@@ -72,7 +72,7 @@ export const SERVICES = [
 
 export const VILLA_TYPES = [
   { id:'f3', color:'#f59e0b', surface:'225 m²', bati:'83 m²',
-    img:'/images/yaye-dia/villa-f3-facade.jpg', planImg:'/images/yaye-dia/villa-f3-plan.jpg',
+    img:'/Images/yaye-dia/villa-f3-facade.jpg', planImg:'/images/yaye-dia/villa-f3-plan.jpg',
     fr:{name:'Villa F3 Économique',standing:'Économique'}, en:{name:'F3 Economy Villa',standing:'Economy'}, es:{name:'Villa F3 Económica',standing:'Económica'}, de:{name:'F3 Economy Villa',standing:'Economy'},
     rooms:[
       {fr:'Chambre enfant',en:'Child bedroom',es:'Habitación infantil',de:'Kinderzimmer',val:'12,50 m²'},
@@ -86,7 +86,7 @@ export const VILLA_TYPES = [
     features:{fr:['Architecture Open Space élégant','Circulation fluide et fonctionnelle','Jardin tropical aménagé','Parfait pour famille de 3-4 personnes'],en:['Elegant open-space architecture','Smooth functional circulation','Landscaped tropical garden','Perfect for family of 3-4'],es:['Arquitectura Open Space elegante','Circulación fluida y funcional','Jardín tropical amenizado','Perfecto para familia de 3-4'],de:['Elegante Open-Space-Architektur','Fließende Zirkulation','Tropengarten','Perfekt für eine Familie']},
   },
   { id:'f4pp', color:'#34d399', surface:'225 m²', bati:'106 m²',
-    img:'/images/yaye-dia/villa-f4pp-facade.jpg', planImg:'/images/yaye-dia/villa-f4pp-plan.jpg',
+    img:'/Images/yaye-dia/villa-f4pp-facade.jpg', planImg:'/images/yaye-dia/villa-f4pp-plan.jpg',
     fr:{name:'Villa F4 Plein Pied',standing:'Moyen Standing'}, en:{name:'F4 Single-Story Villa',standing:'Mid-Range'}, es:{name:'Villa F4 Planta Baja',standing:'Rango Medio'}, de:{name:'F4 Einstöckige Villa',standing:'Mittelklasse'},
     rooms:[
       {fr:'Chambre enfant',en:'Child bedroom',es:'Habitación infantil',de:'Kinderzimmer',val:'12,29 m²'},
@@ -102,7 +102,7 @@ export const VILLA_TYPES = [
     features:{fr:['Salon double hauteur spectaculaire','Open Space réduisant consommation énergétique','3 suites avec salles de bain privées','Façade contemporaine avec claustra bois'],en:['Spectacular double-height living room','Open space reducing energy consumption','3 suites with private bathrooms','Contemporary facade with wooden screens'],es:['Espectacular salón de doble altura','3 suites con baños privados','Fachada contemporánea con celosías'],de:['Spektakuläres Wohnzimmer','3 Suiten mit privaten Bädern','Zeitgenössische Fassade']},
   },
   { id:'f4duplex', color:'#6366f1', surface:'225 m²', bati:'232 m²',
-    img:'/images/yaye-dia/villa-f4duplex.jpg', planImg:'/images/yaye-dia/villa-f4duplex-plan.jpg',
+    img:'/Images/yaye-dia/villa-f4duplex.jpg', planImg:'/images/yaye-dia/villa-f4duplex-plan.jpg',
     fr:{name:'Villa F4 Duplex',standing:'Haut Standing'}, en:{name:'F4 Duplex Villa',standing:'High-End'}, es:{name:'Villa F4 Dúplex',standing:'Alto Standing'}, de:{name:'F4 Duplex Villa',standing:'Hochwertig'},
     floors:[
       {level:'RDC',rooms:[
@@ -123,7 +123,7 @@ export const VILLA_TYPES = [
     features:{fr:['Grandes baies vitrées sur 2 niveaux','Terrasse 40 m² vue panoramique','Salon 58,80 m² spectaculaire','Escalier design garde-corps verre'],en:['Large windows on 2 levels','40 m² panoramic terrace','Spectacular 58.80 m² living room','Designer glass staircase'],es:['Grandes ventanales en 2 niveles','Terraza 40 m² panorámica','Salón espectacular 58,80 m²'],de:['Große Fenster auf 2 Ebenen','40 m² Panoramaterrasse','Spektakuläres Wohnzimmer']},
   },
   { id:'f5', color:'#f472b6', surface:'225 m²', bati:'340 m²',
-    img:'/images/yaye-dia/villa-f5.jpg', planImg:'/images/yaye-dia/villa-f5-plan.jpg',
+    img:'/Images/yaye-dia/villa-f5.jpg', planImg:'/images/yaye-dia/villa-f5-plan.jpg',
     fr:{name:'Villa F5',standing:'Très Haut Standing'}, en:{name:'F5 Premium Villa',standing:'Premium'}, es:{name:'Villa F5 Premium',standing:'Premium'}, de:{name:'F5 Premium Villa',standing:'Premium'},
     rooms:[
       {fr:'Master Room',en:'Master Room',es:'Master Room',de:'Master Room',val:'20 m²'},
@@ -141,12 +141,12 @@ export const VILLA_TYPES = [
 ];
 
 export const YAYE_SLIDES = [
-  { img:'/images/yaye-dia/villa-f5.jpg', fr:{tag:"L'Art de vivre Moderne",title:'Villa F5 — Très Haut Standing',sub:'340 m² bâtis — Mercedes G-Wagon — Cité Yaye Dia'}, en:{tag:'The Art of Modern Living',title:'F5 Villa — Premium',sub:'340 m² built — Yaye Dia City'}, es:{tag:'El Arte de Vivir Moderno',title:'Villa F5 — Premium',sub:'340 m² construidos — Ciudad Yaye Dia'}, de:{tag:'Die Kunst des modernen Lebens',title:'F5 Villa — Premium',sub:'340 m² gebaut — Yaye Dia Stadt'} },
-  { img:'/images/yaye-dia/villa-f4duplex-nuit.jpg', fr:{tag:'Nuit Étoilée',title:'Villas F4 Duplex illuminées',sub:'Haut Standing — Cité Yaye Dia sous les étoiles'}, en:{tag:'Starry Night',title:'Illuminated F4 Duplex Villas',sub:'High-End — Yaye Dia City under the stars'}, es:{tag:'Noche Estrellada',title:'Villas F4 Dúplex iluminadas',sub:'Alto Standing — Ciudad Yaye Dia'}, de:{tag:'Sternennacht',title:'Beleuchtete F4 Duplex Villen',sub:'Hochwertig — Yaye Dia Stadt'} },
-  { img:'/images/yaye-dia/cite-vue-aerienne.jpg', fr:{tag:'Vue Aérienne',title:'300 Villas — Vue Complète',sub:'Région de Thiès — Sénégal — Cité Yaye Dia'}, en:{tag:'Aerial View',title:'300 Villas — Complete View',sub:'Thiès Region — Senegal — Yaye Dia City'}, es:{tag:'Vista Aérea',title:'300 Villas — Vista Completa',sub:'Región de Thiès — Senegal'}, de:{tag:'Luftaufnahme',title:'300 Villen — Vollständige Ansicht',sub:'Thiès Region — Senegal'} },
-  { img:'/images/yaye-dia/villa-f4pp-facade.jpg', fr:{tag:'Moyen Standing',title:'Villa F4 Plein Pied',sub:'106 m² bâtis — Façade moderne — Range Rover rouge'}, en:{tag:'Mid-Range',title:'F4 Single-Story Villa',sub:'106 m² built — Modern facade'}, es:{tag:'Rango Medio',title:'Villa F4 Planta Baja',sub:'106 m² construidos — Fachada moderna'}, de:{tag:'Mittelklasse',title:'F4 Einstöckige Villa',sub:'106 m² gebaut — Moderne Fassade'} },
-  { img:'/images/yaye-dia/salon-duplex.jpg', fr:{tag:'Intérieur Luxueux',title:'Salon Duplex — Marbre & Bois',sub:'Escalier design, verdure & finitions haut de gamme'}, en:{tag:'Luxury Interior',title:'Duplex Living Room — Marble & Wood',sub:'Designer staircase, greenery & high-end finishes'}, es:{tag:'Interior Lujoso',title:'Salón Dúplex — Mármol y Madera',sub:'Escalera de diseño y acabados de lujo'}, de:{tag:'Luxuriöses Interieur',title:'Duplex Wohnzimmer — Marmor & Holz',sub:'Designertreppe & hochwertige Oberflächen'} },
-  { img:'/images/yaye-dia/villa-f5-terrasse.jpg', fr:{tag:'Terrasse Panoramique',title:'Villa F5 — Terrasse 66,52 m²',sub:'Barbecue, salon extérieur & cuisine africaine'}, en:{tag:'Panoramic Terrace',title:'F5 Villa — 66.52 m² Terrace',sub:'BBQ, outdoor lounge & African kitchen'}, es:{tag:'Terraza Panorámica',title:'Villa F5 — Terraza 66,52 m²',sub:'Barbacoa, sala exterior y cocina africana'}, de:{tag:'Panoramaterrasse',title:'F5 Villa — 66,52 m² Terrasse',sub:'Grill, Außenwohnbereich & afrikanische Küche'} },
+  { img:'/Images/yaye-dia/villa-f5.jpg', fr:{tag:"L'Art de vivre Moderne",title:'Villa F5 — Très Haut Standing',sub:'340 m² bâtis — Mercedes G-Wagon — Cité Yaye Dia'}, en:{tag:'The Art of Modern Living',title:'F5 Villa — Premium',sub:'340 m² built — Yaye Dia City'}, es:{tag:'El Arte de Vivir Moderno',title:'Villa F5 — Premium',sub:'340 m² construidos — Ciudad Yaye Dia'}, de:{tag:'Die Kunst des modernen Lebens',title:'F5 Villa — Premium',sub:'340 m² gebaut — Yaye Dia Stadt'} },
+  { img:'/Images/yaye-dia/villa-f4duplex-nuit.jpg', fr:{tag:'Nuit Étoilée',title:'Villas F4 Duplex illuminées',sub:'Haut Standing — Cité Yaye Dia sous les étoiles'}, en:{tag:'Starry Night',title:'Illuminated F4 Duplex Villas',sub:'High-End — Yaye Dia City under the stars'}, es:{tag:'Noche Estrellada',title:'Villas F4 Dúplex iluminadas',sub:'Alto Standing — Ciudad Yaye Dia'}, de:{tag:'Sternennacht',title:'Beleuchtete F4 Duplex Villen',sub:'Hochwertig — Yaye Dia Stadt'} },
+  { img:'/Images/yaye-dia/cite-vue-aerienne.jpg', fr:{tag:'Vue Aérienne',title:'300 Villas — Vue Complète',sub:'Région de Thiès — Sénégal — Cité Yaye Dia'}, en:{tag:'Aerial View',title:'300 Villas — Complete View',sub:'Thiès Region — Senegal — Yaye Dia City'}, es:{tag:'Vista Aérea',title:'300 Villas — Vista Completa',sub:'Región de Thiès — Senegal'}, de:{tag:'Luftaufnahme',title:'300 Villen — Vollständige Ansicht',sub:'Thiès Region — Senegal'} },
+  { img:'/Images/yaye-dia/villa-f4pp-facade.jpg', fr:{tag:'Moyen Standing',title:'Villa F4 Plein Pied',sub:'106 m² bâtis — Façade moderne — Range Rover rouge'}, en:{tag:'Mid-Range',title:'F4 Single-Story Villa',sub:'106 m² built — Modern facade'}, es:{tag:'Rango Medio',title:'Villa F4 Planta Baja',sub:'106 m² construidos — Fachada moderna'}, de:{tag:'Mittelklasse',title:'F4 Einstöckige Villa',sub:'106 m² gebaut — Moderne Fassade'} },
+  { img:'/Images/yaye-dia/salon-duplex.jpg', fr:{tag:'Intérieur Luxueux',title:'Salon Duplex — Marbre & Bois',sub:'Escalier design, verdure & finitions haut de gamme'}, en:{tag:'Luxury Interior',title:'Duplex Living Room — Marble & Wood',sub:'Designer staircase, greenery & high-end finishes'}, es:{tag:'Interior Lujoso',title:'Salón Dúplex — Mármol y Madera',sub:'Escalera de diseño y acabados de lujo'}, de:{tag:'Luxuriöses Interieur',title:'Duplex Wohnzimmer — Marmor & Holz',sub:'Designertreppe & hochwertige Oberflächen'} },
+  { img:'/Images/yaye-dia/villa-f5-terrasse.jpg', fr:{tag:'Terrasse Panoramique',title:'Villa F5 — Terrasse 66,52 m²',sub:'Barbecue, salon extérieur & cuisine africaine'}, en:{tag:'Panoramic Terrace',title:'F5 Villa — 66.52 m² Terrace',sub:'BBQ, outdoor lounge & African kitchen'}, es:{tag:'Terraza Panorámica',title:'Villa F5 — Terraza 66,52 m²',sub:'Barbacoa, sala exterior y cocina africana'}, de:{tag:'Panoramaterrasse',title:'F5 Villa — 66,52 m² Terrasse',sub:'Grill, Außenwohnbereich & afrikanische Küche'} },
 ];
 
 export const AMENITIES = [
