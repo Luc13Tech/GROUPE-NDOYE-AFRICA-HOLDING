@@ -142,7 +142,7 @@ export default function About() {
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
+        bgImg="/Images/yaye-dia/site-voirie.jpg"
         label={tl('African Society','African Society','African Society','African Society')}
         title={tl('À Propos de GNAH','About GNAH','Acerca de GNAH','Über GNAH')}
         sub={tl('African Development Company — depuis 2015','African Development Company — since 2015','African Development Company — desde 2015','African Development Company — seit 2015')}
