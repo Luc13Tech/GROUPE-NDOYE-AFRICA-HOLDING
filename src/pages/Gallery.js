@@ -120,7 +120,7 @@ export default function Gallery() {
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/images/yaye-dia/cite-vue-aerienne.jpg"
+        bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
         label={tl('Résidence Yaye Dia','Yaye Dia Residence','Residencia Yaye Dia','Yaye Dia Residenz')}
         title={tl('Galerie de Photos','Photo Gallery','Galería de Fotos','Fotogalerie')}
         sub={tl('Découvrez la Cité Yaye Dia en images','Discover Yaye Dia City in pictures','Descubra la Ciudad Yaye Dia en imágenes','Entdecken Sie die Yaye Dia Stadt in Bildern')}
