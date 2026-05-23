@@ -228,7 +228,7 @@ export default function Home() {
 
             <div className={`slide-right${introVisible ? ' visible' : ''}`} style={{ position: 'relative' }}>
               <img
-                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85"
+                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85"
                 alt="Africa"
                 style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
               />
