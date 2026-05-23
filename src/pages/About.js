@@ -142,7 +142,7 @@ export default function About() {
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/Images/yaye-dia/site-voirie.jpg"
+        bgImg="/Images/yaye-dia/cite-voirie.jpg"
         label={tl('African Society','African Society','African Society','African Society')}
         title={tl('À Propos de GNAH','About GNAH','Acerca de GNAH','Über GNAH')}
         sub={tl('African Development Company — depuis 2015','African Development Company — since 2015','African Development Company — desde 2015','African Development Company — seit 2015')}
@@ -170,7 +170,7 @@ export default function About() {
               </Link>
             </div>
             <div className={`slide-right${heroVis?' visible':''}`} style={{ position:'relative' }}>
-              <img src="/Images/yaye-dia/cite-vue-aerienne.jpg"
+              <img src="/Images/yaye-dia/salon-f4-interieur.jpg"
                 onError={e=>{ e.target.src='https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85'; }}
                 alt="GNAH" style={{ width:'100%', height:400, objectFit:'cover', borderTop:'3px solid var(--gold)' }}/>
               {/* Floating stats */}
