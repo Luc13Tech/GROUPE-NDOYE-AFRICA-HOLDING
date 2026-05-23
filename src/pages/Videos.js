@@ -16,7 +16,7 @@ const VIDEOS = [
     id: 1,
     platform: 'youtube',
     url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI',           // ← Remplacez par votre lien
-    thumbnail: '/images/yaye-dia/cite-vue-aerienne.jpg',
+    thumbnail: '/Images/yaye-dia/cite-vue-aerienne.jpg',
     fallback: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',
     duration: '2:45',
     fr: { title:'Résidence Yaye Dia — Présentation Officielle',     desc:'Découvrez en vidéo notre programme immobilier d\'exception : 300 villas haut standing en Région de Thiès, Sénégal.' },
@@ -28,7 +28,7 @@ const VIDEOS = [
     id: 2,
     platform: 'youtube',
     url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_2',        // ← Remplacez par votre lien
-    thumbnail: '/images/yaye-dia/villa-f5-facade3.jpg',
+    thumbnail: '/Images/yaye-dia/villa-f5-facade3.jpg',
     fallback: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=85',
     duration: '3:20',
     fr: { title:'Villa F5 — Visite Virtuelle Haut Standing',        desc:'Visite complète de notre villa F5 Très Haut Standing : 3 niveaux, terrasse BBQ, marbre Calacatta et finitions luxueuses.' },
@@ -40,7 +40,7 @@ const VIDEOS = [
     id: 3,
     platform: 'tiktok',
     url: 'https://www.tiktok.com/@assane.design.con',                // ← Remplacez par votre lien TikTok
-    thumbnail: '/images/yaye-dia/villa-f4duplex-nuit.jpg',
+    thumbnail: '/Images/yaye-dia/villa-f4duplex-nuit.jpg',
     fallback: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=85',
     duration: '0:58',
     fr: { title:'Cité Yaye Dia — Vue Nuit Spectaculaire',           desc:'La Cité Yaye Dia illuminée de nuit. Nos villas F4 Duplex dans toute leur splendeur sous un ciel étoilé.' },
@@ -52,7 +52,7 @@ const VIDEOS = [
     id: 4,
     platform: 'facebook',
     url: 'https://www.facebook.com/groupendoyeafricaholding',        // ← Remplacez par votre lien
-    thumbnail: '/images/yaye-dia/cite-plan-top.jpg',
+    thumbnail: '/Images/yaye-dia/cite-plan-top.jpg',
     fallback: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=85',
     duration: '4:10',
     fr: { title:'Plan Masse — 300 Villas Tracées',                  desc:'Vue aérienne du plan masse de la Cité Yaye Dia. 300 villas soigneusement tracées sur 225 m² chacune.' },
@@ -64,7 +64,7 @@ const VIDEOS = [
     id: 5,
     platform: 'youtube',
     url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_5',        // ← Remplacez par votre lien
-    thumbnail: '/images/yaye-dia/salon-duplex.jpg',
+    thumbnail: '/Images/yaye-dia/salon-duplex.jpg',
     fallback: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',
     duration: '2:15',
     fr: { title:'Intérieurs de Luxe — Salon & Design',              desc:'Nos intérieurs haut de gamme : marbre Calacatta, bois massif, escaliers spectaculaires et espaces baignés de lumière.' },
@@ -76,7 +76,7 @@ const VIDEOS = [
     id: 6,
     platform: 'instagram',
     url: 'https://www.instagram.com/assanedesignconception',         // ← Remplacez par votre lien
-    thumbnail: '/images/yaye-dia/cite-commodites-vue.jpg',
+    thumbnail: '/Images/yaye-dia/cite-commodites-vue.jpg',
     fallback: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85',
     duration: '1:30',
     fr: { title:'Commodités — Une Cité Complète',                   desc:'Complexe sportif, terrain omnisports, mosquée, centre commercial, district sanitaire — tout ce dont vous avez besoin.' },
@@ -107,7 +107,7 @@ export default function Videos() {
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/images/yaye-dia/villa-f5-facade3.jpg"
+        bgImg="/Images/yaye-dia/villa-f5-facade3.jpg"
         label={tl('Nos Réalisations','Our Achievements','Nuestras Realizaciones','Unsere Realisierungen')}
         title={tl('Nos Vidéos','Our Videos','Nuestros Videos','Unsere Videos')}
         sub={tl('Visitez la Cité Yaye Dia en vidéo','Visit Yaye Dia City in video','Visite la Ciudad Yaye Dia en video','Besuchen Sie die Yaye Dia Stadt im Video')}
