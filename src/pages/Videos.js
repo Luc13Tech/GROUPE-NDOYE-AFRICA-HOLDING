@@ -25,18 +25,6 @@ const VIDEOS = [
     de: { title:'Yaye Dia Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
   },
   {
-    id: 2,
-    platform: 'youtube',
-    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_2',        // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/villa-f5-facade3.jpg',
-    fallback: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=85',
-    duration: '3:20',
-    fr: { title:'Villa F5 — Visite Virtuelle Haut Standing',        desc:'Visite complète de notre villa F5 Très Haut Standing : 3 niveaux, terrasse BBQ, marbre Calacatta et finitions luxueuses.' },
-    en: { title:'F5 Villa — Premium Virtual Tour',                  desc:'Complete tour of our F5 Premium villa: 3 levels, BBQ terrace, Calacatta marble and luxury finishes.' },
-    es: { title:'Villa F5 — Visita Virtual Premium',                desc:'Visita completa de nuestra villa F5 Premium: 3 niveles, terraza BBQ, mármol Calacatta y acabados de lujo.' },
-    de: { title:'F5 Villa — Premium Virtuelle Tour',                desc:'Vollständige Tour durch unsere F5 Premium Villa: 3 Ebenen, BBQ-Terrasse, Calacatta-Marmor und Luxusausstattung.' },
-  },
-  {
     id: 3,
     platform: 'tiktok',
     url: 'https://www.tiktok.com/@assane.design.con',                // ← Remplacez par votre lien TikTok
@@ -59,19 +47,7 @@ const VIDEOS = [
     en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Yaye Dia City site plan. 300 carefully plotted villas on 225 m² each.' },
     es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Ciudad Yaye Dia. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
     de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Yaye Dia Stadt. 300 sorgfältig geplante Villen auf je 225 m².' },
-  },
-  {
-    id: 5,
-    platform: 'youtube',
-    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_5',        // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/salon-duplex.jpg',
-    fallback: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',
-    duration: '2:15',
-    fr: { title:'Intérieurs de Luxe — Salon & Design',              desc:'Nos intérieurs haut de gamme : marbre Calacatta, bois massif, escaliers spectaculaires et espaces baignés de lumière.' },
-    en: { title:'Luxury Interiors — Living Room & Design',          desc:'Our high-end interiors: Calacatta marble, solid wood, spectacular staircases and light-filled spaces.' },
-    es: { title:'Interiores de Lujo — Salón y Diseño',              desc:'Nuestros interiores de alta gama: mármol Calacatta, madera maciza, escaleras espectaculares y espacios llenos de luz.' },
-    de: { title:'Luxus-Innenräume — Wohnzimmer & Design',           desc:'Unsere hochwertigen Innenräume: Calacatta-Marmor, Massivholz, spektakuläre Treppen und lichtdurchflutete Räume.' },
-  },
+  },j
   {
     id: 6,
     platform: 'instagram',
