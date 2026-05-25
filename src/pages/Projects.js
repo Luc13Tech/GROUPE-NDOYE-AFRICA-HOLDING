@@ -79,7 +79,7 @@ ${form.msg}`;
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/Images/yaye-dia/cover.jpg"
+        bgImg="/Images/yaye-dia/cite-voirie.jpg"
         label={tl('Projet Phare','Flagship Project','Proyecto Insignia','Vorzeigeprojekt')}
         title={tl('Résidence Yaye Dia','Yaye Dia Residence','Residencia Yaye Dia','Yaye Dia Residenz')}
         sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal','300 High-End Villas — Thiès Region, Senegal','300 Villas de Alto Standing — Región de Thiès, Senegal','300 Hochwertige Villen — Thiès Region, Senegal')}
