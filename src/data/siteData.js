@@ -72,7 +72,7 @@ export const SERVICES = [
 
 export const VILLA_TYPES = [
   { id:'f3', color:'#f59e0b', surface:'225 m²', bati:'83 m²',
-    img:'/Images/yaye-dia/villa-f3-facade.jpg', planImg:'/images/yaye-dia/villa-f3-plan.jpg',
+    img:'/Images/yaye-dia/villa-f3-facade.jpg', planImg:'/Images/yaye-dia/villa-f3-plan.jpg',
     fr:{name:'Villa F3 Économique',standing:'Économique'}, en:{name:'F3 Economy Villa',standing:'Economy'}, es:{name:'Villa F3 Económica',standing:'Económica'}, de:{name:'F3 Economy Villa',standing:'Economy'},
     rooms:[
       {fr:'Chambre enfant',en:'Child bedroom',es:'Habitación infantil',de:'Kinderzimmer',val:'12,50 m²'},
@@ -86,7 +86,7 @@ export const VILLA_TYPES = [
     features:{fr:['Architecture Open Space élégant','Circulation fluide et fonctionnelle','Jardin tropical aménagé','Parfait pour famille de 3-4 personnes'],en:['Elegant open-space architecture','Smooth functional circulation','Landscaped tropical garden','Perfect for family of 3-4'],es:['Arquitectura Open Space elegante','Circulación fluida y funcional','Jardín tropical amenizado','Perfecto para familia de 3-4'],de:['Elegante Open-Space-Architektur','Fließende Zirkulation','Tropengarten','Perfekt für eine Familie']},
   },
   { id:'f4pp', color:'#34d399', surface:'225 m²', bati:'106 m²',
-    img:'/Images/yaye-dia/villa-f4pp-facade.jpg', planImg:'/images/yaye-dia/villa-f4pp-plan.jpg',
+    img:'/Images/yaye-dia/villa-f4pp-facade.jpg', planImg:'/Images/yaye-dia/villa-f4pp-plan.jpg',
     fr:{name:'Villa F4 Plein Pied',standing:'Moyen Standing'}, en:{name:'F4 Single-Story Villa',standing:'Mid-Range'}, es:{name:'Villa F4 Planta Baja',standing:'Rango Medio'}, de:{name:'F4 Einstöckige Villa',standing:'Mittelklasse'},
     rooms:[
       {fr:'Chambre enfant',en:'Child bedroom',es:'Habitación infantil',de:'Kinderzimmer',val:'12,29 m²'},
@@ -102,7 +102,7 @@ export const VILLA_TYPES = [
     features:{fr:['Salon double hauteur spectaculaire','Open Space réduisant consommation énergétique','3 suites avec salles de bain privées','Façade contemporaine avec claustra bois'],en:['Spectacular double-height living room','Open space reducing energy consumption','3 suites with private bathrooms','Contemporary facade with wooden screens'],es:['Espectacular salón de doble altura','3 suites con baños privados','Fachada contemporánea con celosías'],de:['Spektakuläres Wohnzimmer','3 Suiten mit privaten Bädern','Zeitgenössische Fassade']},
   },
   { id:'f4duplex', color:'#6366f1', surface:'225 m²', bati:'232 m²',
-    img:'/Images/yaye-dia/villa-f4duplex.jpg', planImg:'/images/yaye-dia/villa-f4duplex-plan.jpg',
+    img:'/Images/yaye-dia/villa-f4duplex.jpg', planImg:'/Images/yaye-dia/villa-f4duplex-plan.jpg',
     fr:{name:'Villa F4 Duplex',standing:'Haut Standing'}, en:{name:'F4 Duplex Villa',standing:'High-End'}, es:{name:'Villa F4 Dúplex',standing:'Alto Standing'}, de:{name:'F4 Duplex Villa',standing:'Hochwertig'},
     floors:[
       {level:'RDC',rooms:[
@@ -123,7 +123,7 @@ export const VILLA_TYPES = [
     features:{fr:['Grandes baies vitrées sur 2 niveaux','Terrasse 40 m² vue panoramique','Salon 58,80 m² spectaculaire','Escalier design garde-corps verre'],en:['Large windows on 2 levels','40 m² panoramic terrace','Spectacular 58.80 m² living room','Designer glass staircase'],es:['Grandes ventanales en 2 niveles','Terraza 40 m² panorámica','Salón espectacular 58,80 m²'],de:['Große Fenster auf 2 Ebenen','40 m² Panoramaterrasse','Spektakuläres Wohnzimmer']},
   },
   { id:'f5', color:'#f472b6', surface:'225 m²', bati:'340 m²',
-    img:'/Images/yaye-dia/villa-f5.jpg', planImg:'/images/yaye-dia/villa-f5-plan.jpg',
+    img:'/Images/yaye-dia/villa-f5.jpg', planImg:'/Images/yaye-dia/villa-f5-plan.jpg',
     fr:{name:'Villa F5',standing:'Très Haut Standing'}, en:{name:'F5 Premium Villa',standing:'Premium'}, es:{name:'Villa F5 Premium',standing:'Premium'}, de:{name:'F5 Premium Villa',standing:'Premium'},
     rooms:[
       {fr:'Master Room',en:'Master Room',es:'Master Room',de:'Master Room',val:'20 m²'},
