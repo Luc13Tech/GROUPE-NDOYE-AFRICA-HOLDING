@@ -40,7 +40,7 @@ export default function Partners() {
             {PARTNERS_WORLD.map((p,i) => (
               <div key={p.code} className={`card-white fade-up${wpVis?' visible':''} delay-${(i%3)+1}`}>
                 <div style={{ fontSize:'2.6rem', marginBottom:14 }}>
-                  {p.code==='TR'?'🇹🇷':p.code==='CN'?'🇨🇳':p.code==='RU'?'🇷🇺':p.code==='US'?'🇺🇸':p.code==='MY'?'🇲🇾':'🇬🇧'}
+                  {p.code==='TR'?'🇹🇷':p.code==='CN'?'🇨🇳':p.code==='RU'?'🇷🇺':p.code==='US'?'🇺🇸':p.code==='MY'?'🇲🇾':p.code==='IN'?'🇮🇳':'🇬🇧'}
                 </div>
                 <h3 style={{ fontFamily:'var(--f-display)', fontSize:'1rem', color:'var(--text-dark)', letterSpacing:'.1em', marginBottom:12 }}>
                   {(p[lang]||p.fr).country}
@@ -121,4 +121,4 @@ export default function Partners() {
       </section>
     </main>
   );
-}
+          }
