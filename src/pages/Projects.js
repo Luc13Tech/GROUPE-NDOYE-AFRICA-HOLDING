@@ -79,7 +79,7 @@ ${form.msg}`;
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/images/yaye-dia/cover.jpg"
+        bgImg="/Images/yaye-dia/cover.jpg"
         label={tl('Projet Phare','Flagship Project','Proyecto Insignia','Vorzeigeprojekt')}
         title={tl('Résidence Yaye Dia','Yaye Dia Residence','Residencia Yaye Dia','Yaye Dia Residenz')}
         sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal','300 High-End Villas — Thiès Region, Senegal','300 Villas de Alto Standing — Región de Thiès, Senegal','300 Hochwertige Villen — Thiès Region, Senegal')}
@@ -123,9 +123,9 @@ ${form.msg}`;
               </div>
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:16}}>
-              <img src="/images/yaye-dia/vision.jpg" alt="Yaye Dia" style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
+              <img src="/Images/yaye-dia/vision.jpg" alt="Yaye Dia" style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
-                <img src="/images/yaye-dia/design.jpg" alt="Design" style={{width:'100%',height:130,objectFit:'cover'}}/>
+                <img src="/Images/yaye-dia/design.jpg" alt="Design" style={{width:'100%',height:130,objectFit:'cover'}}/>
                 <div style={{background:'var(--navy)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:16,textAlign:'center'}}>
                   <div style={{fontFamily:'var(--f-elegant)',fontSize:'2rem',color:'var(--gold)'}}>300</div>
                   <div style={{fontFamily:'var(--f-serif)',fontStyle:'italic',color:'rgba(200,195,186,.5)',fontSize:'.8rem'}}>
