@@ -55,7 +55,7 @@ export default function Navbar() {
       <header className={`navbar${scrolled?' scrolled':''}`}>
         <div className="navbar-inner">
           <Link to="/" className="nav-logo" onClick={()=>window.scrollTo({top:0,behavior:'instant'})}>
-            <img src="/images/logo/gnah-logo.png" alt="Groupe Ndoye Africa Holding" className="nav-logo-img"
+            <img src="/Images/logo/gnah-logo.png" alt="Groupe Ndoye Africa Holding" className="nav-logo-img"
               onError={e=>{e.target.style.display='none';}}/>
             <div className="nav-logo-text">
               <span className="nav-logo-name">GROUPE NDOYE AFRICA HOLDING</span>
