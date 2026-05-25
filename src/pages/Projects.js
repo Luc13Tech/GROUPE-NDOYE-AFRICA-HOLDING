@@ -319,10 +319,10 @@ ${form.msg}`;
                 <p style={{fontSize:'.8rem',color:'var(--text-mid)'}}>{mat.color}</p>
               </div>
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
-                <img src="/images/yaye-dia/cuisine.jpg" alt="Cuisine" style={{width:'100%',height:110,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/cuisine-luxe.jpg" alt="Cuisine" style={{width:'100%',height:110,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=70';}}
                 />
-                <img src="/images/yaye-dia/master.jpg" alt="Master" style={{width:'100%',height:110,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/salon-f4.jpg" alt="salon" style={{width:'100%',height:110,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&q=70';}}
                 />
               </div>
@@ -350,14 +350,14 @@ ${form.msg}`;
               </div>
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:12}}>
-              <img src="/images/yaye-dia/lotissement.jpg" alt="Lotissement" style={{width:'100%',height:200,objectFit:'cover'}}
+              <img src="/Images/yaye-dia/lotissement.jpg" alt="Lotissement" style={{width:'100%',height:200,objectFit:'cover'}}
                 onError={e=>{e.target.src='https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=70';}}
               />
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
-                <img src="/images/yaye-dia/eclairage.jpg" alt="Éclairage" style={{width:'100%',height:120,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/eclairage.jpg" alt="Éclairage" style={{width:'100%',height:120,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=70';}}
                 />
-                <img src="/images/yaye-dia/dechets.jpg" alt="Déchets" style={{width:'100%',height:120,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/immeuble-jour.jpg" alt="Déchets" style={{width:'100%',height:120,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=70';}}
                 />
               </div>
