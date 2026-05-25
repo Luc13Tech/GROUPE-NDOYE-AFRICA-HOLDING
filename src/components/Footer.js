@@ -35,7 +35,7 @@ export default function Footer() {
       {/* Background cuisine image */}
       <div style={{
         position:'absolute', inset:0,
-        backgroundImage:"url('/images/yaye-dia/cuisine-luxe.jpg')",
+        backgroundImage:"url('/Images/yaye-dia/cuisine-luxe.jpg')",
         backgroundSize:'cover', backgroundPosition:'center 40%',
         filter:'brightness(.15)', zIndex:0,
       }}/>
