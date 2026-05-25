@@ -37,7 +37,7 @@ export default function Footer() {
         position:'absolute', inset:0,
         backgroundImage:"url('/Images/yaye-dia/cuisine-luxe.jpg')",
         backgroundSize:'cover', backgroundPosition:'center 40%',
-        filter:'brightness(.30)', zIndex:0,
+        filter:'brightness(1.15)', zIndex:0,
       }}/>
       {/* Gold gradient overlay */}
       <div style={{
