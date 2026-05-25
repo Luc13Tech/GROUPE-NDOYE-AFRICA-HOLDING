@@ -209,8 +209,8 @@ export const VILLA_TYPES = [
     color: '#f472b6',
     surface: '225 m²',
     bati: '340 m²',
-    img: '/Images/yaye-dia/villa-f5.jpg',
-    planImg: '/Images/yaye-dia/villa-f5-plan.jpg',
+    img: '/Images/yaye-dia/villa-f5-terrasse.jpg',
+    planImg: '/Images/yaye-dia/villa-f5-plan-aerien.jpg',
     fr: { name: 'Villa F5', standing: 'Très Haut Standing' },
     en: { name: 'F5 Premium Villa', standing: 'Premium' },
     es: { name: 'Villa F5 Premium', standing: 'Premium' },
@@ -237,7 +237,7 @@ export const VILLA_TYPES = [
 
 export const YAYE_SLIDES = [
   {
-    img: '/Images/yaye-dia/villa-f5.jpg',
+    img: '/Images/yaye-dia/villa-f5-terrasse-plan.jpg',
     fr: { tag: "L'Art de vivre Moderne", title: 'Villa F5 — Très Haut Standing', sub: '340 m² bâtis — Mercedes G-Wagon — Cité Yaye Dia' },
     en: { tag: 'The Art of Modern Living', title: 'F5 Villa — Premium', sub: '340 m² built — Yaye Dia City' },
     es: { tag: 'El Arte de Vivir Moderno', title: 'Villa F5 — Premium', sub: '340 m² construidos — Ciudad Yaye Dia' },
@@ -265,7 +265,7 @@ export const YAYE_SLIDES = [
     de: { tag: 'Mittelklasse', title: 'F4 Einstöckige Villa', sub: '106 m² gebaut — Moderne Fassade' },
   },
   {
-    img: '/Images/yaye-dia/salon-duplex.jpg',
+    img: '/Images/yaye-dia/salon-f4-interieur.jpg',
     fr: { tag: 'Intérieur Luxueux', title: 'Salon Duplex — Marbre & Bois', sub: 'Escalier design, verdure & finitions haut de gamme' },
     en: { tag: 'Luxury Interior', title: 'Duplex Living Room — Marble & Wood', sub: 'Designer staircase, greenery & high-end finishes' },
     es: { tag: 'Interior Lujoso', title: 'Salón Dúplex — Mármol y Madera', sub: 'Escalera de diseño y acabados de lujo' },
