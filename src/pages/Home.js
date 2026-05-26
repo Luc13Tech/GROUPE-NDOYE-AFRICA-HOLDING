@@ -87,7 +87,7 @@ function Counter({ target, duration = 1800 }) {
   useEffect(() => {
     if (!visible) return;
     const num = parseInt(target.replace(/\D/g, '')) || 0;
-    const step = Math.ceil(num / (duration / 5));
+    const step = Math.ceil(num / (duration /50));
     let cur = 0;
     const t = setInterval(() => {
       cur = Math.min(cur + step, num);
