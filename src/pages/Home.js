@@ -81,13 +81,13 @@ function YayeDiaCarousel() {
 }
 
 // ── Animated counter
-function Counter({ target, duration = 1800 }) {
+function Counter({ target, duration = 800 }) {
   const [count, setCount] = useState(0);
   const [ref, visible] = useInView();
   useEffect(() => {
     if (!visible) return;
     const num = parseInt(target.replace(/\D/g, '')) || 0;
-    const step = Math.ceil(num / (duration /50));
+    const step = Math.ceil(num / (duration /30));
     let cur = 0;
     const t = setInterval(() => {
       cur = Math.min(cur + step, num);
