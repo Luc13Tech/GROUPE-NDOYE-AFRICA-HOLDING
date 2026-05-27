@@ -15,7 +15,7 @@ const VIDEOS = [
   {
     id: 1,
     platform: 'youtube',
-    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI',           // ← Remplacez par votre lien
+    url: 'https://youtube.com/@groupendoyeafricaholding?si=5kUEaEaU2k_g4T-8',           // ← Remplacez par votre lien
     thumbnail: '/Images/yaye-dia/cite-vue-aerienne.jpg',
     fallback: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',
     duration: '2:45',
