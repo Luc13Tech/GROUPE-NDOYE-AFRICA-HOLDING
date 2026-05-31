@@ -17,6 +17,7 @@ import Gallery from './pages/Gallery';
 import Videos from './pages/Videos';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import Entreprises from './pages/Entreprises';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -52,6 +53,7 @@ export default function App() {
           <Route path="/contact"         element={<Layout><Contact /></Layout>} />
           <Route path="/galerie"         element={<Layout><Gallery /></Layout>} />
           <Route path="/videos"          element={<Layout><Videos /></Layout>} />
+          <Route path="/entreprises" element={<Layout><Entreprises /></Layout>} />
           <Route path="/admin"           element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="*"                element={<Navigate to="/" />} />
