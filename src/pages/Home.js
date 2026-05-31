@@ -100,9 +100,29 @@ function Counter({ target, duration = 1800 }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
+
+// Get services from localStorage or fallback
+function getServices() {
+  try {
+    const s = localStorage.getItem('gnah_services');
+    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p; }
+  } catch {}
+  return null;
+}
+// Get partners from localStorage or fallback  
+function getPartnersRT() {
+  try {
+    const s = localStorage.getItem('gnah_partners');
+    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p; }
+  } catch {}
+  return null;
+}
+
 export default function Home() {
   const { lang } = useLang();
   const [heroIdx, setHeroIdx] = useState(0);
+  const [rtServices, setRtServices] = useState(getServices);
+  const [rtPartners, setRtPartners] = useState(getPartnersRT);
   const [statsRef, statsVisible] = useInView();
   const [introRef, introVisible] = useInView();
   const [svcRef, svcVisible]     = useInView();
@@ -111,6 +131,13 @@ export default function Home() {
   useEffect(() => {
     const t = setInterval(() => setHeroIdx(i => (i + 1) % HERO_IMGS.length), 6000);
     return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    const h = () => { setRtServices(getServices()); setRtPartners(getPartnersRT()); };
+    window.addEventListener('storage', h);
+    const iv = setInterval(h, 2000);
+    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
   }, []);
 
   const t  = (obj) => obj[lang] || obj.fr;
@@ -228,7 +255,7 @@ export default function Home() {
 
             <div className={`slide-right${introVisible ? ' visible' : ''}`} style={{ position: 'relative' }}>
               <img
-                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85"
+                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85"
                 alt="Africa"
                 style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
               />

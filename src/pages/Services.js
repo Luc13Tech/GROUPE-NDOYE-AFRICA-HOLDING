@@ -36,8 +36,24 @@ const PROCESS_STEPS = {
       {n:'04',t:'Umsetzung',d:'Strenge Überwachung und Lieferung innerhalb definierter Fristen und Standards.'}],
 };
 
+
+function getServicesRT() {
+  try {
+    const s = localStorage.getItem('gnah_services');
+    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p; }
+  } catch {}
+  return null;
+}
+
 export default function Services() {
   const { lang } = useLang();
+  const [rtSvc, setRtSvc] = useState(getServicesRT);
+  useEffect(() => {
+    const h = () => setRtSvc(getServicesRT());
+    window.addEventListener('storage', h);
+    const iv = setInterval(h, 2000);
+    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
+  }, []);
   const [gridRef, gridVis] = useInView();
   const [procRef, procVis] = useInView();
   const [form, setForm] = useState({ nom:'', entreprise:'', email:'', tel:'', service:'', budget:'', desc:'' });
@@ -75,7 +91,7 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
       <section className="section" ref={gridRef}>
         <div className="container">
           <div className="grid-3">
-            {SERVICES.map((s,i) => (
+            {(rtSvc || SERVICES).map((s,i) => (
               <div key={i} className={`card-white fade-up${gridVis?' visible':''} delay-${i+1}`}>
                 <div style={{width:54,height:54,border:'1px solid rgba(201,168,76,.3)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--gold)',marginBottom:20}}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">{SVC_ICONS[s.icon]}</svg>
@@ -163,7 +179,7 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
                   <label className="form-label form-label-dark">{tl('Type de Service *','Service Type *','Tipo de Servicio *','Dienstart *')}</label>
                   <select className="form-select form-select-dark" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))}>
                     <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
-                    {SERVICES.map(s=><option key={s.icon} value={(s[lang]||s.fr).title}>{(s[lang]||s.fr).title}</option>)}
+                    {(rtSvc || SERVICES).map(s=><option key={s.icon} value={(s[lang]||s.fr).title}>{(s[lang]||s.fr).title}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">

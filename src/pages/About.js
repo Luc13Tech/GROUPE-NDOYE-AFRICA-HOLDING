@@ -122,6 +122,28 @@ export default function About() {
   const [perfRef, perfVis]   = useInView();
   const [barRef, barVis]     = useInView();
   const [objRef, objVis]     = useInView();
+  // Load QR code library and render
+  useEffect(() => {
+    const el = document.getElementById('about-qr');
+    if (!el || el.querySelector('canvas')) return;
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    script.onload = () => {
+      if (window.QRCode && el && !el.querySelector('canvas')) {
+        const size = Math.min(window.innerWidth < 640 ? 160 : 200, 200);
+        new window.QRCode(el, {
+          text: 'https://groupendoyeafrica.com',
+          width: size, height: size,
+          colorDark: '#c9a84c',
+          colorLight: '#050810',
+          correctLevel: (window.QRCode || {}).CorrectLevel?.H || 1,
+        });
+      }
+    };
+    document.head.appendChild(script);
+  }, []);
+
+
   const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
 
   const PERF_DATA = [
@@ -142,7 +164,7 @@ export default function About() {
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/Images/yaye-dia/cite-voirie.jpg"
+        bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
         label={tl('African Society','African Society','African Society','African Society')}
         title={tl('À Propos de GNAH','About GNAH','Acerca de GNAH','Über GNAH')}
         sub={tl('African Development Company — depuis 2015','African Development Company — since 2015','African Development Company — desde 2015','African Development Company — seit 2015')}
@@ -170,7 +192,7 @@ export default function About() {
               </Link>
             </div>
             <div className={`slide-right${heroVis?' visible':''}`} style={{ position:'relative' }}>
-              <img src="/Images/yaye-dia/salon-f4-interieur.jpg"
+              <img src="/Images/yaye-dia/cite-vue-aerienne.jpg"
                 onError={e=>{ e.target.src='https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85'; }}
                 alt="GNAH" style={{ width:'100%', height:400, objectFit:'cover', borderTop:'3px solid var(--gold)' }}/>
               {/* Floating stats */}
@@ -372,6 +394,112 @@ export default function About() {
             ))}
           </div>
         </div>
+      </section>
+
+
+      {/* ── QR CODE SECTION ── */}
+      <section style={{ background:'linear-gradient(135deg,var(--navy) 0%,var(--navy2) 50%,var(--navy) 100%)', padding:'72px 0', position:'relative', overflow:'hidden' }}>
+        {/* Background decoration */}
+        <div style={{ position:'absolute', inset:0, backgroundImage:'repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(201,168,76,.025) 30px,rgba(201,168,76,.025) 31px)', pointerEvents:'none' }}/>
+        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'min(400px,80vw)', height:'min(400px,80vw)', borderRadius:'50%', background:'radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%)', pointerEvents:'none' }}/>
+
+        <div className="container" style={{ position:'relative', zIndex:1 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:48, alignItems:'center', maxWidth:900, margin:'0 auto' }}>
+
+            {/* Left — Text */}
+            <div>
+              <div className="sec-label">{tl('Plateforme digitale','Digital Platform','Plataforma digital','Digitale Plattform')}</div>
+              <h2 style={{ fontFamily:'var(--f-elegant)', fontSize:'clamp(1.4rem,3vw,2.2rem)', color:'var(--cream)', marginTop:8, marginBottom:12, lineHeight:1.2 }}>
+                {tl('Scannez & Visitez Notre Site','Scan & Visit Our Website','Escanee y Visite Nuestro Sitio','Scannen & Besuchen Sie Unsere Website')}
+              </h2>
+              <div style={{ width:48, height:2, background:'linear-gradient(90deg,var(--gold),var(--gold-d))', marginBottom:18 }}/>
+              <p style={{ fontFamily:'var(--f-serif)', fontStyle:'italic', fontSize:'1rem', color:'rgba(201,168,76,.7)', marginBottom:12 }}>
+                {tl("Accédez directement à notre plateforme","Access our platform directly","Acceda directamente a nuestra plataforma","Greifen Sie direkt auf unsere Plattform zu")}
+              </p>
+              <p style={{ fontSize:'.88rem', color:'rgba(200,195,186,.55)', lineHeight:1.8, marginBottom:24 }}>
+                {tl(
+                  "Scannez le code QR avec votre appareil photo ou partagez-le avec vos contacts pour les rediriger directement vers notre plateforme officielle.",
+                  "Scan the QR code with your camera or share it with your contacts to redirect them directly to our official platform.",
+                  "Escanee el código QR con su cámara o compártalo con sus contactos para redirigirlos directamente a nuestra plataforma oficial.",
+                  "Scannen Sie den QR-Code mit Ihrer Kamera oder teilen Sie ihn mit Ihren Kontakten, um sie direkt zu unserer offiziellen Plattform weiterzuleiten."
+                )}
+              </p>
+
+              {/* URL badge */}
+              <div style={{ display:'inline-flex', alignItems:'center', gap:8, padding:'9px 18px', background:'rgba(201,168,76,.08)', border:'1px solid rgba(201,168,76,.3)', marginBottom:24 }}>
+                <span style={{ width:7, height:7, background:'#34d399', borderRadius:'50%', flexShrink:0, animation:'pulse 1.5s ease-in-out infinite' }}/>
+                <span style={{ fontFamily:'var(--f-display)', fontSize:'.65rem', color:'var(--gold)', letterSpacing:'.12em' }}>
+                  groupendoyeafrica.com
+                </span>
+              </div>
+
+              {/* Action buttons */}
+              <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+                <button
+                  onClick={()=>{
+                    if(navigator.share){
+                      navigator.share({ title:'Groupe Ndoye Africa Holding', text:"Découvrez la plateforme officielle de GNAH", url:'https://groupendoyeafrica.com' }).catch(()=>{});
+                    } else {
+                      navigator.clipboard.writeText('https://groupendoyeafrica.com').then(()=>alert('Lien copié !')).catch(()=>{});
+                    }
+                  }}
+                  style={{ display:'flex', alignItems:'center', gap:8, padding:'11px 22px', background:'linear-gradient(135deg,#c9a84c,#e8c96a,#8b6914)', color:'var(--navy)', fontFamily:'var(--f-display)', fontSize:'.68rem', letterSpacing:'.14em', textTransform:'uppercase', border:'none', cursor:'pointer', transition:'all .3s' }}
+                  onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-2px)';e.currentTarget.style.boxShadow='0 8px 24px rgba(201,168,76,.35)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='none';}}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                  {tl('Partager','Share','Compartir','Teilen')}
+                </button>
+                <button
+                  id="copy-qr-btn"
+                  onClick={()=>{
+                    navigator.clipboard.writeText('https://groupendoyeafrica.com').then(()=>{
+                      const btn = document.getElementById('copy-qr-btn');
+                      if(btn){ btn.textContent = tl('✓ Lien copié !','✓ Link copied!','✓ ¡Enlace copiado!','✓ Link kopiert!'); setTimeout(()=>{ if(btn) btn.textContent = tl('Copier le lien','Copy link','Copiar enlace','Link kopieren'); }, 2500); }
+                    }).catch(()=>{});
+                  }}
+                  style={{ display:'flex', alignItems:'center', gap:8, padding:'11px 22px', background:'transparent', color:'var(--gold)', fontFamily:'var(--f-display)', fontSize:'.68rem', letterSpacing:'.14em', textTransform:'uppercase', border:'1px solid rgba(201,168,76,.4)', cursor:'pointer', transition:'all .3s' }}
+                  onMouseEnter={e=>{e.currentTarget.style.background='rgba(201,168,76,.08)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.background='transparent';}}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  {tl('Copier le lien','Copy link','Copiar enlace','Link kopieren')}
+                </button>
+              </div>
+            </div>
+
+            {/* Right — QR Code */}
+            <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:16 }}>
+              {/* Gold frame */}
+              <div style={{
+                position:'relative', padding:3,
+                background:'linear-gradient(135deg,#c9a84c,#e8c96a 30%,#8b6914 60%,#c9a84c)',
+                boxShadow:'0 0 60px rgba(201,168,76,.35), 0 20px 60px rgba(0,0,0,.5)',
+                animation:'qrPulse 3s ease-in-out infinite',
+              }}>
+                {/* Corner marks */}
+                {[['top:0,left:0','border-top:3px solid var(--gold),border-left:3px solid var(--gold)'],['top:0,right:0','border-top:3px solid var(--gold),border-right:3px solid var(--gold)'],['bottom:0,left:0','border-bottom:3px solid var(--gold),border-left:3px solid var(--gold)'],['bottom:0,right:0','border-bottom:3px solid var(--gold),border-right:3px solid var(--gold)']].map(([pos],i)=>(
+                  <div key={i} style={{ position:'absolute', width:14, height:14, ...Object.fromEntries(pos.split(',').map(p=>p.split(':'))) }}/>
+                ))}
+                <div style={{ background:'var(--navy)', padding:'clamp(14px,3vw,22px)' }}>
+                  {/* QR rendered by useEffect */}
+                  <div id="about-qr" style={{ display:'block' }}/>
+                </div>
+              </div>
+              <div style={{ fontFamily:'var(--f-display)', fontSize:'.6rem', color:'rgba(201,168,76,.5)', letterSpacing:'.16em', textTransform:'uppercase', textAlign:'center' }}>
+                {tl('Scanner avec votre appareil photo','Scan with your camera','Escanear con su cámara','Mit Kamera scannen')}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes qrPulse {
+            0%,100%{box-shadow:0 0 40px rgba(201,168,76,.2),0 20px 60px rgba(0,0,0,.5)}
+            50%{box-shadow:0 0 80px rgba(201,168,76,.5),0 20px 60px rgba(0,0,0,.5)}
+          }
+          @keyframes pulse {0%,100%{opacity:1}50%{opacity:.3}}
+        `}</style>
       </section>
 
       {/* ── CTA ── */}

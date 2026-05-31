@@ -21,6 +21,13 @@ const AMENITY_ICONS = {
 
 function Carousel() {
   const { lang } = useLang();
+  const [rtProj, setRtProj] = useState(getProjectsRT);
+  useEffect(() => {
+    const h = () => setRtProj(getProjectsRT());
+    window.addEventListener('storage', h);
+    const iv = setInterval(h, 2000);
+    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
+  }, []);
   const [idx, setIdx] = useState(0);
   const prev = useCallback(()=>setIdx(i=>(i-1+YAYE_SLIDES.length)%YAYE_SLIDES.length),[]);
   const next = useCallback(()=>setIdx(i=>(i+1)%YAYE_SLIDES.length),[]);
@@ -49,8 +56,24 @@ function Carousel() {
   );
 }
 
+
+function getProjectsRT() {
+  try {
+    const s = localStorage.getItem('gnah_projets');
+    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p; }
+  } catch {}
+  return null;
+}
+
 export default function Projects() {
   const { lang } = useLang();
+  const [rtProj, setRtProj] = useState(getProjectsRT);
+  useEffect(() => {
+    const h = () => setRtProj(getProjectsRT());
+    window.addEventListener('storage', h);
+    const iv = setInterval(h, 2000);
+    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
+  }, []);
   const [activeVilla, setActiveVilla] = useState('f3');
   const [amenRef, amenVis] = useInView();
   const [lotRef, lotVis]   = useInView();
@@ -79,7 +102,7 @@ ${form.msg}`;
   return (
     <main className="page-white">
       <PageHero
-        bgImg="/Images/yaye-dia/cite-voirie.jpg"
+        bgImg="/Images/yaye-dia/cover.jpg"
         label={tl('Projet Phare','Flagship Project','Proyecto Insignia','Vorzeigeprojekt')}
         title={tl('Résidence Yaye Dia','Yaye Dia Residence','Residencia Yaye Dia','Yaye Dia Residenz')}
         sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal','300 High-End Villas — Thiès Region, Senegal','300 Villas de Alto Standing — Región de Thiès, Senegal','300 Hochwertige Villen — Thiès Region, Senegal')}
@@ -319,10 +342,10 @@ ${form.msg}`;
                 <p style={{fontSize:'.8rem',color:'var(--text-mid)'}}>{mat.color}</p>
               </div>
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
-                <img src="/Images/yaye-dia/cuisine-luxe.jpg" alt="Cuisine" style={{width:'100%',height:110,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/cuisine.jpg" alt="Cuisine" style={{width:'100%',height:110,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=70';}}
                 />
-                <img src="/Images/yaye-dia/salon-f4.jpg" alt="salon" style={{width:'100%',height:110,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/master.jpg" alt="Master" style={{width:'100%',height:110,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&q=70';}}
                 />
               </div>
@@ -357,7 +380,7 @@ ${form.msg}`;
                 <img src="/Images/yaye-dia/eclairage.jpg" alt="Éclairage" style={{width:'100%',height:120,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=70';}}
                 />
-                <img src="/Images/yaye-dia/immeuble-jour.jpg" alt="Déchets" style={{width:'100%',height:120,objectFit:'cover'}}
+                <img src="/Images/yaye-dia/dechets.jpg" alt="Déchets" style={{width:'100%',height:120,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=70';}}
                 />
               </div>

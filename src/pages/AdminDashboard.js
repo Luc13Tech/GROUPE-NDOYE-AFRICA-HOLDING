@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { VILLA_TYPES, DEFAULT_ADMIN_CONTENT, SITE, SERVICES } from '../data/siteData';
+import { VILLA_TYPES, DEFAULT_ADMIN_CONTENT, SITE, SERVICES, COMPANIES } from '../data/siteData';
 
 function LineChart({ data, color='#c9a84c', height=90 }) {
   const max=Math.max(...data.map(d=>d.val)); const min=Math.min(...data.map(d=>d.val)); const range=max-min||1;
@@ -66,6 +66,7 @@ const TABS=[
   {id:'galerie',label:'Galerie & Médias',icon:IC.gallery},
   {id:'settings',label:'Paramètres',icon:IC.settings},
   {id:'password',label:'Mot de passe',icon:IC.lock},
+  {id:'entreprises',label:'Entreprises',icon:IC.gallery},
 ];
 const SVC_ICONS_LIST=['building','layers','chart','road','leaf','zap','star','globe','home','heart'];
 const GALLERY_CATS=['Vue Générale','Extérieur','Intérieur','Plans 3D','Immeubles','Commodités'];
@@ -86,6 +87,7 @@ export default function AdminDashboard() {
   const [servicesList,setServicesList]=useState(()=>{try{return JSON.parse(localStorage.getItem('gnah_services')||'null')||SERVICES.map((s,i)=>({id:i+1,active:true,icon:s.icon,title_fr:s.fr.title,title_en:s.en.title,desc_fr:s.fr.desc,desc_en:s.en.desc}));}catch{return [];}});
   const [galleryList,setGalleryList]=useState(()=>{try{return JSON.parse(localStorage.getItem('gnah_gallery')||'null')||[];}catch{return [];}});
   const [partnersList,setPartnersList]=useState(()=>{try{return JSON.parse(localStorage.getItem('gnah_partners')||'null')||[];}catch{return [];}});
+  const [companiesList,setCompaniesList]=useState(()=>{try{const s=localStorage.getItem('gnah_companies');if(s){const p=JSON.parse(s);if(Array.isArray(p)&&p.length>0)return p;}return COMPANIES;}catch{return COMPANIES;}});
   const [isDesktop,setIsDesktop]=useState(window.innerWidth>=1024);
   const [chartData,setChartData]=useState([
     {label:'T1 2024',val:12},{label:'T2 2024',val:18},{label:'T3 2024',val:22},{label:'T4 2024',val:27},
@@ -409,7 +411,44 @@ export default function AdminDashboard() {
             </>
           )}
 
-          {/* SETTINGS */}
+
+          {/* ENTREPRISES */}
+          {tab==='entreprises'&&(
+            <>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20,flexWrap:'wrap',gap:10}}>
+                <div style={sectionTitle}>Gestion des Entreprises</div>
+                <button onClick={()=>openModal('addCompany',{active:true})} className="btn btn-gold" style={{fontSize:'.68rem',padding:'9px 14px',display:'flex',alignItems:'center',gap:6}}>{IC.plus} Nouvelle Entreprise</button>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(250px,1fr))',gap:14}}>
+                {companiesList.map(c=>(
+                  <div key={c.id} style={{background:'var(--navy2)',border:'var(--border-gold)',overflow:'hidden'}}>
+                    <div style={{background:'rgba(5,8,16,.8)',padding:'20px 16px',display:'flex',alignItems:'center',justifyContent:'center',minHeight:90,borderBottom:'2px solid var(--gold)'}}>
+                      {c.logo
+                        ?<img src={c.logo} alt={c.name} style={{maxHeight:60,maxWidth:160,objectFit:'contain'}} onError={e=>{e.target.style.display='none';}}/>
+                        :<div style={{fontFamily:'var(--f-display)',fontSize:'1.2rem',color:'var(--gold)',letterSpacing:'.1em'}}>{(c.name||'?').slice(0,2).toUpperCase()}</div>}
+                    </div>
+                    <div style={{padding:16}}>
+                      <div style={{display:'flex',justifyContent:'space-between',marginBottom:8,flexWrap:'wrap',gap:5}}>
+                        <span style={tag('var(--gold)')}>{typeof c.sector==='object'?c.sector.fr:c.sector}</span>
+                        <span style={tag(c.active!==false?'#34d399':'#f87171')}>{c.active!==false?'ACTIF':'INACTIF'}</span>
+                      </div>
+                      <div style={{fontFamily:'var(--f-display)',fontSize:'.9rem',color:'var(--cream)',marginBottom:4}}>{c.name}</div>
+                      {c.country&&<div style={{fontSize:'.72rem',color:'rgba(200,195,186,.45)',marginBottom:8}}>{c.country}</div>}
+                      <p style={{fontSize:'.74rem',color:'rgba(200,195,186,.5)',lineHeight:1.6,marginBottom:12}}>{((typeof c.desc==='object'?c.desc.fr:c.desc)||'').slice(0,80)}...</p>
+                      <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+                        <button onClick={()=>openModal('editCompany',{...c,desc_fr:typeof c.desc==='object'?c.desc.fr:c.desc,desc_en:typeof c.desc==='object'?c.desc.en:'',sector_fr:typeof c.sector==='object'?c.sector.fr:c.sector})} className="btn-edit" style={{display:'flex',alignItems:'center',gap:3}}>{IC.edit} Modifier</button>
+                        <button onClick={()=>{if(window.confirm('Supprimer ?'))saveList('gnah_companies',setCompaniesList,companiesList.filter(x=>x.id!==c.id));}} className="btn-del">{IC.trash}</button>
+                        <button onClick={()=>saveList('gnah_companies',setCompaniesList,companiesList.map(x=>x.id===c.id?{...x,active:x.active===false?true:false}:x))} className="btn-tog">{c.active!==false?'Désactiver':'Activer'}</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {companiesList.length===0&&<div style={{padding:'40px 20px',color:'rgba(200,195,186,.35)',fontFamily:'var(--f-display)',fontSize:'.82rem',textAlign:'center'}}>Aucune entreprise. Créez la première.</div>}
+              </div>
+            </>
+          )}
+
+          {/* SETTINGS */
           {tab==='settings'&&(
             <>
               <div style={sectionTitle}>Paramètres du Site</div>
@@ -476,7 +515,7 @@ export default function AdminDashboard() {
               <FF label="Description FR *" k="desc_fr" textarea/>
               <FF label="Description EN" k="desc_en" textarea/>
               <FF label="Catégorie" k="category" options={['Immobilier','Infrastructure','Agriculture','Énergie','Autre']}/>
-              <FF label="URL Image" k="img" ph="/images/yaye-dia/villa-f5.jpg"/>
+              <FF label="URL Image" k="img" ph="/Images/yaye-dia/villa-f5.jpg"/>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
                 <input type="checkbox" checked={form.active!==false} onChange={e=>setForm(p=>({...p,active:e.target.checked}))} style={{accentColor:'var(--gold)',width:16,height:16}}/>
                 <label style={{fontFamily:'var(--f-display)',fontSize:'.65rem',color:'var(--text)',letterSpacing:'.08em',textTransform:'uppercase'}}>Projet actif (visible sur le site)</label>
@@ -508,7 +547,7 @@ export default function AdminDashboard() {
             {(modal==='addGallery'||modal==='editGallery')&&(<div>
               <FF label="Titre *" k="title" ph="ex: Villa F5 — Façade nuit"/>
               <FF label="Titre EN" k="title_en"/>
-              <FF label="URL Image *" k="img" ph="/images/yaye-dia/villa-f5.jpg"/>
+              <FF label="URL Image *" k="img" ph="/Images/yaye-dia/villa-f5.jpg"/>
               <FF label="Catégorie" k="category" options={GALLERY_CATS}/>
               <FF label="Description" k="desc" textarea ph="Description courte de la photo..."/>
               <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
@@ -518,6 +557,42 @@ export default function AdminDashboard() {
               <div style={{display:'flex',gap:10,justifyContent:'flex-end'}}>
                 <button onClick={closeModal} style={btnCancel}>Annuler</button>
                 <button onClick={()=>{if(!form.title||!form.img)return;const item={id:form.id||Date.now(),active:form.active!==false,title:form.title,title_en:form.title_en||form.title,img:form.img,category:form.category||'Extérieur',desc:form.desc||''};modal==='addGallery'?saveList('gnah_gallery',setGalleryList,[...galleryList,item]):saveList('gnah_gallery',setGalleryList,galleryList.map(x=>x.id===item.id?item:x));closeModal();}} className="btn btn-gold" style={{fontSize:'.7rem'}}>{modal==='addGallery'?'Ajouter':'Enregistrer'}</button>
+              </div>
+            </div>)}
+
+
+            {(modal==='addCompany'||modal==='editCompany')&&(<div>
+              <FF label="Nom de l'entreprise *" k="name" ph="ex: Terratransport"/>
+              <FF label="Logo URL" k="logo" ph="/Images/entreprises/logo-terratransport.png"/>
+              <FF label="Secteur FR *" k="sector_fr" ph="ex: Transport & Logistique"/>
+              <FF label="Secteur EN" k="sector_en" ph="ex: Transport & Logistics"/>
+              <FF label="Description FR *" k="desc_fr" textarea ph="Description de l'entreprise..."/>
+              <FF label="Description EN" k="desc_en" textarea/>
+              <FF label="Site web" k="website" ph="https://www.terratransport.com"/>
+              <FF label="Pays" k="country" ph="ex: Sénégal"/>
+              <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
+                <input type="checkbox" checked={form.active!==false} onChange={e=>setForm(p=>({...p,active:e.target.checked}))} style={{accentColor:'var(--gold)',width:16,height:16}}/>
+                <label style={{fontFamily:'var(--f-display)',fontSize:'.65rem',color:'var(--text)',letterSpacing:'.08em',textTransform:'uppercase'}}>Entreprise active (visible sur le site)</label>
+              </div>
+              <div style={{display:'flex',gap:10,justifyContent:'flex-end'}}>
+                <button onClick={closeModal} style={btnCancel}>Annuler</button>
+                <button onClick={()=>{
+                  if(!form.name)return;
+                  const item={
+                    id:form.id||Date.now(),
+                    active:form.active!==false,
+                    name:form.name,
+                    logo:form.logo||'',
+                    sector:{fr:form.sector_fr||'',en:form.sector_en||form.sector_fr||'',es:form.sector_fr||'',de:form.sector_fr||''},
+                    desc:{fr:form.desc_fr||'',en:form.desc_en||form.desc_fr||'',es:form.desc_fr||'',de:form.desc_fr||''},
+                    website:form.website||'#',
+                    country:form.country||'',
+                  };
+                  modal==='addCompany'
+                    ?saveList('gnah_companies',setCompaniesList,[...companiesList,item])
+                    :saveList('gnah_companies',setCompaniesList,companiesList.map(x=>x.id===item.id?item:x));
+                  closeModal();
+                }} className="btn btn-gold" style={{fontSize:'.7rem'}}>{modal==='addCompany'?'Créer':'Enregistrer'}</button>
               </div>
             </div>)}
 

@@ -27,10 +27,10 @@ const GALLERY_ITEMS = [
   // Category: Plans 3D / Floor plans
   { id:15, cat:'plans',    src:'/Images/yaye-dia/villa-f3-plan.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F3 — Vue aérienne parcelle',          en:'F3 3D Plan — Aerial plot view',               es:'Plan 3D F3 — Vista aérea parcela',            de:'F3 3D Plan — Luftaufnahme Grundstück' },
   { id:16, cat:'plans',    src:'/Images/yaye-dia/villa-f3-plan2.jpg',      fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F3 — Intérieur détaillé',            en:'F3 3D Plan — Detailed interior',              es:'Plan 3D F3 — Interior detallado',            de:'F3 3D Plan — Detailliertes Innere' },
-  { id:17, cat:'plans',    src:'/Images/yaye-dia/villa-f4pp-plan3.jpg',    fallback:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1800&q=85', fr:'Plan 3D F4 Plein Pied — Composition',        en:'F4 Single-Story 3D Plan — Layout',            es:'Plan 3D F4 Planta Baja — Composición',        de:'F4 Einstöckig 3D Plan — Grundriss' },
+  { id:17, cat:'plans',    src:'/Images/yaye-dia/villa-f4pp-plan.jpg',     fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F4 Plein Pied — Composition',        en:'F4 Single-Story 3D Plan — Layout',            es:'Plan 3D F4 Planta Baja — Composición',        de:'F4 Einstöckig 3D Plan — Grundriss' },
   { id:18, cat:'plans',    src:'/Images/yaye-dia/villa-f5-plan-aerien.jpg',fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan aérien F5 — Terrasse & espaces',        en:'F5 Aerial plan — Terrace & spaces',           es:'Plan aéreo F5 — Terraza y espacios',          de:'F5 Luftplan — Terrasse & Räume' },
   { id:19, cat:'plans',    src:'/Images/yaye-dia/villa-f5-terrasse-plan.jpg',fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85',fr:'Plan 3D Terrasse F5 — Barbecue & détente',  en:'F5 3D Terrace Plan — BBQ & relaxation',       es:'Plan 3D Terraza F5 — Barbacoa y relax',      de:'F5 3D Terrassenplan — Grill & Entspannung' },
-  { id:20, cat:'plans',    src:'/Images/yaye-dia/villa-f4duplex-plan.jpg', fallback:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85', fr:'Plan 3D F4 Duplex — RDC + Étage',           en:'F4 Duplex 3D Plan — Ground + Upper floor',    es:'Plan 3D F4 Dúplex — PB + Planta alta',       de:'F4 Duplex 3D Plan — EG + OG' },
+  { id:20, cat:'plans',    src:'/Images/yaye-dia/villa-f4duplex-plan.jpg', fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F4 Duplex — RDC + Étage',           en:'F4 Duplex 3D Plan — Ground + Upper floor',    es:'Plan 3D F4 Dúplex — PB + Planta alta',       de:'F4 Duplex 3D Plan — EG + OG' },
 
   // Category: Intérieurs / Interiors
   { id:21, cat:'interior', src:'/Images/yaye-dia/salon-f3.jpg',            fallback:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',   fr:'Salon F3 — Espace de vie ouvert & lumineux',  en:'F3 Living room — Open & bright living space', es:'Salón F3 — Espacio de vida abierto y luminoso',de:'F3 Wohnzimmer — Offener heller Wohnraum' },
@@ -41,7 +41,7 @@ const GALLERY_ITEMS = [
   { id:26, cat:'interior', src:'/Images/yaye-dia/master.jpg',              fallback:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=85', fr:'Master Room — Dressing & salle de bain',     en:'Master Room — Dressing & bathroom',           es:'Master Room — Vestidor y baño',              de:'Master Room — Ankleidezimmer & Bad' },
 
   // Category: Immeubles / Buildings
-  { id:27, cat:'buildings',src:'/Images/yaye-dia/immeuble-nuit.jpg',       fallback:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=85', fr:'Immeuble Yaye Dia — Façade nuit',           en:'Yaye Dia Building — Night facade',            es:'Edificio Yaye Dia — Fachada noche',          de:'Yaye Dia Gebäude — Nachtfassade' },
+  { id:27, cat:'buildings',src:'/Images/yaye-dia/immeuble-nuit.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble résidentiel — Cité Yaye Dia nuit',  en:'Residential building — Yaye Dia City night',  es:'Edificio residencial — Ciudad Yaye Dia noche',de:'Wohngebäude — Yaye Dia Stadt Nacht' },
   { id:28, cat:'buildings',src:'/Images/yaye-dia/immeuble-jour.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble Yaye Dia — Façade moderne jour',    en:'Yaye Dia Building — Modern daytime facade',   es:'Edificio Yaye Dia — Fachada moderna día',    de:'Yaye Dia Gebäude — Moderne Tagesfassade' },
 ];
 
@@ -103,8 +103,24 @@ function Lightbox({ item, items, onClose, onPrev, onNext, lang }) {
   );
 }
 
+
+function getExtraPhotos() {
+  try {
+    const s = localStorage.getItem('gnah_gallery');
+    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p.filter(x => x.active !== false); }
+  } catch {}
+  return [];
+}
+
 export default function Gallery() {
   const { lang } = useLang();
+  const [extraPhotos, setExtraPhotos] = useState(getExtraPhotos);
+  useEffect(() => {
+    const h = () => setExtraPhotos(getExtraPhotos());
+    window.addEventListener('storage', h);
+    const iv = setInterval(h, 2000);
+    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
+  }, []);
   const [activeCat, setActiveCat] = useState('all');
   const [lightboxIdx, setLightboxIdx] = useState(null);
   const [gridRef, gridVis] = useInView();
@@ -234,4 +250,4 @@ export default function Gallery() {
       )}
     </main>
   );
-  }
+}
