@@ -69,12 +69,12 @@ ${form.desc}`;
         </div>
       </section>
 
-      {/* INVESTMENT TIERS */}
+      {/* NOS CONSULTANCES - SECTION MODIFIÉE */}
       <section style={{ background:'var(--gray-50)', padding:'72px 0' }} ref={tierRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:48 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Capacité','Capacity','Capacidad','Kapazität')}</div>
-            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Fourchettes d'Investissement","Investment Ranges","Rangos de Inversión","Investitionsbereiche")}</h2>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Expertise','Expertise','Experiencia','Expertise')}</div>
+            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Nos Consultances","Our Consultancies","Nuestras Consultorías","Unsere Beratungen")}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-3">
@@ -84,7 +84,7 @@ ${form.desc}`;
                   {t[lang]||t.fr}
                 </div>
                 <div style={{ fontFamily:'var(--f-elegant)', fontSize:'1.6rem', color:'var(--gold)', marginBottom:20 }}>{t.range}</div>
-                <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(tl(`Bonjour, je suis intéressé(e) par un investissement catégorie "${t.fr}" (${t.range}).`,`Hello, I am interested in investment category "${t.en}" (${t.range}).`,`Hola, estoy interesado/a en la categoría de inversión "${t.es}" (${t.range}).`,`Hallo, ich interessiere mich für die Investitionskategorie "${t.de}" (${t.range}).`))}`}
+                <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(tl(`Bonjour, je suis intéressé(e) par vos services de consultance "${t.fr}" (${t.range}).`,`Hello, I am interested in your consultancy services "${t.en}" (${t.range}).`,`Hola, estoy interesado/a en sus servicios de consultoría "${t.es}" (${t.range}).`,`Hallo, ich interessiere mich für Ihre Beratungsdienstleistungen "${t.de}" (${t.range}).`))}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-outline-dark btn-sm">
                   {tl('En savoir plus','Learn more','Saber más','Mehr erfahren')}
@@ -165,4 +165,4 @@ ${form.desc}`;
       </section>
     </main>
   );
-}
+        }
