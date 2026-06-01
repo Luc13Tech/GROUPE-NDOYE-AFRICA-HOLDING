@@ -103,11 +103,16 @@ export default function Entreprises() {
                     onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-5px)';e.currentTarget.style.boxShadow='var(--shadow-lg)';e.currentTarget.style.borderColor='var(--gold)';}}
                     onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='var(--shadow-sm)';e.currentTarget.style.borderColor='var(--gray-200)';}}
                   >
-                    {/* LOGO AREA */}
+                    {/* LOGO AREA - CORRIGÉ */}
                     <div style={{
-                      background:'var(--navy)', padding:'32px 24px',
-                      display:'flex', alignItems:'center', justifyContent:'center',
-                      minHeight:140, position:'relative', overflow:'hidden',
+                      background:'var(--navy)',
+                      padding:'24px 20px',
+                      display:'flex',
+                      alignItems:'center',
+                      justifyContent:'center',
+                      minHeight:160,
+                      position:'relative',
+                      overflow:'hidden',
                       borderBottom:'3px solid var(--gold)',
                     }}>
                       {/* Decorative background pattern */}
@@ -117,18 +122,32 @@ export default function Entreprises() {
                         alt={company.name}
                         onError={e=>{
                           e.target.style.display='none';
-                          e.target.nextSibling.style.display='flex';
+                          if(e.target.nextSibling) e.target.nextSibling.style.display='flex';
                         }}
-                        style={{ maxHeight:80, maxWidth:200, objectFit:'contain', position:'relative', zIndex:1, filter:'brightness(1.1)' }}
+                        style={{
+                          maxHeight:'100%',
+                          maxWidth:'90%',
+                          width:'auto',
+                          height:'auto',
+                          objectFit:'contain',
+                          position:'relative',
+                          zIndex:1
+                        }}
                       />
                       {/* Fallback if logo fails */}
                       <div style={{
-                        display:'none', alignItems:'center', justifyContent:'center',
+                        display:'none',
+                        alignItems:'center',
+                        justifyContent:'center',
                         background:'linear-gradient(135deg,var(--gold),var(--gold-d))',
-                        width:80, height:80, position:'relative', zIndex:1,
+                        width:80,
+                        height:80,
+                        position:'relative',
+                        zIndex:1,
+                        borderRadius:'50%'
                       }}>
                         <span style={{ fontFamily:'var(--f-display)', fontSize:'1.2rem', color:'var(--navy)', fontWeight:700, letterSpacing:'.1em' }}>
-                          {company.name.slice(0,2).toUpperCase()}
+                          {company.name ? company.name.slice(0,2).toUpperCase() : 'CO'}
                         </span>
                       </div>
                     </div>
