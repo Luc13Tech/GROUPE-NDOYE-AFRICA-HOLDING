@@ -19,7 +19,7 @@ export const SITE = {
     instagram: 'https://www.instagram.com/assanedesignconception',
     tiktok:    'https://www.tiktok.com/@assane.design.con',
     threads:   'https://www.threads.net/@assanedesignconception',
-    linkedin:  'https://www.linkedin.com/company/groupendoyeafricaholding',
+    linkedin:  'https://www.linkedin.com/company/assanecesigneconception',
   },
   waMsg: {
     fr: "Bonjour Groupe Ndoye Africa Holding, je souhaite avoir plus d'informations.",
