@@ -74,7 +74,7 @@ ${form.desc}`;
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:48 }}>
             <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Capacité','Capacity','Capacidad','Kapazität')}</div>
-            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Nos Consultances","Investment Ranges","Rangos de Inversión","Investitionsbereiche")}</h2>
+            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Fourchettes d'Investissement","Investment Ranges","Rangos de Inversión","Investitionsbereiche")}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-3">
