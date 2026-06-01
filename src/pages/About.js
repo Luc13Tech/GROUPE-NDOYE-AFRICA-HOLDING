@@ -220,7 +220,7 @@ export default function About() {
           <div className="grid-4">
             {[
               { val:'10', suf:'+', fr:"Ans d'expérience", en:'Years of experience', es:'Años de experiencia', de:'Jahre Erfahrung', color:'#c9a84c' },
-              { val:'6', suf:'', fr:'Partenaires mondiaux', en:'Global partners', es:'Socios mundiales', de:'Weltweite Partner', color:'#6366f1' },
+              { val:'7', suf:'', fr:'Partenaires mondiaux', en:'Global partners', es:'Socios mundiales', de:'Weltweite Partner', color:'#6366f1' },
               { val:'11', suf:'', fr:'Pays africains partenaires', en:'African partner countries', es:'Países socios africanos', de:'Afrikanische Partnerländer', color:'#34d399' },
               { val:'300', suf:'', fr:'Villas Résidence Yaye Dia', en:'Yaye Dia Villas', es:'Villas Yaye Dia', de:'Yaye Dia Villen', color:'#f472b6' },
             ].map((s,i)=>(
