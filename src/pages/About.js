@@ -192,7 +192,7 @@ export default function About() {
               </Link>
             </div>
             <div className={`slide-right${heroVis?' visible':''}`} style={{ position:'relative' }}>
-              <img src="/Images/yaye-dia/cite-vue-aerienne.jpg"
+              <img src="/Images/yaye-dia/design.jpg"
                 onError={e=>{ e.target.src='https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85'; }}
                 alt="GNAH" style={{ width:'100%', height:400, objectFit:'cover', borderTop:'3px solid var(--gold)' }}/>
               {/* Floating stats */}
