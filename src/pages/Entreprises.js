@@ -126,7 +126,7 @@ export default function Entreprises() {
                         }}
                         style={{
                           maxHeight:'100%',
-                          maxWidth:'90%',
+                          maxWidth:'100%',
                           width:'auto',
                           height:'auto',
                           objectFit:'contain',
