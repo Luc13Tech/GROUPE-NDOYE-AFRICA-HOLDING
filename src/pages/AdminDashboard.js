@@ -448,7 +448,7 @@ export default function AdminDashboard() {
             </>
           )}
 
-          {/* SETTINGS */
+          {/* SETTINGS */}
           {tab==='settings'&&(
             <>
               <div style={sectionTitle}>Paramètres du Site</div>
@@ -624,4 +624,4 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-}
+              }
