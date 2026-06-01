@@ -33,7 +33,7 @@ function LogoMark({ size = 46 }) {
     </div>
   ) : (
     <img
-      src="/Images/logo/gnah-logo.png"
+      src="/public/Images/logo/logoGNAH.png"
       alt="GNAH Logo"
       style={{ height: size, width: 'auto', objectFit: 'contain', flexShrink: 0, display: 'block' }}
       onError={() => setImgFailed(true)}
