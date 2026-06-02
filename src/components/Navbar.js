@@ -25,11 +25,6 @@ function LogoMark({ size = 46 }) {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       flexShrink: 0, position: 'relative', overflow: 'hidden',
     }}>
-      <svg width={size * 0.72} height={size * 0.72} viewBox="0 0 48 48" fill="none">
-        <path d="M8 40V20L24 8l16 12v20H8z" fill="rgba(5,8,16,.7)" stroke="rgba(255,255,255,.5)" strokeWidth="1.5"/>
-        <path d="M18 40V28h12v12" fill="rgba(255,255,255,.3)" stroke="rgba(255,255,255,.5)" strokeWidth="1.2"/>
-        <path d="M24 8v6M20 14h8" stroke="rgba(255,255,255,.6)" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
     </div>
   ) : (
     <img
