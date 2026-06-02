@@ -18,6 +18,7 @@ import Videos from './pages/Videos';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import Entreprises from './pages/Entreprises';
+import { Analytics } from '@vercel/analytics/react'; // ← LIGNE AJOUTÉE
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -58,7 +59,8 @@ export default function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="*"                element={<Navigate to="/" />} />
         </Routes>
+        <Analytics /> {/* ← LIGNE AJOUTÉE */}
       </BrowserRouter>
     </LangProvider>
   );
-}
+    }
