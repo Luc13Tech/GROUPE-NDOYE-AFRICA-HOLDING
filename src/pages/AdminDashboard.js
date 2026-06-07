@@ -66,7 +66,7 @@ const TABS=[
   {id:'galerie',label:'Galerie & Médias',icon:IC.gallery},
   {id:'settings',label:'Paramètres',icon:IC.settings},
   {id:'password',label:'Mot de passe',icon:IC.lock},
-  {id:'entreprises',label:'Entreprises',icon:IC.gallery},
+  {id:'entreprises',label:'Entreprises',icon:<svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'><path d='M6 22V4a2 2 0 012-2h8a2 2 0 012 2v18z'/><path d='M6 12H4a2 2 0 00-2 2v6a2 2 0 002 2h2'/><path d='M18 9h2a2 2 0 012 2v9a2 2 0 01-2 2h-2'/></svg>},
 ];
 const SVC_ICONS_LIST=['building','layers','chart','road','leaf','zap','star','globe','home','heart'];
 const GALLERY_CATS=['Vue Générale','Extérieur','Intérieur','Plans 3D','Immeubles','Commodités'];
@@ -103,7 +103,12 @@ export default function AdminDashboard() {
     return()=>clearInterval(intervalRef.current);
   },[]);
 
-  const saveList=(key,setter,data)=>{setter(data);localStorage.setItem(key,JSON.stringify(data));};
+  const saveList=(key,setter,data)=>{
+  setter(data);
+  localStorage.setItem(key,JSON.stringify(data));
+  // Dispatch storage event so other tabs/components update
+  window.dispatchEvent(new Event('storage'));
+};
   const logout=()=>{sessionStorage.removeItem('gnah_admin');navigate('/admin');};
   const openModal=(type,data={})=>{setModal(type);setForm({...data});};
   const closeModal=()=>{setModal(null);setForm({});};
@@ -448,7 +453,7 @@ export default function AdminDashboard() {
             </>
           )}
 
-          {/* SETTINGS */}
+          {/* SETTINGS */
           {tab==='settings'&&(
             <>
               <div style={sectionTitle}>Paramètres du Site</div>
@@ -624,4 +629,4 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-              }
+}

@@ -31,7 +31,7 @@ export default function AdminLogin() {
       {/* Background */}
       <div style={{
         position:'absolute', inset:0,
-        backgroundImage:"url('/images/yaye-dia/cite-vue-aerienne.jpg')",
+        backgroundImage:"url('/Images/yaye-dia/cite-vue-aerienne.jpg')",
         backgroundSize:'cover', backgroundPosition:'center',
         filter:'brightness(.12)', zIndex:0,
       }}/>
@@ -51,7 +51,7 @@ export default function AdminLogin() {
 
         {/* Logo */}
         <div style={{ marginBottom:28 }}>
-          <img src="/images/logo/gnah-logo.png" alt="GNAH" style={{ height:56, margin:'0 auto 14px', display:'block' }}
+          <img src="/Images/logo/gnah-logo.png" alt="GNAH" style={{ height:56, margin:'0 auto 14px', display:'block' }}
             onError={e=>{e.target.style.display='none';}}/>
           <div style={{ background:'rgba(5,8,16,.6)', padding:'8px 16px', border:'1px solid rgba(201,168,76,.25)', display:'inline-block', marginBottom:6 }}>
             <div style={{ fontFamily:'var(--f-display)', fontSize:'.72rem', color:'var(--cream)', letterSpacing:'.22em' }}>GROUPE NDOYE AFRICA</div>
