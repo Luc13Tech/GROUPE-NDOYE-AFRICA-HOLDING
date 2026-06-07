@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { VILLA_TYPES, DEFAULT_ADMIN_CONTENT, SITE, SERVICES, COMPANIES } from '../data/siteData';
+import { VILLA_TYPES, DEFAULT_ADMIN_CONTENT, SITE, SERVICES, COMPANIES, LOTISSEMENT } from '../data/siteData';
 
 function LineChart({ data, color='#c9a84c', height=90 }) {
   const max=Math.max(...data.map(d=>d.val)); const min=Math.min(...data.map(d=>d.val)); const range=max-min||1;
@@ -398,7 +398,7 @@ export default function AdminDashboard() {
               <div style={sectionTitle}>Gestion des Villas</div>
               <div style={{overflowX:'auto'}}>
                 <table style={{width:'100%',borderCollapse:'collapse',minWidth:480}}>
-                  <thead><tr>{['Type','Nom','Terrain','Bâti','Standing','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.1)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.56rem',letterSpacing:'.12em',padding:'10px 12px',textAlign:'left',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead>
+                  <thead><tr>{['Type','Nom','Terrain','Bâti','Standing','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.1)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.56rem',letterSpacing:'.12em',padding:'10px 12px',textAlign:'left',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}</thead>
                   <tbody>
                     {VILLA_TYPES.map(v=>(
                       <tr key={v.id}>
@@ -415,7 +415,6 @@ export default function AdminDashboard() {
               </div>
             </>
           )}
-
 
           {/* ENTREPRISES */}
           {tab==='entreprises'&&(
@@ -453,7 +452,7 @@ export default function AdminDashboard() {
             </>
           )}
 
-          {/* SETTINGS */
+          {/* SETTINGS */}
           {tab==='settings'&&(
             <>
               <div style={sectionTitle}>Paramètres du Site</div>
@@ -565,7 +564,6 @@ export default function AdminDashboard() {
               </div>
             </div>)}
 
-
             {(modal==='addCompany'||modal==='editCompany')&&(<div>
               <FF label="Nom de l'entreprise *" k="name" ph="ex: Terratransport"/>
               <FF label="Logo URL" k="logo" ph="/Images/entreprises/logo-terratransport.png"/>
@@ -629,4 +627,4 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-}
+  }
