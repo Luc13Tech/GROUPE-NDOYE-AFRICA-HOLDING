@@ -615,3 +615,51 @@ h1,h2,h3,h4,h5 { font-family: var(--f-display); letter-spacing:.04em; line-heigh
   [style*="gap: 72px"] { gap: 28px !important; }
   [style*="gap: 48px"] { gap: 20px !important; }
 }
+
+/* ── Auto-fill grids (fully responsive) ── */
+.grid-auto-2 { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr)); gap:clamp(14px,2.5vw,24px); }
+.grid-auto-3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr)); gap:clamp(14px,2.5vw,24px); }
+.grid-auto-4 { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr)); gap:clamp(12px,2vw,20px); }
+
+/* ── Responsive text helpers ── */
+.text-fluid-sm  { font-size:clamp(.75rem,2vw,.9rem); }
+.text-fluid-md  { font-size:clamp(.85rem,2.5vw,1rem); }
+.text-fluid-lg  { font-size:clamp(1rem,3vw,1.4rem); }
+.text-fluid-xl  { font-size:clamp(1.2rem,4vw,2rem); }
+.text-fluid-xxl { font-size:clamp(1.5rem,5vw,3rem); }
+
+/* ── Extra mobile fixes ── */
+@media (max-width:639px) {
+  .section { padding:36px 0; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns:1fr !important; }
+  .hero-title { font-size:clamp(1.6rem,8vw,2.4rem) !important; }
+  .hero-actions { flex-direction:column; }
+  .hero-actions .btn { width:100%; max-width:100%; }
+  .hcar-slide { height:clamp(180px,50vw,280px); }
+  .page-hero { min-height:clamp(180px,40vw,280px); }
+  .stat-val { font-size:clamp(1.2rem,6vw,2rem); }
+  .sec-title-dark, .sec-title-light { font-size:clamp(1.1rem,5vw,1.8rem); }
+  .modal-box { padding:16px; }
+  .ai-chat { width:min(95vw, 300px); bottom:68px; left:8px; }
+  .footer-grid { grid-template-columns:1fr !important; gap:24px; }
+  .admin-sidebar { width:240px !important; }
+  .dash-grid { grid-template-columns:1fr 1fr; }
+}
+
+@media (min-width:640px) and (max-width:767px) {
+  .grid-3 { grid-template-columns:1fr 1fr !important; }
+  .grid-4 { grid-template-columns:1fr 1fr !important; }
+  .footer-grid { grid-template-columns:1fr 1fr !important; }
+}
+
+@media (max-width:1023px) {
+  .nav-links { display:none !important; }
+  .hamburger { display:flex !important; }
+}
+
+/* ── Tablet specific ── */
+@media (min-width:768px) and (max-width:1023px) {
+  .container { padding:0 24px; }
+  .grid-3 { grid-template-columns:1fr 1fr; }
+  .hero-title { font-size:clamp(2rem,6vw,3.5rem); }
+}

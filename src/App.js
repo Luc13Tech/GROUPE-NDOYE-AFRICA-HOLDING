@@ -15,10 +15,10 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Videos from './pages/Videos';
+import Entreprises from './pages/Entreprises';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
-import Entreprises from './pages/Entreprises';
-import { Analytics } from '@vercel/analytics/react'; // ← LIGNE AJOUTÉE
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,6 +33,7 @@ function Layout({ children }) {
       {children}
       <Footer />
       <FloatingButtons />
+      <PWAInstallPrompt />
     </>
   );
 }
@@ -48,19 +49,18 @@ export default function App() {
           <Route path="/projets"         element={<Layout><Projects /></Layout>} />
           <Route path="/engagements"     element={<Layout><Commitments /></Layout>} />
           <Route path="/partenaires"     element={<Layout><Partners /></Layout>} />
+          <Route path="/entreprises"     element={<Layout><Entreprises /></Layout>} />
           <Route path="/investisseurs"   element={<Layout><Investors /></Layout>} />
           <Route path="/collaboration"   element={<Layout><Collaboration /></Layout>} />
           <Route path="/a-propos"        element={<Layout><About /></Layout>} />
           <Route path="/contact"         element={<Layout><Contact /></Layout>} />
           <Route path="/galerie"         element={<Layout><Gallery /></Layout>} />
           <Route path="/videos"          element={<Layout><Videos /></Layout>} />
-          <Route path="/entreprises" element={<Layout><Entreprises /></Layout>} />
           <Route path="/admin"           element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="*"                element={<Navigate to="/" />} />
         </Routes>
-        <Analytics /> {/* ← LIGNE AJOUTÉE */}
       </BrowserRouter>
     </LangProvider>
   );
-    }
+}
