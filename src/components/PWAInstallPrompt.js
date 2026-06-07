@@ -139,14 +139,14 @@ export default function PWAInstallPrompt() {
             {/* Text */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(.7rem,2vw,.8rem)', color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 3 }}>
-                {tl('Installer l'Application','Install the App','Instalar la Aplicación','App Installieren','安装应用程序')}
+                {tl("Installer l'Application",'Install the App','Instalar la Aplicación','App Installieren','安装应用程序')}
               </div>
               <div style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: 'clamp(.72rem,2vw,.82rem)', color: 'var(--cream)', marginBottom: 2 }}>
                 Groupe Ndoye Africa Holding
               </div>
               <div style={{ fontFamily: 'var(--f-body)', fontSize: 'clamp(.62rem,1.5vw,.7rem)', color: 'rgba(200,195,186,.45)', lineHeight: 1.4 }}>
                 {tl(
-                  'Accédez instantanément à la plateforme depuis votre écran d'accueil.',
+                  'Accédez instantanément à la plateforme depuis votre écran d\'accueil.',
                   'Instantly access the platform from your home screen.',
                   'Acceda instantáneamente a la plataforma desde su pantalla de inicio.',
                   'Greifen Sie sofort von Ihrem Startbildschirm auf die Plattform zu.',
