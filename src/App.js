@@ -19,6 +19,7 @@ import Entreprises from './pages/Entreprises';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
+import { Analytics } from '@vercel/analytics/react'; // ← UNIQUE AJOUT POUR VERCEL
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -60,7 +61,8 @@ export default function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="*"                element={<Navigate to="/" />} />
         </Routes>
+        <Analytics /> {/* ← UNIQUE AJOUT POUR VERCEL */}
       </BrowserRouter>
     </LangProvider>
   );
-}
+    }
