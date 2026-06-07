@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLang } from '../hooks/useLang';
+function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
 import { SITE } from '../data/siteData';
 import PageHero from '../components/PageHero';
 
@@ -29,10 +30,13 @@ const SUBJECTS = {
 
 export default function Contact() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [gridRef, gridVis] = useInView();
   const [form, setForm] = useState({ nom:'', email:'', tel:'', pays:'', objet:'', msg:'' });
   const [sent, setSent] = useState(false);
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   const wm = typeof SITE.waMsg==='object' ? (SITE.waMsg[lang]||SITE.waMsg.fr) : SITE.waMsg;
 
@@ -64,7 +68,7 @@ ${form.msg}`;
   return (
     <main className="page-white">
       <PageHero
-        bgImg="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=85"
+        bgImg="/Images/yaye-dia/villa-f4pp-facade.jpg"
         label={tl("Restons en contact","Let's stay in touch","Mantengámonos en contacto","Bleiben wir in Kontakt")}
         title={tl('Contactez-Nous','Contact Us','Contáctenos','Kontakt')}
         sub={tl('Notre équipe est à votre disposition 7j/7','Our team is available 7 days a week','Nuestro equipo está disponible 7 días a la semana','Unser Team ist 7 Tage die Woche für Sie da')}
@@ -74,7 +78,7 @@ ${form.msg}`;
       {/* MAIN SECTION */}
       <section className="section" ref={gridRef}>
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1.5fr', gap:64, alignItems:'start' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:64, alignItems:'start' }}>
 
             {/* LEFT — INFO + SOCIALS */}
             <div className={`slide-left${gridVis?' visible':''}`}>

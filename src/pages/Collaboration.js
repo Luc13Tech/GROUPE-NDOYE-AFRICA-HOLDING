@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLang } from '../hooks/useLang';
+function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
 import { SITE } from '../data/siteData';
 import PageHero from '../components/PageHero';
 
@@ -60,10 +61,13 @@ const EXPERTISE_LIST = {
 
 export default function Collaboration() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [benRef, benVis] = useInView();
   const [form, setForm] = useState({ nom:'', org:'', pays:'', email:'', tel:'', type:'', expertise:'', desc:'' });
   const [sent, setSent] = useState(false);
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   const submit = () => {
     const msg = `${tl('Bonjour','Hello','Hola','Hallo')}, ${tl('je m\'appelle','my name is','me llamo','ich heiße')} ${form.nom}${form.org?` (${form.org})`:''}, ${form.pays}.
@@ -109,7 +113,7 @@ ${form.desc}`;
       {/* FORM */}
       <section style={{background:'var(--gray-50)',padding:'72px 0'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1.5fr',gap:64,alignItems:'start'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'start'}}>
             <div>
               <div className="sec-label">{tl('Proposez','Propose','Proponga','Vorschlagen')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Entrons en Contact',"Let's Connect",'Entremos en Contacto','Lassen Sie uns in Kontakt treten')}</h2>

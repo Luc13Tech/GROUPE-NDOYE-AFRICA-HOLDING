@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
+function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
 import { SITE, STATS, SERVICES, PARTNERS_WORLD, YAYE_SLIDES, TAGLINE, SUBTITLE } from '../data/siteData';
 
 // ── Hero background images (Unsplash direct links)
@@ -42,6 +43,9 @@ function useInView(threshold = 0.15) {
 // ── Yaye Dia Horizontal Carousel
 function YayeDiaCarousel() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [idx, setIdx] = useState(0);
   const prev = useCallback(() => setIdx(i => (i - 1 + YAYE_SLIDES.length) % YAYE_SLIDES.length), []);
   const next = useCallback(() => setIdx(i => (i + 1) % YAYE_SLIDES.length), []);
@@ -53,6 +57,7 @@ function YayeDiaCarousel() {
 
   const slide = YAYE_SLIDES[idx];
   const t = (obj) => obj[lang] || obj.fr;
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   return (
     <div className="hcar">
@@ -120,6 +125,9 @@ function getPartnersRT() {
 
 export default function Home() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [heroIdx, setHeroIdx] = useState(0);
   const [rtServices, setRtServices] = useState(getServices);
   const [rtPartners, setRtPartners] = useState(getPartnersRT);
@@ -223,7 +231,7 @@ export default function Home() {
         ref={introRef}
       >
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 72, alignItems: 'center' }}>
             <div className={`slide-left${introVisible ? ' visible' : ''}`}>
               <div className="sec-label">{t(LABELS.whoLabel)}</div>
               <h2 className="sec-title-dark">{t(LABELS.whoTitle)}</h2>
@@ -255,7 +263,7 @@ export default function Home() {
 
             <div className={`slide-right${introVisible ? ' visible' : ''}`} style={{ position: 'relative' }}>
               <img
-                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85"
+                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85"
                 alt="Africa"
                 style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
               />
@@ -373,7 +381,7 @@ export default function Home() {
 
       {/* ══ CTA ══ */}
       <section style={{ position: 'relative', minHeight: '48vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=85)`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(.22)' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(/Images/yaye-dia/villa-f4pp-facade.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(.22)' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,rgba(5,8,16,.9),rgba(13,20,39,.75))' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '80px 24px' }}>
           <p style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: '1.1rem', color: 'rgba(201,168,76,.7)', marginBottom: 12 }}>

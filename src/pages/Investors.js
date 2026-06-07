@@ -11,7 +11,7 @@ export default function Investors() {
   const [tierRef, tierVis] = useInView();
   const [form, setForm] = useState({ nom:'', pays:'', email:'', tel:'', montant:'', secteur:'', desc:'' });
   const [sent, setSent] = useState(false);
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   const SECTORS = {
     fr:['Immobilier','Infrastructure','Agriculture','Énergie Renouvelable','Port Maritime','Secteur Minier','Industrie'],
@@ -45,14 +45,14 @@ ${form.desc}`;
       {/* WHY AFRICA */}
       <section className="section">
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:64, alignItems:'center' }}>
             <div>
               <div className="sec-label">{tl("Pourquoi l'Afrique","Why Africa","Por qué África","Warum Afrika")}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Un Continent d'Opportunités","A Continent of Opportunities","Un Continente de Oportunidades","Ein Kontinent der Möglichkeiten")}</h2>
               <div className="divider-gold"/>
               <p style={{ fontSize:'.9rem', color:'var(--text-mid)', lineHeight:1.9, marginBottom:20 }}>{AFRICA_OPPS[lang]||AFRICA_OPPS.fr}</p>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:16 }}>
               {[
                 { val:'23%',  fr:"Surface planète",          en:"Earth's surface",         es:"Superficie terrestre",      de:"Erdoberfläche" },
                 { val:'90%',  fr:"Réserves platine",          en:"Platinum reserves",        es:"Reservas de platino",        de:"Platinreserven" },
@@ -69,12 +69,12 @@ ${form.desc}`;
         </div>
       </section>
 
-      {/* NOS CONSULTANCES - SECTION MODIFIÉE */}
+      {/* INVESTMENT TIERS */}
       <section style={{ background:'var(--gray-50)', padding:'72px 0' }} ref={tierRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:48 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Expertise','Expertise','Experiencia','Expertise')}</div>
-            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Nos Consultances","Our Consultancies","Nuestras Consultorías","Unsere Beratungen")}</h2>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Capacité','Capacity','Capacidad','Kapazität')}</div>
+            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Fourchettes d'Investissement","Investment Ranges","Rangos de Inversión","Investitionsbereiche")}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-3">
@@ -84,7 +84,7 @@ ${form.desc}`;
                   {t[lang]||t.fr}
                 </div>
                 <div style={{ fontFamily:'var(--f-elegant)', fontSize:'1.6rem', color:'var(--gold)', marginBottom:20 }}>{t.range}</div>
-                <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(tl(`Bonjour, je suis intéressé(e) par vos services de consultance "${t.fr}" (${t.range}).`,`Hello, I am interested in your consultancy services "${t.en}" (${t.range}).`,`Hola, estoy interesado/a en sus servicios de consultoría "${t.es}" (${t.range}).`,`Hallo, ich interessiere mich für Ihre Beratungsdienstleistungen "${t.de}" (${t.range}).`))}`}
+                <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(tl(`Bonjour, je suis intéressé(e) par un investissement catégorie "${t.fr}" (${t.range}).`,`Hello, I am interested in investment category "${t.en}" (${t.range}).`,`Hola, estoy interesado/a en la categoría de inversión "${t.es}" (${t.range}).`,`Hallo, ich interessiere mich für die Investitionskategorie "${t.de}" (${t.range}).`))}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-outline-dark btn-sm">
                   {tl('En savoir plus','Learn more','Saber más','Mehr erfahren')}
@@ -165,4 +165,4 @@ ${form.desc}`;
       </section>
     </main>
   );
-        }
+}

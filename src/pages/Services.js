@@ -59,7 +59,7 @@ export default function Services() {
   const [form, setForm] = useState({ nom:'', entreprise:'', email:'', tel:'', service:'', budget:'', desc:'' });
   const [sent, setSent] = useState(false);
 
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
   const svc = s => s[lang] || s.fr;
   const wm = typeof SITE.waMsg==='object' ? (SITE.waMsg[lang]||SITE.waMsg.fr) : SITE.waMsg;
 

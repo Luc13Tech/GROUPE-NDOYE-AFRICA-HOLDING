@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
+function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
 import { SITE, COMPANY_INTRO, CONSORTIUM, STRATEGY, OBJECTIVES, OPERATIONS } from '../data/siteData';
 import PageHero from '../components/PageHero';
 
@@ -117,6 +118,9 @@ const ArrowR = () => <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
 
 export default function About() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [heroRef, heroVis]   = useInView();
   const [statsRef, statsVis] = useInView();
   const [perfRef, perfVis]   = useInView();
@@ -144,7 +148,7 @@ export default function About() {
   }, []);
 
 
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   const PERF_DATA = [
     { year:'2022', val:4, color:'#6366f1', color2:'#8b5cf6' },
@@ -174,7 +178,7 @@ export default function About() {
       {/* ── PRESENTATION ── */}
       <section className="section" ref={heroRef}>
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:72, alignItems:'center' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:72, alignItems:'center' }}>
             <div className={`slide-left${heroVis?' visible':''}`}>
               <div className="sec-label">{tl('Présentation','Overview','Presentación','Überblick')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>
@@ -192,8 +196,8 @@ export default function About() {
               </Link>
             </div>
             <div className={`slide-right${heroVis?' visible':''}`} style={{ position:'relative' }}>
-              <img src="/Images/yaye-dia/design.jpg"
-                onError={e=>{ e.target.src='https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85'; }}
+              <img src="/Images/yaye-dia/cite-vue-aerienne.jpg"
+                onError={e=>{ e.target.src='/Images/yaye-dia/villa-f5-facade3.jpg'; }}
                 alt="GNAH" style={{ width:'100%', height:400, objectFit:'cover', borderTop:'3px solid var(--gold)' }}/>
               {/* Floating stats */}
               <div style={{ position:'absolute', bottom:-20, right:-20, background:'var(--navy)', border:'1px solid var(--gold)', padding:'18px 22px', minWidth:150 }}>
@@ -220,7 +224,7 @@ export default function About() {
           <div className="grid-4">
             {[
               { val:'10', suf:'+', fr:"Ans d'expérience", en:'Years of experience', es:'Años de experiencia', de:'Jahre Erfahrung', color:'#c9a84c' },
-              { val:'7', suf:'', fr:'Partenaires mondiaux', en:'Global partners', es:'Socios mundiales', de:'Weltweite Partner', color:'#6366f1' },
+              { val:'6', suf:'', fr:'Partenaires mondiaux', en:'Global partners', es:'Socios mundiales', de:'Weltweite Partner', color:'#6366f1' },
               { val:'11', suf:'', fr:'Pays africains partenaires', en:'African partner countries', es:'Países socios africanos', de:'Afrikanische Partnerländer', color:'#34d399' },
               { val:'300', suf:'', fr:'Villas Résidence Yaye Dia', en:'Yaye Dia Villas', es:'Villas Yaye Dia', de:'Yaye Dia Villen', color:'#f472b6' },
             ].map((s,i)=>(
@@ -251,7 +255,7 @@ export default function About() {
             <div className="divider-gold-c"/>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:40 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:40 }}>
             {/* Circular gauges */}
             <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(201,168,76,.15)', padding:'36px 32px', backdropFilter:'blur(8px)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.7rem', color:'rgba(201,168,76,.6)', letterSpacing:'.2em', textTransform:'uppercase', marginBottom:28, textAlign:'center' }}>
@@ -320,7 +324,7 @@ export default function About() {
       {/* ── STRATEGY ── */}
       <section className="section">
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:64 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:64 }}>
             <div>
               <div className="sec-label">{tl('Méthodologie','Methodology','Metodología','Methodik')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>

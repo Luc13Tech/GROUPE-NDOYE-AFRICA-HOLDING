@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useLang } from '../hooks/useLang';
+function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
 import { VILLA_TYPES, AMENITIES, LOTISSEMENT, ARCH_PHILOSOPHY, MATERIALS, YAYE_SLIDES, SITE } from '../data/siteData';
 import PageHero from '../components/PageHero';
 
@@ -21,6 +22,9 @@ const AMENITY_ICONS = {
 
 function Carousel() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [rtProj, setRtProj] = useState(getProjectsRT);
   useEffect(() => {
     const h = () => setRtProj(getProjectsRT());
@@ -67,6 +71,9 @@ function getProjectsRT() {
 
 export default function Projects() {
   const { lang } = useLang();
+  const _w = useW();
+  const isMob = _w < 768;
+  const isTab = _w < 1024;
   const [rtProj, setRtProj] = useState(getProjectsRT);
   useEffect(() => {
     const h = () => setRtProj(getProjectsRT());
@@ -81,7 +88,7 @@ export default function Projects() {
   const [sent, setSent] = useState(false);
 
   const villa = VILLA_TYPES.find(v => v.id === activeVilla);
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
   const tv = (obj) => obj[lang]||obj.fr;
 
   const submit = () => {
@@ -112,7 +119,7 @@ ${form.msg}`;
       {/* INTRO */}
       <section className="section">
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64,alignItems:'center'}}>
             <div>
               <div className="sec-label">{tl('Bienvenue','Welcome','Bienvenido','Willkommen')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{tl("L'Art de vivre Moderne","The Art of Modern Living","El Arte de Vivir Moderno","Die Kunst des modernen Lebens")}</h2>
@@ -147,7 +154,7 @@ ${form.msg}`;
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:16}}>
               <img src="/Images/yaye-dia/vision.jpg" alt="Yaye Dia" style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
                 <img src="/Images/yaye-dia/design.jpg" alt="Design" style={{width:'100%',height:130,objectFit:'cover'}}/>
                 <div style={{background:'var(--navy)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:16,textAlign:'center'}}>
                   <div style={{fontFamily:'var(--f-elegant)',fontSize:'2rem',color:'var(--gold)'}}>300</div>
@@ -199,7 +206,7 @@ ${form.msg}`;
           </div>
 
           {villa && (
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:28}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:28}}>
               {/* Images */}
               <div>
                 <div style={{position:'relative',overflow:'hidden',marginBottom:12}}>
@@ -249,7 +256,7 @@ ${form.msg}`;
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:10}}>
                       {tl('Composition','Layout','Composición','Raumaufteilung')}
                     </div>
-                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6}}>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:6}}>
                       {villa.rooms.map((r,i)=>(
                         <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,168,76,.04)',borderLeft:'2px solid rgba(201,168,76,.2)',fontSize:'.75rem'}}>
                           <span style={{color:'rgba(200,195,186,.6)'}}>{r[lang]||r.fr}</span>
@@ -265,7 +272,7 @@ ${form.msg}`;
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.6rem',letterSpacing:'.12em',color:'var(--gold)',textTransform:'uppercase',padding:'6px 10px',background:'rgba(201,168,76,.08)',marginBottom:8}}>
                       {fl.level}
                     </div>
-                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:5}}>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:5}}>
                       {fl.rooms.map((r,i)=>(
                         <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,168,76,.04)',borderLeft:'2px solid rgba(201,168,76,.2)',fontSize:'.75rem'}}>
                           <span style={{color:'rgba(200,195,186,.6)'}}>{r[lang]||r.fr}</span>
@@ -310,7 +317,7 @@ ${form.msg}`;
       {/* ARCHITECTURE */}
       <section className="section" ref={lotRef}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:64}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64}}>
             <div className={`slide-left${lotVis?' visible':''}`}>
               <div className="sec-label">{tl('Esthétique','Aesthetics','Estética','Ästhetik')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{arch.title}</h2>
@@ -341,7 +348,7 @@ ${form.msg}`;
                 </div>
                 <p style={{fontSize:'.8rem',color:'var(--text-mid)'}}>{mat.color}</p>
               </div>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:10}}>
                 <img src="/Images/yaye-dia/cuisine.jpg" alt="Cuisine" style={{width:'100%',height:110,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=70';}}
                 />
@@ -357,13 +364,13 @@ ${form.msg}`;
       {/* LOTISSEMENT */}
       <section style={{background:'var(--gray-50)',padding:'72px 0'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:64,alignItems:'center'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64,alignItems:'center'}}>
             <div>
               <div className="sec-label">{tl('Infrastructure','Infrastructure','Infraestructura','Infrastruktur')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{lot.title}</h2>
               <div className="divider-gold"/>
               <p style={{fontSize:'.88rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:24}}>{lot.desc}</p>
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
                 {lot.items.map((it,i)=>(
                   <div key={i} style={{padding:'14px 16px',background:'var(--white)',border:'1px solid var(--gray-200)',borderTop:'2px solid var(--gold)',borderRadius:'0 0 4px 4px'}}>
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.68rem',color:'var(--text-dark)',letterSpacing:'.06em',marginBottom:5}}>{it.t}</div>
@@ -376,7 +383,7 @@ ${form.msg}`;
               <img src="/Images/yaye-dia/lotissement.jpg" alt="Lotissement" style={{width:'100%',height:200,objectFit:'cover'}}
                 onError={e=>{e.target.src='https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=70';}}
               />
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
                 <img src="/Images/yaye-dia/eclairage.jpg" alt="Éclairage" style={{width:'100%',height:120,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=70';}}
                 />
@@ -392,7 +399,7 @@ ${form.msg}`;
       {/* BOOKING FORM */}
       <section className="section" style={{background:'var(--navy2)'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1.4fr',gap:64,alignItems:'start'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'start'}}>
             <div>
               <div className="sec-label" style={{color:'var(--gold)'}}>{tl('Réservez','Book now','Reserve','Buchen')}</div>
               <h2 style={{fontFamily:'var(--f-elegant)',fontSize:'clamp(1.5rem,3vw,2.2rem)',color:'var(--cream)',marginTop:6,marginBottom:10}}>

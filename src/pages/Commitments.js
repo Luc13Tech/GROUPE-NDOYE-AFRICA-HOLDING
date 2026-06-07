@@ -16,7 +16,7 @@ export default function Commitments() {
   const { lang } = useLang();
   const [cardsRef, cardsVis] = useInView();
   const [statsRef, statsVis] = useInView();
-  const tl = (fr,en,es,de) => ({fr,en,es,de}[lang]||fr);
+  const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   const AFRICA_STATS = [
     { val:'23%',  fr:"de la surface de la planète",           en:"of Earth's surface",              es:"de la superficie terrestre",       de:"der Erdoberfläche" },
