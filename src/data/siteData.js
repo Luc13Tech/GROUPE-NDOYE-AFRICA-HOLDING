@@ -289,7 +289,7 @@ export const OBJECTIVES = [
 
 export const AMENITIES = [
   {icon:'sport',fr:{t:'Complexe Sportif Moderne',d:'Football, basketball, handball.'},en:{t:'Modern Sports Complex',d:'Football, basketball, handball.'},es:{t:'Complejo Deportivo',d:'Fútbol, baloncesto, balonmano.'},de:{t:'Sportkomplex',d:'Fußball, Basketball, Handball.'},zh:{t:'现代体育综合体',d:'足球、篮球、手球。'}},
-  {icon:'kids',fr:{t:'Espace Jeux Enfants',d:'Aire de jeux sécurisée.'},en:{t:'Children's Play Area',d:'Secure play area.'},es:{t:'Zona de Juegos',d:'Área de juegos segura.'},de:{t:'Kinderspielbereich',d:'Sicherer Spielbereich.'},zh:{t:'儿童游乐区',d:'安全游乐区。'}},
+  {icon:'kids',fr:{t:'Espace Jeux Enfants',d:'Aire de jeux sécurisée.'},en:{t:"Children's Play Area",d:'Secure play area.'},es:{t:'Zona de Juegos',d:'Área de juegos segura.'},de:{t:'Kinderspielbereich',d:'Sicherer Spielbereich.'},zh:{t:'儿童游乐区',d:'安全游乐区。'}},
   {icon:'mosque',fr:{t:'Mosquée',d:'Lieu de culte au cœur de la cité.'},en:{t:'Mosque',d:'Place of worship.'},es:{t:'Mezquita',d:'Lugar de culto.'},de:{t:'Moschee',d:'Gebetsstätte.'},zh:{t:'清真寺',d:'社区礼拜场所。'}},
   {icon:'mall',fr:{t:'Centre Commercial',d:'Commerces et services essentiels.'},en:{t:'Shopping Centre',d:'Shops and essential services.'},es:{t:'Centro Comercial',d:'Tiendas y servicios esenciales.'},de:{t:'Einkaufszentrum',d:'Geschäfte und Dienstleistungen.'},zh:{t:'购物中心',d:'商店和基本服务。'}},
   {icon:'health',fr:{t:'District Sanitaire',d:'Centre de santé moderne.'},en:{t:'Health District',d:'Modern health centre.'},es:{t:'Distrito Sanitario',d:'Centro de salud moderno.'},de:{t:'Gesundheitsbezirk',d:'Modernes Gesundheitszentrum.'},zh:{t:'医疗区',d:'现代医疗中心。'}},
