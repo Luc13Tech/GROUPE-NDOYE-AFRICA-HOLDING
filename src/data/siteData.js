@@ -222,7 +222,7 @@ export const PARTNERS_WORLD = [
   { code:'US', fr:{country:'États-Unis',focus:"Ports autonomes, ouvrages d'art et génie civil. Innovation et excellence technologique."},en:{country:'United States',focus:'Autonomous ports, engineering structures and civil engineering.'},es:{country:'Estados Unidos',focus:'Puertos autónomos, obras de ingeniería y obra civil.'},de:{country:'Vereinigte Staaten',focus:'Autonome Häfen, Ingenieurbauwerke und Tiefbau.'},zh:{country:'美国',focus:'自主港口、工程结构和土木工程。创新与技术卓越。'} },
   { code:'MY', fr:{country:'Malaisie',focus:"Agriculture moderne, projets d'État et transfert de technologie. Expertise reconnue mondialement."},en:{country:'Malaysia',focus:'Modern agriculture, state projects and technology transfer.'},es:{country:'Malasia',focus:'Agricultura moderna, proyectos estatales y transferencia tecnológica.'},de:{country:'Malaysia',focus:'Moderne Landwirtschaft, Staatsprojekte und Technologietransfer.'},zh:{country:'马来西亚',focus:'现代农业、国家项目和技术转让。享誉全球的专业知识。'} },
   { code:'GB', fr:{country:'Royaume-Uni',focus:"Levée de fonds, banques d'investissement et structuration financière internationale."},en:{country:'United Kingdom',focus:'Fundraising, investment banks and international financial structuring.'},es:{country:'Reino Unido',focus:'Captación de fondos, bancos de inversión y estructuración financiera.'},de:{country:'Vereinigtes Königreich',focus:'Kapitalbeschaffung, Investmentbanken und Finanzstrukturierung.'},zh:{country:'英国',focus:'筹资、投资银行和国际金融结构。全球金融中心。'} },
-  { code:'IN', fr:{country:'Inde',focus:"Transport & Logistique — Flotte de poids lourds, transport intermodal et solutions logistiques pour l'Afrique et l'Asie."},en:{country:'India',focus:'Transport & Logistics — Heavy truck fleet, intermodal transport and logistics solutions for Africa and Asia.'},es:{country:'India',focus:'Transporte y Logística — Flota de camiones pesados, transporte intermodal y soluciones logísticas.'},de:{country:'Indien',focus:'Transport & Logistik — Schwerlastflotte, intermodaler Transport und Logistiklösungen.'},zh:{country:'印度',focus:'运输与物流 — 重型卡车车队、多式联运和非亚洲物流解决方案。'} },
+  { code:'IN', fr:{country:'Inde',focus:"Transport & Logistique — Flotte de poids lourds, transport intermodal et solutions logistiques pour l'Afrique et l'Asie."},en:{country:'India',focus:'Transport & Logistics — Heavy truck fleet, intermodal transport and logistics solutions for Africa and Asia.'},es:{country:'India',focus:'Transporte y Logística — Flota de camiones pesados, transporte intermodal y soluciones logísticas.'},de:{country:'Indien',focus:'Transport & Logistik — Schwerlastflotte, intermodaler Transport und Logistiklösungen.'},zh:{country:'印度',focus:'运输与物流 — 重型卡车车队、多式联运和亚洲物流解决方案。'} },
 ];
 
 export const AFRICA_PARTNERS = ['Sénégal',"Côte d'Ivoire",'Nigeria','Gabon','Ghana','Cameroun','Mali','Burkina Faso','Guinée','Togo','Bénin'];
@@ -289,7 +289,7 @@ export const OBJECTIVES = [
 
 export const AMENITIES = [
   {icon:'sport',fr:{t:'Complexe Sportif Moderne',d:'Football, basketball, handball.'},en:{t:'Modern Sports Complex',d:'Football, basketball, handball.'},es:{t:'Complejo Deportivo',d:'Fútbol, baloncesto, balonmano.'},de:{t:'Sportkomplex',d:'Fußball, Basketball, Handball.'},zh:{t:'现代体育综合体',d:'足球、篮球、手球。'}},
-  {icon:'kids',fr:{t:'Espace Jeux Enfants',d:'Aire de jeux sécurisée.'},en:{t:"Children's Play Area",d:'Secure play area.'},es:{t:'Zona de Juegos',d:'Área de juegos segura.'},de:{t:'Kinderspielbereich',d:'Sicherer Spielbereich.'},zh:{t:'儿童游乐区',d:'安全游乐区。'}},
+  {icon:'kids',fr:{t:'Espace Jeux Enfants',d:'Aire de jeux sécurisée.'},en:{t:'Children\'s Play Area',d:'Secure play area.'},es:{t:'Zona de Juegos',d:'Área de juegos segura.'},de:{t:'Kinderspielbereich',d:'Sicherer Spielbereich.'},zh:{t:'儿童游乐区',d:'安全游乐区。'}},
   {icon:'mosque',fr:{t:'Mosquée',d:'Lieu de culte au cœur de la cité.'},en:{t:'Mosque',d:'Place of worship.'},es:{t:'Mezquita',d:'Lugar de culto.'},de:{t:'Moschee',d:'Gebetsstätte.'},zh:{t:'清真寺',d:'社区礼拜场所。'}},
   {icon:'mall',fr:{t:'Centre Commercial',d:'Commerces et services essentiels.'},en:{t:'Shopping Centre',d:'Shops and essential services.'},es:{t:'Centro Comercial',d:'Tiendas y servicios esenciales.'},de:{t:'Einkaufszentrum',d:'Geschäfte und Dienstleistungen.'},zh:{t:'购物中心',d:'商店和基本服务。'}},
   {icon:'health',fr:{t:'District Sanitaire',d:'Centre de santé moderne.'},en:{t:'Health District',d:'Modern health centre.'},es:{t:'Distrito Sanitario',d:'Centro de salud moderno.'},de:{t:'Gesundheitsbezirk',d:'Modernes Gesundheitszentrum.'},zh:{t:'医疗区',d:'现代医疗中心。'}},
@@ -313,6 +313,9 @@ export const COMPANIES = [
   },
 ];
 
+// ══════════════════════════════════════════════════════════════
+//  LOTISSEMENT (Ajouté pour Projects.js) - SANS PRIX
+// ══════════════════════════════════════════════════════════════
 export const LOTISSEMENT = [
   {
     id: 1,
@@ -320,8 +323,12 @@ export const LOTISSEMENT = [
     type: 'F3',
     surface: '200 m²',
     statut: 'Disponible',
-    prix_fcfa: 25000000,
     zone: 'Zone A',
+    fr: { description: 'Lot idéal pour villa F3, proche des commodités.' },
+    en: { description: 'Ideal lot for F3 villa, close to amenities.' },
+    es: { description: 'Lote ideal para villa F3, cerca de servicios.' },
+    de: { description: 'Ideal für F3-Villa, in der Nähe von Einrichtungen.' },
+    zh: { description: 'F3别墅的理想地块，靠近便利设施。' }
   },
   {
     id: 2,
@@ -329,8 +336,12 @@ export const LOTISSEMENT = [
     type: 'F4PP',
     surface: '250 m²',
     statut: 'Disponible',
-    prix_fcfa: 32000000,
     zone: 'Zone A',
+    fr: { description: 'Grand terrain pour villa F4 plein pied.' },
+    en: { description: 'Large plot for F4 single-story villa.' },
+    es: { description: 'Gran terreno para villa F4 de una planta.' },
+    de: { description: 'Großes Grundstück für F4-Einstöckige Villa.' },
+    zh: { description: '适合F4平层别墅的大地块。' }
   },
   {
     id: 3,
@@ -338,8 +349,12 @@ export const LOTISSEMENT = [
     type: 'F4 Duplex',
     surface: '300 m²',
     statut: 'Réservé',
-    prix_fcfa: 40000000,
     zone: 'Zone B',
+    fr: { description: 'Terrain premium pour villa duplex avec vue.' },
+    en: { description: 'Premium plot for duplex villa with view.' },
+    es: { description: 'Parcela premium para villa dúplex con vistas.' },
+    de: { description: 'Premium-Grundstück für Duplex-Villa mit Blick.' },
+    zh: { description: '享有景观的复式别墅高级地块。' }
   },
   {
     id: 4,
@@ -347,10 +362,131 @@ export const LOTISSEMENT = [
     type: 'F5',
     surface: '400 m²',
     statut: 'Disponible',
-    prix_fcfa: 55000000,
     zone: 'Zone B',
-  },
+    fr: { description: 'Terrain d\'exception pour villa de grand luxe.' },
+    en: { description: 'Exceptional plot for luxury villa.' },
+    es: { description: 'Parcela excepcional para villa de lujo.' },
+    de: { description: 'Außergewöhnliches Grundstück für Luxusvilla.' },
+    zh: { description: '豪华别墅的卓越地块。' }
+  }
 ];
+
+// ══════════════════════════════════════════════════════════════
+//  ARCHITECTURE PHILOSOPHY (Ajouté pour Projects.js)
+// ══════════════════════════════════════════════════════════════
+export const ARCH_PHILOSOPHY = {
+  fr: {
+    title: 'Architecture Tropicale Contemporaine',
+    desc: 'Nos villas sont conçues pour s\'intégrer harmonieusement dans l\'environnement tropical sénégalais. Chaque résidence bénéficie d\'une orientation optimale pour profiter des alizés tout en se protégeant du soleil. Les grandes baies vitrées créent une continuité entre l\'intérieur et l\'extérieur, tandis que les terrasses et vérandas deviennent de véritables pièces à vivre.',
+    points: [
+      'Orientation bioclimatique étudiée',
+      'Ventilation naturelle transversale',
+      'Protection solaire par brise-soleil',
+      'Intégration paysagère des matériaux locaux'
+    ]
+  },
+  en: {
+    title: 'Contemporary Tropical Architecture',
+    desc: 'Our villas are designed to harmoniously integrate into the Senegalese tropical environment. Each residence benefits from optimal orientation to take advantage of trade winds while protecting from the sun. Large bay windows create continuity between inside and outside, while terraces and verandas become true living spaces.',
+    points: [
+      'Bioclimatic orientation studied',
+      'Cross natural ventilation',
+      'Solar protection by sunshades',
+      'Landscape integration of local materials'
+    ]
+  },
+  es: {
+    title: 'Arquitectura Tropical Contemporánea',
+    desc: 'Nuestras villas están diseñadas para integrarse armoniosamente en el entorno tropical senegalés. Cada residencia se beneficia de una orientación óptima para aprovechar los vientos alisios mientras se protege del sol. Los grandes ventanales crean continuidad entre el interior y el exterior, mientras que las terrazas y galerías se convierten en verdaderos espacios habitables.',
+    points: [
+      'Orientación bioclimática estudiada',
+      'Ventilación natural transversal',
+      'Protección solar mediante parasoles',
+      'Integración paisajística de materiales locales'
+    ]
+  },
+  de: {
+    title: 'Zeitgenössische Tropische Architektur',
+    desc: 'Unsere Villen sind so konzipiert, dass sie sich harmonisch in die tropische Umgebung Senegals einfügen. Jede Residenz profitiert von einer optimalen Ausrichtung, um die Passatwinde zu nutzen und sich gleichzeitig vor der Sonne zu schützen. Große Fensterfronten schaffen Kontinuität zwischen Innen und Außen, während Terrassen und Veranden zu echten Wohnräumen werden.',
+    points: [
+      'Studierte bioklimatische Ausrichtung',
+      'Querlüftung',
+      'Sonnenschutz durch Sonnenblenden',
+      'Landschaftliche Integration lokaler Materialien'
+    ]
+  },
+  zh: {
+    title: '当代热带建筑',
+    desc: '我们的别墅设计旨在与塞内加尔的热带环境和谐融合。每栋住宅都经过优化朝向，既能充分利用信风，又能保护免受阳光直射。大型落地窗创造了室内外的连续性，而露台和阳台则成为真正的生活空间。',
+    points: [
+      '经过研究的生物气候朝向',
+      '横向自然通风',
+      '遮阳板的防晒保护',
+      '本地材料的景观融合'
+    ]
+  }
+};
+
+// ══════════════════════════════════════════════════════════════
+//  MATERIALS (Ajouté pour Projects.js)
+// ══════════════════════════════════════════════════════════════
+export const MATERIALS = {
+  fr: {
+    title: 'Matériaux Nobles & Durables',
+    desc: 'La sélection rigoureuse des matériaux garantit à la fois l\'esthétique et la pérennité de nos réalisations. Chaque élément est choisi pour sa qualité, sa durabilité et son intégration harmonieuse dans l\'architecture.',
+    items: [
+      { name: 'Pierre de Diack', desc: 'Pierre naturelle locale, résistante et élégante' },
+      { name: 'Marbre Calacatta', desc: 'Marbre italien haut de gamme pour les finitions premium' },
+      { name: 'Bois d\'iroko', desc: 'Bois africain imputrescible pour les menuiseries extérieures' },
+      { name: 'Toiture terrasse', desc: 'Isolation thermique renforcée et étanchéité parfaite' },
+      { name: 'Verrerie haut de gamme', desc: 'Double vitrage à isolation thermique renforcée' }
+    ]
+  },
+  en: {
+    title: 'Noble & Sustainable Materials',
+    desc: 'The rigorous selection of materials guarantees both the aesthetics and durability of our achievements. Each element is chosen for its quality, durability and harmonious integration into the architecture.',
+    items: [
+      { name: 'Diack Stone', desc: 'Local natural stone, resistant and elegant' },
+      { name: 'Calacatta Marble', desc: 'High-end Italian marble for premium finishes' },
+      { name: 'Iroko Wood', desc: 'Rot-proof African wood for exterior joinery' },
+      { name: 'Roof Terrace', desc: 'Reinforced thermal insulation and perfect waterproofing' },
+      { name: 'High-end Glass', desc: 'Double glazing with reinforced thermal insulation' }
+    ]
+  },
+  es: {
+    title: 'Materiales Nobles y Sostenibles',
+    desc: 'La rigurosa selección de materiales garantiza tanto la estética como la durabilidad de nuestras realizaciones. Cada elemento es elegido por su calidad, durabilidad e integración armoniosa en la arquitectura.',
+    items: [
+      { name: 'Piedra de Diack', desc: 'Piedra natural local, resistente y elegante' },
+      { name: 'Mármol Calacatta', desc: 'Mármol italiano de alta gama para acabados premium' },
+      { name: 'Madera de Iroko', desc: 'Madera africana inalterable para carpintería exterior' },
+      { name: 'Terraza Azotea', desc: 'Aislamiento térmico reforzado y impermeabilización perfecta' },
+      { name: 'Vidrio de alta gama', desc: 'Doble acristalamiento con aislamiento térmico reforzado' }
+    ]
+  },
+  de: {
+    title: 'Edle & Nachhaltige Materialien',
+    desc: 'Die sorgfältige Auswahl der Materialien garantiert sowohl die Ästhetik als auch die Langlebigkeit unserer Projekte. Jedes Element wird aufgrund seiner Qualität, Haltbarkeit und harmonischen Integration in die Architektur ausgewählt.',
+    items: [
+      { name: 'Diack-Stein', desc: 'Einheimischer Naturstein, widerstandsfähig und elegant' },
+      { name: 'Calacatta-Marmor', desc: 'Hochwertiger italienischer Marmor für Premium-Oberflächen' },
+      { name: 'Iroko-Holz', desc: 'Verrottungsfestes afrikanisches Holz für Außentischlerei' },
+      { name: 'Dachterrasse', desc: 'Verstärkte Wärmedämmung und perfekte Abdichtung' },
+      { name: 'Hochwertiges Glas', desc: 'Doppelverglasung mit verstärkter Wärmedämmung' }
+    ]
+  },
+  zh: {
+    title: '高贵耐用的材料',
+    desc: '严格筛选材料，确保我们作品的美学性和耐久性。每个元素都因其质量、耐用性和与建筑的和谐融合而入选。',
+    items: [
+      { name: '迪亚克石', desc: '本地天然石材，坚固优雅' },
+      { name: '卡拉卡塔大理石', desc: '高端意大利大理石，用于高级饰面' },
+      { name: '伊罗科木材', desc: '防腐非洲木材，用于室外门窗' },
+      { name: '屋顶露台', desc: '增强隔热和完美防水' },
+      { name: '高端玻璃', desc: '增强隔热的双层玻璃' }
+    ]
+  }
+};
 
 export const DEFAULT_ADMIN_CONTENT = {
   projects: [
