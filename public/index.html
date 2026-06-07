@@ -3,24 +3,146 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
-  <meta name="description" content="Groupe Ndoye Africa Holding — Bâtir l'Afrique de demain, un projet à la fois"/>
-  <meta name="theme-color" content="#050810"/>
-  <title>Groupe Ndoye Africa Holding</title>
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#c9a84c"/>
+  <meta name="background-color" content="#050810"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="G.N.A.H"/>
+  <meta name="application-name" content="G.N.A.H"/>
+  <meta name="msapplication-TileColor" content="#050810"/>
+  <meta name="msapplication-TileImage" content="/Images/icons/icon-144.png"/>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Groupe Ndoye Africa Holding — Société spécialisée dans le développement de projets, l'infrastructure publique, l'agriculture et l'immobilier en Afrique depuis 2015."/>
+  <meta name="keywords" content="immobilier Afrique, infrastructure Afrique, investissement Afrique, GNAH, Sénégal, Yaye Dia"/>
+  <meta name="author" content="Groupe Ndoye Africa Holding"/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Groupe Ndoye Africa Holding — Bâtir l'Afrique de demain"/>
+  <meta property="og:description" content="Société spécialisée dans le développement de projets, l'infrastructure et l'immobilier en Afrique."/>
+  <meta property="og:image" content="/Images/yaye-dia/cite-vue-aerienne.jpg"/>
+  <meta property="og:url" content="https://www.groupendoyeafrica.com"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="fr_FR"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Groupe Ndoye Africa Holding"/>
+  <meta name="twitter:description" content="Bâtir l'Afrique de demain"/>
+  <meta name="twitter:image" content="/Images/yaye-dia/cite-vue-aerienne.jpg"/>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json"/>
+
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/Images/icons/icon-192.png"/>
+  <link rel="apple-touch-icon" sizes="152x152" href="/Images/icons/icon-152.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/Images/icons/icon-192.png"/>
+  <link rel="apple-touch-icon" sizes="167x167" href="/Images/icons/icon-192.png"/>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/Images/icons/icon-96.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="/Images/icons/icon-72.png"/>
+  <link rel="shortcut icon" href="/Images/icons/icon-96.png"/>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600;700;800&family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <title>Groupe Ndoye Africa Holding — Bâtir l'Afrique de demain</title>
+
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth;font-size:16px}
-    body{font-family:'Raleway',sans-serif;background:#050810;color:#f5f0e8;overflow-x:hidden}
-    #root{min-height:100vh}
-    ::-webkit-scrollbar{width:5px;height:5px}
-    ::-webkit-scrollbar-track{background:#050810}
-    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#c9a84c,#8b6914);border-radius:3px}
+    /* Critical CSS - prevent FOUC */
+    html, body { margin: 0; padding: 0; background: #050810; }
+    #root { min-height: 100vh; }
+    /* Loading screen */
+    .gnah-splash {
+      position: fixed; inset: 0; background: #050810;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity .6s ease;
+    }
+    .gnah-splash.hide { opacity: 0; pointer-events: none; }
+    .gnah-splash-logo {
+      font-family: Georgia, serif; color: #c9a84c;
+      font-size: clamp(1.2rem,4vw,1.8rem); letter-spacing: .3em;
+      animation: splashPulse 1.5s ease-in-out infinite alternate;
+    }
+    .gnah-splash-sub {
+      font-family: Georgia, serif; font-style: italic;
+      color: rgba(201,168,76,.45); font-size: clamp(.7rem,2vw,.85rem);
+      letter-spacing: .15em; margin-top: 8px;
+    }
+    .gnah-splash-bar {
+      width: 160px; height: 2px; background: rgba(201,168,76,.15);
+      margin-top: 24px; border-radius: 1px; overflow: hidden;
+    }
+    .gnah-splash-bar-fill {
+      height: 100%; background: linear-gradient(90deg,#c9a84c,#e8c96a);
+      animation: splashLoad 1.8s ease-out forwards;
+    }
+    @keyframes splashPulse { from{opacity:.6} to{opacity:1} }
+    @keyframes splashLoad { from{width:0} to{width:100%} }
   </style>
 </head>
 <body>
-  <noscript>Vous devez activer JavaScript pour utiliser cette application.</noscript>
+  <!-- Splash screen -->
+  <div class="gnah-splash" id="splash">
+    <div class="gnah-splash-logo">G.N.A.H.</div>
+    <div class="gnah-splash-sub">Groupe Ndoye Africa Holding</div>
+    <div class="gnah-splash-bar">
+      <div class="gnah-splash-bar-fill"></div>
+    </div>
+  </div>
+
+  <noscript>
+    <div style="font-family:Georgia,serif;text-align:center;padding:60px 20px;background:#050810;color:#c9a84c;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column">
+      <div style="font-size:1.4rem;letter-spacing:.2em;margin-bottom:8px">G.N.A.H.</div>
+      <div style="font-size:.9rem;color:rgba(201,168,76,.6)">Veuillez activer JavaScript pour accéder à la plateforme.</div>
+    </div>
+  </noscript>
+
   <div id="root"></div>
+
+  <!-- Register Service Worker -->
+  <script>
+    // Hide splash screen when React loads
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var splash = document.getElementById('splash');
+        if (splash) {
+          splash.classList.add('hide');
+          setTimeout(function() { splash.remove(); }, 700);
+        }
+      }, 1800);
+    });
+
+    // Register PWA Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(function(reg) {
+            // Check for updates every 60 seconds
+            setInterval(function() { reg.update(); }, 60000);
+            reg.addEventListener('updatefound', function() {
+              var newWorker = reg.installing;
+              newWorker.addEventListener('statechange', function() {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New version available - reload to update
+                  newWorker.postMessage({ type: 'SKIP_WAITING' });
+                  window.location.reload();
+                }
+              });
+            });
+          })
+          .catch(function() {});
+      });
+    }
+  </script>
 </body>
 </html>
