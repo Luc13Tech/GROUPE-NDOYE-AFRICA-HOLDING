@@ -15,36 +15,54 @@ const WAIcon = () => (
   </svg>
 );
 
-// Logo component — affiche l'image PNG ou un fallback stylisé doré
+// LogoMark — shows PNG or golden fallback
 function LogoMark({ size = 46 }) {
-  const [imgFailed, setImgFailed] = useState(false);
-  return imgFailed ? (
-    /* Fallback SVG logo si PNG manquant */
-    <div style={{
-      width: size, height: size, background: 'linear-gradient(135deg,#c9a84c,#8b6914)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      flexShrink: 0, position: 'relative', overflow: 'hidden',
-    }}>
-    </div>
-  ) : (
-    <img
-      src="/public/Images/logo/logoGNAH1.jpg"
-      alt="GNAH Logo"
-      style={{ height: size, width: 'auto', objectFit: 'contain', flexShrink: 0, display: 'block' }}
-      onError={() => setImgFailed(true)}
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div style={{ width: size, height: size, background: 'linear-gradient(145deg,#0d1427,#050810)', border: '1.5px solid rgba(201,168,76,.55)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 40% 30%, rgba(201,168,76,.1), transparent 70%)' }}/>
+        <svg width={size*0.72} height={size*0.72} viewBox="0 0 48 48" fill="none" style={{ position: 'relative', zIndex: 1 }}>
+          <polygon points="24,4 6,16 6,44 42,44 42,16" fill="none" stroke="#c9a84c" strokeWidth="2.2" strokeLinejoin="round"/>
+          <rect x="17" y="26" width="7" height="18" fill="rgba(201,168,76,.8)"/>
+          <rect x="24" y="26" width="7" height="18" fill="rgba(201,168,76,.8)"/>
+          <rect x="10" y="20" width="5" height="5" fill="rgba(201,168,76,.45)"/>
+          <rect x="33" y="20" width="5" height="5" fill="rgba(201,168,76,.45)"/>
+          <circle cx="24" cy="11" r="2.5" fill="#e8c96a" opacity=".9"/>
+        </svg>
+      </div>
+    );
+  }
+  return (
+    <img src="/Images/logo/gnah-logo.png" alt="GNAH"
+      style={{ height: size, width: 'auto', objectFit: 'contain', flexShrink: 0, display: 'block', maxWidth: size * 2.5 }}
+      onError={(e) => {
+        // Try alternative path before showing fallback
+        if (e.target.src.includes('/Images/')) {
+          e.target.src = '/images/logo/gnah-logo.png';
+        } else {
+          setFailed(true);
+        }
+      }}
     />
   );
 }
 
-const LANG_LABELS = { fr: 'Français', en: 'English', es: 'Español', de: 'Deutsch' };
+const LANG_OPTIONS = [
+  { code: 'fr', label: 'Français',  flag: '🇫🇷' },
+  { code: 'en', label: 'English',   flag: '🇬🇧' },
+  { code: 'es', label: 'Español',   flag: '🇪🇸' },
+  { code: 'de', label: 'Deutsch',   flag: '🇩🇪' },
+  { code: 'zh', label: '中文',       flag: '🇨🇳' },
+];
 
 export default function Navbar() {
   const { lang, setLang } = useLang();
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [langOpen, setLangOpen]   = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const location = useLocation();
-  const langRef  = useRef(null);
+  const langRef = useRef(null);
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 50);
@@ -63,126 +81,108 @@ export default function Navbar() {
   const wm = typeof SITE.waMsg === 'object' ? (SITE.waMsg[lang] || SITE.waMsg.fr) : SITE.waMsg;
   const waUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}`;
   const nl = (item) => item[lang] || item.fr;
-
-  const EXTRA = [
-    { id: 'entreprises', fr: 'Entreprises', en: 'Companies', es: 'Empresas', de: 'Unternehmen', path: '/entreprises' },
-    { id: 'galerie', fr: 'Galerie', en: 'Gallery',  es: 'Galería', de: 'Galerie',  path: '/galerie' },
-    { id: 'videos',  fr: 'Vidéos',  en: 'Videos',   es: 'Videos',  de: 'Videos',   path: '/videos'  },
-  ];
-  const ALL_NAV = [...NAV, ...EXTRA];
-
-  const logoSize = scrolled ? 38 : 46;
+  const logoSize = scrolled ? 36 : 44;
+  const currentLang = LANG_OPTIONS.find(l => l.code === lang) || LANG_OPTIONS[0];
 
   return (
     <>
       <header className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <div className="navbar-inner">
-
-          {/* ── LOGO ── */}
-          <Link
-            to="/"
-            className="nav-logo"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
-            style={{ gap: 10, textDecoration: 'none' }}
-          >
+          {/* LOGO */}
+          <Link to="/" className="nav-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
             <LogoMark size={logoSize} />
             <div className="nav-logo-text">
               <span className="nav-logo-name">GROUPE NDOYE AFRICA HOLDING</span>
-              <span className="nav-logo-sub">
-                G.N.A.H — {{ fr: 'Depuis', en: 'Since', es: 'Desde', de: 'Seit' }[lang]} 2015
-              </span>
+              <span className="nav-logo-sub">G.N.A.H — { {fr:'Depuis',en:'Since',es:'Desde',de:'Seit',zh:'自'}[lang] } 2015</span>
             </div>
           </Link>
 
-          {/* ── NAV LINKS ── */}
+          {/* NAV LINKS — desktop */}
           <nav className="nav-links">
-            {ALL_NAV.map(item => (
-              <Link
-                key={item.id}
-                to={item.path}
+            {NAV.map(item => (
+              <Link key={item.id} to={item.path}
                 className={`nav-link${location.pathname === item.path ? ' active' : ''}`}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
-              >
+                onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                 {nl(item)}
               </Link>
             ))}
           </nav>
 
-          {/* ── ACTIONS ── */}
+          {/* ACTIONS */}
           <div className="nav-actions">
-            {/* Language */}
+            {/* Language selector */}
             <div className="lang-selector" ref={langRef}>
-              <button className="lang-btn" onClick={() => setLangOpen(o => !o)} aria-label="Langue">
-                <GlobeIcon /> <span>{lang.toUpperCase()}</span>
-                <span style={{ fontSize: '.6rem', opacity: .6 }}>{langOpen ? '▲' : '▼'}</span>
+              <button className="lang-btn" onClick={() => setLangOpen(o => !o)}>
+                <GlobeIcon />
+                <span>{currentLang.flag} {lang.toUpperCase()}</span>
+                <span style={{ fontSize: '.55rem', opacity: .5 }}>{langOpen ? '▲' : '▼'}</span>
               </button>
               {langOpen && (
                 <div className="lang-dropdown">
-                  {Object.entries(LANG_LABELS).map(([code, label]) => (
-                    <button key={code} className={`lang-option${lang === code ? ' active' : ''}`}
-                      onClick={() => { setLang(code); setLangOpen(false); }}>
-                      {code.toUpperCase()} — {label}
+                  {LANG_OPTIONS.map(opt => (
+                    <button key={opt.code}
+                      className={`lang-option${lang === opt.code ? ' active' : ''}`}
+                      onClick={() => { setLang(opt.code); setLangOpen(false); }}>
+                      {opt.flag} {opt.code.toUpperCase()} — {opt.label}
                     </button>
                   ))}
                 </div>
               )}
             </div>
-            {/* WhatsApp — desktop */}
+
+            {/* WhatsApp — desktop only */}
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="nav-wa-btn">
               <WAIcon /> WhatsApp
             </a>
+
             {/* Hamburger */}
-            <button
-              className={`hamburger${menuOpen ? ' open' : ''}`}
-              onClick={() => setMenuOpen(o => !o)}
-              aria-label="Menu"
-            >
+            <button className={`hamburger${menuOpen ? ' open' : ''}`}
+              onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
               <span /><span /><span />
             </button>
           </div>
         </div>
       </header>
 
-      {/* ── MOBILE MENU ── */}
+      {/* MOBILE MENU */}
       <nav className={`mobile-menu${menuOpen ? ' open' : ''}`}>
         {/* Logo in mobile menu */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingBottom: 16, marginBottom: 8, borderBottom: '1px solid rgba(201,168,76,.12)' }}>
-          <LogoMark size={42} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, paddingBottom: 14, marginBottom: 8, borderBottom: '1px solid rgba(201,168,76,.15)' }}>
+          <LogoMark size={40} />
           <div>
-            <div style={{ fontFamily: 'var(--f-display)', fontSize: '.65rem', color: 'var(--gold)', letterSpacing: '.16em' }}>GROUPE NDOYE AFRICA HOLDING</div>
-            <div style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: '.62rem', color: 'rgba(201,168,76,.45)' }}>G.N.A.H — Depuis 2015</div>
+            <div style={{ fontFamily: 'var(--f-display)', fontSize: '.62rem', color: 'var(--gold)', letterSpacing: '.14em' }}>GROUPE NDOYE AFRICA HOLDING</div>
+            <div style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: '.6rem', color: 'rgba(201,168,76,.4)' }}>G.N.A.H — Depuis 2015</div>
           </div>
         </div>
 
-        {ALL_NAV.map(item => (
-          <Link
-            key={item.id}
-            to={item.path}
+        {/* Nav links */}
+        {NAV.map(item => (
+          <Link key={item.id} to={item.path}
             className={`mobile-link${location.pathname === item.path ? ' active' : ''}`}
-            onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'instant' }); }}
-          >
+            onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'instant' }); }}>
             {nl(item)}
           </Link>
         ))}
 
-        <div style={{ marginTop: 16, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-          {Object.keys(LANG_LABELS).map(code => (
-            <button key={code}
-              onClick={() => { setLang(code); setMenuOpen(false); }}
+        {/* Language + WhatsApp */}
+        <div style={{ marginTop: 16, display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+          {LANG_OPTIONS.map(opt => (
+            <button key={opt.code}
+              onClick={() => { setLang(opt.code); setMenuOpen(false); }}
               style={{
-                padding: '5px 10px',
-                background: lang === code ? 'var(--gold)' : 'transparent',
-                color: lang === code ? 'var(--navy)' : 'var(--gold)',
+                padding: '5px 9px',
+                background: lang === opt.code ? 'var(--gold)' : 'transparent',
+                color: lang === opt.code ? 'var(--navy)' : 'var(--gold)',
                 border: '1px solid rgba(201,168,76,.35)',
-                fontFamily: 'var(--f-display)', fontSize: '.62rem',
-                letterSpacing: '.1em', cursor: 'pointer', transition: 'var(--trans-f)',
+                fontFamily: 'var(--f-body)', fontSize: '.72rem',
+                cursor: 'pointer', transition: 'var(--trans-f)',
+                display: 'flex', alignItems: 'center', gap: 4,
               }}>
-              {code.toUpperCase()}
+              {opt.flag} {opt.code.toUpperCase()}
             </button>
           ))}
           <a href={waUrl} target="_blank" rel="noopener noreferrer"
-            className="btn btn-wa btn-sm"
-            style={{ fontSize: '.65rem' }}
+            className="btn btn-wa btn-sm" style={{ fontSize: '.65rem' }}
             onClick={() => setMenuOpen(false)}>
             <WAIcon /> WhatsApp
           </a>
