@@ -51,7 +51,7 @@ function YayeDiaCarousel() {
   const next = useCallback(() => setIdx(i => (i + 1) % YAYE_SLIDES.length), []);
 
   useEffect(() => {
-    const t = setInterval(next, 3500);
+    const t = setInterval(next, 4500);
     return () => clearInterval(t);
   }, [next]);
 
