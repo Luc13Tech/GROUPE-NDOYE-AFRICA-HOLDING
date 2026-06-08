@@ -29,7 +29,7 @@ const SVC_ICONS = {
 };
 
 // ── Intersection observer hook for scroll animations
-function useInView(threshold = 0.15) {
+function useInView(threshold = 0.10) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -51,7 +51,7 @@ function YayeDiaCarousel() {
   const next = useCallback(() => setIdx(i => (i + 1) % YAYE_SLIDES.length), []);
 
   useEffect(() => {
-    const t = setInterval(next, 4500);
+    const t = setInterval(next, 3500);
     return () => clearInterval(t);
   }, [next]);
 
