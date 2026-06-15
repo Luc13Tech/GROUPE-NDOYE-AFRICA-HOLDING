@@ -4,6 +4,8 @@ import { LangProvider } from './hooks/useLang';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingButtons from './components/FloatingButtons';
+import PWAInstallPrompt from './components/PWAInstallPrompt';
+import { Analytics } from '@vercel/analytics/react';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
@@ -18,24 +20,42 @@ import Videos from './pages/Videos';
 import Entreprises from './pages/Entreprises';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
-import PWAInstallPrompt from './components/PWAInstallPrompt';
-import { Analytics } from '@vercel/analytics/react'; // ← UNIQUE AJOUT POUR VERCEL
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Update document title for SEO per page
+    const titles = {
+      '/': 'Groupe Ndoye Africa Holding — Bâtir l\'Afrique de demain',
+      '/services': 'Services — Groupe Ndoye Africa Holding',
+      '/projets': 'Projets — Résidence Yaye Dia & Infrastructures',
+      '/engagements': 'Engagements — Groupe Ndoye Africa Holding',
+      '/partenaires': 'Partenaires Mondiaux — Groupe Ndoye Africa Holding',
+      '/entreprises': 'Entreprises Partenaires — Groupe Ndoye Africa Holding',
+      '/investisseurs': 'Investisseurs — Opportunités en Afrique',
+      '/collaboration': 'Collaboration — Groupe Ndoye Africa Holding',
+      '/a-propos': 'À Propos — Groupe Ndoye Africa Holding',
+      '/contact': 'Contact — Groupe Ndoye Africa Holding',
+      '/galerie': 'Galerie — Résidence Yaye Dia',
+      '/videos': 'Vidéos — Groupe Ndoye Africa Holding',
+    };
+    const title = titles[pathname] || 'Groupe Ndoye Africa Holding';
+    document.title = title;
+  }, [pathname]);
   return null;
 }
 
 function Layout({ children }) {
+  const { pathname } = useLocation();
   return (
-    <>
+    <div key={pathname}>
       <Navbar />
       {children}
       <Footer />
       <FloatingButtons />
       <PWAInstallPrompt />
-    </>
+    </div>
   );
 }
 
@@ -59,10 +79,10 @@ export default function App() {
           <Route path="/videos"          element={<Layout><Videos /></Layout>} />
           <Route path="/admin"           element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="*"                element={<Navigate to="/" />} />
+          <Route path="*"                element={<Navigate to="/" replace />} />
         </Routes>
-        <Analytics /> {/* ← UNIQUE AJOUT POUR VERCEL */}
+        <Analytics />
       </BrowserRouter>
     </LangProvider>
   );
-    }
+}
