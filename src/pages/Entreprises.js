@@ -81,14 +81,14 @@ export default function Entreprises(){
                     onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-5px)';e.currentTarget.style.boxShadow='var(--shadow-lg)';e.currentTarget.style.borderColor='var(--gold)';}}
                     onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='var(--shadow-sm)';e.currentTarget.style.borderColor='var(--gray-200)';}}>
 
-                    {/* LOGO AREA */}
-                    <div style={{background:'var(--navy)',padding:'32px 24px',display:'flex',alignItems:'center',justifyContent:'center',minHeight:150,position:'relative',overflow:'hidden',borderBottom:'3px solid var(--gold)'}}>
+                    {/* LOGO AREA - MODIFIED: image fills 100% of the frame */}
+                    <div style={{background:'var(--navy)',padding:0,display:'flex',alignItems:'center',justifyContent:'center',minHeight:150,position:'relative',overflow:'hidden',borderBottom:'3px solid var(--gold)'}}>
                       <div style={{position:'absolute',inset:0,backgroundImage:'repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(201,168,76,.03) 20px,rgba(201,168,76,.03) 21px)',zIndex:0}}/>
                       {company.logo?(
                         <img
                           src={company.logo}
                           alt={company.name}
-                          style={{maxHeight:90,maxWidth:210,objectFit:'contain',position:'relative',zIndex:1,filter:'brightness(1.1)'}}
+                          style={{width:'100%',height:'100%',minHeight:150,objectFit:'cover',position:'relative',zIndex:1}}
                           onError={e=>{
                             e.target.style.display='none';
                             const fb=e.target.parentNode.querySelector('.logo-fallback');
@@ -177,4 +177,4 @@ export default function Entreprises(){
       </section>
     </main>
   );
-}
+                                }
