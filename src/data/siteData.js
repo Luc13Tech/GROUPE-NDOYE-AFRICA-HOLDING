@@ -222,7 +222,7 @@ export const PARTNERS_WORLD = [
   { code:'US', fr:{country:'États-Unis',focus:"Ports autonomes, ouvrages d'art et génie civil. Innovation et excellence technologique."},en:{country:'United States',focus:'Autonomous ports, engineering structures and civil engineering.'},es:{country:'Estados Unidos',focus:'Puertos autónomos, obras de ingeniería y obra civil.'},de:{country:'Vereinigte Staaten',focus:'Autonome Häfen, Ingenieurbauwerke und Tiefbau.'},zh:{country:'美国',focus:'自主港口、工程结构和土木工程。创新与技术卓越。'} },
   { code:'MY', fr:{country:'Malaisie',focus:"Agriculture moderne, projets d'État et transfert de technologie. Expertise reconnue mondialement."},en:{country:'Malaysia',focus:'Modern agriculture, state projects and technology transfer.'},es:{country:'Malasia',focus:'Agricultura moderna, proyectos estatales y transferencia tecnológica.'},de:{country:'Malaysia',focus:'Moderne Landwirtschaft, Staatsprojekte und Technologietransfer.'},zh:{country:'马来西亚',focus:'现代农业、国家项目和技术转让。享誉全球的专业知识。'} },
   { code:'GB', fr:{country:'Royaume-Uni',focus:"Levée de fonds, banques d'investissement et structuration financière internationale."},en:{country:'United Kingdom',focus:'Fundraising, investment banks and international financial structuring.'},es:{country:'Reino Unido',focus:'Captación de fondos, bancos de inversión y estructuración financiera.'},de:{country:'Vereinigtes Königreich',focus:'Kapitalbeschaffung, Investmentbanken und Finanzstrukturierung.'},zh:{country:'英国',focus:'筹资、投资银行和国际金融结构。全球金融中心。'} },
-  { code:'IN', fr:{country:'Inde',focus:"Transport & Logistique — Flotte de poids lourds, transport intermodal et solutions logistiques pour l'Afrique et l'Asie."},en:{country:'India',focus:'Transport & Logistics — Heavy truck fleet, intermodal transport and logistics solutions for Africa and Asia.'},es:{country:'India',focus:'Transporte y Logística — Flota de camiones pesados, transporte intermodal y soluciones logísticas.'},de:{country:'Indien',focus:'Transport & Logistik — Schwerlastflotte, intermodaler Transport und Logistiklösungen.'},zh:{country:'印度',focus:'运输与物流 — 重型卡车车队、多式联运和亚洲物流解决方案。'} },
+  { code:'IN', fr:{country:'Inde',focus:"Transport & Logistique — Flotte de poids lourds, transport intermodal et solutions logistiques pour l'Afrique et l'Asie."},en:{country:'India',focus:'Transport & Logistics — Heavy truck fleet, intermodal transport and logistics solutions for Africa and Asia.'},es:{country:'India',focus:'Transporte y Logística — Flota de camiones pesados, transporte intermodal y soluciones logísticas.'},de:{country:'Indien',focus:'Transport & Logistik — Schwerlastflotte, intermodaler Transport und Logistiklösungen.'},zh:{country:'印度',focus:'运输与物流 — 重型卡车车队、多式联运和非亚洲物流解决方案。'} },
 ];
 
 export const AFRICA_PARTNERS = ['Sénégal',"Côte d'Ivoire",'Nigeria','Gabon','Ghana','Cameroun','Mali','Burkina Faso','Guinée','Togo','Bénin'];
@@ -289,7 +289,7 @@ export const OBJECTIVES = [
 
 export const AMENITIES = [
   {icon:'sport',fr:{t:'Complexe Sportif Moderne',d:'Football, basketball, handball.'},en:{t:'Modern Sports Complex',d:'Football, basketball, handball.'},es:{t:'Complejo Deportivo',d:'Fútbol, baloncesto, balonmano.'},de:{t:'Sportkomplex',d:'Fußball, Basketball, Handball.'},zh:{t:'现代体育综合体',d:'足球、篮球、手球。'}},
-  {icon:'kids',fr:{t:'Espace Jeux Enfants',d:'Aire de jeux sécurisée.'},en:{t:'Children\'s Play Area',d:'Secure play area.'},es:{t:'Zona de Juegos',d:'Área de juegos segura.'},de:{t:'Kinderspielbereich',d:'Sicherer Spielbereich.'},zh:{t:'儿童游乐区',d:'安全游乐区。'}},
+  {icon:'kids',fr:{t:'Espace Jeux Enfants',d:'Aire de jeux sécurisée.'},en:{t:"Children's Play Area",d:'Secure play area.'},es:{t:'Zona de Juegos',d:'Área de juegos segura.'},de:{t:'Kinderspielbereich',d:'Sicherer Spielbereich.'},zh:{t:'儿童游乐区',d:'安全游乐区。'}},
   {icon:'mosque',fr:{t:'Mosquée',d:'Lieu de culte au cœur de la cité.'},en:{t:'Mosque',d:'Place of worship.'},es:{t:'Mezquita',d:'Lugar de culto.'},de:{t:'Moschee',d:'Gebetsstätte.'},zh:{t:'清真寺',d:'社区礼拜场所。'}},
   {icon:'mall',fr:{t:'Centre Commercial',d:'Commerces et services essentiels.'},en:{t:'Shopping Centre',d:'Shops and essential services.'},es:{t:'Centro Comercial',d:'Tiendas y servicios esenciales.'},de:{t:'Einkaufszentrum',d:'Geschäfte und Dienstleistungen.'},zh:{t:'购物中心',d:'商店和基本服务。'}},
   {icon:'health',fr:{t:'District Sanitaire',d:'Centre de santé moderne.'},en:{t:'Health District',d:'Modern health centre.'},es:{t:'Distrito Sanitario',d:'Centro de salud moderno.'},de:{t:'Gesundheitsbezirk',d:'Modernes Gesundheitszentrum.'},zh:{t:'医疗区',d:'现代医疗中心。'}},
@@ -313,185 +313,59 @@ export const COMPANIES = [
   },
 ];
 
-// ══════════════════════════════════════════════════════════════
-//  LOTISSEMENT (Ajouté pour Projects.js) - SANS PRIX
-// ══════════════════════════════════════════════════════════════
-export const LOTISSEMENT = [
-  {
-    id: 1,
-    nom: 'Cité Yaye Dia — Lot n°01',
-    type: 'F3',
-    surface: '200 m²',
-    statut: 'Disponible',
-    zone: 'Zone A',
-    fr: { description: 'Lot idéal pour villa F3, proche des commodités.' },
-    en: { description: 'Ideal lot for F3 villa, close to amenities.' },
-    es: { description: 'Lote ideal para villa F3, cerca de servicios.' },
-    de: { description: 'Ideal für F3-Villa, in der Nähe von Einrichtungen.' },
-    zh: { description: 'F3别墅的理想地块，靠近便利设施。' }
-  },
-  {
-    id: 2,
-    nom: 'Cité Yaye Dia — Lot n°02',
-    type: 'F4PP',
-    surface: '250 m²',
-    statut: 'Disponible',
-    zone: 'Zone A',
-    fr: { description: 'Grand terrain pour villa F4 plein pied.' },
-    en: { description: 'Large plot for F4 single-story villa.' },
-    es: { description: 'Gran terreno para villa F4 de una planta.' },
-    de: { description: 'Großes Grundstück für F4-Einstöckige Villa.' },
-    zh: { description: '适合F4平层别墅的大地块。' }
-  },
-  {
-    id: 3,
-    nom: 'Cité Yaye Dia — Lot n°03',
-    type: 'F4 Duplex',
-    surface: '300 m²',
-    statut: 'Réservé',
-    zone: 'Zone B',
-    fr: { description: 'Terrain premium pour villa duplex avec vue.' },
-    en: { description: 'Premium plot for duplex villa with view.' },
-    es: { description: 'Parcela premium para villa dúplex con vistas.' },
-    de: { description: 'Premium-Grundstück für Duplex-Villa mit Blick.' },
-    zh: { description: '享有景观的复式别墅高级地块。' }
-  },
-  {
-    id: 4,
-    nom: 'Cité Yaye Dia — Lot n°04',
-    type: 'F5',
-    surface: '400 m²',
-    statut: 'Disponible',
-    zone: 'Zone B',
-    fr: { description: 'Terrain d\'exception pour villa de grand luxe.' },
-    en: { description: 'Exceptional plot for luxury villa.' },
-    es: { description: 'Parcela excepcional para villa de lujo.' },
-    de: { description: 'Außergewöhnliches Grundstück für Luxusvilla.' },
-    zh: { description: '豪华别墅的卓越地块。' }
-  }
-];
-
-// ══════════════════════════════════════════════════════════════
-//  ARCHITECTURE PHILOSOPHY (Ajouté pour Projects.js)
-// ══════════════════════════════════════════════════════════════
-export const ARCH_PHILOSOPHY = {
-  fr: {
-    title: 'Architecture Tropicale Contemporaine',
-    desc: 'Nos villas sont conçues pour s\'intégrer harmonieusement dans l\'environnement tropical sénégalais. Chaque résidence bénéficie d\'une orientation optimale pour profiter des alizés tout en se protégeant du soleil. Les grandes baies vitrées créent une continuité entre l\'intérieur et l\'extérieur, tandis que les terrasses et vérandas deviennent de véritables pièces à vivre.',
-    points: [
-      'Orientation bioclimatique étudiée',
-      'Ventilation naturelle transversale',
-      'Protection solaire par brise-soleil',
-      'Intégration paysagère des matériaux locaux'
-    ]
-  },
-  en: {
-    title: 'Contemporary Tropical Architecture',
-    desc: 'Our villas are designed to harmoniously integrate into the Senegalese tropical environment. Each residence benefits from optimal orientation to take advantage of trade winds while protecting from the sun. Large bay windows create continuity between inside and outside, while terraces and verandas become true living spaces.',
-    points: [
-      'Bioclimatic orientation studied',
-      'Cross natural ventilation',
-      'Solar protection by sunshades',
-      'Landscape integration of local materials'
-    ]
-  },
-  es: {
-    title: 'Arquitectura Tropical Contemporánea',
-    desc: 'Nuestras villas están diseñadas para integrarse armoniosamente en el entorno tropical senegalés. Cada residencia se beneficia de una orientación óptima para aprovechar los vientos alisios mientras se protege del sol. Los grandes ventanales crean continuidad entre el interior y el exterior, mientras que las terrazas y galerías se convierten en verdaderos espacios habitables.',
-    points: [
-      'Orientación bioclimática estudiada',
-      'Ventilación natural transversal',
-      'Protección solar mediante parasoles',
-      'Integración paisajística de materiales locales'
-    ]
-  },
-  de: {
-    title: 'Zeitgenössische Tropische Architektur',
-    desc: 'Unsere Villen sind so konzipiert, dass sie sich harmonisch in die tropische Umgebung Senegals einfügen. Jede Residenz profitiert von einer optimalen Ausrichtung, um die Passatwinde zu nutzen und sich gleichzeitig vor der Sonne zu schützen. Große Fensterfronten schaffen Kontinuität zwischen Innen und Außen, während Terrassen und Veranden zu echten Wohnräumen werden.',
-    points: [
-      'Studierte bioklimatische Ausrichtung',
-      'Querlüftung',
-      'Sonnenschutz durch Sonnenblenden',
-      'Landschaftliche Integration lokaler Materialien'
-    ]
-  },
-  zh: {
-    title: '当代热带建筑',
-    desc: '我们的别墅设计旨在与塞内加尔的热带环境和谐融合。每栋住宅都经过优化朝向，既能充分利用信风，又能保护免受阳光直射。大型落地窗创造了室内外的连续性，而露台和阳台则成为真正的生活空间。',
-    points: [
-      '经过研究的生物气候朝向',
-      '横向自然通风',
-      '遮阳板的防晒保护',
-      '本地材料的景观融合'
-    ]
-  }
+export const LOTISSEMENT = {
+  fr:{ title:'Lotissement Sur Mesure', desc:"La Cité Yaye Dia est conçue selon les standards modernes d'urbanisme. Chaque élément est pensé pour offrir confort, sécurité et durabilité aux 300 familles.", items:[
+    { t:'Éclairage Solaire', d:'Lampadaires solaires performants pour la sécurité 24h/24 et la durabilité environnementale.' },
+    { t:'Réseau Assainissement', d:"Réseau complet tout-à-l'égout conforme aux normes internationales d'hygiène." },
+    { t:'Gestion des Déchets', d:'Station de recyclage dédiée et collecte organisée pour une cité propre.' },
+    { t:'Voirie Intelligente', d:'Routes larges et parfaitement tracées facilitant la circulation et le développement.' },
+  ]},
+  en:{ title:'Tailored Development', desc:"Yaye Dia City is designed to modern urban planning standards. Every element is designed for comfort, safety and durability for 300 families.", items:[
+    { t:'Solar Lighting', d:'High-performance solar street lights for 24/7 security and environmental sustainability.' },
+    { t:'Sewerage Network', d:'Complete sewerage network compliant with international hygiene standards.' },
+    { t:'Waste Management', d:'Dedicated recycling station and organised collection for a clean city.' },
+    { t:'Smart Roads', d:'Wide and perfectly laid roads facilitating circulation and development.' },
+  ]},
+  es:{ title:'Urbanización a Medida', desc:"La Ciudad Yaye Dia está diseñada según los estándares modernos de planificación urbana.", items:[
+    { t:'Alumbrado Solar', d:'Farolas solares de alto rendimiento para seguridad 24/7.' },
+    { t:'Red de Saneamiento', d:'Red completa de alcantarillado conforme a normas internacionales.' },
+    { t:'Gestión de Residuos', d:'Estación de reciclaje dedicada y recogida organizada.' },
+    { t:'Vías Inteligentes', d:'Calles amplias y perfectamente trazadas.' },
+  ]},
+  de:{ title:'Maßgeschneiderte Erschließung', desc:"Die Yaye Dia Stadt ist nach modernen Stadtplanungsstandards gestaltet.", items:[
+    { t:'Solarbeleuchtung', d:'Solarstraßenlaternen für 24/7-Sicherheit.' },
+    { t:'Kanalnetz', d:'Vollständiges Abwassernetz gemäß internationalen Hygienestandards.' },
+    { t:'Abfallwirtschaft', d:'Dedizierte Recyclingstation und organisierte Sammlung.' },
+    { t:'Intelligente Straßen', d:'Breite und perfekt angelegte Straßen.' },
+  ]},
+  zh:{ title:'定制化开发', desc:"Yaye Dia城按照现代城市规划标准设计，为300个家庭提供舒适、安全和耐久的居住环境。", items:[
+    { t:'太阳能照明', d:'高性能太阳能路灯，提供24/7安全保障和环境可持续性。' },
+    { t:'排污网络', d:'符合国际卫生标准的完整排污网络。' },
+    { t:'废物管理', d:'专用回收站和有组织的垃圾收集，保持城市整洁。' },
+    { t:'智能道路', d:'宽阔、完美铺设的道路，便于通行和发展。' },
+  ]},
 };
 
-// ══════════════════════════════════════════════════════════════
-//  MATERIALS (Ajouté pour Projects.js)
-// ══════════════════════════════════════════════════════════════
+export const ARCH_PHILOSOPHY = {
+  fr:{ title:'Architecture Tropicale Contemporaine', intro:"L'esthétique au service de la fonctionnalité", desc:"Nos villas sont conçues selon une philosophie architecturale tropicale contemporaine alliant esthétique, confort et durabilité. L'espace de vie ouvert augmente la perception de surface jusqu'à +20% visuellement.", subtitle:'Nos 3 Piliers Architecturaux', items:["Optimisation fonctionnelle — chaque m² est pensé et utilisé","Fluidité des circulations — passages naturels et intuitifs","Valorisation de la lumière naturelle — grandes baies vitrées"] },
+  en:{ title:'Contemporary Tropical Architecture', intro:"Aesthetics in service of functionality", desc:"Our villas follow a contemporary tropical architectural philosophy combining aesthetics, comfort and durability. The open living space increases surface perception by up to +20% visually.", subtitle:'Our 3 Architectural Pillars', items:["Functional optimisation — every m² is thought out","Fluid circulation — natural and intuitive passages","Enhancement of natural light — large bay windows"] },
+  es:{ title:'Arquitectura Tropical Contemporánea', intro:"La estética al servicio de la funcionalidad", desc:"Nuestras villas siguen una filosofía arquitectónica tropical contemporánea que combina estética, confort y durabilidad.", subtitle:'Nuestros 3 Pilares Arquitectónicos', items:["Optimización funcional — cada m² está pensado","Fluidez de circulaciones — pasos naturales e intuitivos","Valorización de la luz natural — grandes ventanales"] },
+  de:{ title:'Zeitgenössische Tropische Architektur', intro:"Ästhetik im Dienst der Funktionalität", desc:"Unsere Villen folgen einer zeitgenössischen tropischen Architekturphilosophie, die Ästhetik, Komfort und Langlebigkeit verbindet.", subtitle:'Unsere 3 Architektonischen Säulen', items:["Funktionale Optimierung — jeder m² ist durchdacht","Fließende Zirkulation — natürliche und intuitive Wege","Aufwertung des natürlichen Lichts — große Glasfronten"] },
+  zh:{ title:'当代热带建筑', intro:"美学服务于功能", desc:"我们的别墅遵循当代热带建筑理念，融合美学、舒适性和耐久性。开放式生活空间在视觉上增加了高达+20%的空间感知。", subtitle:'我们的3大建筑支柱', items:["功能优化 — 每平方米都经过精心设计","流畅的动线 — 自然直观的通道","自然光的利用 — 大型落地窗"] },
+};
+
 export const MATERIALS = {
-  fr: {
-    title: 'Matériaux Nobles & Durables',
-    desc: 'La sélection rigoureuse des matériaux garantit à la fois l\'esthétique et la pérennité de nos réalisations. Chaque élément est choisi pour sa qualité, sa durabilité et son intégration harmonieuse dans l\'architecture.',
-    items: [
-      { name: 'Pierre de Diack', desc: 'Pierre naturelle locale, résistante et élégante' },
-      { name: 'Marbre Calacatta', desc: 'Marbre italien haut de gamme pour les finitions premium' },
-      { name: 'Bois d\'iroko', desc: 'Bois africain imputrescible pour les menuiseries extérieures' },
-      { name: 'Toiture terrasse', desc: 'Isolation thermique renforcée et étanchéité parfaite' },
-      { name: 'Verrerie haut de gamme', desc: 'Double vitrage à isolation thermique renforcée' }
-    ]
-  },
-  en: {
-    title: 'Noble & Sustainable Materials',
-    desc: 'The rigorous selection of materials guarantees both the aesthetics and durability of our achievements. Each element is chosen for its quality, durability and harmonious integration into the architecture.',
-    items: [
-      { name: 'Diack Stone', desc: 'Local natural stone, resistant and elegant' },
-      { name: 'Calacatta Marble', desc: 'High-end Italian marble for premium finishes' },
-      { name: 'Iroko Wood', desc: 'Rot-proof African wood for exterior joinery' },
-      { name: 'Roof Terrace', desc: 'Reinforced thermal insulation and perfect waterproofing' },
-      { name: 'High-end Glass', desc: 'Double glazing with reinforced thermal insulation' }
-    ]
-  },
-  es: {
-    title: 'Materiales Nobles y Sostenibles',
-    desc: 'La rigurosa selección de materiales garantiza tanto la estética como la durabilidad de nuestras realizaciones. Cada elemento es elegido por su calidad, durabilidad e integración armoniosa en la arquitectura.',
-    items: [
-      { name: 'Piedra de Diack', desc: 'Piedra natural local, resistente y elegante' },
-      { name: 'Mármol Calacatta', desc: 'Mármol italiano de alta gama para acabados premium' },
-      { name: 'Madera de Iroko', desc: 'Madera africana inalterable para carpintería exterior' },
-      { name: 'Terraza Azotea', desc: 'Aislamiento térmico reforzado y impermeabilización perfecta' },
-      { name: 'Vidrio de alta gama', desc: 'Doble acristalamiento con aislamiento térmico reforzado' }
-    ]
-  },
-  de: {
-    title: 'Edle & Nachhaltige Materialien',
-    desc: 'Die sorgfältige Auswahl der Materialien garantiert sowohl die Ästhetik als auch die Langlebigkeit unserer Projekte. Jedes Element wird aufgrund seiner Qualität, Haltbarkeit und harmonischen Integration in die Architektur ausgewählt.',
-    items: [
-      { name: 'Diack-Stein', desc: 'Einheimischer Naturstein, widerstandsfähig und elegant' },
-      { name: 'Calacatta-Marmor', desc: 'Hochwertiger italienischer Marmor für Premium-Oberflächen' },
-      { name: 'Iroko-Holz', desc: 'Verrottungsfestes afrikanisches Holz für Außentischlerei' },
-      { name: 'Dachterrasse', desc: 'Verstärkte Wärmedämmung und perfekte Abdichtung' },
-      { name: 'Hochwertiges Glas', desc: 'Doppelverglasung mit verstärkter Wärmedämmung' }
-    ]
-  },
-  zh: {
-    title: '高贵耐用的材料',
-    desc: '严格筛选材料，确保我们作品的美学性和耐久性。每个元素都因其质量、耐用性和与建筑的和谐融合而入选。',
-    items: [
-      { name: '迪亚克石', desc: '本地天然石材，坚固优雅' },
-      { name: '卡拉卡塔大理石', desc: '高端意大利大理石，用于高级饰面' },
-      { name: '伊罗科木材', desc: '防腐非洲木材，用于室外门窗' },
-      { name: '屋顶露台', desc: '增强隔热和完美防水' },
-      { name: '高端玻璃', desc: '增强隔热的双层玻璃' }
-    ]
-  }
+  fr:{ title:'Matériaux Nobles & Durables', desc:"Chaque villa est construite avec des matériaux haut de gamme : bois massif, pierre naturelle et marbre Calacatta pour les villas F5. La qualité est non négociable chez GNAH.", marble:"Revêtement intégral en marbre Calacatta — veines dorées, brillance naturelle. Symbole de luxe et de prestige absolu.", color:"Le client a une liberté totale sur le choix de la couleur. Première recommandation : vert émeraude modulable. Le client est Roi." },
+  en:{ title:'Noble & Durable Materials', desc:"Each villa is built with high-end materials: solid wood, natural stone and Calacatta marble for F5 villas. Quality is non-negotiable at GNAH.", marble:"Full Calacatta marble coating — golden veins, natural shine. Symbol of absolute luxury and prestige.", color:"The client has total freedom in colour choice. First recommendation: adjustable emerald green. The client is King." },
+  es:{ title:'Materiales Nobles y Duraderos', desc:"Cada villa está construida con materiales de alta gama: madera maciza, piedra natural y mármol Calacatta para las villas F5.", marble:"Revestimiento integral de mármol Calacatta — vetas doradas, brillo natural. Símbolo de lujo y prestigio absoluto.", color:"El cliente tiene libertad total en la elección del color. Primera recomendación: verde esmeralda modulable. El cliente es Rey." },
+  de:{ title:'Edle & Dauerhafte Materialien', desc:"Jede Villa wird mit hochwertigen Materialien gebaut: Massivholz, Naturstein und Calacatta-Marmor für F5-Villen.", marble:"Vollständige Calacatta-Marmor Verkleidung — goldene Adern, natürlicher Glanz. Symbol absoluten Luxus und Prestige.", color:"Der Kunde hat völlige Freiheit bei der Farbwahl. Erste Empfehlung: anpassbares Smaragdgrün. Der Kunde ist König." },
+  zh:{ title:'高贵耐久的材料', desc:"每栋别墅都采用高端材料建造：实木、天然石材，F5别墅还使用卡拉卡塔大理石。GNAH的质量不可妥协。", marble:"卡拉卡塔大理石全覆盖 — 金色纹脉，自然光泽。绝对奢华与尊贵的象征。", color:"客户在颜色选择上拥有完全自由。首选推荐：可调节的祖母绿。客户是王。" },
 };
 
 export const DEFAULT_ADMIN_CONTENT = {
   projects: [
     {id:1,active:true,category:'Immobilier',img:'/Images/yaye-dia/cite-vue-aerienne.jpg',title:{fr:'Résidence Yaye Dia',en:'Yaye Dia Residence',zh:'Yaye Dia住宅'},desc:{fr:'300 villas haut standing en Région de Thiès, Sénégal.',en:'300 high-end villas in Thiès Region, Senegal.',zh:'塞内加尔蒂耶斯地区300栋高档别墅。'},waMsg:{fr:'Bonjour, je suis intéressé(e) par la Résidence Yaye Dia.',en:'Hello, I am interested in the Yaye Dia Residence.'}},
     {id:2,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&q=85',title:{fr:'Port Lagunaire de Dabou',en:'Dabou Lagoon Port',zh:'达布湖港'},desc:{fr:"Port lagunaire en Côte d'Ivoire — $1,7 milliard — BOT.",en:"Lagoon port in Ivory Coast — $1.7 billion — BOT.",zh:"科特迪瓦湖港 — 17亿美元 — BOT合同。"},waMsg:{fr:"Bonjour, je suis intéressé(e) par le Port de Dabou.",en:"Hello, I am interested in the Dabou Port."}},
-    {id:3,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=85',title:{fr:'Autoroute Abuja–Lagos',en:'Abuja–Lagos Highway',zh:'阿布贾-拉各斯高速公路'},desc:{fr:"Autoroute au Nigeria — $5,7 milliards — BOT — 467 km.",en:"Highway in Nigeria — $5.7 billion — BOT — 467 km.",zh:"尼日利亚高速公路 — 57亿美元 — BOT合同 — 467公里。"},waMsg:{fr:"Bonjour, je m'intéresse à l'autoroute Abuja-Lagos.",en:"Hello, I am interested in the Abuja-Lagos highway."}},
+    {id:3,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=85',title:{fr:'Autoroute Abuja-Lagos',en:'Abuja-Lagos Highway',zh:'阿布贾-拉各斯高速公路'},desc:{fr:"Autoroute au Nigeria — $5,7 milliards — BOT — 467 km.",en:"Highway in Nigeria — $5.7 billion — BOT — 467 km.",zh:"尼日利亚高速公路 — 57亿美元 — BOT合同 — 467公里。"},waMsg:{fr:"Bonjour, je m'intéresse à l'autoroute Abuja-Lagos.",en:"Hello, I am interested in the Abuja-Lagos highway."}},
   ],
 };
