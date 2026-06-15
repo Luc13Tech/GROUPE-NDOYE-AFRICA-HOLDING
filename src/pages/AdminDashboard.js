@@ -250,7 +250,11 @@ export default function AdminDashboard() {
                 </div>
                 <div style={{overflowX:'auto'}}>
                   <table style={{width:'100%',borderCollapse:'collapse',minWidth:440}}>
-                    <thead><tr>{['Lot','Type','Progression','Statut','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.08)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.54rem',letterSpacing:'.12em',padding:'9px 10px',textAlign:'left',textTransform:'uppercase',borderBottom:'1px solid rgba(201,168,76,.15)',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead>
+                    <thead>
+                      <tr>
+                        {['Lot','Type','Progression','Statut','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.08)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.54rem',letterSpacing:'.12em',padding:'9px 10px',textAlign:'left',textTransform:'uppercase',borderBottom:'1px solid rgba(201,168,76,.15)',whiteSpace:'nowrap'}}>{h}</th>)}
+                      </tr>
+                    </thead>
                     <tbody>
                       {filteredLots.map(lot=>(
                         <tr key={lot.id}>
@@ -273,7 +277,11 @@ export default function AdminDashboard() {
                           </td>
                         </tr>
                       ))}
-                      {filteredLots.length===0&&<tr><td colSpan={5} style={{textAlign:'center',padding:20,color:'rgba(200,195,186,.3)',fontSize:'.8rem'}}>Aucun lot trouvé.</td></tr>}
+                      {filteredLots.length===0&&(
+                        <tr>
+                          <td colSpan={5} style={{textAlign:'center',padding:20,color:'rgba(200,195,186,.3)',fontSize:'.8rem'}}>Aucun lot trouvé.</td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -398,7 +406,11 @@ export default function AdminDashboard() {
               <div style={sectionTitle}>Gestion des Villas</div>
               <div style={{overflowX:'auto'}}>
                 <table style={{width:'100%',borderCollapse:'collapse',minWidth:480}}>
-                  <thead><tr>{['Type','Nom','Terrain','Bâti','Standing','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.1)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.56rem',letterSpacing:'.12em',padding:'10px 12px',textAlign:'left',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}</table></thead>
+                  <thead>
+                    <tr>
+                      {['Type','Nom','Terrain','Bâti','Standing','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.1)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.56rem',letterSpacing:'.12em',padding:'10px 12px',textAlign:'left',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}
+                    </tr>
+                  </thead>
                   <tbody>
                     {VILLA_TYPES.map(v=>(
                       <tr key={v.id}>
@@ -415,7 +427,6 @@ export default function AdminDashboard() {
               </div>
             </>
           )}
-
 
           {/* ENTREPRISES */}
           {tab==='entreprises'&&(
@@ -565,7 +576,6 @@ export default function AdminDashboard() {
               </div>
             </div>)}
 
-
             {(modal==='addCompany'||modal==='editCompany')&&(<div>
               <FF label="Nom de l'entreprise *" k="name" ph="ex: Terratransport"/>
               <FF label="Logo URL" k="logo" ph="/Images/entreprises/logo-terratransport.png"/>
@@ -629,4 +639,4 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-}
+                                                                                                       }
