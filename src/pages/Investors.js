@@ -22,10 +22,10 @@ export default function Investors() {
   const AMOUNTS = ['$3M — $20M','$20M — $50M','$50M — $100M','$100M — $450M','$450M — $6 Mrd'];
 
   const submit = () => {
-    const msg = `${tl('Bonjour','Hello','Hola','Hallo')}, ${tl('je m\'appelle','my name is','me llamo','ich heiße')} ${form.nom} (${form.pays}).
-${tl('Montant envisagé','Investment amount','Monto previsto','Investitionsbetrag')}: ${form.montant}.
-${tl('Secteur','Sector','Sector','Sektor')}: ${form.secteur}.
-${tl('Téléphone','Phone','Teléfono','Telefon')}: ${form.tel}.
+    const msg = `${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${tl('je m\'appelle', 'my name is', 'me llamo', 'ich heiße','我的名字是')} ${form.nom} (${form.pays}).
+${tl('Montant envisagé', 'Investment amount', 'Monto previsto', 'Investitionsbetrag','预计投资额')}: ${form.montant}.
+${tl('Secteur', 'Sector', 'Sector', 'Sektor','行业')}: ${form.secteur}.
+${tl('Téléphone', 'Phone', 'Teléfono', 'Telefon','电话')}: ${form.tel}.
 Email: ${form.email}.
 ${form.desc}`;
     window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
@@ -36,10 +36,10 @@ ${form.desc}`;
     <main className="page-white">
       <PageHero
         bgImg="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1600&q=85"
-        label={tl('Opportunités','Opportunities','Oportunidades','Möglichkeiten')}
-        title={tl('Espace Investisseurs','Investor Space','Espacio Inversores','Investorenbereich')}
-        sub={tl("Des opportunités d'investissement exceptionnelles sur le continent africain","Exceptional investment opportunities across the African continent","Oportunidades de inversión excepcionales en el continente africano","Außergewöhnliche Investitionsmöglichkeiten auf dem afrikanischen Kontinent")}
-        breadcrumbs={[{ label: tl('Investisseurs','Investors','Inversores','Investoren') }]}
+        label={tl('Opportunités', 'Opportunities', 'Oportunidades', 'Möglichkeiten','机遇')}
+        title={tl('Espace Investisseurs', 'Investor Space', 'Espacio Inversores', 'Investorenbereich','投资者专区')}
+        sub={tl("Des opportunités d'investissement exceptionnelles sur le continent africain", "Exceptional investment opportunities across the African continent", "Oportunidades de inversión excepcionales en el continente africano", "Außergewöhnliche Investitionsmöglichkeiten auf dem afrikanischen Kontinent",'非洲大陆的卓越投资机会。')}
+        breadcrumbs={[{ label: tl('Investisseurs', 'Investors', 'Inversores', 'Investoren','投资者') }]}
       />
 
       {/* WHY AFRICA */}
@@ -47,8 +47,8 @@ ${form.desc}`;
         <div className="container">
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:64, alignItems:'center' }}>
             <div>
-              <div className="sec-label">{tl("Pourquoi l'Afrique","Why Africa","Por qué África","Warum Afrika")}</div>
-              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Un Continent d'Opportunités","A Continent of Opportunities","Un Continente de Oportunidades","Ein Kontinent der Möglichkeiten")}</h2>
+              <div className="sec-label">{tl("Pourquoi l'Afrique", "Why Africa", "Por qué África", "Warum Afrika","为什么选择非洲")}</div>
+              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Un Continent d'Opportunités", "A Continent of Opportunities", "Un Continente de Oportunidades", "Ein Kontinent der Möglichkeiten","充满机遇的大陆")}</h2>
               <div className="divider-gold"/>
               <p style={{ fontSize:'.9rem', color:'var(--text-mid)', lineHeight:1.9, marginBottom:20 }}>{AFRICA_OPPS[lang]||AFRICA_OPPS.fr}</p>
             </div>
@@ -73,8 +73,8 @@ ${form.desc}`;
       <section style={{ background:'var(--gray-50)', padding:'72px 0' }} ref={tierRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:48 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Capacité','Capacity','Capacidad','Kapazität')}</div>
-            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Fourchettes d'Investissement","Investment Ranges","Rangos de Inversión","Investitionsbereiche")}</h2>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Capacité', 'Capacity', 'Capacidad', 'Kapazität','能力')}</div>
+            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl("Fourchettes d'Investissement", "Investment Ranges", "Rangos de Inversión", "Investitionsbereiche","投资范围")}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-3">
@@ -87,7 +87,7 @@ ${form.desc}`;
                 <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(tl(`Bonjour, je suis intéressé(e) par un investissement catégorie "${t.fr}" (${t.range}).`,`Hello, I am interested in investment category "${t.en}" (${t.range}).`,`Hola, estoy interesado/a en la categoría de inversión "${t.es}" (${t.range}).`,`Hallo, ich interessiere mich für die Investitionskategorie "${t.de}" (${t.range}).`))}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-outline-dark btn-sm">
-                  {tl('En savoir plus','Learn more','Saber más','Mehr erfahren')}
+                  {tl('En savoir plus', 'Learn more', 'Saber más', 'Mehr erfahren','了解更多')}
                 </a>
               </div>
             ))}
@@ -100,11 +100,11 @@ ${form.desc}`;
         <div className="container">
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1.4fr', gap:64, alignItems:'start' }}>
             <div>
-              <div className="sec-label">{tl('Investissez','Invest','Invierta','Investieren')}</div>
-              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Devenez Investisseur GNAH','Become a GNAH Investor','Conviértase en Inversor GNAH','GNAH-Investor werden')}</h2>
+              <div className="sec-label">{tl('Investissez', 'Invest', 'Invierta', 'Investieren','投资')}</div>
+              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Devenez Investisseur GNAH', 'Become a GNAH Investor', 'Conviértase en Inversor GNAH', 'GNAH-Investor werden','成为GNAH投资者')}</h2>
               <div className="divider-gold"/>
               <p style={{ color:'var(--text-mid)', lineHeight:1.9, marginBottom:28, fontSize:'.88rem' }}>
-                {tl("Rejoignez notre réseau d'investisseurs et participez au développement du continent africain.","Join our investor network and participate in the development of the African continent.","Únase a nuestra red de inversores y participe en el desarrollo del continente africano.","Treten Sie unserem Investorennetzwerk bei und beteiligen Sie sich an der Entwicklung des afrikanischen Kontinents.")}
+                {tl("Rejoignez notre réseau d'investisseurs et participez au développement du continent africain.", "Join our investor network and participate in the development of the African continent.", "Únase a nuestra red de inversores y participe en el desarrollo del continente africano.", "Treten Sie unserem Investorennetzwerk bei und beteiligen Sie sich an der Entwicklung des afrikanischen Kontinents.",'加入我们的投资者网络，参与非洲大陆的发展。')}
               </p>
               {[
                 {fr:'Analyse de faisabilité offerte',en:'Free feasibility analysis',es:'Análisis de viabilidad gratuito',de:'Kostenlose Machbarkeitsstudie'},
@@ -120,10 +120,10 @@ ${form.desc}`;
             </div>
             <div style={{ background:'var(--navy2)', padding:40, border:'var(--border-gold)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.78rem', color:'var(--gold)', letterSpacing:'.16em', marginBottom:26, textTransform:'uppercase' }}>
-                {tl("FORMULAIRE D'INVESTISSEMENT","INVESTMENT FORM","FORMULARIO DE INVERSIÓN","INVESTITIONSFORMULAR")}
+                {tl("FORMULAIRE D'INVESTISSEMENT", "INVESTMENT FORM", "FORMULARIO DE INVERSIÓN", "INVESTITIONSFORMULAR",'投资申请表')}
               </div>
               {sent&&<div style={{ background:'rgba(52,211,153,.08)', border:'1px solid rgba(52,211,153,.3)', color:'#34d399', padding:'10px 14px', marginBottom:16, fontSize:'.8rem', fontFamily:'var(--f-display)' }}>
-                {tl('✓ Envoyé ! Redirection WhatsApp...','✓ Sent! WhatsApp redirect...','✓ ¡Enviado!','✓ Gesendet!')}
+                {tl('✓ Envoyé ! Redirection WhatsApp...', '✓ Sent! WhatsApp redirect...', '✓ ¡Enviado!', '✓ Gesendet!','✓ 已发送！正在跳转至WhatsApp...')}
               </div>}
               <div className="form-grid" style={{ gap:14 }}>
                 {[
@@ -138,26 +138,26 @@ ${form.desc}`;
                   </div>
                 ))}
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl("Montant d'Investissement","Investment Amount","Monto de Inversión","Investitionsbetrag")}</label>
+                  <label className="form-label form-label-dark">{tl("Montant d'Investissement", "Investment Amount", "Monto de Inversión", "Investitionsbetrag","投资金额")}</label>
                   <select className="form-select form-select-dark" value={form.montant} onChange={e=>setForm(p=>({...p,montant:e.target.value}))}>
-                    <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
+                    <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
                     {AMOUNTS.map(a=><option key={a}>{a}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl("Secteur d'Intérêt","Sector of Interest","Sector de Interés","Interessensbereich")}</label>
+                  <label className="form-label form-label-dark">{tl("Secteur d'Intérêt", "Sector of Interest", "Sector de Interés", "Interessensbereich","感兴趣的行业")}</label>
                   <select className="form-select form-select-dark" value={form.secteur} onChange={e=>setForm(p=>({...p,secteur:e.target.value}))}>
-                    <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
+                    <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
                     {(SECTORS[lang]||SECTORS.fr).map(s=><option key={s}>{s}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Description','Description','Descripción','Beschreibung')}</label>
-                  <textarea className="form-textarea form-textarea-dark" value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))} placeholder={tl("Décrivez votre projet d'investissement...","Describe your investment project...","Describa su proyecto de inversión...","Beschreiben Sie Ihr Investitionsprojekt...")}/>
+                  <label className="form-label form-label-dark">{tl('Description', 'Description', 'Descripción', 'Beschreibung','描述')}</label>
+                  <textarea className="form-textarea form-textarea-dark" value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))} placeholder={tl("Décrivez votre projet d'investissement...", "Describe your investment project...", "Describa su proyecto de inversión...", "Beschreiben Sie Ihr Investitionsprojekt...",'描述您的投资项目...')}/>
                 </div>
               </div>
               <button onClick={submit} className="btn btn-wa" style={{ marginTop:20, width:'100%', justifyContent:'center' }}>
-                <WAIcon/> {tl('Soumettre ma demande','Submit my request','Enviar mi solicitud','Anfrage einreichen')}
+                <WAIcon/> {tl('Soumettre ma demande', 'Submit my request', 'Enviar mi solicitud', 'Anfrage einreichen','提交我的申请')}
               </button>
             </div>
           </div>

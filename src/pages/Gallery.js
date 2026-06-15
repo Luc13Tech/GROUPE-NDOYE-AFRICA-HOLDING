@@ -137,10 +137,10 @@ export default function Gallery() {
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
-        label={tl('Résidence Yaye Dia','Yaye Dia Residence','Residencia Yaye Dia','Yaye Dia Residenz')}
-        title={tl('Galerie de Photos','Photo Gallery','Galería de Fotos','Fotogalerie')}
-        sub={tl('Découvrez la Cité Yaye Dia en images','Discover Yaye Dia City in pictures','Descubra la Ciudad Yaye Dia en imágenes','Entdecken Sie die Yaye Dia Stadt in Bildern')}
-        breadcrumbs={[{ label: tl('Galerie','Gallery','Galería','Galerie') }]}
+        label={tl('Résidence Yaye Dia', 'Yaye Dia Residence', 'Residencia Yaye Dia', 'Yaye Dia Residenz','Yaye Dia住宅')}
+        title={tl('Galerie de Photos', 'Photo Gallery', 'Galería de Fotos', 'Fotogalerie','图片库')}
+        sub={tl('Découvrez la Cité Yaye Dia en images', 'Discover Yaye Dia City in pictures', 'Descubra la Ciudad Yaye Dia en imágenes', 'Entdecken Sie die Yaye Dia Stadt in Bildern','通过图片探索Yaye Dia城')}
+        breadcrumbs={[{ label: tl('Galerie', 'Gallery', 'Galería', 'Galerie','图库') }]}
       />
 
       {/* CATEGORY FILTERS */}
@@ -209,7 +209,7 @@ export default function Gallery() {
                   <div>
                     <div style={{ fontFamily:'var(--f-elegant)', fontSize:'.85rem', color:'var(--cream)', marginBottom:3, lineHeight:1.3 }}>{item[lang]||item.fr}</div>
                     <div style={{ fontFamily:'var(--f-display)', fontSize:'.52rem', letterSpacing:'.12em', color:'var(--gold)', textTransform:'uppercase' }}>
-                      {tl('Cliquer pour agrandir','Click to enlarge','Clic para ampliar','Klicken zum Vergrößern')}
+                      {tl('Cliquer pour agrandir', 'Click to enlarge', 'Clic para ampliar', 'Klicken zum Vergrößern','点击放大')}
                     </div>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function Gallery() {
           {filtered.length === 0 && (
             <div style={{ textAlign:'center', padding:'60px 0', color:'var(--text-mid)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.82rem', letterSpacing:'.1em' }}>
-                {tl('Aucune photo dans cette catégorie.','No photos in this category.','No hay fotos en esta categoría.','Keine Fotos in dieser Kategorie.')}
+                {tl('Aucune photo dans cette catégorie.', 'No photos in this category.', 'No hay fotos en esta categoría.', 'Keine Fotos in dieser Kategorie.','此分类暂无图片。')}
               </div>
             </div>
           )}

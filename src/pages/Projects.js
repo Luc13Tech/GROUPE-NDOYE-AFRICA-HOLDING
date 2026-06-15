@@ -93,9 +93,9 @@ export default function Projects() {
 
   const submit = () => {
     const vName = tv(villa).name;
-    const msg = `${tl('Bonjour','Hello','Hola','Hallo')}, ${tl('je m\'appelle','my name is','me llamo','mein Name ist')} ${form.nom} ${form.prenom}.
-${tl('Je suis intéressé(e) par la','I am interested in the','Estoy interesado/a en la','Ich interessiere mich für die')} ${vName} ${tl('de la Résidence Yaye Dia','at Yaye Dia Residence','de la Residencia Yaye Dia','der Yaye Dia Residenz')}.
-${tl('Téléphone','Phone','Teléfono','Telefon')}: ${form.tel}.
+    const msg = `${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${tl('je m\'appelle', 'my name is', 'me llamo', 'mein Name ist','我的名字是')} ${form.nom} ${form.prenom}.
+${tl('Je suis intéressé(e) par la','I am interested in the','Estoy interesado/a en la','Ich interessiere mich für die','我对以下感兴趣：')} ${vName} ${tl('de la Résidence Yaye Dia', 'at Yaye Dia Residence', 'de la Residencia Yaye Dia', 'der Yaye Dia Residenz','于Yaye Dia住宅')}.
+${tl('Téléphone', 'Phone', 'Teléfono', 'Telefon','电话')}: ${form.tel}.
 Email: ${form.email}.
 ${form.msg}`;
     window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -110,10 +110,10 @@ ${form.msg}`;
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/cover.jpg"
-        label={tl('Projet Phare','Flagship Project','Proyecto Insignia','Vorzeigeprojekt')}
-        title={tl('Résidence Yaye Dia','Yaye Dia Residence','Residencia Yaye Dia','Yaye Dia Residenz')}
-        sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal','300 High-End Villas — Thiès Region, Senegal','300 Villas de Alto Standing — Región de Thiès, Senegal','300 Hochwertige Villen — Thiès Region, Senegal')}
-        breadcrumbs={[{ label: tl('Projets','Projects','Proyectos','Projekte') }]}
+        label={tl('Projet Phare', 'Flagship Project', 'Proyecto Insignia', 'Vorzeigeprojekt','旗舰项目')}
+        title={tl('Résidence Yaye Dia', 'Yaye Dia Residence', 'Residencia Yaye Dia', 'Yaye Dia Residenz','Yaye Dia住宅')}
+        sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal', '300 High-End Villas — Thiès Region, Senegal', '300 Villas de Alto Standing — Región de Thiès, Senegal', '300 Hochwertige Villen — Thiès Region, Senegal','300栋高档别墅 — 塞内加尔蒂耶斯地区')}
+        breadcrumbs={[{ label: tl('Projets', 'Projects', 'Proyectos', 'Projekte','项目') }]}
       />
 
       {/* INTRO */}
@@ -121,23 +121,17 @@ ${form.msg}`;
         <div className="container">
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64,alignItems:'center'}}>
             <div>
-              <div className="sec-label">{tl('Bienvenue','Welcome','Bienvenido','Willkommen')}</div>
-              <h2 className="sec-title-light" style={{marginTop:6}}>{tl("L'Art de vivre Moderne","The Art of Modern Living","El Arte de Vivir Moderno","Die Kunst des modernen Lebens")}</h2>
+              <div className="sec-label">{tl('Bienvenue', 'Welcome', 'Bienvenido', 'Willkommen','欢迎')}</div>
+              <h2 className="sec-title-light" style={{marginTop:6}}>{tl("L'Art de vivre Moderne", "The Art of Modern Living", "El Arte de Vivir Moderno", "Die Kunst des modernen Lebens","现代生活艺术")}</h2>
               <div className="divider-gold"/>
               <p style={{fontFamily:'var(--f-serif)',fontStyle:'italic',fontSize:'1.05rem',color:'var(--gold)',marginBottom:14}}>
-                {tl("L'immobilier au vrai sens du mot","Real estate in the truest sense","Bienes raíces en el verdadero sentido","Immobilien im wahrsten Sinne")}
+                {tl("L'immobilier au vrai sens du mot", "Real estate in the truest sense", "Bienes raíces en el verdadero sentido", "Immobilien im wahrsten Sinne","真正意义上的房地产")}
               </p>
               <p style={{fontSize:'.9rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:16}}>
-                {tl("Bienvenue à la Cité YAYE DIA, un programme immobilier d'exception composé de 300 villas modernes, conçu pour redéfinir les standards du cadre de vie résidentiel.",
-                   "Welcome to YAYE DIA City, an exceptional real estate programme of 300 modern villas, designed to redefine residential living standards.",
-                   "Bienvenido a la Ciudad YAYE DIA, un programa inmobiliario excepcional de 300 villas modernas, diseñado para redefinir los estándares de vida residencial.",
-                   "Willkommen in der YAYE DIA Stadt, einem außergewöhnlichen Immobilienprogramm mit 300 modernen Villen, das darauf ausgelegt ist, die Wohnstandards neu zu definieren.")}
+                {tl("Bienvenue à la Cité YAYE DIA, un programme immobilier d'exception composé de 300 villas modernes, conçu pour redéfinir les standards du cadre de vie résidentiel.", "Welcome to YAYE DIA City, an exceptional real estate programme of 300 modern villas, designed to redefine residential living standards.", "Bienvenido a la Ciudad YAYE DIA, un programa inmobiliario excepcional de 300 villas modernas, diseñado para redefinir los estándares de vida residencial.", "Willkommen in der YAYE DIA Stadt, einem außergewöhnlichen Immobilienprogramm mit 300 modernen Villen, das darauf ausgelegt ist, die Wohnstandards neu zu definieren.",'欢迎来到YAYE DIA城，一个由300栋现代优雅别墅组成的卓越房地产项目。')}
               </p>
               <p style={{fontSize:'.9rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:28}}>
-                {tl("Choisir la Cité YAYE DIA, c'est investir dans un cadre de vie moderne et structuré, une communauté dynamique et une valorisation immobilière durable.",
-                   "Choosing YAYE DIA City means investing in a modern structured living environment, a dynamic community and sustainable real estate appreciation.",
-                   "Elegir la Ciudad YAYE DIA significa invertir en un entorno de vida moderno y estructurado, una comunidad dinámica y una valorización inmobiliaria sostenible.",
-                   "Die YAYE DIA Stadt zu wählen bedeutet, in ein modernes strukturiertes Wohnumfeld, eine dynamische Gemeinschaft und nachhaltige Immobilienwertsteigerung zu investieren.")}
+                {tl("Choisir la Cité YAYE DIA, c'est investir dans un cadre de vie moderne et structuré, une communauté dynamique et une valorisation immobilière durable.", "Choosing YAYE DIA City means investing in a modern structured living environment, a dynamic community and sustainable real estate appreciation.", "Elegir la Ciudad YAYE DIA significa invertir en un entorno de vida moderno y estructurado, una comunidad dinámica y una valorización inmobiliaria sostenible.", "Die YAYE DIA Stadt zu wählen bedeutet, in ein modernes strukturiertes Wohnumfeld, eine dynamische Gemeinschaft und nachhaltige Immobilienwertsteigerung zu investieren.",'选择YAYE DIA城，就是投资于现代化、结构完善的生活环境，一个安全且配套齐全的社区。')}
               </p>
               <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
                 {[
@@ -159,7 +153,7 @@ ${form.msg}`;
                 <div style={{background:'var(--navy)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:16,textAlign:'center'}}>
                   <div style={{fontFamily:'var(--f-elegant)',fontSize:'2rem',color:'var(--gold)'}}>300</div>
                   <div style={{fontFamily:'var(--f-serif)',fontStyle:'italic',color:'rgba(200,195,186,.5)',fontSize:'.8rem'}}>
-                    {tl('Villas Haut Standing','High-End Villas','Villas de Alto Standing','Hochwertige Villen')}
+                    {tl('Villas Haut Standing', 'High-End Villas', 'Villas de Alto Standing', 'Hochwertige Villen','高档别墅')}
                   </div>
                 </div>
               </div>
@@ -172,8 +166,8 @@ ${form.msg}`;
       <section style={{background:'var(--gray-50)',padding:'72px 0'}}>
         <div className="container">
           <div style={{textAlign:'center',marginBottom:36}}>
-            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Galerie','Gallery','Galería','Galerie')}</div>
-            <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Découvrez la Cité','Discover the City','Descubra la Ciudad','Entdecken Sie die Stadt')}</h2>
+            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Galerie', 'Gallery', 'Galería', 'Galerie','图库')}</div>
+            <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Découvrez la Cité', 'Discover the City', 'Descubra la Ciudad', 'Entdecken Sie die Stadt','探索这座城')}</h2>
             <div className="divider-gold-c"/>
           </div>
           <Carousel/>
@@ -184,11 +178,11 @@ ${form.msg}`;
       <section className="section">
         <div className="container">
           <div style={{textAlign:'center',marginBottom:36}}>
-            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Modèles','Models','Modelos','Modelle')}</div>
+            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Modèles', 'Models', 'Modelos', 'Modelle','模型')}</div>
             <h2 className="sec-title-light" style={{marginTop:6}}>
-              {tl('Style et ','Style and ','Estilo y ','Stil und ')}
+              {tl('Style et ', 'Style and ', 'Estilo y ', 'Stil und ','风格与 ')}
               <em style={{fontFamily:'var(--f-elegant)',color:'var(--gold)'}}>
-                {tl('Architecture','Architecture','Arquitectura','Architektur')}
+                {tl('Architecture', 'Architecture', 'Arquitectura', 'Architektur','建筑')}
               </em>
             </h2>
             <div className="divider-gold-c"/>
@@ -227,7 +221,7 @@ ${form.msg}`;
                 {(villa.features||villa.extras) && (
                   <div style={{marginTop:14,padding:'18px 20px',background:'var(--gray-50)',border:'1px solid var(--gray-200)',borderLeft:'3px solid var(--gold)'}}>
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.65rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:10}}>
-                      {tl('Caractéristiques','Features','Características','Merkmale')}
+                      {tl('Caractéristiques', 'Features', 'Características', 'Merkmale','特点')}
                     </div>
                     {((villa.features||villa.extras)[lang]||(villa.features||villa.extras).fr||[]).map((f,i)=>(
                       <div key={i} style={{display:'flex',gap:8,fontSize:'.78rem',color:'var(--text-mid)',padding:'4px 0',borderBottom:'1px solid var(--gray-200)'}}>
@@ -242,11 +236,11 @@ ${form.msg}`;
               <div style={{background:'var(--navy)',border:'var(--border-gold)',padding:24}}>
                 <div style={{display:'flex',justifyContent:'space-between',marginBottom:20,paddingBottom:16,borderBottom:'1px solid rgba(201,168,76,.12)'}}>
                   <div>
-                    <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:4}}>{tl('Terrain','Plot','Parcela','Grundstück')}</div>
+                    <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:4}}>{tl('Terrain', 'Plot', 'Parcela', 'Grundstück','地块')}</div>
                     <div style={{fontFamily:'var(--f-elegant)',fontSize:'1.5rem',color:'var(--cream)'}}>{villa.surface}</div>
                   </div>
                   <div style={{textAlign:'right'}}>
-                    <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:4}}>{tl('Bâti','Built','Construido','Gebaut')}</div>
+                    <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:4}}>{tl('Bâti', 'Built', 'Construido', 'Gebaut','建筑面积')}</div>
                     <div style={{fontFamily:'var(--f-elegant)',fontSize:'1.5rem',color:'var(--cream)'}}>{villa.bati}</div>
                   </div>
                 </div>
@@ -254,7 +248,7 @@ ${form.msg}`;
                 {villa.rooms && (
                   <>
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:10}}>
-                      {tl('Composition','Layout','Composición','Raumaufteilung')}
+                      {tl('Composition', 'Layout', 'Composición', 'Raumaufteilung','布局')}
                     </div>
                     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:6}}>
                       {villa.rooms.map((r,i)=>(
@@ -292,9 +286,9 @@ ${form.msg}`;
       <section style={{background:'var(--gray-50)',padding:'72px 0'}} ref={amenRef}>
         <div className="container">
           <div style={{textAlign:'center',marginBottom:48}}>
-            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Cadre de vie','Living environment','Entorno de vida','Wohnumfeld')}</div>
+            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Cadre de vie', 'Living environment', 'Entorno de vida', 'Wohnumfeld','生活环境')}</div>
             <h2 className="sec-title-light" style={{marginTop:6}}>
-              {tl("Un Cadre de Vie Pensé Pour le Bien-être","A Living Environment Designed for Well-being","Un Entorno de Vida Pensado Para el Bienestar","Ein Wohnumfeld für Wohlbefinden")}
+              {tl("Un Cadre de Vie Pensé Pour le Bien-être", "A Living Environment Designed for Well-being", "Un Entorno de Vida Pensado Para el Bienestar", "Ein Wohnumfeld für Wohlbefinden","为幸福而设计的生活环境")}
             </h2>
             <div className="divider-gold-c"/>
           </div>
@@ -319,7 +313,7 @@ ${form.msg}`;
         <div className="container">
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64}}>
             <div className={`slide-left${lotVis?' visible':''}`}>
-              <div className="sec-label">{tl('Esthétique','Aesthetics','Estética','Ästhetik')}</div>
+              <div className="sec-label">{tl('Esthétique', 'Aesthetics', 'Estética', 'Ästhetik','美学')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{arch.title}</h2>
               <div className="divider-gold"/>
               <p style={{fontFamily:'var(--f-serif)',fontStyle:'italic',fontSize:'1.05rem',color:'var(--gold)',marginBottom:14}}>{arch.intro}</p>
@@ -334,7 +328,7 @@ ${form.msg}`;
               </div>
             </div>
             <div className={`slide-right${lotVis?' visible':''}`}>
-              <div className="sec-label">{tl('Matériaux','Materials','Materiales','Materialien')}</div>
+              <div className="sec-label">{tl('Matériaux', 'Materials', 'Materiales', 'Materialien','材料')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{mat.title}</h2>
               <div className="divider-gold"/>
               <p style={{fontSize:'.88rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:16}}>{mat.desc}</p>
@@ -344,7 +338,7 @@ ${form.msg}`;
               </div>
               <div style={{background:'var(--gray-50)',border:'1px solid var(--gray-200)',padding:'14px 18px',marginBottom:16}}>
                 <div style={{fontFamily:'var(--f-display)',fontSize:'.68rem',color:'var(--gold)',letterSpacing:'.1em',marginBottom:8}}>
-                  {tl('Couleur & Design','Color & Design','Color y Diseño','Farbe & Design')}
+                  {tl('Couleur & Design', 'Color & Design', 'Color y Diseño', 'Farbe & Design','颜色与设计')}
                 </div>
                 <p style={{fontSize:'.8rem',color:'var(--text-mid)'}}>{mat.color}</p>
               </div>
@@ -366,7 +360,7 @@ ${form.msg}`;
         <div className="container">
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64,alignItems:'center'}}>
             <div>
-              <div className="sec-label">{tl('Infrastructure','Infrastructure','Infraestructura','Infrastruktur')}</div>
+              <div className="sec-label">{tl('Infrastructure', 'Infrastructure', 'Infraestructura', 'Infrastruktur','基础设施')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{lot.title}</h2>
               <div className="divider-gold"/>
               <p style={{fontSize:'.88rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:24}}>{lot.desc}</p>
@@ -401,13 +395,13 @@ ${form.msg}`;
         <div className="container">
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'start'}}>
             <div>
-              <div className="sec-label" style={{color:'var(--gold)'}}>{tl('Réservez','Book now','Reserve','Buchen')}</div>
+              <div className="sec-label" style={{color:'var(--gold)'}}>{tl('Réservez', 'Book now', 'Reserve', 'Buchen','立即预订')}</div>
               <h2 style={{fontFamily:'var(--f-elegant)',fontSize:'clamp(1.5rem,3vw,2.2rem)',color:'var(--cream)',marginTop:6,marginBottom:10}}>
-                {tl('Votre Villa Vous Attend','Your Villa Awaits','Su Villa le Espera','Ihre Villa Wartet')}
+                {tl('Votre Villa Vous Attend', 'Your Villa Awaits', 'Su Villa le Espera', 'Ihre Villa Wartet','您的别墅等待着您')}
               </h2>
               <div className="divider-gold"/>
               <p style={{color:'rgba(200,195,186,.6)',lineHeight:1.9,marginBottom:28,fontSize:'.88rem'}}>
-                {tl('Remplissez le formulaire et notre équipe vous contactera sous 24 heures via WhatsApp.','Fill in the form and our team will contact you within 24 hours via WhatsApp.','Complete el formulario y nuestro equipo le contactará en 24 horas por WhatsApp.','Füllen Sie das Formular aus und unser Team kontaktiert Sie innerhalb von 24 Stunden per WhatsApp.')}
+                {tl('Remplissez le formulaire et notre équipe vous contactera sous 24 heures via WhatsApp.', 'Fill in the form and our team will contact you within 24 hours via WhatsApp.', 'Complete el formulario y nuestro equipo le contactará en 24 horas por WhatsApp.', 'Füllen Sie das Formular aus und unser Team kontaktiert Sie innerhalb von 24 Stunden per WhatsApp.','填写表格，我们的团队将在24小时内通过WhatsApp与您联系。')}
               </p>
               {[
                 {fr:'Région de Thiès, Sénégal',en:'Thiès Region, Senegal',es:'Región de Thiès, Senegal',de:'Thiès Region, Senegal'},
@@ -424,10 +418,10 @@ ${form.msg}`;
 
             <div style={{background:'rgba(5,8,16,.6)',padding:40,border:'var(--border-gold)'}}>
               <div style={{fontFamily:'var(--f-display)',fontSize:'.78rem',color:'var(--gold)',letterSpacing:'.16em',marginBottom:26,textTransform:'uppercase'}}>
-                {tl('FORMULAIRE DE RÉSERVATION','BOOKING FORM','FORMULARIO DE RESERVA','BUCHUNGSFORMULAR')}
+                {tl('FORMULAIRE DE RÉSERVATION', 'BOOKING FORM', 'FORMULARIO DE RESERVA', 'BUCHUNGSFORMULAR','预订表格')}
               </div>
               {sent&&<div style={{background:'rgba(52,211,153,.08)',border:'1px solid rgba(52,211,153,.3)',color:'#34d399',padding:'10px 14px',marginBottom:16,fontSize:'.8rem',fontFamily:'var(--f-display)'}}>
-                {tl('✓ Envoyé ! Redirection WhatsApp...','✓ Sent! WhatsApp redirect...','✓ ¡Enviado! Redirigiendo a WhatsApp...','✓ Gesendet! WhatsApp-Weiterleitung...')}
+                {tl('✓ Envoyé ! Redirection WhatsApp...', '✓ Sent! WhatsApp redirect...', '✓ ¡Enviado! Redirigiendo a WhatsApp...', '✓ Gesendet! WhatsApp-Weiterleitung...','✓ 已发送！正在跳转至WhatsApp...')}
               </div>}
               <div className="form-grid" style={{gap:14}}>
                 {[
@@ -442,18 +436,18 @@ ${form.msg}`;
                   </div>
                 ))}
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Type de Villa','Villa Type','Tipo de Villa','Villa Typ')}</label>
+                  <label className="form-label form-label-dark">{tl('Type de Villa', 'Villa Type', 'Tipo de Villa', 'Villa Typ','别墅类型')}</label>
                   <select className="form-select form-select-dark" value={form.villa} onChange={e=>setForm(p=>({...p,villa:e.target.value}))}>
                     {VILLA_TYPES.map(v=><option key={v.id} value={v.id}>{(v[lang]||v.fr).name} — {(v[lang]||v.fr).standing}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Message','Message','Mensaje','Nachricht')}</label>
-                  <textarea className="form-textarea form-textarea-dark" placeholder={tl('Votre message...','Your message...','Su mensaje...','Ihre Nachricht...')} value={form.msg} onChange={e=>setForm(p=>({...p,msg:e.target.value}))}/>
+                  <label className="form-label form-label-dark">{tl('Message', 'Message', 'Mensaje', 'Nachricht','消息')}</label>
+                  <textarea className="form-textarea form-textarea-dark" placeholder={tl('Votre message...', 'Your message...', 'Su mensaje...', 'Ihre Nachricht...','您的消息...')} value={form.msg} onChange={e=>setForm(p=>({...p,msg:e.target.value}))}/>
                 </div>
               </div>
               <button onClick={submit} className="btn btn-wa" style={{marginTop:20,width:'100%',justifyContent:'center'}}>
-                <WAIcon/> {tl('Envoyer ma demande','Send my request','Enviar mi solicitud','Anfrage senden')}
+                <WAIcon/> {tl('Envoyer ma demande', 'Send my request', 'Enviar mi solicitud', 'Anfrage senden','发送我的申请')}
               </button>
             </div>
           </div>

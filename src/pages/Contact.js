@@ -42,9 +42,9 @@ export default function Contact() {
 
   const submit = () => {
     if (!form.nom || !form.msg) return;
-    const msg = `${tl('Bonjour','Hello','Hola','Hallo')}, ${tl('je m\'appelle','my name is','me llamo','ich heiße')} ${form.nom}${form.pays ? ` (${form.pays})` : ''}.
-${tl('Objet','Subject','Asunto','Betreff')}: ${form.objet || 'N/A'}.
-${tl('Téléphone','Phone','Teléfono','Telefon')}: ${form.tel || 'N/A'}.
+    const msg = `${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${tl('je m\'appelle', 'my name is', 'me llamo', 'ich heiße','我的名字是')} ${form.nom}${form.pays ? ` (${form.pays})` : ''}.
+${tl('Objet', 'Subject', 'Asunto', 'Betreff','主题')}: ${form.objet || 'N/A'}.
+${tl('Téléphone', 'Phone', 'Teléfono', 'Telefon','电话')}: ${form.tel || 'N/A'}.
 Email: ${form.email || 'N/A'}.
 
 ${form.msg}`;
@@ -55,8 +55,8 @@ ${form.msg}`;
 
   const CONTACT_INFO = [
     { icon:<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>,
-      label:tl('Adresse','Address','Dirección','Adresse'),
-      val: tl(SITE.address_fr, SITE.address_fr, SITE.address_fr, SITE.address_fr) },
+      label:tl('Adresse', 'Address', 'Dirección', 'Adresse','地址'),
+      val: SITE.address_fr },
     { icon:<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 10.9a16 16 0 006.29 6.29l1.22-1.22a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0121.17 18z"/></svg>,
       label:'WhatsApp / Téléphone',
       val: SITE.phone, href:`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}` },
@@ -69,10 +69,10 @@ ${form.msg}`;
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/villa-f4pp-facade.jpg"
-        label={tl("Restons en contact","Let's stay in touch","Mantengámonos en contacto","Bleiben wir in Kontakt")}
-        title={tl('Contactez-Nous','Contact Us','Contáctenos','Kontakt')}
-        sub={tl('Notre équipe est à votre disposition 7j/7','Our team is available 7 days a week','Nuestro equipo está disponible 7 días a la semana','Unser Team ist 7 Tage die Woche für Sie da')}
-        breadcrumbs={[{ label:tl('Contact','Contact','Contacto','Kontakt') }]}
+        label={tl("Restons en contact", "Let's stay in touch", "Mantengámonos en contacto", "Bleiben wir in Kontakt",'让我们保持联系')}
+        title={tl('Contactez-Nous', 'Contact Us', 'Contáctenos', 'Kontakt','联系我们')}
+        sub={tl('Notre équipe est à votre disposition 7j/7', 'Our team is available 7 days a week', 'Nuestro equipo está disponible 7 días a la semana', 'Unser Team ist 7 Tage die Woche für Sie da','我们的团队每周7天为您服务')}
+        breadcrumbs={[{ label:tl('Contact', 'Contact', 'Contacto', 'Kontakt','联系') }]}
       />
 
       {/* MAIN SECTION */}
@@ -82,14 +82,11 @@ ${form.msg}`;
 
             {/* LEFT — INFO + SOCIALS */}
             <div className={`slide-left${gridVis?' visible':''}`}>
-              <div className="sec-label">{tl('Coordonnées','Details','Coordenadas','Kontaktdaten')}</div>
-              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Nos Coordonnées','Our Details','Nuestros Datos','Unsere Daten')}</h2>
+              <div className="sec-label">{tl('Coordonnées', 'Details', 'Coordenadas', 'Kontaktdaten','联系方式')}</div>
+              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Nos Coordonnées', 'Our Details', 'Nuestros Datos', 'Unsere Daten','我们的联系方式')}</h2>
               <div className="divider-gold"/>
               <p style={{ color:'var(--text-mid)', lineHeight:1.9, marginBottom:32, fontSize:'.88rem' }}>
-                {tl("N'hésitez pas à nous contacter pour tout renseignement sur nos projets, services ou opportunités d'investissement. Notre équipe vous répond rapidement.",
-                   "Do not hesitate to contact us for any information about our projects, services or investment opportunities. Our team will respond quickly.",
-                   "No dude en contactarnos para cualquier información sobre nuestros proyectos, servicios u oportunidades de inversión.",
-                   "Zögern Sie nicht, uns für Informationen über unsere Projekte, Dienstleistungen oder Investitionsmöglichkeiten zu kontaktieren.")}
+                {tl("N'hésitez pas à nous contacter pour tout renseignement sur nos projets, services ou opportunités d'investissement. Notre équipe vous répond rapidement.", "Do not hesitate to contact us for any information about our projects, services or investment opportunities. Our team will respond quickly.", "No dude en contactarnos para cualquier información sobre nuestros proyectos, servicios u oportunidades de inversión.", "Zögern Sie nicht, uns für Informationen über unsere Projekte, Dienstleistungen oder Investitionsmöglichkeiten zu kontaktieren.",'如需了解我们的项目、服务或投资机会，请随时联系我们。')}
               </p>
 
               {/* Contact cards */}
@@ -111,7 +108,7 @@ ${form.msg}`;
 
               {/* Social networks */}
               <div style={{ marginTop:28 }}>
-                <div className="sec-label" style={{ marginBottom:14 }}>{tl('Réseaux Sociaux','Social Networks','Redes Sociales','Soziale Netzwerke')}</div>
+                <div className="sec-label" style={{ marginBottom:14 }}>{tl('Réseaux Sociaux', 'Social Networks', 'Redes Sociales', 'Soziale Netzwerke','社交媒体')}</div>
                 <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
                   {SOCIALS.map(s=>(
                     <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer"
@@ -128,10 +125,10 @@ ${form.msg}`;
               {/* WhatsApp direct CTA */}
               <div style={{ marginTop:28, padding:'20px 22px', background:'var(--navy)', border:'1px solid rgba(201,168,76,.2)' }}>
                 <div style={{ fontFamily:'var(--f-display)', fontSize:'.68rem', color:'var(--gold)', letterSpacing:'.12em', textTransform:'uppercase', marginBottom:8 }}>
-                  {tl('Réponse Rapide','Quick Response','Respuesta Rápida','Schnelle Antwort')}
+                  {tl('Réponse Rapide', 'Quick Response', 'Respuesta Rápida', 'Schnelle Antwort','快速回复')}
                 </div>
                 <p style={{ color:'rgba(200,195,186,.55)', fontSize:'.82rem', lineHeight:1.7, marginBottom:14 }}>
-                  {tl('Contactez-nous directement sur WhatsApp pour une réponse sous 24h.','Contact us directly on WhatsApp for a response within 24 hours.','Contáctenos directamente en WhatsApp para una respuesta en 24 horas.','Kontaktieren Sie uns direkt per WhatsApp für eine Antwort innerhalb von 24 Stunden.')}
+                  {tl('Contactez-nous directement sur WhatsApp pour une réponse sous 24h.', 'Contact us directly on WhatsApp for a response within 24 hours.', 'Contáctenos directamente en WhatsApp para una respuesta en 24 horas.', 'Kontaktieren Sie uns direkt per WhatsApp für eine Antwort innerhalb von 24 Stunden.','直接通过WhatsApp联系我们，24小时内回复。')}
                 </p>
                 <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}`}
                   target="_blank" rel="noopener noreferrer"
@@ -144,13 +141,13 @@ ${form.msg}`;
             {/* RIGHT — FORM */}
             <div className={`slide-right${gridVis?' visible':''}`} style={{ background:'var(--navy2)', padding:40, border:'var(--border-gold)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.78rem', color:'var(--gold)', letterSpacing:'.16em', marginBottom:26, textTransform:'uppercase' }}>
-                {tl('FORMULAIRE DE CONTACT','CONTACT FORM','FORMULARIO DE CONTACTO','KONTAKTFORMULAR')}
+                {tl('FORMULAIRE DE CONTACT', 'CONTACT FORM', 'FORMULARIO DE CONTACTO', 'KONTAKTFORMULAR','联系表格')}
               </div>
 
               {sent && (
                 <div style={{ background:'rgba(52,211,153,.08)', border:'1px solid rgba(52,211,153,.3)', color:'#34d399', padding:'12px 16px', marginBottom:18, fontSize:'.82rem', fontFamily:'var(--f-display)', letterSpacing:'.06em', display:'flex', alignItems:'center', gap:8 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20,6 9,17 4,12"/></svg>
-                  {tl('Message envoyé ! Redirection WhatsApp...','Message sent! WhatsApp redirect...','¡Mensaje enviado! Redirigiendo a WhatsApp...','Nachricht gesendet! WhatsApp-Weiterleitung...')}
+                  {tl('Message envoyé ! Redirection WhatsApp...', 'Message sent! WhatsApp redirect...', '¡Mensaje enviado! Redirigiendo a WhatsApp...', 'Nachricht gesendet! WhatsApp-Weiterleitung...','消息已发送！正在跳转至WhatsApp...')}
                 </div>
               )}
 
@@ -168,17 +165,17 @@ ${form.msg}`;
                 ))}
 
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Objet *','Subject *','Asunto *','Betreff *')}</label>
+                  <label className="form-label form-label-dark">{tl('Objet *', 'Subject *', 'Asunto *', 'Betreff *','主题 *')}</label>
                   <select className="form-select form-select-dark" value={form.objet} onChange={e=>setForm(p=>({...p,objet:e.target.value}))}>
-                    <option value="">{tl('Sélectionner un objet...','Select a subject...','Seleccionar un asunto...','Betreff auswählen...')}</option>
+                    <option value="">{tl('Sélectionner un objet...', 'Select a subject...', 'Seleccionar un asunto...', 'Betreff auswählen...','请选择主题...')}</option>
                     {(SUBJECTS[lang]||SUBJECTS.fr).map(s=><option key={s}>{s}</option>)}
                   </select>
                 </div>
 
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Message *','Message *','Mensaje *','Nachricht *')}</label>
+                  <label className="form-label form-label-dark">{tl('Message *', 'Message *', 'Mensaje *', 'Nachricht *','消息 *')}</label>
                   <textarea className="form-textarea form-textarea-dark" style={{ minHeight:140 }}
-                    placeholder={tl('Votre message...','Your message...','Su mensaje...','Ihre Nachricht...')}
+                    placeholder={tl('Votre message...', 'Your message...', 'Su mensaje...', 'Ihre Nachricht...','您的消息...')}
                     value={form.msg} onChange={e=>setForm(p=>({...p,msg:e.target.value}))}/>
                 </div>
               </div>
@@ -186,11 +183,11 @@ ${form.msg}`;
               <button onClick={submit} className="btn btn-wa"
                 style={{ marginTop:22, width:'100%', justifyContent:'center', padding:'14px' }}>
                 <WAIcon/>
-                {tl('Envoyer via WhatsApp','Send via WhatsApp','Enviar por WhatsApp','Per WhatsApp senden')}
+                {tl('Envoyer via WhatsApp', 'Send via WhatsApp', 'Enviar por WhatsApp', 'Per WhatsApp senden','通过WhatsApp发送')}
               </button>
 
               <p style={{ marginTop:12, fontSize:'.74rem', color:'rgba(200,195,186,.3)', textAlign:'center', fontFamily:'var(--f-display)', letterSpacing:'.06em' }}>
-                {tl('Réponse sous 24h — Équipe disponible 7j/7','Response within 24h — Team available 7 days/7','Respuesta en 24h — Equipo disponible 7 días/7','Antwort innerhalb 24h — Team verfügbar 7 Tage/7')}
+                {tl('Réponse sous 24h — Équipe disponible 7j/7', 'Response within 24h — Team available 7 days/7', 'Respuesta en 24h — Equipo disponible 7 días/7', 'Antwort innerhalb 24h — Team verfügbar 7 Tage/7','24小时内回复 — 团队每周7天为您服务')}
               </p>
             </div>
           </div>
@@ -201,8 +198,8 @@ ${form.msg}`;
       <section style={{ padding:'0 0 72px' }}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:28 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Localisation','Location','Ubicación','Standort')}</div>
-            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Nous Trouver','Find Us','Encuéntrenos','Uns finden')}</h2>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Localisation', 'Location', 'Ubicación', 'Standort','位置')}</div>
+            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Nous Trouver', 'Find Us', 'Encuéntrenos', 'Uns finden','找到我们')}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div style={{ border:'3px solid var(--gold)', overflow:'hidden', height:360, position:'relative' }}>

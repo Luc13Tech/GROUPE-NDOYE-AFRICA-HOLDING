@@ -108,27 +108,22 @@ export default function Videos() {
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/villa-f5-facade3.jpg"
-        label={tl('Nos Réalisations','Our Achievements','Nuestras Realizaciones','Unsere Realisierungen')}
-        title={tl('Nos Vidéos','Our Videos','Nuestros Videos','Unsere Videos')}
-        sub={tl('Visitez la Cité Yaye Dia en vidéo','Visit Yaye Dia City in video','Visite la Ciudad Yaye Dia en video','Besuchen Sie die Yaye Dia Stadt im Video')}
-        breadcrumbs={[{ label: tl('Vidéos','Videos','Videos','Videos') }]}
+        label={tl('Nos Réalisations', 'Our Achievements', 'Nuestras Realizaciones', 'Unsere Realisierungen','我们的成就')}
+        title={tl('Nos Vidéos', 'Our Videos', 'Nuestros Videos', 'Unsere Videos','我们的视频')}
+        sub={tl('Visitez la Cité Yaye Dia en vidéo', 'Visit Yaye Dia City in video', 'Visite la Ciudad Yaye Dia en video', 'Besuchen Sie die Yaye Dia Stadt im Video','通过视频参观Yaye Dia城')}
+        breadcrumbs={[{ label: tl('Vidéos', 'Videos', 'Videos', 'Videos','视频') }]}
       />
 
       {/* INTRO */}
       <section style={{ background:'var(--gray-50)', padding:'48px 0 32px', borderBottom:'1px solid var(--gray-200)' }}>
         <div className="container" style={{ textAlign:'center' }}>
-          <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Contenu vidéo','Video content','Contenido en video','Videoinhalt')}</div>
+          <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Contenu vidéo', 'Video content', 'Contenido en video', 'Videoinhalt','视频内容')}</div>
           <h2 className="sec-title-light" style={{ marginTop:6 }}>
-            {tl('Plongez dans la Cité Yaye Dia','Dive into Yaye Dia City','Sumérgete en la Ciudad Yaye Dia','Tauchen Sie ein in die Yaye Dia Stadt')}
+            {tl('Plongez dans la Cité Yaye Dia', 'Dive into Yaye Dia City', 'Sumérgete en la Ciudad Yaye Dia', 'Tauchen Sie ein in die Yaye Dia Stadt','沉浸式体验Yaye Dia城')}
           </h2>
           <div className="divider-gold-c"/>
           <p style={{ color:'var(--text-mid)', maxWidth:600, margin:'0 auto', fontSize:'.88rem', lineHeight:1.8 }}>
-            {tl(
-              "Nos vidéos vous permettent de visiter virtuellement la Résidence Yaye Dia, de découvrir chaque villa, les commodités et l'environnement exceptionnel de la cité.",
-              "Our videos allow you to virtually visit Yaye Dia Residence, discover each villa, the amenities and the exceptional environment of the city.",
-              "Nuestros videos le permiten visitar virtualmente la Residencia Yaye Dia, descubrir cada villa, las comodidades y el entorno excepcional de la ciudad.",
-              "Unsere Videos ermöglichen es Ihnen, die Yaye Dia Residenz virtuell zu besuchen, jede Villa, die Annehmlichkeiten und das außergewöhnliche Stadtumfeld zu entdecken."
-            )}
+            {tl("Nos vidéos vous permettent de visiter virtuellement la Résidence Yaye Dia, de découvrir chaque villa, les commodités et l'environnement exceptionnel de la cité.", "Our videos allow you to virtually visit Yaye Dia Residence, discover each villa, the amenities and the exceptional environment of the city.", "Nuestros videos le permiten visitar virtualmente la Residencia Yaye Dia, descubrir cada villa, las comodidades y el entorno excepcional de la ciudad.", "Unsere Videos ermöglichen es Ihnen, die Yaye Dia Residenz virtuell zu besuchen, jede Villa, die Annehmlichkeiten und das außergewöhnliche Stadtumfeld zu entdecken.",'我们的视频让您虚拟参观Yaye Dia住宅，探索每栋别墅并跟踪施工进展。')}
           </p>
         </div>
       </section>
@@ -228,7 +223,7 @@ export default function Videos() {
                       onMouseLeave={e=>{ e.currentTarget.style.opacity='1'; e.currentTarget.style.transform='translateY(0)'; }}
                     >
                       {platform.icon}
-                      {tl('Regarder la vidéo','Watch the video','Ver el video','Video ansehen')}
+                      {tl('Regarder la vidéo', 'Watch the video', 'Ver el video', 'Video ansehen','观看视频')}
                     </a>
                   </div>
                 </div>
@@ -241,18 +236,13 @@ export default function Videos() {
       {/* SOCIAL CTA */}
       <section style={{ background:'var(--navy)', padding:'64px 0' }}>
         <div className="container" style={{ textAlign:'center' }}>
-          <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Suivez-nous','Follow us','Síganos','Folgen Sie uns')}</div>
+          <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Suivez-nous', 'Follow us', 'Síganos', 'Folgen Sie uns','关注我们')}</div>
           <h2 className="sec-title-dark" style={{ marginTop:6 }}>
-            {tl('Retrouvez-Nous sur les Réseaux','Find Us on Social Media','Encuéntrenos en las Redes','Finden Sie uns in den sozialen Medien')}
+            {tl('Retrouvez-Nous sur les Réseaux', 'Find Us on Social Media', 'Encuéntrenos en las Redes', 'Finden Sie uns in den sozialen Medien','在社交媒体上找到我们')}
           </h2>
           <div className="divider-gold-c"/>
           <p style={{ color:'rgba(200,195,186,.55)', maxWidth:500, margin:'0 auto 32px', fontSize:'.88rem', lineHeight:1.8 }}>
-            {tl(
-              "Suivez nos pages pour ne manquer aucune actualité, vidéo exclusive et mise à jour de la Résidence Yaye Dia.",
-              "Follow our pages to never miss any news, exclusive video or update from Yaye Dia Residence.",
-              "Siga nuestras páginas para no perderse ninguna noticia, video exclusivo o actualización de la Residencia Yaye Dia.",
-              "Folgen Sie unseren Seiten, um keine Neuigkeiten, exklusiven Videos oder Updates der Yaye Dia Residenz zu verpassen."
-            )}
+            {tl("Suivez nos pages pour ne manquer aucune actualité, vidéo exclusive et mise à jour de la Résidence Yaye Dia.", "Follow our pages to never miss any news, exclusive video or update from Yaye Dia Residence.", "Siga nuestras páginas para no perderse ninguna noticia, video exclusivo o actualización de la Residencia Yaye Dia.", "Folgen Sie unseren Seiten, um keine Neuigkeiten, exklusiven Videos oder Updates der Yaye Dia Residenz zu verpassen.",'关注我们的页面，不错过任何Yaye Dia住宅的新闻、独家视频和更新。')}
           </p>
           <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap' }}>
             {[
