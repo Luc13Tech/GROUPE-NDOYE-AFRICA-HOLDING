@@ -1,0 +1,13 @@
+# Groupe Ndoye Africa Holding — robots.txt
+User-agent: *
+Allow: /
+
+# Disallow admin pages from indexing
+Disallow: /admin
+Disallow: /admin/dashboard
+
+# Sitemap location
+Sitemap: https://groupendoyeafrica.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

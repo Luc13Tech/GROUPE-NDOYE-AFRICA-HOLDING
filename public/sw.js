@@ -1,79 +1,81 @@
-// ══════════════════════════════════════════════════════════
-//  GNAH Service Worker — PWA Cache & Update Strategy
-// ══════════════════════════════════════════════════════════
+// GNAH Service Worker — Network First Strategy
+const CACHE_NAME = 'gnah-v2';
+const STATIC_CACHE = 'gnah-static-v2';
 
-const CACHE_NAME = 'gnah-v1';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/static/js/main.chunk.js',
-  '/static/js/bundle.js',
-  '/static/css/main.chunk.css',
-  '/manifest.json',
   '/Images/logo/gnah-logo.png',
-  '/Images/yaye-dia/cite-vue-aerienne.jpg',
   '/Images/icons/icon-192.png',
   '/Images/icons/icon-512.png',
+  '/manifest.json',
 ];
 
-// ── Install: cache static assets
+// Install
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(STATIC_CACHE).then((cache) => {
       return cache.addAll(STATIC_ASSETS).catch(() => {});
     })
   );
   self.skipWaiting();
 });
 
-// ── Activate: clean old caches
+// Activate — clean old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((names) =>
       Promise.all(
-        names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n))
+        names.filter((n) => n !== CACHE_NAME && n !== STATIC_CACHE)
+          .map((n) => caches.delete(n))
       )
     )
   );
   self.clients.claim();
 });
 
-// ── Fetch: Network first, fallback to cache
+// Fetch — NETWORK FIRST for HTML/JS, Cache First for images only
 self.addEventListener('fetch', (event) => {
-  // Skip non-GET and browser-extension requests
   if (event.request.method !== 'GET') return;
-  if (!event.request.url.startsWith(self.location.origin)) return;
-
-  // For HTML navigation — Network first (ensures updates show immediately)
-  if (event.request.mode === 'navigate') {
+  
+  const url = new URL(event.request.url);
+  
+  // Skip non-same-origin
+  if (url.origin !== self.location.origin) return;
+  
+  // IMAGES — Cache first (they don't change often)
+  if (/\.(png|jpg|jpeg|gif|webp|svg|ico)$/.test(url.pathname)) {
     event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+      caches.match(event.request).then((cached) => {
+        if (cached) return cached;
+        return fetch(event.request).then((response) => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(STATIC_CACHE).then((c) => c.put(event.request, clone));
+          }
           return response;
-        })
-        .catch(() => caches.match('/index.html'))
+        }).catch(() => cached);
+      })
     );
     return;
   }
-
-  // For assets — Cache first, then network
+  
+  // ALL OTHER REQUESTS — Network first, NO caching of HTML/JS
+  // This ensures React Router works correctly and pages always load fresh
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        if (response && response.status === 200) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        }
+    fetch(event.request)
+      .then((response) => {
         return response;
-      }).catch(() => cached);
-    })
+      })
+      .catch(() => {
+        // Fallback: serve index.html for navigation (SPA)
+        if (event.request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+        return new Response('', { status: 408 });
+      })
   );
 });
 
-// ── Background sync for updates
+// Handle update messages
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();

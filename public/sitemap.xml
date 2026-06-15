@@ -1,15 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://groupendoyeafrica.com/</loc></url>
-  <url><loc>https://groupendoyeafrica.com/services</loc></url>
-  <url><loc>https://groupendoyeafrica.com/projets</loc></url>
-  <url><loc>https://groupendoyeafrica.com/engagements</loc></url>
-  <url><loc>https://groupendoyeafrica.com/partenaires</loc></url>
-  <url><loc>https://groupendoyeafrica.com/entreprises</loc></url>
-  <url><loc>https://groupendoyeafrica.com/investisseurs</loc></url>
-  <url><loc>https://groupendoyeafrica.com/collaboration</loc></url>
-  <url><loc>https://groupendoyeafrica.com/a-propos</loc></url>
-  <url><loc>https://groupendoyeafrica.com/contact</loc></url>
-  <url><loc>https://groupendoyeafrica.com/galerie</loc></url>
-  <url><loc>https://groupendoyeafrica.com/videos</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://groupendoyeafrica.com/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://groupendoyeafrica.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://groupendoyeafrica.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://groupendoyeafrica.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://groupendoyeafrica.com/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://groupendoyeafrica.com/"/>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/projets</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/services</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/partenaires</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/entreprises</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/investisseurs</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/engagements</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/collaboration</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/a-propos</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/contact</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/galerie</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://groupendoyeafrica.com/videos</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>
