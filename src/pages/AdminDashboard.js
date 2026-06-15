@@ -398,7 +398,7 @@ export default function AdminDashboard() {
               <div style={sectionTitle}>Gestion des Villas</div>
               <div style={{overflowX:'auto'}}>
                 <table style={{width:'100%',borderCollapse:'collapse',minWidth:480}}>
-                  <thead><tr>{['Type','Nom','Terrain','Bâti','Standing','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.1)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.56rem',letterSpacing:'.12em',padding:'10px 12px',textAlign:'left',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead>
+                  <thead><tr>{['Type','Nom','Terrain','Bâti','Standing','Actions'].map((h,i)=><th key={i} style={{background:'rgba(201,168,76,.1)',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.56rem',letterSpacing:'.12em',padding:'10px 12px',textAlign:'left',textTransform:'uppercase',whiteSpace:'nowrap'}}>{h}</th>)}</table></thead>
                   <tbody>
                     {VILLA_TYPES.map(v=>(
                       <tr key={v.id}>
@@ -453,7 +453,7 @@ export default function AdminDashboard() {
             </>
           )}
 
-          {/* SETTINGS */
+          {/* SETTINGS */}
           {tab==='settings'&&(
             <>
               <div style={sectionTitle}>Paramètres du Site</div>
