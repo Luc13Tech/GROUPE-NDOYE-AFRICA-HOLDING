@@ -15,21 +15,14 @@ const WAIcon = () => (
   </svg>
 );
 
-// LogoMark — shows PNG or golden fallback
+// LogoMark — shows PNG or golden fallback (empty square only)
 function LogoMark({ size = 46 }) {
   const [failed, setFailed] = useState(false);
   if (failed) {
     return (
       <div style={{ width: size, height: size, background: 'linear-gradient(145deg,#0d1427,#050810)', border: '1.5px solid rgba(201,168,76,.55)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 40% 30%, rgba(201,168,76,.1), transparent 70%)' }}/>
-        <svg width={size*0.72} height={size*0.72} viewBox="0 0 48 48" fill="none" style={{ position: 'relative', zIndex: 1 }}>
-          <polygon points="24,4 6,16 6,44 42,44 42,16" fill="none" stroke="#c9a84c" strokeWidth="2.2" strokeLinejoin="round"/>
-          <rect x="17" y="26" width="7" height="18" fill="rgba(201,168,76,.8)"/>
-          <rect x="24" y="26" width="7" height="18" fill="rgba(201,168,76,.8)"/>
-          <rect x="10" y="20" width="5" height="5" fill="rgba(201,168,76,.45)"/>
-          <rect x="33" y="20" width="5" height="5" fill="rgba(201,168,76,.45)"/>
-          <circle cx="24" cy="11" r="2.5" fill="#e8c96a" opacity=".9"/>
-        </svg>
+        {/* Empty square - no building icon */}
       </div>
     );
   }
@@ -185,4 +178,4 @@ export default function Navbar() {
       </nav>
     </>
   );
-}
+  }
