@@ -65,12 +65,12 @@ export default function Services() {
 
   const submit = () => {
     if(!form.nom||!form.service){return;}
-    const msg = `${tl('Bonjour','Hello','Hola','Hallo')}, ${form.nom}${form.entreprise?` (${form.entreprise})`:''}.
-${tl('Service','Service','Servicio','Dienst')}: ${form.service}.
-${tl('Budget','Budget','Presupuesto','Budget')}: ${form.budget||'N/A'}.
-${tl('Téléphone','Phone','Teléfono','Telefon')}: ${form.tel}.
+    const msg = `${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${form.nom}${form.entreprise?` (${form.entreprise})`:''}.
+${tl('Service', 'Service', 'Servicio', 'Dienst','服务')}: ${form.service}.
+${tl('Budget', 'Budget', 'Presupuesto', 'Budget','预算')}: ${form.budget||'N/A'}.
+${tl('Téléphone', 'Phone', 'Teléfono', 'Telefon','电话')}: ${form.tel}.
 Email: ${form.email}.
-${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
+${tl('Description', 'Description', 'Descripción', 'Beschreibung','描述')}: ${form.desc}`;
     window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
     setSent(true); setTimeout(()=>setSent(false),4000);
   };
@@ -81,10 +81,10 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
     <main className="page-white">
       <PageHero
         bgImg="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=85"
-        label={tl('Notre expertise','Our expertise','Nuestra experiencia','Unsere Expertise')}
-        title={tl('Nos Services','Our Services','Nuestros Servicios','Unsere Leistungen')}
-        sub={tl('Solutions complètes pour vos projets en Afrique','Complete solutions for your projects in Africa','Soluciones completas para sus proyectos en África','Vollständige Lösungen für Ihre Projekte in Afrika')}
-        breadcrumbs={[{ label: tl('Services','Services','Servicios','Leistungen') }]}
+        label={tl('Notre expertise', 'Our expertise', 'Nuestra experiencia', 'Unsere Expertise','我们的专业知识')}
+        title={tl('Nos Services', 'Our Services', 'Nuestros Servicios', 'Unsere Leistungen','我们的服务')}
+        sub={tl('Solutions complètes pour vos projets en Afrique', 'Complete solutions for your projects in Africa', 'Soluciones completas para sus proyectos en África', 'Vollständige Lösungen für Ihre Projekte in Afrika','为您在非洲的项目提供全方位解决方案')}
+        breadcrumbs={[{ label: tl('Services', 'Services', 'Servicios', 'Leistungen','服务') }]}
       />
 
       {/* SERVICES GRID */}
@@ -100,12 +100,12 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
                 <h3 style={{fontFamily:'var(--f-display)',fontSize:'.9rem',color:'var(--text-dark)',letterSpacing:'.06em',marginBottom:12}}>{svc(s).title}</h3>
                 <p style={{fontSize:'.84rem',color:'var(--text-mid)',lineHeight:1.85,marginBottom:20,flex:1}}>{svc(s).desc}</p>
                 <button
-                  onClick={()=>window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`${tl('Bonjour','Hello','Hola','Hallo')}, ${tl('je suis intéressé(e) par le service','I am interested in the service','estoy interesado/a en el servicio','ich interessiere mich für die Leistung')}: ${svc(s).title}`)}`, '_blank')}
+                  onClick={()=>window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${tl('je suis intéressé(e) par le service','I am interested in the service','estoy interesado/a en el servicio','ich interessiere mich für die Leistung','我对该服务感兴趣')}: ${svc(s).title}`)}`, '_blank')}
                   style={{display:'flex',alignItems:'center',gap:6,background:'none',border:'none',color:'var(--gold)',fontFamily:'var(--f-display)',fontSize:'.62rem',letterSpacing:'.12em',textTransform:'uppercase',cursor:'pointer',padding:0,transition:'gap .2s'}}
                   onMouseEnter={e=>e.currentTarget.style.gap='10px'}
                   onMouseLeave={e=>e.currentTarget.style.gap='6px'}
                 >
-                  {tl('En savoir plus','Learn more','Saber más','Mehr erfahren')} <ArrowR/>
+                  {tl('En savoir plus', 'Learn more', 'Saber más', 'Mehr erfahren','了解更多')} <ArrowR/>
                 </button>
               </div>
             ))}
@@ -117,8 +117,8 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
       <section className="section" style={{background:'var(--gray-50)'}} ref={procRef}>
         <div className="container">
           <div style={{textAlign:'center',marginBottom:52}}>
-            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Méthodologie','Methodology','Metodología','Methodik')}</div>
-            <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Notre Approche','Our Approach','Nuestro Enfoque','Unser Ansatz')}</h2>
+            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Méthodologie', 'Methodology', 'Metodología', 'Methodik','方法论')}</div>
+            <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Notre Approche', 'Our Approach', 'Nuestro Enfoque', 'Unser Ansatz','我们的方法')}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-4">
@@ -138,11 +138,11 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
         <div className="container">
           <div style={{display:'grid',gridTemplateColumns:'1fr 1.4fr',gap:72,alignItems:'start'}}>
             <div>
-              <div className="sec-label">{tl('Travaillons ensemble',"Let's work together",'Trabajemos juntos','Arbeiten wir zusammen')}</div>
-              <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Demande de Service','Service Request','Solicitud de Servicio','Serviceanfrage')}</h2>
+              <div className="sec-label">{tl('Travaillons ensemble', "Let's work together", 'Trabajemos juntos', 'Arbeiten wir zusammen','让我们一起合作')}</div>
+              <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Demande de Service', 'Service Request', 'Solicitud de Servicio', 'Serviceanfrage','服务申请')}</h2>
               <div className="divider-gold"/>
               <p style={{color:'var(--text-mid)',lineHeight:1.9,marginBottom:28,fontSize:'.88rem'}}>
-                {tl("Décrivez votre projet. Notre équipe vous répondra sous 24h via WhatsApp.",'Describe your project. Our team will respond within 24 hours via WhatsApp.','Describa su proyecto. Nuestro equipo le responderá en 24 horas por WhatsApp.','Beschreiben Sie Ihr Projekt. Unser Team antwortet innerhalb von 24 Stunden per WhatsApp.')}
+                {tl("Décrivez votre projet. Notre équipe vous répondra sous 24h via WhatsApp.", 'Describe your project. Our team will respond within 24 hours via WhatsApp.', 'Describa su proyecto. Nuestro equipo le responderá en 24 horas por WhatsApp.', 'Beschreiben Sie Ihr Projekt. Unser Team antwortet innerhalb von 24 Stunden per WhatsApp.','描述您的项目，我们的团队将在24小时内通过WhatsApp回复您。')}
               </p>
               {[
                 {fr:'Réponse sous 24h',en:'Response within 24h',es:'Respuesta en 24h',de:'Antwort innerhalb 24h'},
@@ -158,10 +158,10 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
             </div>
             <div style={{background:'var(--navy2)',padding:40,border:'var(--border-gold)'}}>
               <div style={{fontFamily:'var(--f-display)',fontSize:'.78rem',color:'var(--gold)',letterSpacing:'.16em',marginBottom:26,textTransform:'uppercase'}}>
-                {tl('FORMULAIRE DE DEMANDE','SERVICE REQUEST FORM','FORMULARIO DE SOLICITUD','SERVICEANFRAGE')}
+                {tl('FORMULAIRE DE DEMANDE', 'SERVICE REQUEST FORM', 'FORMULARIO DE SOLICITUD', 'SERVICEANFRAGE','申请表')}
               </div>
               {sent&&<div style={{background:'rgba(52,211,153,.08)',border:'1px solid rgba(52,211,153,.3)',color:'#34d399',padding:'10px 14px',marginBottom:16,fontSize:'.8rem',fontFamily:'var(--f-display)'}}>
-                {tl('✓ Envoyé ! Redirection WhatsApp...','✓ Sent! WhatsApp redirect...','✓ ¡Enviado! Redirigiendo a WhatsApp...','✓ Gesendet! WhatsApp-Weiterleitung...')}
+                {tl('✓ Envoyé ! Redirection WhatsApp...', '✓ Sent! WhatsApp redirect...', '✓ ¡Enviado! Redirigiendo a WhatsApp...', '✓ Gesendet! WhatsApp-Weiterleitung...','✓ 已发送！正在跳转至WhatsApp...')}
               </div>}
               <div className="form-grid" style={{gap:14}}>
                 {[
@@ -176,26 +176,26 @@ ${tl('Description','Description','Descripción','Beschreibung')}: ${form.desc}`;
                   </div>
                 ))}
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Type de Service *','Service Type *','Tipo de Servicio *','Dienstart *')}</label>
+                  <label className="form-label form-label-dark">{tl('Type de Service *', 'Service Type *', 'Tipo de Servicio *', 'Dienstart *','服务类型 *')}</label>
                   <select className="form-select form-select-dark" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))}>
-                    <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
+                    <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
                     {(rtSvc || SERVICES).map(s=><option key={s.icon} value={(s[lang]||s.fr).title}>{(s[lang]||s.fr).title}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Budget Estimé','Estimated Budget','Presupuesto Estimado','Geschätztes Budget')}</label>
+                  <label className="form-label form-label-dark">{tl('Budget Estimé', 'Estimated Budget', 'Presupuesto Estimado', 'Geschätztes Budget','预估预算')}</label>
                   <select className="form-select form-select-dark" value={form.budget} onChange={e=>setForm(p=>({...p,budget:e.target.value}))}>
-                    <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
+                    <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
                     {['< $1M','$1M — $10M','$10M — $50M','$50M — $100M','> $100M'].map(b=><option key={b}>{b}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-dark">{tl('Description du Projet *','Project Description *','Descripción del Proyecto *','Projektbeschreibung *')}</label>
-                  <textarea className="form-textarea form-textarea-dark" placeholder={tl('Décrivez votre projet...','Describe your project...','Describa su proyecto...','Beschreiben Sie Ihr Projekt...')} value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))}/>
+                  <label className="form-label form-label-dark">{tl('Description du Projet *', 'Project Description *', 'Descripción del Proyecto *', 'Projektbeschreibung *','项目描述 *')}</label>
+                  <textarea className="form-textarea form-textarea-dark" placeholder={tl('Décrivez votre projet...', 'Describe your project...', 'Describa su proyecto...', 'Beschreiben Sie Ihr Projekt...','描述您的项目...')} value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))}/>
                 </div>
               </div>
               <button onClick={submit} className="btn btn-wa" style={{marginTop:20,width:'100%',justifyContent:'center'}}>
-                <WAIcon/> {tl('Envoyer via WhatsApp','Send via WhatsApp','Enviar por WhatsApp','Per WhatsApp senden')}
+                <WAIcon/> {tl('Envoyer via WhatsApp', 'Send via WhatsApp', 'Enviar por WhatsApp', 'Per WhatsApp senden','通过WhatsApp发送')}
               </button>
             </div>
           </div>

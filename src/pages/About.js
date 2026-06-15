@@ -159,20 +159,20 @@ export default function About() {
   ];
 
   const IMPACT_BARS = [
-    { label:tl('Développement Immobilier','Real Estate Development','Desarrollo Inmobiliario','Immobilienentwicklung'), percent:92, color:'#c9a84c', delay:.1 },
-    { label:tl('Infrastructure Publique','Public Infrastructure','Infraestructura Pública','Öffentliche Infrastruktur'), percent:85, color:'#6366f1', delay:.2 },
-    { label:tl('Agriculture & Technologie','Agriculture & Technology','Agricultura y Tecnología','Landwirtschaft & Technologie'), percent:70, color:'#34d399', delay:.3 },
-    { label:tl('Énergie Renouvelable','Renewable Energy','Energía Renovable','Erneuerbare Energien'), percent:78, color:'#f472b6', delay:.4 },
+    { label:tl('Développement Immobilier', 'Real Estate Development', 'Desarrollo Inmobiliario', 'Immobilienentwicklung','房地产开发'), percent:92, color:'#c9a84c', delay:.1 },
+    { label:tl('Infrastructure Publique', 'Public Infrastructure', 'Infraestructura Pública', 'Öffentliche Infrastruktur','公共基础设施'), percent:85, color:'#6366f1', delay:.2 },
+    { label:tl('Agriculture & Technologie', 'Agriculture & Technology', 'Agricultura y Tecnología', 'Landwirtschaft & Technologie','农业与技术'), percent:70, color:'#34d399', delay:.3 },
+    { label:tl('Énergie Renouvelable', 'Renewable Energy', 'Energía Renovable', 'Erneuerbare Energien','可再生能源'), percent:78, color:'#f472b6', delay:.4 },
   ];
 
   return (
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
-        label={tl('African Society','African Society','African Society','African Society')}
-        title={tl('À Propos de GNAH','About GNAH','Acerca de GNAH','Über GNAH')}
-        sub={tl('African Development Company — depuis 2015','African Development Company — since 2015','African Development Company — desde 2015','African Development Company — seit 2015')}
-        breadcrumbs={[{ label:tl('À Propos','About','Acerca de','Über uns') }]}
+        label={tl('African Society', 'African Society', 'African Society', 'African Society','非洲社会')}
+        title={tl('À Propos de GNAH', 'About GNAH', 'Acerca de GNAH', 'Über GNAH','关于GNAH')}
+        sub={tl('African Development Company — depuis 2015', 'African Development Company — since 2015', 'African Development Company — desde 2015', 'African Development Company — seit 2015','非洲发展公司 — 自2015年')}
+        breadcrumbs={[{ label:tl('À Propos', 'About', 'Acerca de', 'Über uns','关于我们') }]}
       />
 
       {/* ── PRESENTATION ── */}
@@ -180,9 +180,9 @@ export default function About() {
         <div className="container">
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:72, alignItems:'center' }}>
             <div className={`slide-left${heroVis?' visible':''}`}>
-              <div className="sec-label">{tl('Présentation','Overview','Presentación','Überblick')}</div>
+              <div className="sec-label">{tl('Présentation', 'Overview', 'Presentación', 'Überblick','介绍')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>
-                {tl('Qui Sommes-Nous ?','Who Are We?','¿Quiénes Somos?','Wer Sind Wir?')}
+                {tl('Qui Sommes-Nous ?', 'Who Are We?', '¿Quiénes Somos?', 'Wer Sind Wir?','我们是谁？')}
               </h2>
               <div className="divider-gold"/>
               <p style={{ fontSize:'.9rem', color:'var(--text-mid)', lineHeight:1.9, marginBottom:16 }}>
@@ -192,7 +192,7 @@ export default function About() {
                 {CONSORTIUM[lang]||CONSORTIUM.fr}
               </p>
               <Link to="/contact" className="btn btn-gold" onClick={()=>window.scrollTo({top:0,behavior:'instant'})}>
-                {tl('Nous contacter','Contact us','Contáctenos','Kontaktieren Sie uns')} <ArrowR/>
+                {tl('Nous contacter', 'Contact us', 'Contáctenos', 'Kontaktieren Sie uns','联系我们')} <ArrowR/>
               </Link>
             </div>
             <div className={`slide-right${heroVis?' visible':''}`} style={{ position:'relative' }}>
@@ -203,7 +203,7 @@ export default function About() {
               <div style={{ position:'absolute', bottom:-20, right:-20, background:'var(--navy)', border:'1px solid var(--gold)', padding:'18px 22px', minWidth:150 }}>
                 <div style={{ fontFamily:'var(--f-elegant)', fontSize:'2rem', color:'var(--gold)', lineHeight:1 }}>2015</div>
                 <div style={{ fontFamily:'var(--f-display)', fontSize:'.62rem', letterSpacing:'.1em', color:'rgba(200,195,186,.5)', marginTop:4 }}>
-                  {tl("Année de fondation","Year founded","Año de fundación","Gründungsjahr")}
+                  {tl("Année de fondation", "Year founded", "Año de fundación", "Gründungsjahr",'成立年份')}
                 </div>
               </div>
             </div>
@@ -215,9 +215,9 @@ export default function About() {
       <section style={{ background:'var(--navy)', padding:'80px 0' }} ref={statsRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:52 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Chiffres clés','Key figures','Cifras clave','Kennzahlen')}</div>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Chiffres clés', 'Key figures', 'Cifras clave', 'Kennzahlen','关键数据')}</div>
             <h2 className="sec-title-dark" style={{ marginTop:6 }}>
-              {tl('GNAH en Chiffres','GNAH by the Numbers','GNAH en Cifras','GNAH in Zahlen')}
+              {tl('GNAH en Chiffres', 'GNAH by the Numbers', 'GNAH en Cifras', 'GNAH in Zahlen','GNAH数字概览')}
             </h2>
             <div className="divider-gold-c"/>
           </div>
@@ -247,10 +247,10 @@ export default function About() {
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:52 }}>
             <div className="sec-label" style={{ display:'inline-flex', color:'var(--gold)' }}>
-              {tl('Performance','Performance','Rendimiento','Leistung')}
+              {tl('Performance', 'Performance', 'Rendimiento', 'Leistung','绩效')}
             </div>
             <h2 style={{ fontFamily:'var(--f-elegant)', fontSize:'clamp(1.6rem,3vw,2.6rem)', color:'var(--cream)', marginTop:6 }}>
-              {tl('Performance & Échelle GNAH','GNAH Performance & Scale','Rendimiento y Escala GNAH','GNAH-Leistung & Skala')}
+              {tl('Performance & Échelle GNAH', 'GNAH Performance & Scale', 'Rendimiento y Escala GNAH', 'GNAH-Leistung & Skala','GNAH绩效与规模')}
             </h2>
             <div className="divider-gold-c"/>
           </div>
@@ -259,18 +259,18 @@ export default function About() {
             {/* Circular gauges */}
             <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(201,168,76,.15)', padding:'36px 32px', backdropFilter:'blur(8px)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.7rem', color:'rgba(201,168,76,.6)', letterSpacing:'.2em', textTransform:'uppercase', marginBottom:28, textAlign:'center' }}>
-                {tl('Indicateurs de Progression','Progress Indicators','Indicadores de Progresión','Fortschrittsindikatoren')}
+                {tl('Indicateurs de Progression', 'Progress Indicators', 'Indicadores de Progresión', 'Fortschrittsindikatoren','进展指标')}
               </div>
               <div style={{ display:'flex', justifyContent:'space-around', flexWrap:'wrap', gap:24 }}>
-                <CircleProgress percent={83} size={130} stroke={10} color="#c9a84c" label={tl("Ans d'impact","Years impact","Años impacto","Jahre Impact")} value="10+" visible={perfVis}/>
-                <CircleProgress percent={95} size={130} stroke={10} color="#6366f1" label={tl("Engagement","Commitment","Compromiso","Engagement")} value="98%" visible={perfVis}/>
-                <CircleProgress percent={72} size={130} stroke={10} color="#34d399" label={tl("Couverture Afrique","Africa Coverage","Cobertura África","Afrika-Abdeckung")} value="11/54" visible={perfVis}/>
+                <CircleProgress percent={83} size={130} stroke={10} color="#c9a84c" label={tl("Ans d'impact", "Years impact", "Años impacto", "Jahre Impact","影响年限")} value="10+" visible={perfVis}/>
+                <CircleProgress percent={95} size={130} stroke={10} color="#6366f1" label={tl("Engagement", "Commitment", "Compromiso", "Engagement",'承诺')} value="98%" visible={perfVis}/>
+                <CircleProgress percent={72} size={130} stroke={10} color="#34d399" label={tl("Couverture Afrique", "Africa Coverage", "Cobertura África", "Afrika-Abdeckung",'非洲覆盖范围')} value="11/54" visible={perfVis}/>
               </div>
 
               {/* Impact bars */}
               <div style={{ marginTop:36 }}>
                 <div style={{ fontFamily:'var(--f-display)', fontSize:'.65rem', color:'rgba(200,195,186,.45)', letterSpacing:'.16em', textTransform:'uppercase', marginBottom:16 }}>
-                  {tl('Répartition par secteur','Sector breakdown','Distribución por sector','Verteilung nach Sektor')}
+                  {tl('Répartition par secteur', 'Sector breakdown', 'Distribución por sector', 'Verteilung nach Sektor','按行业分布')}
                 </div>
                 {IMPACT_BARS.map((b,i)=>(
                   <HBar key={i} label={b.label} percent={b.percent} color={b.color} visible={perfVis} delay={b.delay}/>
@@ -281,10 +281,10 @@ export default function About() {
             {/* Bar chart partners */}
             <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(201,168,76,.15)', padding:'36px 32px', backdropFilter:'blur(8px)' }} ref={barRef}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.7rem', color:'rgba(201,168,76,.6)', letterSpacing:'.2em', textTransform:'uppercase', marginBottom:8 }}>
-                {tl('Progression Annuelle des Partenaires Commerciaux','Annual Commercial Partners Growth','Crecimiento Anual de Socios Comerciales','Jährliches Wachstum der Handelspartner')}
+                {tl('Progression Annuelle des Partenaires Commerciaux', 'Annual Commercial Partners Growth', 'Crecimiento Anual de Socios Comerciales', 'Jährliches Wachstum der Handelspartner','商业合作伙伴年度增长')}
               </div>
               <div style={{ fontFamily:'var(--f-serif)', fontStyle:'italic', fontSize:'.8rem', color:'rgba(200,195,186,.35)', marginBottom:28 }}>
-                {tl('Nombre de partenaires actifs par année','Number of active partners per year','Número de socios activos por año','Anzahl aktiver Partner pro Jahr')}
+                {tl('Nombre de partenaires actifs par année', 'Number of active partners per year', 'Número de socios activos por año', 'Anzahl aktiver Partner pro Jahr','每年活跃合作伙伴数量')}
               </div>
 
               <BarChart data={PERF_DATA} visible={barVis||perfVis}/>
@@ -293,18 +293,18 @@ export default function About() {
               <div style={{ display:'flex', gap:16, justifyContent:'center', marginTop:16, flexWrap:'wrap' }}>
                 <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:'.68rem', color:'rgba(200,195,186,.5)', fontFamily:'Raleway,sans-serif' }}>
                   <div style={{ width:10, height:10, borderRadius:2, background:'#8b5cf6' }}/>
-                  {tl('Partenaires actifs','Active partners','Socios activos','Aktive Partner')}
+                  {tl('Partenaires actifs', 'Active partners', 'Socios activos', 'Aktive Partner','活跃合作伙伴')}
                 </div>
                 <div style={{ display:'flex', alignItems:'center', gap:6, fontSize:'.68rem', color:'rgba(200,195,186,.5)', fontFamily:'Raleway,sans-serif' }}>
                   <div style={{ width:10, height:10, borderRadius:2, background:'var(--gold)' }}/>
-                  2026 {tl('(En cours)','(Ongoing)','(En curso)','(Laufend)')}
+                  2026 {tl('(En cours)','(Ongoing)','(En curso)','(Laufend)','（进行中）')}
                 </div>
               </div>
 
               {/* Key ops */}
               <div style={{ marginTop:28, borderTop:'1px solid rgba(201,168,76,.1)', paddingTop:20 }}>
                 <div style={{ fontFamily:'var(--f-display)', fontSize:'.65rem', color:'rgba(201,168,76,.5)', letterSpacing:'.14em', textTransform:'uppercase', marginBottom:12 }}>
-                  {tl('Opérations majeures','Major operations','Operaciones mayores','Wichtige Operationen')}
+                  {tl('Opérations majeures', 'Major operations', 'Operaciones mayores', 'Wichtige Operationen','主要运营')}
                 </div>
                 {OPERATIONS.slice(0,3).map((op,i)=>(
                   <div key={i} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'7px 0', borderBottom:'1px solid rgba(255,255,255,.05)', fontSize:'.78rem' }}>
@@ -326,9 +326,9 @@ export default function About() {
         <div className="container">
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:64 }}>
             <div>
-              <div className="sec-label">{tl('Méthodologie','Methodology','Metodología','Methodik')}</div>
+              <div className="sec-label">{tl('Méthodologie', 'Methodology', 'Metodología', 'Methodik','方法论')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>
-                {tl('Stratégies & Plans de Développement','Strategies & Development Plans','Estrategias y Planes de Desarrollo','Strategien & Entwicklungspläne')}
+                {tl('Stratégies & Plans de Développement', 'Strategies & Development Plans', 'Estrategias y Planes de Desarrollo', 'Strategien & Entwicklungspläne','战略与发展计划')}
               </h2>
               <div className="divider-gold"/>
               <p style={{ fontSize:'.9rem', color:'var(--text-mid)', lineHeight:1.9, marginBottom:24 }}>
@@ -347,18 +347,15 @@ export default function About() {
               ))}
             </div>
             <div>
-              <div className="sec-label">{tl('Business Model','Business Model','Modelo de Negocio','Geschäftsmodell')}</div>
-              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Nos Solutions','Our Solutions','Nuestras Soluciones','Unsere Lösungen')}</h2>
+              <div className="sec-label">{tl('Business Model', 'Business Model', 'Modelo de Negocio', 'Geschäftsmodell','商业模式')}</div>
+              <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Nos Solutions', 'Our Solutions', 'Nuestras Soluciones', 'Unsere Lösungen','我们的解决方案')}</h2>
               <div className="divider-gold"/>
               <div style={{ padding:'24px', background:'var(--gray-50)', border:'1px solid var(--gray-200)', borderLeft:'3px solid var(--gold)', marginBottom:16 }}>
                 <div style={{ fontFamily:'var(--f-elegant)', fontSize:'1.2rem', color:'var(--gold)', marginBottom:4 }}>Mastering</div>
                 <div style={{ fontFamily:'var(--f-display)', fontSize:'.82rem', color:'var(--text-dark)', letterSpacing:'.08em' }}>THE Challenges</div>
               </div>
               <p style={{ fontSize:'.88rem', color:'var(--text-mid)', lineHeight:1.9 }}>
-                {tl("Si le propriétaire du projet ne dispose pas d'un modèle économique complet, nous faisons appel à des cabinets d'études experts pour mettre en place le programme. Qu'il s'agisse d'un projet privé ou d'État, nous trouvons toujours un partenaire fiable.",
-                    "If the project owner does not have a complete business model, we call on expert study firms to set up the programme. Whether private or state project, we always find a reliable partner.",
-                    "Si el propietario del proyecto no dispone de un modelo económico completo, recurrimos a firmas de estudio expertas. Sea privado o estatal, siempre encontramos un socio fiable.",
-                    "Falls der Projektinhaber kein vollständiges Geschäftsmodell hat, beauftragen wir Expertenfirmen. Ob privates oder staatliches Projekt, wir finden immer einen zuverlässigen Partner.")}
+                {tl("Si le propriétaire du projet ne dispose pas d'un modèle économique complet, nous faisons appel à des cabinets d'études experts pour mettre en place le programme. Qu'il s'agisse d'un projet privé ou d'État, nous trouvons toujours un partenaire fiable.", "If the project owner does not have a complete business model, we call on expert study firms to set up the programme. Whether private or state project, we always find a reliable partner.", "Si el propietario del proyecto no dispone de un modelo económico completo, recurrimos a firmas de estudio expertas. Sea privado o estatal, siempre encontramos un socio fiable.", "Falls der Projektinhaber kein vollständiges Geschäftsmodell hat, beauftragen wir Expertenfirmen. Ob privates oder staatliches Projekt, wir finden immer einen zuverlässigen Partner.",'如果项目所有者没有完整的商业模式，我们将调动专家网络与其共同构建。')}
               </p>
             </div>
           </div>
@@ -369,13 +366,13 @@ export default function About() {
       <section style={{ background:'var(--gray-50)', padding:'80px 0' }} ref={objRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:52 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Vision','Vision','Visión','Vision')}</div>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Vision', 'Vision', 'Visión', 'Vision','愿景')}</div>
             <h2 className="sec-title-light" style={{ marginTop:6 }}>
-              {tl("Objectifs pour l'Afrique","Objectives for Africa","Objetivos para África","Ziele für Afrika")}
+              {tl("Objectifs pour l'Afrique", "Objectives for Africa", "Objetivos para África", "Ziele für Afrika",'非洲目标')}
             </h2>
             <div className="divider-gold-c"/>
             <p style={{ fontFamily:'var(--f-serif)', fontStyle:'italic', fontSize:'1.05rem', color:'var(--gold)' }}>
-              {tl('Un défi à relever !','A challenge to take up!','¡Un desafío a afrontar!','Eine Herausforderung!')}
+              {tl('Un défi à relever !', 'A challenge to take up!', '¡Un desafío a afrontar!', 'Eine Herausforderung!','一个值得挑战的目标！')}
             </p>
           </div>
           <div className="grid-3">
@@ -412,21 +409,16 @@ export default function About() {
 
             {/* Left — Text */}
             <div>
-              <div className="sec-label">{tl('Plateforme digitale','Digital Platform','Plataforma digital','Digitale Plattform')}</div>
+              <div className="sec-label">{tl('Plateforme digitale', 'Digital Platform', 'Plataforma digital', 'Digitale Plattform','数字平台')}</div>
               <h2 style={{ fontFamily:'var(--f-elegant)', fontSize:'clamp(1.4rem,3vw,2.2rem)', color:'var(--cream)', marginTop:8, marginBottom:12, lineHeight:1.2 }}>
-                {tl('Scannez & Visitez Notre Site','Scan & Visit Our Website','Escanee y Visite Nuestro Sitio','Scannen & Besuchen Sie Unsere Website')}
+                {tl('Scannez & Visitez Notre Site', 'Scan & Visit Our Website', 'Escanee y Visite Nuestro Sitio', 'Scannen & Besuchen Sie Unsere Website','扫描并访问我们的网站')}
               </h2>
               <div style={{ width:48, height:2, background:'linear-gradient(90deg,var(--gold),var(--gold-d))', marginBottom:18 }}/>
               <p style={{ fontFamily:'var(--f-serif)', fontStyle:'italic', fontSize:'1rem', color:'rgba(201,168,76,.7)', marginBottom:12 }}>
-                {tl("Accédez directement à notre plateforme","Access our platform directly","Acceda directamente a nuestra plataforma","Greifen Sie direkt auf unsere Plattform zu")}
+                {tl("Accédez directement à notre plateforme", "Access our platform directly", "Acceda directamente a nuestra plataforma", "Greifen Sie direkt auf unsere Plattform zu",'直接访问我们的平台')}
               </p>
               <p style={{ fontSize:'.88rem', color:'rgba(200,195,186,.55)', lineHeight:1.8, marginBottom:24 }}>
-                {tl(
-                  "Scannez le code QR avec votre appareil photo ou partagez-le avec vos contacts pour les rediriger directement vers notre plateforme officielle.",
-                  "Scan the QR code with your camera or share it with your contacts to redirect them directly to our official platform.",
-                  "Escanee el código QR con su cámara o compártalo con sus contactos para redirigirlos directamente a nuestra plataforma oficial.",
-                  "Scannen Sie den QR-Code mit Ihrer Kamera oder teilen Sie ihn mit Ihren Kontakten, um sie direkt zu unserer offiziellen Plattform weiterzuleiten."
-                )}
+                {tl("Scannez le code QR avec votre appareil photo ou partagez-le avec vos contacts pour les rediriger directement vers notre plateforme officielle.", "Scan the QR code with your camera or share it with your contacts to redirect them directly to our official platform.", "Escanee el código QR con su cámara o compártalo con sus contactos para redirigirlos directamente a nuestra plataforma oficial.", "Scannen Sie den QR-Code mit Ihrer Kamera oder teilen Sie ihn mit Ihren Kontakten, um sie direkt zu unserer offiziellen Plattform weiterzuleiten.",'用相机扫描二维码，或与联系人分享，直接将他们引导至我们的官方平台。')}
               </p>
 
               {/* URL badge */}
@@ -452,14 +444,14 @@ export default function About() {
                   onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.boxShadow='none';}}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                  {tl('Partager','Share','Compartir','Teilen')}
+                  {tl('Partager', 'Share', 'Compartir', 'Teilen','分享')}
                 </button>
                 <button
                   id="copy-qr-btn"
                   onClick={()=>{
                     navigator.clipboard.writeText('https://groupendoyeafrica.com').then(()=>{
                       const btn = document.getElementById('copy-qr-btn');
-                      if(btn){ btn.textContent = tl('✓ Lien copié !','✓ Link copied!','✓ ¡Enlace copiado!','✓ Link kopiert!'); setTimeout(()=>{ if(btn) btn.textContent = tl('Copier le lien','Copy link','Copiar enlace','Link kopieren'); }, 2500); }
+                      if(btn){ btn.textContent = tl('✓ Lien copié !', '✓ Link copied!', '✓ ¡Enlace copiado!', '✓ Link kopiert!','✓ 链接已复制！'); setTimeout(()=>{ if(btn) btn.textContent = tl('Copier le lien', 'Copy link', 'Copiar enlace', 'Link kopieren','复制链接'); }, 2500); }
                     }).catch(()=>{});
                   }}
                   style={{ display:'flex', alignItems:'center', gap:8, padding:'11px 22px', background:'transparent', color:'var(--gold)', fontFamily:'var(--f-display)', fontSize:'.68rem', letterSpacing:'.14em', textTransform:'uppercase', border:'1px solid rgba(201,168,76,.4)', cursor:'pointer', transition:'all .3s' }}
@@ -467,7 +459,7 @@ export default function About() {
                   onMouseLeave={e=>{e.currentTarget.style.background='transparent';}}
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                  {tl('Copier le lien','Copy link','Copiar enlace','Link kopieren')}
+                  {tl('Copier le lien', 'Copy link', 'Copiar enlace', 'Link kopieren','复制链接')}
                 </button>
               </div>
             </div>
@@ -491,7 +483,7 @@ export default function About() {
                 </div>
               </div>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.6rem', color:'rgba(201,168,76,.5)', letterSpacing:'.16em', textTransform:'uppercase', textAlign:'center' }}>
-                {tl('Scanner avec votre appareil photo','Scan with your camera','Escanear con su cámara','Mit Kamera scannen')}
+                {tl('Scanner avec votre appareil photo', 'Scan with your camera', 'Escanear con su cámara', 'Mit Kamera scannen','用相机扫描')}
               </div>
             </div>
           </div>
@@ -513,13 +505,13 @@ export default function About() {
             For. Africa Continent
           </p>
           <h2 style={{ fontFamily:'var(--f-elegant)', fontSize:'clamp(1.6rem,3vw,2.4rem)', color:'var(--cream)', marginBottom:16 }}>
-            {tl("Investissons Ensemble dans l'Avenir","Let's Invest Together in the Future","Invirtamos Juntos en el Futuro","Investieren wir gemeinsam in die Zukunft")}
+            {tl("Investissons Ensemble dans l'Avenir", "Let's Invest Together in the Future", "Invirtamos Juntos en el Futuro", "Investieren wir gemeinsam in die Zukunft",'共同投资未来')}
           </h2>
           <div style={{ width:60, height:2, background:'var(--gold)', margin:'0 auto 28px' }}/>
           <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(typeof SITE.waMsg==='object'?(SITE.waMsg[lang]||SITE.waMsg.fr):SITE.waMsg)}`}
             target="_blank" rel="noopener noreferrer" className="btn btn-wa">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            {tl('Contactez-nous sur WhatsApp','Contact us on WhatsApp','Contáctenos en WhatsApp','Kontaktieren Sie uns per WhatsApp')}
+            {tl('Contactez-nous sur WhatsApp', 'Contact us on WhatsApp', 'Contáctenos en WhatsApp', 'Kontaktieren Sie uns per WhatsApp','通过WhatsApp联系我们')}
           </a>
         </div>
       </section>

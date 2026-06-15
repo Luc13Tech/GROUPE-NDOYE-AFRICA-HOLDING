@@ -29,18 +29,18 @@ export default function Commitments() {
     <main className="page-white">
       <PageHero
         bgImg="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=85"
-        label={tl('Nos valeurs','Our values','Nuestros valores','Unsere Werte')}
-        title={tl('Nos Engagements','Our Commitments','Nuestros Compromisos','Unsere Verpflichtungen')}
-        sub={tl('Ce en quoi nous croyons et ce que nous défendons','What we believe in and what we stand for','En lo que creemos y lo que defendemos','Was wir glauben und wofür wir stehen')}
-        breadcrumbs={[{ label: tl('Engagements','Commitments','Compromisos','Verpflichtungen') }]}
+        label={tl('Nos valeurs', 'Our values', 'Nuestros valores', 'Unsere Werte','我们的价值观')}
+        title={tl('Nos Engagements', 'Our Commitments', 'Nuestros Compromisos', 'Unsere Verpflichtungen','我们的承诺')}
+        sub={tl('Ce en quoi nous croyons et ce que nous défendons', 'What we believe in and what we stand for', 'En lo que creemos y lo que defendemos', 'Was wir glauben und wofür wir stehen','我们所信仰和坚持的理念')}
+        breadcrumbs={[{ label: tl('Engagements', 'Commitments', 'Compromisos', 'Verpflichtungen','承诺') }]}
       />
 
       {/* COMMITMENTS GRID */}
       <section className="section" ref={cardsRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:52 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Valeurs fondamentales','Core values','Valores fundamentales','Grundwerte')}</div>
-            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Ce Qui Nous Guide','What Guides Us','Lo Que Nos Guía','Was Uns Leitet')}</h2>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Valeurs fondamentales', 'Core values', 'Valores fundamentales', 'Grundwerte','核心价值观')}</div>
+            <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Ce Qui Nous Guide', 'What Guides Us', 'Lo Que Nos Guía', 'Was Uns Leitet','指引我们的理念')}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-2" style={{ gap:24 }}>
@@ -67,8 +67,8 @@ export default function Commitments() {
       <section style={{ background:'var(--navy)', padding:'80px 0' }} ref={statsRef}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:52 }}>
-            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Le continent africain','The African continent','El continente africano','Der afrikanische Kontinent')}</div>
-            <h2 className="sec-title-dark" style={{ marginTop:6 }}>{tl("L'Afrique en Chiffres","Africa by the Numbers","África en Cifras","Afrika in Zahlen")}</h2>
+            <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Le continent africain', 'The African continent', 'El continente africano', 'Der afrikanische Kontinent','非洲大陆')}</div>
+            <h2 className="sec-title-dark" style={{ marginTop:6 }}>{tl("L'Afrique en Chiffres", "Africa by the Numbers", "África en Cifras", "Afrika in Zahlen","数字看非洲")}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-4">

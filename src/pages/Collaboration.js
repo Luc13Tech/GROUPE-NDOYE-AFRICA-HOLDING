@@ -70,10 +70,10 @@ export default function Collaboration() {
   const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
 
   const submit = () => {
-    const msg = `${tl('Bonjour','Hello','Hola','Hallo')}, ${tl('je m\'appelle','my name is','me llamo','ich heiße')} ${form.nom}${form.org?` (${form.org})`:''}, ${form.pays}.
-${tl('Type de collaboration','Collaboration type','Tipo de colaboración','Kooperationsart')}: ${form.type}.
-${tl('Expertise','Expertise','Expertise','Expertise')}: ${form.expertise}.
-${tl('Téléphone','Phone','Teléfono','Telefon')}: ${form.tel}.
+    const msg = `${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${tl('je m\'appelle', 'my name is', 'me llamo', 'ich heiße','我的名字是')} ${form.nom}${form.org?` (${form.org})`:''}, ${form.pays}.
+${tl('Type de collaboration', 'Collaboration type', 'Tipo de colaboración', 'Kooperationsart','合作类型')}: ${form.type}.
+${tl('Expertise', 'Expertise', 'Expertise', 'Expertise','专业知识')}: ${form.expertise}.
+${tl('Téléphone', 'Phone', 'Teléfono', 'Telefon','电话')}: ${form.tel}.
 Email: ${form.email}.
 ${form.desc}`;
     window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
@@ -84,9 +84,9 @@ ${form.desc}`;
     <main className="page-white">
       <PageHero
         bgImg="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=85"
-        label={tl('Travaillons ensemble',"Let's work together",'Trabajemos juntos','Arbeiten wir zusammen')}
+        label={tl('Travaillons ensemble', "Let's work together", 'Trabajemos juntos', 'Arbeiten wir zusammen','让我们一起合作')}
         title="Collaboration"
-        sub={tl("Construisons ensemble l'Afrique de demain","Let's build tomorrow's Africa together","Construyamos juntos el África del mañana","Lassen Sie uns gemeinsam das Afrika von morgen aufbauen")}
+        sub={tl("Construisons ensemble l'Afrique de demain", "Let's build tomorrow's Africa together", "Construyamos juntos el África del mañana", "Lassen Sie uns gemeinsam das Afrika von morgen aufbauen",'让我们共同建设明日非洲。')}
         breadcrumbs={[{ label:'Collaboration' }]}
       />
 
@@ -94,8 +94,8 @@ ${form.desc}`;
       <section className="section" ref={benRef}>
         <div className="container">
           <div style={{textAlign:'center',marginBottom:52}}>
-            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Pourquoi collaborer','Why collaborate','Por qué colaborar','Warum zusammenarbeiten')}</div>
-            <h2 className="sec-title-light" style={{marginTop:6}}>{tl("Rejoignez l'Écosystème GNAH","Join the GNAH Ecosystem","Únase al Ecosistema GNAH","Treten Sie dem GNAH-Ökosystem bei")}</h2>
+            <div className="sec-label" style={{display:'inline-flex'}}>{tl('Pourquoi collaborer', 'Why collaborate', 'Por qué colaborar', 'Warum zusammenarbeiten','为什么合作')}</div>
+            <h2 className="sec-title-light" style={{marginTop:6}}>{tl("Rejoignez l'Écosystème GNAH", "Join the GNAH Ecosystem", "Únase al Ecosistema GNAH", "Treten Sie dem GNAH-Ökosystem bei",'加入GNAH生态系统')}</h2>
             <div className="divider-gold-c"/>
           </div>
           <div className="grid-3">
@@ -115,18 +115,15 @@ ${form.desc}`;
         <div className="container">
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'start'}}>
             <div>
-              <div className="sec-label">{tl('Proposez','Propose','Proponga','Vorschlagen')}</div>
-              <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Entrons en Contact',"Let's Connect",'Entremos en Contacto','Lassen Sie uns in Kontakt treten')}</h2>
+              <div className="sec-label">{tl('Proposez', 'Propose', 'Proponga', 'Vorschlagen','提交建议')}</div>
+              <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Entrons en Contact', "Let's Connect", 'Entremos en Contacto', 'Lassen Sie uns in Kontakt treten','让我们取得联系')}</h2>
               <div className="divider-gold"/>
               <p style={{color:'var(--text-mid)',lineHeight:1.9,marginBottom:28,fontSize:'.88rem'}}>
-                {tl("Vous avez une expertise complémentaire ? Soumettez votre proposition et notre équipe vous recontactera sous 48h.",
-                   "You have complementary expertise? Submit your proposal and our team will get back to you within 48 hours.",
-                   "¿Tiene una expertise complementaria? Envíe su propuesta y nuestro equipo le contactará en 48 horas.",
-                   "Sie haben komplementäre Expertise? Senden Sie Ihren Vorschlag und unser Team meldet sich innerhalb von 48 Stunden.")}
+                {tl("Vous avez une expertise complémentaire ? Soumettez votre proposition et notre équipe vous recontactera sous 48h.", "You have complementary expertise? Submit your proposal and our team will get back to you within 48 hours.", "¿Tiene una expertise complementaria? Envíe su propuesta y nuestro equipo le contactará en 48 horas.", "Sie haben komplementäre Expertise? Senden Sie Ihren Vorschlag und unser Team meldet sich innerhalb von 48 Stunden.",'您有互补的专业知识吗？提交您的建议，我们的团队将与您联系。')}
               </p>
               <div style={{background:'var(--white)',border:'1px solid var(--gray-200)',borderLeft:'3px solid var(--gold)',padding:'20px 22px',marginBottom:20}}>
                 <div style={{fontFamily:'var(--f-display)',fontSize:'.68rem',color:'var(--gold)',letterSpacing:'.12em',textTransform:'uppercase',marginBottom:12}}>
-                  {tl('Types de Collaboration','Collaboration Types','Tipos de Colaboración','Kooperationsarten')}
+                  {tl('Types de Collaboration', 'Collaboration Types', 'Tipos de Colaboración', 'Kooperationsarten','合作类型')}
                 </div>
                 {(COLLAB_TYPES[lang]||COLLAB_TYPES.fr).map((t,i)=>(
                   <div key={i} style={{display:'flex',gap:8,fontSize:'.8rem',color:'var(--text-mid)',padding:'5px 0',borderBottom:'1px solid var(--gray-200)'}}>
@@ -138,10 +135,10 @@ ${form.desc}`;
 
             <div style={{background:'var(--white)',padding:40,border:'1px solid var(--gray-200)',boxShadow:'var(--shadow-md)'}}>
               <div style={{fontFamily:'var(--f-display)',fontSize:'.78rem',color:'var(--gold)',letterSpacing:'.16em',marginBottom:26,textTransform:'uppercase'}}>
-                {tl('FORMULAIRE DE COLLABORATION','COLLABORATION FORM','FORMULARIO DE COLABORACIÓN','KOOPERATIONSFORMULAR')}
+                {tl('FORMULAIRE DE COLLABORATION', 'COLLABORATION FORM', 'FORMULARIO DE COLABORACIÓN', 'KOOPERATIONSFORMULAR','合作申请表')}
               </div>
               {sent&&<div style={{background:'rgba(52,211,153,.08)',border:'1px solid rgba(52,211,153,.3)',color:'#34d399',padding:'10px 14px',marginBottom:16,fontSize:'.8rem',fontFamily:'var(--f-display)'}}>
-                {tl('✓ Envoyé ! Redirection WhatsApp...','✓ Sent! WhatsApp redirect...','✓ ¡Enviado!','✓ Gesendet!')}
+                {tl('✓ Envoyé ! Redirection WhatsApp...', '✓ Sent! WhatsApp redirect...', '✓ ¡Enviado!', '✓ Gesendet!','✓ 已发送！正在跳转至WhatsApp...')}
               </div>}
               <div className="form-grid" style={{gap:14}}>
                 {[
@@ -157,26 +154,26 @@ ${form.desc}`;
                   </div>
                 ))}
                 <div className="form-group form-full">
-                  <label className="form-label form-label-light">{tl('Type de Collaboration *','Collaboration Type *','Tipo de Colaboración *','Kooperationsart *')}</label>
+                  <label className="form-label form-label-light">{tl('Type de Collaboration *', 'Collaboration Type *', 'Tipo de Colaboración *', 'Kooperationsart *','合作类型 *')}</label>
                   <select className="form-select form-select-light" value={form.type} onChange={e=>setForm(p=>({...p,type:e.target.value}))}>
-                    <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
+                    <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
                     {(COLLAB_TYPES[lang]||COLLAB_TYPES.fr).map(t=><option key={t}>{t}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-light">{tl("Domaine d'Expertise *",'Area of Expertise *','Área de Expertise *','Fachgebiet *')}</label>
+                  <label className="form-label form-label-light">{tl("Domaine d'Expertise *", 'Area of Expertise *', 'Área de Expertise *', 'Fachgebiet *',"专业领域 *")}</label>
                   <select className="form-select form-select-light" value={form.expertise} onChange={e=>setForm(p=>({...p,expertise:e.target.value}))}>
-                    <option value="">{tl('Sélectionner...','Select...','Seleccionar...','Auswählen...')}</option>
+                    <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
                     {(EXPERTISE_LIST[lang]||EXPERTISE_LIST.fr).map(e=><option key={e}>{e}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">
-                  <label className="form-label form-label-light">{tl('Description de votre proposition *','Description of your proposal *','Descripción de su propuesta *','Beschreibung Ihres Vorschlags *')}</label>
-                  <textarea className="form-textarea form-textarea-light" style={{minHeight:130}} placeholder={tl('Décrivez votre proposition en détail...','Describe your proposal in detail...','Describa su propuesta en detalle...','Beschreiben Sie Ihren Vorschlag im Detail...')} value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))}/>
+                  <label className="form-label form-label-light">{tl('Description de votre proposition *', 'Description of your proposal *', 'Descripción de su propuesta *', 'Beschreibung Ihres Vorschlags *','您的提案描述 *')}</label>
+                  <textarea className="form-textarea form-textarea-light" style={{minHeight:130}} placeholder={tl('Décrivez votre proposition en détail...', 'Describe your proposal in detail...', 'Describa su propuesta en detalle...', 'Beschreiben Sie Ihren Vorschlag im Detail...','详细描述您的提案...')} value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))}/>
                 </div>
               </div>
               <button onClick={submit} className="btn btn-wa" style={{marginTop:20,width:'100%',justifyContent:'center'}}>
-                <WAIcon/> {tl('Soumettre ma proposition','Submit my proposal','Enviar mi propuesta','Vorschlag einreichen')}
+                <WAIcon/> {tl('Soumettre ma proposition', 'Submit my proposal', 'Enviar mi propuesta', 'Vorschlag einreichen','提交我的提案')}
               </button>
             </div>
           </div>
