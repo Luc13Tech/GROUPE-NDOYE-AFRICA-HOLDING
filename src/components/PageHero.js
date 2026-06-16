@@ -12,7 +12,7 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
     return (val !== undefined && val !== '') ? val : fr;
   };
 
-  const defaultGradient = 'linear-gradient(135deg,#050810 0%,#0d1427 100%)';
+  const defaultGradient = 'linear-gradient(135deg,#050810 100%,#0d1427 100%)';
 
   useEffect(() => {
     let cancelled = false;
