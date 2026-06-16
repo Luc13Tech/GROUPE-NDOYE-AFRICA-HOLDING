@@ -169,6 +169,7 @@ export default function About() {
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
+        fallbackImg="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1600&q=85"
         label={tl('African Society', 'African Society', 'African Society', 'African Society','非洲社会')}
         title={tl('À Propos de GNAH', 'About GNAH', 'Acerca de GNAH', 'Über GNAH','关于GNAH')}
         sub={tl('African Development Company — depuis 2015', 'African Development Company — since 2015', 'African Development Company — desde 2015', 'African Development Company — seit 2015','非洲发展公司 — 自2015年')}

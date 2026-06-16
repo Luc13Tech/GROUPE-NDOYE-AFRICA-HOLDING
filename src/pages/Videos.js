@@ -13,6 +13,18 @@ function useInView(t=.1){const r=useRef(null);const[v,sv]=useState(false);useEff
 // ══════════════════════════════════════════════════════════════
 const VIDEOS = [
   {
+    id: 1,
+    platform: 'youtube',
+    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI',           // ← Remplacez par votre lien
+    thumbnail: '/Images/yaye-dia/cite-vue-aerienne.jpg',
+    fallback: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',
+    duration: '2:45',
+    fr: { title:'Résidence Yaye Dia — Présentation Officielle',     desc:'Découvrez en vidéo notre programme immobilier d\'exception : 300 villas haut standing en Région de Thiès, Sénégal.' },
+    en: { title:'Yaye Dia Residence — Official Presentation',       desc:'Discover our exceptional real estate programme in video: 300 high-end villas in the Thiès Region, Senegal.' },
+    es: { title:'Residencia Yaye Dia — Presentación Oficial',       desc:'Descubra en video nuestro excepcional programa inmobiliario: 300 villas de alto standing en la Región de Thiès, Senegal.' },
+    de: { title:'Yaye Dia Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
+  },
+  {
     id: 2,
     platform: 'youtube',
     url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_2',        // ← Remplacez par votre lien
@@ -47,6 +59,18 @@ const VIDEOS = [
     en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Yaye Dia City site plan. 300 carefully plotted villas on 225 m² each.' },
     es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Ciudad Yaye Dia. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
     de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Yaye Dia Stadt. 300 sorgfältig geplante Villen auf je 225 m².' },
+  },
+  {
+    id: 5,
+    platform: 'youtube',
+    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_5',        // ← Remplacez par votre lien
+    thumbnail: '/Images/yaye-dia/salon-duplex.jpg',
+    fallback: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',
+    duration: '2:15',
+    fr: { title:'Intérieurs de Luxe — Salon & Design',              desc:'Nos intérieurs haut de gamme : marbre Calacatta, bois massif, escaliers spectaculaires et espaces baignés de lumière.' },
+    en: { title:'Luxury Interiors — Living Room & Design',          desc:'Our high-end interiors: Calacatta marble, solid wood, spectacular staircases and light-filled spaces.' },
+    es: { title:'Interiores de Lujo — Salón y Diseño',              desc:'Nuestros interiores de alta gama: mármol Calacatta, madera maciza, escaleras espectaculares y espacios llenos de luz.' },
+    de: { title:'Luxus-Innenräume — Wohnzimmer & Design',           desc:'Unsere hochwertigen Innenräume: Calacatta-Marmor, Massivholz, spektakuläre Treppen und lichtdurchflutete Räume.' },
   },
   {
     id: 6,
@@ -84,6 +108,7 @@ export default function Videos() {
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/villa-f5-facade3.jpg"
+        fallbackImg="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=85"
         label={tl('Nos Réalisations', 'Our Achievements', 'Nuestras Realizaciones', 'Unsere Realisierungen','我们的成就')}
         title={tl('Nos Vidéos', 'Our Videos', 'Nuestros Videos', 'Unsere Videos','我们的视频')}
         sub={tl('Visitez la Cité Yaye Dia en vidéo', 'Visit Yaye Dia City in video', 'Visite la Ciudad Yaye Dia en video', 'Besuchen Sie die Yaye Dia Stadt im Video','通过视频参观Yaye Dia城')}

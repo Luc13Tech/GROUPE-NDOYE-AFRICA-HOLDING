@@ -29,6 +29,7 @@ export default function Commitments() {
     <main className="page-white">
       <PageHero
         bgImg="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=85"
+        fallbackImg="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&q=85"
         label={tl('Nos valeurs', 'Our values', 'Nuestros valores', 'Unsere Werte','我们的价值观')}
         title={tl('Nos Engagements', 'Our Commitments', 'Nuestros Compromisos', 'Unsere Verpflichtungen','我们的承诺')}
         sub={tl('Ce en quoi nous croyons et ce que nous défendons', 'What we believe in and what we stand for', 'En lo que creemos y lo que defendemos', 'Was wir glauben und wofür wir stehen','我们所信仰和坚持的理念')}

@@ -110,6 +110,7 @@ ${form.msg}`;
     <main className="page-white">
       <PageHero
         bgImg="/Images/yaye-dia/cover.jpg"
+        fallbackImg="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=85"
         label={tl('Projet Phare', 'Flagship Project', 'Proyecto Insignia', 'Vorzeigeprojekt','旗舰项目')}
         title={tl('Résidence Yaye Dia', 'Yaye Dia Residence', 'Residencia Yaye Dia', 'Yaye Dia Residenz','Yaye Dia住宅')}
         sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal', '300 High-End Villas — Thiès Region, Senegal', '300 Villas de Alto Standing — Región de Thiès, Senegal', '300 Hochwertige Villen — Thiès Region, Senegal','300栋高档别墅 — 塞内加尔蒂耶斯地区')}
