@@ -2,43 +2,58 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
 
-export default function PageHero({ bgImg, label, title, sub, breadcrumbs = [] }) {
+export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadcrumbs = [] }) {
   const { lang } = useLang();
-  const [imgError, setImgError] = useState(false);
-  const [bgLoaded, setBgLoaded] = useState(false);
+  const [activeSrc, setActiveSrc] = useState(null);
+  const [useGradient, setUseGradient] = useState(false);
 
   const tl = (fr, en, es, de, zh = '') => {
     const val = { fr, en, es, de, zh }[lang];
     return (val !== undefined && val !== '') ? val : fr;
   };
 
-  // Fallback gradients if image fails to load
-  const fallbackGradients = {
-    '/Images/yaye-dia/cite-vue-aerienne.jpg': 'linear-gradient(135deg,#0a0f1a 0%,#1a2744 100%)',
-    '/Images/yaye-dia/villa-piscine2.jpg':          'linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)',
-    '/Images/yaye-dia/cuisine-luxe.jpg':       'linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 100%)',
-    '/Images/yaye-dia/salon-f4.jpg':       'linear-gradient(135deg,#0d1427 0%,#1a2744 100%)',
-    '/Images/yaye-dia/villa-f4pp-facade.jpg':  'linear-gradient(135deg,#050810 0%,#0d1427 100%)',
-    '/Images/yaye-dia/villa-f4duplex.jpg':     'linear-gradient(135deg,#0a0f1a 0%,#162032 100%)',
-  };
   const defaultGradient = 'linear-gradient(135deg,#050810 0%,#0d1427 100%)';
 
   useEffect(() => {
-    setImgError(false);
-    setBgLoaded(false);
-    if (!bgImg) { setBgLoaded(true); return; }
+    let cancelled = false;
+    setActiveSrc(null);
+    setUseGradient(false);
 
-    const img = new window.Image();
-    img.onload  = () => { setBgLoaded(true); setImgError(false); };
-    img.onerror = () => { setImgError(true); setBgLoaded(true); };
-    img.src = bgImg;
-  }, [bgImg]);
+    if (!bgImg && !fallbackImg) { setUseGradient(true); return; }
 
-  const bgStyle = (!bgLoaded || imgError)
-    ? { background: fallbackGradients[bgImg] || defaultGradient }
-    : { backgroundImage: `url(${bgImg})` };
+    // Try primary image first
+    const tryLoad = (src, onFail) => {
+      const img = new window.Image();
+      img.onload = () => { if (!cancelled) setActiveSrc(src); };
+      img.onerror = () => { if (!cancelled) onFail(); };
+      img.src = src;
+    };
 
-  const homeLabel = tl('Accueil','Home','Inicio','Startseite','首页');
+    if (bgImg) {
+      tryLoad(bgImg, () => {
+        // Primary failed -> try fallback Unsplash
+        if (fallbackImg) {
+          tryLoad(fallbackImg, () => {
+            if (!cancelled) setUseGradient(true);
+          });
+        } else if (!cancelled) {
+          setUseGradient(true);
+        }
+      });
+    } else if (fallbackImg) {
+      tryLoad(fallbackImg, () => { if (!cancelled) setUseGradient(true); });
+    }
+
+    return () => { cancelled = true; };
+  }, [bgImg, fallbackImg]);
+
+  const bgStyle = useGradient
+    ? { background: defaultGradient }
+    : activeSrc
+      ? { backgroundImage: `url(${activeSrc})` }
+      : { background: defaultGradient };
+
+  const homeLabel = tl('Accueil', 'Home', 'Inicio', 'Startseite', '首页');
 
   return (
     <section style={{ paddingTop: 72, position: 'relative' }}>
@@ -50,7 +65,7 @@ export default function PageHero({ bgImg, label, title, sub, breadcrumbs = [] })
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         zIndex: 0,
-        transition: 'background 0.5s ease',
+        transition: 'background-image 0.6s ease',
       }}/>
 
       {/* Dark overlay */}
