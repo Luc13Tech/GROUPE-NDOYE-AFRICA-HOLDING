@@ -12,7 +12,7 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
     return (val !== undefined && val !== '') ? val : fr;
   };
 
-  const defaultGradient = 'linear-gradient(135deg,#050810 100%,#0d1427 100%)';
+  const defaultGradient = 'linear-gradient(135deg,#050810 0%,#0d1427 100%)';
 
   useEffect(() => {
     let cancelled = false;
@@ -21,7 +21,6 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
 
     if (!bgImg && !fallbackImg) { setUseGradient(true); return; }
 
-    // Try primary image first
     const tryLoad = (src, onFail) => {
       const img = new window.Image();
       img.onload = () => { if (!cancelled) setActiveSrc(src); };
@@ -31,7 +30,6 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
 
     if (bgImg) {
       tryLoad(bgImg, () => {
-        // Primary failed -> try fallback Unsplash
         if (fallbackImg) {
           tryLoad(fallbackImg, () => {
             if (!cancelled) setUseGradient(true);
@@ -50,7 +48,12 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
   const bgStyle = useGradient
     ? { background: defaultGradient }
     : activeSrc
-      ? { backgroundImage: `url(${activeSrc})` }
+      ? {
+          backgroundImage: `url(${activeSrc})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+        }
       : { background: defaultGradient };
 
   const homeLabel = tl('Accueil', 'Home', 'Inicio', 'Startseite', '首页');
@@ -59,13 +62,11 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
     <section style={{ paddingTop: 72, position: 'relative' }}>
       {/* Background */}
       <div style={{
-        position: 'absolute', inset: 0,
+        position: 'absolute',
+        inset: 0,
         ...bgStyle,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         zIndex: 0,
-        transition: 'background-image 0.6s ease',
+        transition: 'background-image 0.6s ease, background 0.6s ease',
       }}/>
 
       {/* Dark overlay */}
@@ -141,4 +142,4 @@ export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadc
       </div>
     </section>
   );
-}
+  }
