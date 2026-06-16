@@ -15,9 +15,9 @@ export default function PageHero({ bgImg, label, title, sub, breadcrumbs = [] })
   // Fallback gradients if image fails to load
   const fallbackGradients = {
     '/Images/yaye-dia/cite-vue-aerienne.jpg': 'linear-gradient(135deg,#0a0f1a 0%,#1a2744 100%)',
-    '/Images/yaye-dia/villa-f5.jpg':          'linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)',
+    '/Images/yaye-dia/villa-piscine2.jpg':          'linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)',
     '/Images/yaye-dia/cuisine-luxe.jpg':       'linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 100%)',
-    '/Images/yaye-dia/salon-duplex.jpg':       'linear-gradient(135deg,#0d1427 0%,#1a2744 100%)',
+    '/Images/yaye-dia/salon-f4.jpg':       'linear-gradient(135deg,#0d1427 0%,#1a2744 100%)',
     '/Images/yaye-dia/villa-f4pp-facade.jpg':  'linear-gradient(135deg,#050810 0%,#0d1427 100%)',
     '/Images/yaye-dia/villa-f4duplex.jpg':     'linear-gradient(135deg,#0a0f1a 0%,#162032 100%)',
   };
