@@ -8,7 +8,7 @@ export default function PWAInstallPrompt() {
   const [installing, setInstalling] = useState(false);
   const [installed, setInstalled] = useState(false);
 
-  const tl = (fr, en, es, de, zh='') => ({ fr, en, es, de, zh }[lang] || fr);
+  const tl = (fr, en, es, de, zh = '') => ({ fr, en, es, de, zh }[lang] || fr);
 
   useEffect(() => {
     // Check if ALREADY installed RIGHT NOW (real-time check, never relies on stale memory)
@@ -103,6 +103,7 @@ export default function PWAInstallPrompt() {
           borderTop: '2px solid var(--gold)',
           boxShadow: '0 -8px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(201,168,76,.15)',
           padding: 'clamp(16px,3vw,22px) clamp(16px,3vw,24px)',
+          position: 'relative',
         }}>
           {/* Top gold line */}
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg,transparent,#c9a84c,transparent)' }}/>
@@ -136,14 +137,14 @@ export default function PWAInstallPrompt() {
             {/* Text */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(.7rem,2vw,.8rem)', color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 3 }}>
-                {tl('Installer l'Application','Install the App','Instalar la Aplicación','App Installieren','安装应用程序')}
+                {tl('Installer l\'Application', 'Install the App', 'Instalar la Aplicación', 'App Installieren', '安装应用程序')}
               </div>
               <div style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: 'clamp(.72rem,2vw,.82rem)', color: 'var(--cream)', marginBottom: 2 }}>
                 Groupe Ndoye Africa Holding
               </div>
               <div style={{ fontFamily: 'var(--f-body)', fontSize: 'clamp(.62rem,1.5vw,.7rem)', color: 'rgba(200,195,186,.45)', lineHeight: 1.4 }}>
                 {tl(
-                  'Accédez instantanément à la plateforme depuis votre écran d'accueil.',
+                  'Accédez instantanément à la plateforme depuis votre écran d\'accueil.',
                   'Instantly access the platform from your home screen.',
                   'Acceda instantáneamente a la plataforma desde su pantalla de inicio.',
                   'Greifen Sie sofort von Ihrem Startbildschirm auf die Plattform zu.',
@@ -180,19 +181,19 @@ export default function PWAInstallPrompt() {
               {installing ? (
                 <>
                   <span style={{ width: 12, height: 12, border: '2px solid #050810', borderTopColor: 'transparent', borderRadius: '50%', display: 'inline-block', animation: 'gnah-spin .8s linear infinite' }}/>
-                  {tl('Installation...','Installing...','Instalando...','Wird installiert...','安装中...')}
+                  {tl('Installation...', 'Installing...', 'Instalando...', 'Wird installiert...', '安装中...')}
                 </>
               ) : (
                 <>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                  {tl('Installer','Install','Instalar','Installieren','安装')}
+                  {tl('Installer', 'Install', 'Instalar', 'Installieren', '安装')}
                 </>
               )}
             </button>
             <button onClick={handleDismiss} style={{ padding: '11px 18px', background: 'transparent', border: '1px solid rgba(201,168,76,.25)', color: 'rgba(201,168,76,.6)', fontFamily: 'var(--f-display)', fontSize: 'clamp(.58rem,1.4vw,.66rem)', letterSpacing: '.1em', textTransform: 'uppercase', cursor: 'pointer', transition: 'all .2s' }}
               onMouseEnter={e=>{ e.currentTarget.style.background='rgba(201,168,76,.06)'; e.currentTarget.style.color='var(--gold)'; }}
               onMouseLeave={e=>{ e.currentTarget.style.background='transparent'; e.currentTarget.style.color='rgba(201,168,76,.6)'; }}>
-              {tl('Plus tard','Later','Después','Später','以后')}
+              {tl('Plus tard', 'Later', 'Después', 'Später', '以后')}
             </button>
           </div>
         </div>
