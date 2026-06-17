@@ -33,20 +33,26 @@ export default function Footer() {
   const waUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}`;
   const nl = (item) => item[lang] || item.fr;
 
-  // PWA install detection
+  // PWA install detection — always reflects REAL current state, never relies on stale localStorage
   useEffect(() => {
-    const installed = window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone === true
-      || localStorage.getItem('gnah_pwa_installed') === 'true';
-    setIsInstalled(installed);
+    const checkInstalled = () => {
+      const installed = window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+      setIsInstalled(installed);
+    };
+    checkInstalled();
 
-    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); };
+    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); setIsInstalled(false); };
     window.addEventListener('beforeinstallprompt', handler);
-    window.addEventListener('appinstalled', () => {
-      setIsInstalled(true);
-      localStorage.setItem('gnah_pwa_installed', 'true');
-    });
-    return () => window.removeEventListener('beforeinstallprompt', handler);
+    window.addEventListener('appinstalled', () => { setIsInstalled(true); });
+
+    // Re-check periodically in case app was uninstalled while page is open
+    const interval = setInterval(checkInstalled, 3000);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleInstall = async () => {
@@ -55,9 +61,18 @@ export default function Footer() {
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === 'accepted') {
         setIsInstalled(true);
-        localStorage.setItem('gnah_pwa_installed', 'true');
       }
       setDeferredPrompt(null);
+    } else {
+      // Browser hasn't fired beforeinstallprompt yet (or already dismissed it once) —
+      // guide the user instead of doing nothing
+      alert(tl(
+        "Pour installer l'application : ouvrez le menu de votre navigateur et choisissez \"Ajouter à l'écran d'accueil\" ou \"Installer l'application\".",
+        'To install the app: open your browser menu and select "Add to Home Screen" or "Install App".',
+        'Para instalar la aplicación: abra el menú de su navegador y seleccione "Agregar a pantalla de inicio".',
+        'Um die App zu installieren: Öffnen Sie das Browsermenü und wählen Sie "Zum Startbildschirm hinzufügen".',
+        '要安装应用程序：打开浏览器菜单并选择"添加到主屏幕"或"安装应用程序"。'
+      ));
     }
   };
 
@@ -113,7 +128,7 @@ export default function Footer() {
               {tl('Application Mobile GNAH', 'GNAH Mobile App', 'Aplicación Móvil GNAH', 'GNAH Mobile App', 'GNAH移动应用')}
             </div>
             <div style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: 'clamp(.72rem,1vw,.82rem)', color: 'rgba(200,195,186,.5)' }}>
-              {tl('Accédez instantanément depuis votre écran d\'accueil', 'Instant access from your home screen', 'Acceso instantáneo desde su pantalla de inicio', 'Sofortiger Zugriff vom Startbildschirm', '从主屏幕即时访问')}
+              {tl('Accédez instantanément depuis votre écran d'accueil', 'Instant access from your home screen', 'Acceso instantáneo desde su pantalla de inicio', 'Sofortiger Zugriff vom Startbildschirm', '从主屏幕即时访问')}
             </div>
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -126,7 +141,7 @@ export default function Footer() {
                 onMouseLeave={e => e.currentTarget.style.opacity = '1'}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                {tl("Installer l'App", 'Install App', 'Instalar App', 'App installieren', '安装应用')}
+                {tl('Installer l'App', 'Install App', 'Instalar App', 'App installieren', '安装应用')}
               </button>
             )}
             {isInstalled && (
@@ -261,4 +276,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-   }
+}
