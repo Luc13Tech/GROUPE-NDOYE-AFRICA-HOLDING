@@ -153,26 +153,26 @@ export default function Home() {
   const waUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}`;
 
   const LABELS = {
-    heroSub:      { fr:'Un projet à la fois', en:'One project at a time', es:'Un proyecto a la vez', de:'Ein Projekt nach dem anderen' },
-    discoverBtn:  { fr:'Découvrir GNAH', en:'Discover GNAH', es:'Descubrir GNAH', de:'GNAH Entdecken' },
-    scroll:       { fr:'Découvrir', en:'Scroll', es:'Explorar', de:'Entdecken' },
-    flagship:     { fr:'Projet Phare', en:'Flagship Project', es:'Proyecto Insignia', de:'Vorzeigeprojekt' },
-    residence:    { fr:'Résidence', en:'Residence', es:'Residencia', de:'Residenz' },
-    residenceSub: { fr:"L'Art de vivre Moderne — 300 villas Haut Standing", en:'The Art of Modern Living — 300 High-End Villas', es:'El Arte de Vivir Moderno — 300 Villas de Alto Standing', de:'Die Kunst des modernen Lebens — 300 Hochwertige Villen' },
-    seeProject:   { fr:'Découvrir le Projet', en:'Discover the Project', es:'Ver el Proyecto', de:'Projekt Entdecken' },
-    expertLabel:  { fr:'Notre expertise', en:'Our expertise', es:'Nuestra experiencia', de:'Unsere Expertise' },
-    servTitle:    { fr:'Nos Services', en:'Our Services', es:'Nuestros Servicios', de:'Unsere Leistungen' },
-    servBtn:      { fr:'Tous nos services', en:'All our services', es:'Todos nuestros servicios', de:'Alle Leistungen' },
-    learnMore:    { fr:'En savoir plus', en:'Learn more', es:'Saber más', de:'Mehr erfahren' },
-    partLabel:    { fr:'Réseau mondial', en:'Global network', es:'Red mundial', de:'Weltweites Netzwerk' },
-    partTitle:    { fr:'Partenaires dans le Monde', en:'Global Partners', es:'Socios Mundiales', de:'Weltweite Partner' },
-    partBtn:      { fr:'Voir tous les partenaires', en:'View all partners', es:'Ver todos los socios', de:'Alle Partner anzeigen' },
-    ctaSub:       { fr:"Prêt à investir dans l'avenir de l'Afrique ?", en:"Ready to invest in Africa's future?", es:'¿Listo para invertir en el futuro de África?', de:'Bereit, in Afrikas Zukunft zu investieren?' },
-    ctaTitle:     { fr:"Contactez-Nous Aujourd'hui", en:'Contact Us Today', es:'Contáctenos Hoy', de:'Kontaktieren Sie Uns Heute' },
-    ctaBtn:       { fr:'Nous contacter', en:'Contact us', es:'Contáctenos', de:'Kontakt' },
-    whoLabel:     { fr:'Qui sommes-nous', en:'Who we are', es:'Quiénes somos', de:'Wer wir sind' },
-    whoTitle:     { fr:'African Development Company', en:'African Development Company', es:'African Development Company', de:'African Development Company' },
-    whoSub:       { fr:"10 ans d'excellence", en:'10 years of excellence', es:'10 años de excelencia', de:'10 Jahre Exzellenz' },
+    heroSub:      { fr:'Un projet à la fois', en:'One project at a time', es:'Un proyecto a la vez', de:'Ein Projekt nach dem anderen', zh:'一次一个项目' },
+    discoverBtn:  { fr:'Découvrir GNAH', en:'Discover GNAH', es:'Descubrir GNAH', de:'GNAH Entdecken', zh:'探索GNAH' },
+    scroll:       { fr:'Découvrir', en:'Scroll', es:'Explorar', de:'Entdecken', zh:'探索' },
+    flagship:     { fr:'Projet Phare', en:'Flagship Project', es:'Proyecto Insignia', de:'Vorzeigeprojekt', zh:'旗舰项目' },
+    residence:    { fr:'Résidence', en:'Residence', es:'Residencia', de:'Residenz', zh:'住宅' },
+    residenceSub: { fr:"L'Art de vivre Moderne — 300 villas Haut Standing", en:'The Art of Modern Living — 300 High-End Villas', es:'El Arte de Vivir Moderno — 300 Villas de Alto Standing', de:'Die Kunst des modernen Lebens — 300 Hochwertige Villen' , zh:'现代生活艺术 — 300栋高档别墅' },
+    seeProject:   { fr:'Découvrir le Projet', en:'Discover the Project', es:'Ver el Proyecto', de:'Projekt Entdecken', zh:'探索项目' },
+    expertLabel:  { fr:'Notre expertise', en:'Our expertise', es:'Nuestra experiencia', de:'Unsere Expertise', zh:'我们的专业知识' },
+    servTitle:    { fr:'Nos Services', en:'Our Services', es:'Nuestros Servicios', de:'Unsere Leistungen', zh:'我们的服务' },
+    servBtn:      { fr:'Tous nos services', en:'All our services', es:'Todos nuestros servicios', de:'Alle Leistungen', zh:'查看所有服务' },
+    learnMore:    { fr:'En savoir plus', en:'Learn more', es:'Saber más', de:'Mehr erfahren', zh:'了解更多' },
+    partLabel:    { fr:'Réseau mondial', en:'Global network', es:'Red mundial', de:'Weltweites Netzwerk', zh:'全球网络' },
+    partTitle:    { fr:'Partenaires dans le Monde', en:'Global Partners', es:'Socios Mundiales', de:'Weltweite Partner', zh:'全球合作伙伴' },
+    partBtn:      { fr:'Voir tous les partenaires', en:'View all partners', es:'Ver todos los socios', de:'Alle Partner anzeigen', zh:'查看所有合作伙伴' },
+    ctaSub:       { fr:"Prêt à investir dans l'avenir de l'Afrique ?", en:"Ready to invest in Africa's future?", es:'¿Listo para invertir en el futuro de África?', de:'Bereit, in Afrikas Zukunft zu investieren?' , zh:'准备好投资非洲的未来了吗？' },
+    ctaTitle:     { fr:"Contactez-Nous Aujourd'hui", en:'Contact Us Today', es:'Contáctenos Hoy', de:'Kontaktieren Sie Uns Heute', zh:'今天联系我们' },
+    ctaBtn:       { fr:'Nous contacter', en:'Contact us', es:'Contáctenos', de:'Kontakt', zh:'联系我们' },
+    whoLabel:     { fr:'Qui sommes-nous', en:'Who we are', es:'Quiénes somos', de:'Wer wir sind', zh:'我们是谁' },
+    whoTitle:     { fr:'African Development Company', en:'African Development Company', es:'African Development Company', de:'African Development Company', zh:'African Development Company' },
+    whoSub:       { fr:"10 ans d'excellence", en:'10 years of excellence', es:'10 años de excelencia', de:'10 Jahre Exzellenz', zh:'10年卓越成就' },
   };
 
   return (
@@ -263,7 +263,7 @@ export default function Home() {
 
             <div className={`slide-right${introVisible ? ' visible' : ''}`} style={{ position: 'relative' }}>
               <img
-                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85"
+                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85"
                 alt="Africa"
                 style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
               />
