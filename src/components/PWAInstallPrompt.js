@@ -11,10 +11,9 @@ export default function PWAInstallPrompt() {
   const tl = (fr, en, es, de, zh='') => ({ fr, en, es, de, zh }[lang] || fr);
 
   useEffect(() => {
-    // Check if already installed
+    // Check if ALREADY installed RIGHT NOW (real-time check, never relies on stale memory)
     const isInstalled = window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone === true
-      || localStorage.getItem('gnah_pwa_installed') === 'true';
+      || window.navigator.standalone === true;
 
     if (isInstalled) return;
 
@@ -30,7 +29,6 @@ export default function PWAInstallPrompt() {
 
     // Listen for successful install
     window.addEventListener('appinstalled', () => {
-      localStorage.setItem('gnah_pwa_installed', 'true');
       setInstalled(true);
       setShow(false);
       setDeferredPrompt(null);
@@ -46,7 +44,6 @@ export default function PWAInstallPrompt() {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === 'accepted') {
-        localStorage.setItem('gnah_pwa_installed', 'true');
         setInstalled(true);
       }
     } catch {}
@@ -139,14 +136,14 @@ export default function PWAInstallPrompt() {
             {/* Text */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: 'var(--f-display)', fontSize: 'clamp(.7rem,2vw,.8rem)', color: 'var(--gold)', letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 3 }}>
-                {tl("Installer l'Application",'Install the App','Instalar la Aplicación','App Installieren','安装应用程序')}
+                {tl('Installer l'Application','Install the App','Instalar la Aplicación','App Installieren','安装应用程序')}
               </div>
               <div style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: 'clamp(.72rem,2vw,.82rem)', color: 'var(--cream)', marginBottom: 2 }}>
                 Groupe Ndoye Africa Holding
               </div>
               <div style={{ fontFamily: 'var(--f-body)', fontSize: 'clamp(.62rem,1.5vw,.7rem)', color: 'rgba(200,195,186,.45)', lineHeight: 1.4 }}>
                 {tl(
-                  'Accédez instantanément à la plateforme depuis votre écran d\'accueil.',
+                  'Accédez instantanément à la plateforme depuis votre écran d'accueil.',
                   'Instantly access the platform from your home screen.',
                   'Acceda instantáneamente a la plataforma desde su pantalla de inicio.',
                   'Greifen Sie sofort von Ihrem Startbildschirm auf die Plattform zu.',
