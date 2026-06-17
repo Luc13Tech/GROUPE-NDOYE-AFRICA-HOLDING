@@ -23,21 +23,10 @@ const VIDEOS = [
     en: { title:'Yaye Dia Residence — Official Presentation',       desc:'Discover our exceptional real estate programme in video: 300 high-end villas in the Thiès Region, Senegal.' },
     es: { title:'Residencia Yaye Dia — Presentación Oficial',       desc:'Descubra en video nuestro excepcional programa inmobiliario: 300 villas de alto standing en la Región de Thiès, Senegal.' },
     de: { title:'Yaye Dia Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
+    zh: { title:'Yaye Dia住宅 — 官方介绍',      desc:'通过视频探索我们卓越的房地产项目：塞内加尔蒂耶斯地区的300栋高档别墅。' },
   },
   {
     id: 2,
-    platform: 'youtube',
-    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_2',        // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/villa-f5-facade3.jpg',
-    fallback: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=85',
-    duration: '3:20',
-    fr: { title:'Villa F5 — Visite Virtuelle Haut Standing',        desc:'Visite complète de notre villa F5 Très Haut Standing : 3 niveaux, terrasse BBQ, marbre Calacatta et finitions luxueuses.' },
-    en: { title:'F5 Villa — Premium Virtual Tour',                  desc:'Complete tour of our F5 Premium villa: 3 levels, BBQ terrace, Calacatta marble and luxury finishes.' },
-    es: { title:'Villa F5 — Visita Virtual Premium',                desc:'Visita completa de nuestra villa F5 Premium: 3 niveles, terraza BBQ, mármol Calacatta y acabados de lujo.' },
-    de: { title:'F5 Villa — Premium Virtuelle Tour',                desc:'Vollständige Tour durch unsere F5 Premium Villa: 3 Ebenen, BBQ-Terrasse, Calacatta-Marmor und Luxusausstattung.' },
-  },
-  {
-    id: 3,
     platform: 'tiktok',
     url: 'https://www.tiktok.com/@assane.design.con',                // ← Remplacez par votre lien TikTok
     thumbnail: '/Images/yaye-dia/villa-f4duplex-nuit.jpg',
@@ -47,9 +36,10 @@ const VIDEOS = [
     en: { title:'Yaye Dia City — Spectacular Night View',           desc:'Yaye Dia City illuminated at night. Our F4 Duplex villas in all their splendour under a starry sky.' },
     es: { title:'Ciudad Yaye Dia — Vista Nocturna Espectacular',    desc:'La Ciudad Yaye Dia iluminada de noche. Nuestras villas F4 Dúplex en todo su esplendor bajo un cielo estrellado.' },
     de: { title:'Yaye Dia Stadt — Spektakuläre Nachtansicht',       desc:'Die Yaye Dia Stadt bei Nacht beleuchtet. Unsere F4 Duplex Villen in voller Pracht unter einem Sternenhimmel.' },
+    zh: { title:'Yaye Dia城 — 壮观夜景',       desc:'夜幕下灯火璧煌的Yaye Dia城。我们的F4复式别墅在星空下尽显华丽风采。' },
   },
   {
-    id: 4,
+    id: 3,
     platform: 'facebook',
     url: 'https://www.facebook.com/groupendoyeafricaholding',        // ← Remplacez par votre lien
     thumbnail: '/Images/yaye-dia/cite-plan-top.jpg',
@@ -59,21 +49,10 @@ const VIDEOS = [
     en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Yaye Dia City site plan. 300 carefully plotted villas on 225 m² each.' },
     es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Ciudad Yaye Dia. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
     de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Yaye Dia Stadt. 300 sorgfältig geplante Villen auf je 225 m².' },
+    zh: { title:'总平面图 — 300栋规划别墅',                   desc:'Yaye Dia城总平面图鸟瞰图。300栋精心规划的别墅，每栋占地225平方米。' },
   },
   {
-    id: 5,
-    platform: 'youtube',
-    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI_5',        // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/salon-duplex.jpg',
-    fallback: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',
-    duration: '2:15',
-    fr: { title:'Intérieurs de Luxe — Salon & Design',              desc:'Nos intérieurs haut de gamme : marbre Calacatta, bois massif, escaliers spectaculaires et espaces baignés de lumière.' },
-    en: { title:'Luxury Interiors — Living Room & Design',          desc:'Our high-end interiors: Calacatta marble, solid wood, spectacular staircases and light-filled spaces.' },
-    es: { title:'Interiores de Lujo — Salón y Diseño',              desc:'Nuestros interiores de alta gama: mármol Calacatta, madera maciza, escaleras espectaculares y espacios llenos de luz.' },
-    de: { title:'Luxus-Innenräume — Wohnzimmer & Design',           desc:'Unsere hochwertigen Innenräume: Calacatta-Marmor, Massivholz, spektakuläre Treppen und lichtdurchflutete Räume.' },
-  },
-  {
-    id: 6,
+    id: 4,
     platform: 'instagram',
     url: 'https://www.instagram.com/assanedesignconception',         // ← Remplacez par votre lien
     thumbnail: '/Images/yaye-dia/cite-commodites-vue.jpg',
@@ -83,6 +62,7 @@ const VIDEOS = [
     en: { title:'Amenities — A Complete City',                      desc:'Sports complex, multi-purpose field, mosque, shopping centre, health district — everything you need.' },
     es: { title:'Comodidades — Una Ciudad Completa',                desc:'Complejo deportivo, campo polideportivo, mezquita, centro comercial, distrito sanitario: todo lo que necesita.' },
     de: { title:'Annehmlichkeiten — Eine vollständige Stadt',       desc:'Sportkomplex, Mehrzweckspielfeld, Moschee, Einkaufszentrum, Gesundheitsbezirk — alles was Sie brauchen.' },
+    zh: { title:'配套设施 — 一座完整的城市',       desc:'体育中心、多功能运动场、清真寺、购物中心、医疗区 — 应有尽有。' },
   },
 ];
 
