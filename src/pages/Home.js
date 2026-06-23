@@ -186,18 +186,19 @@ export default function Home() {
         <div className="hero-content">
           <div className="hero-eyebrow">
             <span className="hero-dot" />
-            Groupe Ndoye Africa Holding — {lang === 'fr' ? 'Sénégal, Afrique' : lang === 'en' ? 'Senegal, Africa' : lang === 'es' ? 'Senegal, África' : 'Senegal, Afrika'}
+            Groupe Ndoye Africa Holding — {lang === 'fr' ? 'Sénégal, Afrique' : lang === 'en' ? 'Senegal, Africa' : lang === 'es' ? 'Senegal, África' : lang === 'de' ? 'Senegal, Afrika' : '塞内加尔，非洲'}
           </div>
           <h1 className="hero-title">
             {lang === 'fr' ? <><em>Bâtir</em> l'Afrique<br />de demain</> :
              lang === 'en' ? <><em>Building</em><br />tomorrow's Africa</> :
              lang === 'es' ? <><em>Construyendo</em><br />el África del mañana</> :
-             <><em>Das Afrika</em><br />von morgen bauen</>}
+             lang === 'de' ? <><em>Das Afrika</em><br />von morgen bauen</> :
+             <><em>建设</em><br />明天的非洲</>}
           </h1>
           <p className="hero-sub">{t(LABELS.heroSub)} — {t(SUBTITLE)}</p>
           <div className="hero-actions">
             <Link to="/projets" className="btn btn-gold" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-              {lang === 'fr' ? 'Résidence Yaye Dia' : lang === 'en' ? 'Yaye Dia Residence' : lang === 'es' ? 'Residencia Yaye Dia' : 'Yaye Dia Residenz'} <ArrowR />
+              {lang === 'fr' ? 'Résidence Yaye Dia' : lang === 'en' ? 'Yaye Dia Residence' : lang === 'es' ? 'Residencia Yaye Dia' : lang === 'de' ? 'Yaye Dia Residenz' : 'Yaye Dia 住宅'} <ArrowR />
             </Link>
             <Link to="/a-propos" className="btn btn-outline-gold" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
               {t(LABELS.discoverBtn)}
@@ -243,7 +244,9 @@ export default function Home() {
                   ? "G.N.A.H has been operating on the market since 2015 as a company specialising in project development and structuring, public infrastructure, agriculture, construction and real estate. In collaboration with major international groups in optimal synergy."
                   : lang === 'es'
                   ? "G.N.A.H opera en el mercado desde 2015 como empresa especializada en desarrollo y estructuración de proyectos, infraestructura pública, agricultura, construcción e inmobiliaria. En colaboración con grandes grupos internacionales en sinergia óptima."
-                  : "G.N.A.H ist seit 2015 auf dem Markt tätig als Unternehmen, das sich auf Projektentwicklung und -strukturierung, öffentliche Infrastruktur, Landwirtschaft, Bau und Immobilien spezialisiert hat. In Zusammenarbeit mit großen internationalen Gruppen in optimaler Synergie."
+                  : lang === 'de'
+                  ? "G.N.A.H ist seit 2015 auf dem Markt tätig als Unternehmen, das sich auf Projektentwicklung und -strukturierung, öffentliche Infrastruktur, Landwirtschaft, Bau und Immobilien spezialisiert hat. In Zusammenarbeit mit großen internationalen Gruppen in optimaler Synergie."
+                  : "G.N.A.H自2015年以来一直在市场上运营，是一家专注于项目开发和结构设计、公共基础设施、农业、建筑和房地产的专业公司。与大型国际集团在最佳协同效应下合作。"
                 }
               </p>
               <p style={{ fontSize: '.92rem', color: 'var(--text)', lineHeight: 1.9, marginBottom: 32 }}>
@@ -253,7 +256,9 @@ export default function Home() {
                   ? "Made up of a team of specialists, technicians, engineers and architects, GNAH has the expertise to successfully achieve the defined objectives. Our network covers 6 partner countries and 11 African nations."
                   : lang === 'es'
                   ? "Compuesta por un equipo de especialistas, técnicos, ingenieros y arquitectos, GNAH tiene la experiencia para lograr con éxito los objetivos definidos. Nuestra red abarca 6 países socios y 11 naciones africanas."
-                  : "Bestehend aus einem Team von Spezialisten, Technikern, Ingenieuren und Architekten hat GNAH die Expertise, die definierten Ziele erfolgreich zu erreichen. Unser Netzwerk umfasst 6 Partnerländer und 11 afrikanische Nationen."
+                  : lang === 'de'
+                  ? "Bestehend aus einem Team von Spezialisten, Technikern, Ingenieuren und Architekten hat GNAH die Expertise, die definierten Ziele erfolgreich zu erreichen. Unser Netzwerk umfasst 6 Partnerländer und 11 afrikanische Nationen."
+                  : "由专家、技术人员、工程师和建筑师组成的团队，GNAH拥有成功实现既定目标的专业知识。我们的网络覆盖6个合作伙伴国家和11个非洲国家。"
                 }
               </p>
               <Link to="/a-propos" className="btn btn-gold" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
