@@ -8,7 +8,7 @@ export const SITE = {
   short:      'G.N.A.H',
   phone:      '+221 77 939 84 84',
   whatsapp:   '221779398484',
-  email:      'Contact@groupendoyefrica.com,
+  email:      'Contact@groupendoyefrica.com',
   address_fr: 'Cité Baobab, Sénégal',
   adminPass:  'admin123',
   social: {
