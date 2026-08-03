@@ -307,11 +307,16 @@ export default function Home() {
             <div style={{ position: 'relative' }}>
               {/* Main image - first YAYE_SLIDE */}
               <div style={{ position: 'relative', overflow: 'hidden' }}>
-                <img src={YAYE_SLIDES[0].img} alt="GNAH"
+                <img 
+                  src={slideLoaded[0] || YAYE_SLIDES[0].img}
+                  alt="GNAH"
                   style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block', transition: 'transform .6s ease' }}
                   onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                   onMouseLeave={e => e.currentTarget.style.transform = ''}
-                  onError={e => { e.target.style.background = '#0d1427'; e.target.style.minHeight = '300px'; }}
+                  onError={e => { 
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85';
+                  }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(5,8,16,.5) 0%, transparent 50%)' }} />
               </div>
