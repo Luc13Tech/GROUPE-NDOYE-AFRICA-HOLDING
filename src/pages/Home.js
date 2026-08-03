@@ -107,7 +107,7 @@ export default function Home() {
   const w = useW();
   const isMob = w < 768;
   const [slide, setSlide] = useState(0);
-  const [slideLoaded, setSlideLoaded] = useState({});
+  const [slideLoaded, setSlideLoaded] = useState({}); // stores {index: resolvedURL}
   const [activePart, setActivePart] = useState(0);
   const [activeVilla, setActiveVilla] = useState(0);
   const timerRef = useRef(null);
@@ -128,12 +128,31 @@ export default function Home() {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  /* Preload hero images */
+  /* Fallback Unsplash URLs for each YAYE_SLIDE image */
+  const SLIDE_FALLBACKS = [
+    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=85', // villa-f5 → luxury villa
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85', // villa-f4duplex-nuit → villa at night
+    'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=85', // cite-vue-aerienne → aerial view
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1800&q=85',    // salon-f4-interieur → luxury interior
+  ];
+
+  /* Preload hero images — try local first, fallback to Unsplash */
   useEffect(() => {
     YAYE_SLIDES.forEach((s, i) => {
-      const img = new Image();
-      img.onload = () => setSlideLoaded(p => ({ ...p, [i]: true }));
-      img.src = s.img;
+      const tryLoad = (src, onFail) => {
+        const img = new Image();
+        img.onload = () => setSlideLoaded(p => ({ ...p, [i]: src }));
+        img.onerror = onFail;
+        img.src = src;
+      };
+      // Try local /Images/ first
+      tryLoad(s.img, () => {
+        // Fallback to Unsplash
+        tryLoad(SLIDE_FALLBACKS[i], () => {
+          // Last resort: use Unsplash anyway
+          setSlideLoaded(p => ({ ...p, [i]: SLIDE_FALLBACKS[i] }));
+        });
+      });
     });
   }, []);
 
@@ -146,8 +165,8 @@ export default function Home() {
         {YAYE_SLIDES.map((s, i) => (
           <div key={i} style={{
             position: 'absolute', inset: 0,
-            backgroundImage: slideLoaded[i] ? `url(${s.img})` : undefined,
-            background: slideLoaded[i] ? undefined : '#050810',
+            backgroundImage: slideLoaded[i] ? `url(${slideLoaded[i]})` : undefined,
+            background: slideLoaded[i] ? undefined : 'linear-gradient(135deg,#050810,#0d1427)',
             backgroundSize: 'cover', backgroundPosition: 'center',
             opacity: i === slide ? 1 : 0,
             transform: i === slide ? 'scale(1.04)' : 'scale(1)',
