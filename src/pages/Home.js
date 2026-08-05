@@ -100,6 +100,98 @@ function FadeIn({ children, delay = 0, dir = 'up', style = {} }) {
   );
 }
 
+
+/* ── Animated Button Component ────────────────────────────────── */
+function AnimBtn({ to, href, children, variant = 'gold', style = {}, onClick, target, rel }) {
+  const [hov, setHov] = React.useState(false);
+  const [rip, setRip] = React.useState(null);
+
+  const handleClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setRip({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setTimeout(() => setRip(null), 600);
+    if (onClick) onClick(e);
+  };
+
+  const goldGrad = 'linear-gradient(135deg,#c9a84c,#e8c96a,#8b6914)';
+
+  const baseStyle = {
+    position: 'relative', overflow: 'hidden',
+    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+    gap: 8, cursor: 'pointer', textDecoration: 'none',
+    fontFamily: 'var(--f-display)', letterSpacing: '.14em', textTransform: 'uppercase',
+    transition: 'all .35s cubic-bezier(.4,0,.2,1)',
+    border: 'none',
+    padding: 'clamp(13px,2vw,16px) clamp(24px,3vw,36px)',
+    fontSize: '.66rem',
+    transform: hov ? 'translateY(-4px)' : 'translateY(0)',
+    animation: 'btnFloat 3s ease-in-out infinite',
+    ...style,
+  };
+
+  const goldStyle = {
+    ...baseStyle,
+    background: goldGrad,
+    color: '#050810',
+    boxShadow: hov
+      ? '0 18px 50px rgba(201,168,76,.7), 0 0 0 2px rgba(201,168,76,.3)'
+      : '0 6px 28px rgba(201,168,76,.35)',
+  };
+
+  const outlineStyle = {
+    ...baseStyle,
+    background: hov ? 'rgba(201,168,76,.12)' : 'rgba(5,8,16,.4)',
+    border: `1px solid ${hov ? 'rgba(201,168,76,.8)' : 'rgba(201,168,76,.42)'}`,
+    color: 'var(--cream)',
+    backdropFilter: 'blur(12px)',
+    boxShadow: hov ? '0 18px 50px rgba(0,0,0,.4), 0 0 0 1px rgba(201,168,76,.2)' : 'none',
+  };
+
+  const greenStyle = {
+    ...baseStyle,
+    background: hov ? '#1ebe5b' : '#25D366',
+    color: '#fff',
+    boxShadow: hov ? '0 18px 50px rgba(37,211,102,.5)' : '0 6px 24px rgba(37,211,102,.3)',
+  };
+
+  const s = variant === 'gold' ? goldStyle : variant === 'green' ? greenStyle : outlineStyle;
+
+  const shimmer = (
+    <span style={{
+      position: 'absolute', top: 0, left: hov ? '120%' : '-40%', width: '60%', height: '100%',
+      background: 'linear-gradient(to right, transparent, rgba(255,255,255,.18), transparent)',
+      transform: 'skewX(-20deg)',
+      transition: 'left .55s ease',
+      pointerEvents: 'none',
+    }} />
+  );
+
+  const ripple = rip && (
+    <span style={{
+      position: 'absolute',
+      left: rip.x - 40, top: rip.y - 40,
+      width: 80, height: 80,
+      borderRadius: '50%',
+      background: 'rgba(255,255,255,.25)',
+      animation: 'rippleOut .6s ease forwards',
+      pointerEvents: 'none',
+    }} />
+  );
+
+  const inner = <>{shimmer}{ripple}{children}</>;
+
+  if (to) return (
+    <Link to={to} style={s} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} onClick={handleClick}>
+      {inner}
+    </Link>
+  );
+  return (
+    <a href={href || '#'} target={target} rel={rel} style={s} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} onClick={handleClick}>
+      {inner}
+    </a>
+  );
+}
+
 /* ── Service icons ────────────────────────────────────────────── */
 const SVC_ICONS = {
   building: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 22V4a2 2 0 012-2h8a2 2 0 012 2v18z"/><path d="M6 12H4a2 2 0 00-2 2v6a2 2 0 002 2h2"/><path d="M18 9h2a2 2 0 012 2v9a2 2 0 01-2 2h-2"/></svg>,
@@ -457,12 +549,10 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link to="/a-propos" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 26px', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.62rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'opacity .3s' }}
-              onMouseEnter={e => e.currentTarget.style.opacity = '.85'}
-              onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
+            <AnimBtn to="/a-propos" variant="gold">
               {tl('En savoir plus', 'Learn more', 'Saber más', 'Mehr erfahren', '了解更多')}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
+            </AnimBtn>
           </FadeIn>
           <FadeIn dir="right">
             <div style={{ position: 'relative' }}>
@@ -616,14 +706,30 @@ export default function Home() {
                   ))}
                 </div>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  <Link to="/projets" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 22px', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.6rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 25px rgba(201,168,76,.4)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}>
+                  <AnimBtn to="/projets" variant="gold" style={{ padding: '10px 22px', fontSize: '.6rem' }}>
                     {tl('Voir le projet', 'View project', 'Ver proyecto', 'Projekt ansehen', '查看项目')}
-                  </Link>
-                  <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 22px', border: `1px solid ${v.color}60`, color: v.color, fontFamily: 'var(--f-display)', fontSize: '.6rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = `${v.color}15`; e.currentTarget.style.borderColor = v.color; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.borderColor = `${v.color}60`; }}>
+                  </AnimBtn>
+                  <a href={waUrl} target="_blank" rel="noopener noreferrer"
+                    style={{ display:'inline-flex', alignItems:'center', gap:6, padding:'10px 22px',
+                      border:`1px solid ${v.color}60`, color:v.color,
+                      fontFamily:'var(--f-display)', fontSize:'.6rem', letterSpacing:'.12em',
+                      textTransform:'uppercase', textDecoration:'none',
+                      position:'relative', overflow:'hidden',
+                      transition:'all .35s cubic-bezier(.4,0,.2,1)',
+                      animation:'btnFloat 3.2s ease-in-out infinite',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform='translateY(-4px)';
+                      e.currentTarget.style.background=`${v.color}20`;
+                      e.currentTarget.style.borderColor=v.color;
+                      e.currentTarget.style.boxShadow=`0 12px 32px ${v.color}40`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform='';
+                      e.currentTarget.style.background='';
+                      e.currentTarget.style.borderColor=`${v.color}60`;
+                      e.currentTarget.style.boxShadow='';
+                    }}>
                     {tl('Réserver', 'Reserve', 'Reservar', 'Reservieren', '预订')}
                   </a>
                 </div>
@@ -669,12 +775,10 @@ export default function Home() {
           </div>
           <FadeIn delay={0.4} dir="up">
             <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <Link to="/services" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 28px', border: '1px solid rgba(201,168,76,.3)', color: 'var(--gold)', fontFamily: 'var(--f-display)', fontSize: '.62rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.08)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.6)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.borderColor = 'rgba(201,168,76,.3)'; }}>
+              <AnimBtn to="/services" variant="outline">
                 {tl('Tous nos services', 'All services', 'Todos los servicios', 'Alle Leistungen', '查看所有服务')}
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
+              </AnimBtn>
             </div>
           </FadeIn>
         </div>
@@ -724,12 +828,10 @@ export default function Home() {
             </div>
           </FadeIn>
           <div style={{ textAlign: 'center', marginTop: 32 }}>
-            <Link to="/partenaires" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 28px', border: '1px solid rgba(201,168,76,.3)', color: 'var(--gold)', fontFamily: 'var(--f-display)', fontSize: '.62rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.08)'}
-              onMouseLeave={e => e.currentTarget.style.background = ''}>
+            <AnimBtn to="/partenaires" variant="outline">
               {tl('Voir tous les partenaires', 'View all partners', 'Ver todos los socios', 'Alle Partner', '查看所有合作伙伴')}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
+            </AnimBtn>
           </div>
         </div>
       </section>
@@ -787,12 +889,10 @@ export default function Home() {
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 36 }}>
-            <Link to="/entreprises" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, padding: '12px 28px', border: '1px solid rgba(201,168,76,.3)', color: 'var(--gold)', fontFamily: 'var(--f-display)', fontSize: '.62rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(201,168,76,.08)'}
-              onMouseLeave={e => e.currentTarget.style.background = ''}>
+            <AnimBtn to="/entreprises" variant="outline">
               {tl('Toutes nos entreprises', 'All companies', 'Todas las empresas', 'Alle Unternehmen', '查看所有企业')}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
+            </AnimBtn>
           </div>
         </div>
       </section>
@@ -803,8 +903,17 @@ export default function Home() {
         <GoldCanvas density={isMob ? 28 : 52} />
         <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <FadeIn dir="up">
-            <div style={{ display: 'inline-block', padding: 2, background: goldGrad, marginBottom: 32, animation: 'spinSlow 10s linear infinite' }}>
-              <div style={{ background: 'var(--navy2)', padding: '10px 18px', fontFamily: 'var(--f-display)', fontSize: '.48rem', letterSpacing: '.3em', color: 'var(--gold)', textTransform: 'uppercase' }}>G.N.A.H</div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 16, marginBottom: 32, padding: '14px 28px', border: '1px solid rgba(201,168,76,.3)', background: 'rgba(201,168,76,.06)', backdropFilter: 'blur(12px)', animation: 'floatY 4s ease-in-out infinite' }}>
+              <div style={{ width: 1, height: 28, background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)' }} />
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontFamily: 'var(--f-display)', fontSize: '.46rem', letterSpacing: '.22em', color: 'rgba(201,168,76,.6)', textTransform: 'uppercase', marginBottom: 3 }}>G.N.A.H — Since 2015</div>
+                <div style={{ fontFamily: 'var(--f-elegant)', fontSize: '1.1rem', color: 'var(--cream)', lineHeight: 1 }}>
+                  <span style={{ background: goldGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                    {tl("Bâtir l'Afrique de demain","Building tomorrow's Africa","Construyendo el África del mañana","Das Afrika von morgen bauen","建设明日非洲")}
+                  </span>
+                </div>
+              </div>
+              <div style={{ width: 1, height: 28, background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)' }} />
             </div>
             <h2 style={{ fontFamily: 'var(--f-elegant)', fontSize: 'clamp(2rem,5vw,3.8rem)', color: 'var(--cream)', lineHeight: 1.15, marginBottom: 16 }}>
               {tl('Investissons Ensemble', "Let's Invest Together", 'Invirtamos Juntos', 'Gemeinsam Investieren', '共同投资')}
@@ -817,17 +926,13 @@ export default function Home() {
               {nl({ fr: "Projets structurés, partenariats durables, vision continentale.", en: "Structured projects, lasting partnerships, continental vision.", es: "Proyectos estructurados, asociaciones duraderas, visión continental.", de: "Strukturierte Projekte, dauerhafte Partnerschaften, kontinentale Vision.", zh: "结构化项目，持久合作，大陆愿景。" })}
             </p>
             <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(14px,2vw,17px) clamp(28px,3.5vw,42px)', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', boxShadow: '0 8px 40px rgba(201,168,76,.45)', transition: 'all .3s' }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 16px 52px rgba(201,168,76,.65)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 40px rgba(201,168,76,.45)'; }}>
+              <AnimBtn href={waUrl} target="_blank" rel="noopener noreferrer" variant="gold" style={{ padding: 'clamp(14px,2vw,17px) clamp(28px,3.5vw,42px)', fontSize: '.68rem' }}>
                 {tl('Nous contacter', 'Contact us', 'Contáctenos', 'Kontakt', '联系我们')}
-              </a>
-              <Link to="/investisseurs" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(14px,2vw,17px) clamp(28px,3.5vw,42px)', background: 'transparent', border: '1px solid rgba(201,168,76,.4)', color: 'var(--cream)', fontFamily: 'var(--f-display)', fontSize: '.68rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s', backdropFilter: 'blur(4px)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.1)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.8)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.4)'; }}>
+              </AnimBtn>
+              <AnimBtn to="/investisseurs" variant="outline" style={{ padding: 'clamp(14px,2vw,17px) clamp(28px,3.5vw,42px)', fontSize: '.68rem' }}>
                 {tl('Investir', 'Invest', 'Invertir', 'Investieren', '投资')}
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
+              </AnimBtn>
             </div>
           </FadeIn>
         </div>
