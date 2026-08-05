@@ -120,17 +120,18 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
 
   const nl = obj => obj[lang] || obj.fr;
 
-  /* Preload — try GNAH local first, fallback Unsplash */
+  /* Load Unsplash immediately, upgrade to local GNAH image if available */
   useEffect(() => {
+    // Set Unsplash immediately so slides show right away
+    const initial = {};
+    HERO_UNSPLASH.forEach((url, i) => { initial[i] = url; });
+    setLoaded(initial);
+
+    // Then try to upgrade to local GNAH images
     YAYE_SLIDES.forEach((s, i) => {
       const img = new Image();
       img.onload = () => setLoaded(p => ({ ...p, [i]: s.img }));
-      img.onerror = () => {
-        const fb = new Image();
-        fb.onload = () => setLoaded(p => ({ ...p, [i]: HERO_UNSPLASH[i] }));
-        fb.onerror = () => setLoaded(p => ({ ...p, [i]: HERO_UNSPLASH[i] }));
-        fb.src = HERO_UNSPLASH[i];
-      };
+      // If local fails, keep Unsplash (already set)
       img.src = s.img;
     });
   }, []);
@@ -221,9 +222,9 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
       {YAYE_SLIDES.map((s, i) => (
         <div key={i} style={{
           position: 'absolute', inset: '-3%',
-          backgroundImage: loaded[i] ? `url(${loaded[i]})` : undefined,
-          background: loaded[i] ? undefined : 'linear-gradient(135deg,#050810 0%,#0d1427 100%)',
-          backgroundSize: 'cover', backgroundPosition: 'center',
+          backgroundImage: `url(${loaded[i] || HERO_UNSPLASH[i]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           opacity: i === slide ? 1 : 0,
           transform: `scale(1.06) translate(${i === slide ? mousePos.x * 0.3 : 0}px, ${i === slide ? mousePos.y * 0.3 : 0}px)`,
           transition: i === slide
