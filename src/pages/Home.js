@@ -102,6 +102,278 @@ const SVC_ICONS = {
 /* ══════════════════════════════════════════════════════════════
    HOME PAGE
 ══════════════════════════════════════════════════════════════ */
+/* ── Hero 3D Premium ─────────────────────────────────────────── */
+/* Premium Unsplash images - shown while local images load */
+const HERO_UNSPLASH = [
+  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=90',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=90',
+  'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1920&q=90',
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90',
+];
+
+function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
+  const [loaded, setLoaded] = useState({});
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const heroRef = useRef(null);
+  const canvasRef = useRef(null);
+  const rafRef = useRef(null);
+
+  const nl = obj => obj[lang] || obj.fr;
+
+  /* Preload — try GNAH local first, fallback Unsplash */
+  useEffect(() => {
+    YAYE_SLIDES.forEach((s, i) => {
+      const img = new Image();
+      img.onload = () => setLoaded(p => ({ ...p, [i]: s.img }));
+      img.onerror = () => {
+        const fb = new Image();
+        fb.onload = () => setLoaded(p => ({ ...p, [i]: HERO_UNSPLASH[i] }));
+        fb.onerror = () => setLoaded(p => ({ ...p, [i]: HERO_UNSPLASH[i] }));
+        fb.src = HERO_UNSPLASH[i];
+      };
+      img.src = s.img;
+    });
+  }, []);
+
+  /* 3D Canvas — premium gold particles with depth */
+  useEffect(() => {
+    const cv = canvasRef.current; if (!cv) return;
+    const ctx = cv.getContext('2d');
+    let raf;
+    const resize = () => { cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const layers = [
+      Array.from({ length: 35 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 2 + 0.5, speed: 0.15, depth: 0.3 })),
+      Array.from({ length: 25 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.5 + 1, speed: 0.25, depth: 0.6 })),
+      Array.from({ length: 15 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1 + 1.5, speed: 0.4, depth: 1.0 })),
+    ];
+
+    let mx = 0.5, my = 0.5;
+    let time = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      time += 0.008;
+
+      layers.forEach((layer, li) => {
+        layer.forEach(p => {
+          const px = (p.x * cv.width) + Math.sin(time * p.speed + p.x * 6) * 25 * p.depth + (mx - 0.5) * 40 * p.depth;
+          const py = (p.y * cv.height) + Math.cos(time * p.speed + p.y * 6) * 18 * p.depth + (my - 0.5) * 30 * p.depth;
+          const alpha = (0.15 + li * 0.15 + Math.sin(time * 2 + p.x * 10) * 0.1);
+          const grd = ctx.createRadialGradient(px, py, 0, px, py, p.r * 3);
+          grd.addColorStop(0, `rgba(232,201,106,${alpha})`);
+          grd.addColorStop(0.5, `rgba(201,168,76,${alpha * 0.6})`);
+          grd.addColorStop(1, 'rgba(201,168,76,0)');
+          ctx.beginPath(); ctx.arc(px, py, p.r * 3, 0, Math.PI * 2);
+          ctx.fillStyle = grd; ctx.fill();
+          ctx.beginPath(); ctx.arc(px, py, p.r * 0.6, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,240,180,${alpha * 1.5})`; ctx.fill();
+        });
+        /* Connection lines for nearest layer */
+        if (li === 1) {
+          layer.forEach((p, pi) => {
+            const px = (p.x * cv.width) + Math.sin(time * p.speed + p.x * 6) * 25 * p.depth + (mx - 0.5) * 40 * p.depth;
+            const py = (p.y * cv.height) + Math.cos(time * p.speed + p.y * 6) * 18 * p.depth + (my - 0.5) * 30 * p.depth;
+            layer.slice(pi + 1, pi + 3).forEach(q => {
+              const qx = (q.x * cv.width) + Math.sin(time * q.speed + q.x * 6) * 25 * q.depth + (mx - 0.5) * 40 * q.depth;
+              const qy = (q.y * cv.height) + Math.cos(time * q.speed + q.y * 6) * 18 * q.depth + (my - 0.5) * 30 * q.depth;
+              const d = Math.hypot(px - qx, py - qy);
+              if (d < 110) {
+                ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy);
+                ctx.strokeStyle = `rgba(201,168,76,${(1 - d / 110) * 0.12})`; ctx.lineWidth = 0.8; ctx.stroke();
+              }
+            });
+          });
+        }
+      });
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    const onMove = e => {
+      const rect = cv.getBoundingClientRect();
+      mx = (e.clientX - rect.left) / rect.width;
+      my = (e.clientY - rect.top) / rect.height;
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); window.removeEventListener('mousemove', onMove); };
+  }, []);
+
+  /* Mouse parallax on hero container */
+  const handleMouseMove = e => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMousePos({
+      x: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
+      y: ((e.clientY - rect.top) / rect.height - 0.5) * 12,
+    });
+  };
+
+  const goldGrad = 'linear-gradient(135deg,#c9a84c,#e8c96a,#8b6914)';
+
+  return (
+    <section ref={heroRef} onMouseMove={handleMouseMove}
+      style={{ position: 'relative', height: '100vh', minHeight: 640, overflow: 'hidden', cursor: 'default' }}>
+
+      {/* ── BG SLIDES with parallax ─────────────────────────── */}
+      {YAYE_SLIDES.map((s, i) => (
+        <div key={i} style={{
+          position: 'absolute', inset: '-3%',
+          backgroundImage: loaded[i] ? `url(${loaded[i]})` : undefined,
+          background: loaded[i] ? undefined : 'linear-gradient(135deg,#050810 0%,#0d1427 100%)',
+          backgroundSize: 'cover', backgroundPosition: 'center',
+          opacity: i === slide ? 1 : 0,
+          transform: `scale(1.06) translate(${i === slide ? mousePos.x * 0.3 : 0}px, ${i === slide ? mousePos.y * 0.3 : 0}px)`,
+          transition: i === slide
+            ? 'opacity 1.4s cubic-bezier(.4,0,.2,1), transform 0.1s ease'
+            : 'opacity 1.4s cubic-bezier(.4,0,.2,1)',
+          willChange: 'transform, opacity',
+        }} />
+      ))}
+
+      {/* ── CINEMATIC OVERLAY ──────────────────────────────── */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(105deg, rgba(5,8,16,.92) 0%, rgba(5,8,16,.65) 45%, rgba(5,8,16,.82) 100%)',
+      }} />
+      {/* Bottom fade */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', zIndex: 1,
+        background: 'linear-gradient(to top, rgba(5,8,16,.9) 0%, transparent 100%)',
+      }} />
+      {/* Top fade */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '20%', zIndex: 1,
+        background: 'linear-gradient(to bottom, rgba(5,8,16,.5) 0%, transparent 100%)',
+      }} />
+
+      {/* ── 3D GOLD CANVAS ──────────────────────────────────── */}
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 2, pointerEvents: 'none' }} />
+
+      {/* ── 3D GEOMETRIC ACCENT ─────────────────────────────── */}
+      <div style={{
+        position: 'absolute', zIndex: 2, pointerEvents: 'none',
+        right: isMob ? '-8%' : '4%', top: '50%',
+        width: isMob ? 220 : 380, height: isMob ? 220 : 380,
+        transform: `translateY(-50%) rotateX(${mousePos.y * 0.5}deg) rotateY(${mousePos.x * 0.3}deg)`,
+        transition: 'transform 0.15s ease',
+        transformStyle: 'preserve-3d',
+      }}>
+        {/* Outer ring */}
+        <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '1px solid rgba(201,168,76,.12)', animation: 'spinSlow 30s linear infinite' }}>
+          {/* Orbit dot top */}
+          <div style={{ position: 'absolute', top: -5, left: '50%', transform: 'translateX(-50%)', width: 10, height: 10, borderRadius: '50%', background: goldGrad, boxShadow: '0 0 20px rgba(201,168,76,.9), 0 0 40px rgba(201,168,76,.4)' }} />
+        </div>
+        {/* Mid ring */}
+        <div style={{ position: 'absolute', inset: 38, borderRadius: '50%', border: '1px solid rgba(201,168,76,.22)', animation: 'spinSlow 20s linear infinite reverse' }}>
+          <div style={{ position: 'absolute', bottom: -5, left: '50%', transform: 'translateX(-50%)', width: 7, height: 7, borderRadius: '50%', background: 'rgba(201,168,76,.8)', boxShadow: '0 0 12px rgba(201,168,76,.8)' }} />
+        </div>
+        {/* Inner ring */}
+        <div style={{ position: 'absolute', inset: 76, borderRadius: '50%', border: '1px solid rgba(201,168,76,.38)', animation: 'spinSlow 14s linear infinite' }} />
+        {/* Core */}
+        <div style={{ position: 'absolute', inset: 114, borderRadius: '50%', background: 'rgba(201,168,76,.04)', border: '1px solid rgba(201,168,76,.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ fontFamily: 'var(--f-display)', fontSize: isMob ? '.38rem' : '.5rem', letterSpacing: '.22em', color: 'rgba(201,168,76,.7)', textTransform: 'uppercase', textAlign: 'center' }}>GNAH</div>
+        </div>
+      </div>
+
+      {/* ── SLIDE NUMBER INDICATOR ───────────────────────────── */}
+      <div style={{ position: 'absolute', right: isMob ? 16 : 32, top: '50%', transform: 'translateY(-50%)', zIndex: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+        {YAYE_SLIDES.map((_, i) => (
+          <button key={i} onClick={() => { setSlide(i); clearInterval(timerRef.current); timerRef.current = setInterval(() => setSlide(s => (s + 1) % YAYE_SLIDES.length), 5500); }}
+            style={{ width: i === slide ? 3 : 2, height: i === slide ? 32 : 16, borderRadius: 2, border: 'none', cursor: 'pointer', transition: 'all .4s', background: i === slide ? 'var(--gold)' : 'rgba(201,168,76,.3)', padding: 0, boxShadow: i === slide ? '0 0 12px rgba(201,168,76,.6)' : 'none' }} />
+        ))}
+      </div>
+
+      {/* ── MAIN CONTENT ─────────────────────────────────────── */}
+      <div className="container" style={{
+        position: 'absolute', inset: 0, zIndex: 3,
+        display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        padding: `0 clamp(16px,5vw,56px)`,
+        transform: `translate(${mousePos.x * 0.08}px, ${mousePos.y * 0.05}px)`,
+        transition: 'transform 0.2s ease',
+      }}>
+
+        {/* Live badge */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', border: '1px solid rgba(201,168,76,.28)', background: 'rgba(201,168,76,.06)', backdropFilter: 'blur(12px)', marginBottom: 22, width: 'fit-content', animation: 'fadeInUp .5s ease both' }}>
+          <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#34d399', boxShadow: '0 0 10px #34d399', animation: 'pulse 2s infinite' }} />
+          <span style={{ fontFamily: 'var(--f-display)', fontSize: '.52rem', letterSpacing: '.26em', color: 'rgba(201,168,76,.85)', textTransform: 'uppercase' }}>
+            {YAYE_SLIDES[slide][lang]?.tag || YAYE_SLIDES[slide].fr.tag}
+          </span>
+        </div>
+
+        {/* Main title */}
+        <h1 key={`title-${slide}`} style={{
+          fontFamily: 'var(--f-elegant)',
+          fontSize: 'clamp(2.4rem,5.5vw,5.2rem)',
+          color: 'var(--cream)',
+          lineHeight: 1.08,
+          letterSpacing: '.01em',
+          marginBottom: 14,
+          maxWidth: 820,
+          textShadow: '0 4px 32px rgba(0,0,0,.4)',
+          animation: 'heroSlideIn .7s cubic-bezier(.22,1,.36,1) both',
+        }}>
+          {YAYE_SLIDES[slide][lang]?.title || YAYE_SLIDES[slide].fr.title}
+        </h1>
+
+        {/* Sub */}
+        <p key={`sub-${slide}`} style={{
+          fontFamily: 'var(--f-serif)', fontStyle: 'italic',
+          fontSize: 'clamp(.9rem,1.6vw,1.18rem)',
+          color: 'rgba(245,240,232,.52)',
+          marginBottom: 12,
+          animation: 'heroSlideIn .8s cubic-bezier(.22,1,.36,1) .08s both',
+        }}>
+          {YAYE_SLIDES[slide][lang]?.sub || YAYE_SLIDES[slide].fr.sub}
+        </p>
+
+        {/* Tagline */}
+        <div style={{ marginBottom: 38, animation: 'heroSlideIn .85s cubic-bezier(.22,1,.36,1) .14s both' }}>
+          <span style={{ fontFamily: 'var(--f-display)', fontSize: '.68rem', letterSpacing: '.22em', textTransform: 'uppercase', background: goldGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            {nl(TAGLINE)}
+          </span>
+        </div>
+
+        {/* CTAs */}
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', animation: 'heroSlideIn .9s cubic-bezier(.22,1,.36,1) .2s both' }}>
+          <Link to="/projets" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(13px,2vw,16px) clamp(24px,3vw,36px)', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.66rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', boxShadow: '0 8px 36px rgba(201,168,76,.5)', transition: 'all .3s', backdropFilter: 'blur(4px)' }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(201,168,76,.7)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 36px rgba(201,168,76,.5)'; }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            {tl('Découvrir nos Projets','Discover our Projects','Ver nuestros Proyectos','Unsere Projekte','探索我们的项目')}
+          </Link>
+          <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(13px,2vw,16px) clamp(24px,3vw,36px)', background: 'rgba(5,8,16,.4)', border: '1px solid rgba(201,168,76,.42)', color: 'var(--cream)', fontFamily: 'var(--f-display)', fontSize: '.66rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', backdropFilter: 'blur(12px)', transition: 'all .3s' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.15)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.8)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(5,8,16,.4)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.42)'; e.currentTarget.style.transform = ''; }}>
+            {tl('Nous écrire','Message us','Escríbanos','Schreiben Sie uns','发消息')}
+          </a>
+        </div>
+
+        {/* Progress bar dots */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 48, animation: 'fadeInUp 1s ease .3s both' }}>
+          {YAYE_SLIDES.map((_, i) => (
+            <button key={i} onClick={() => { setSlide(i); clearInterval(timerRef.current); timerRef.current = setInterval(() => setSlide(s => (s + 1) % YAYE_SLIDES.length), 5500); }}
+              style={{ height: 3, width: i === slide ? 36 : 12, borderRadius: 2, border: 'none', cursor: 'pointer', transition: 'all .5s cubic-bezier(.4,0,.2,1)', background: i === slide ? 'var(--gold)' : 'rgba(201,168,76,.25)', padding: 0, boxShadow: i === slide ? '0 0 10px rgba(201,168,76,.6)' : 'none' }} />
+          ))}
+          <span style={{ fontFamily: 'var(--f-display)', fontSize: '.48rem', letterSpacing: '.16em', color: 'rgba(201,168,76,.4)', textTransform: 'uppercase', marginLeft: 4 }}>
+            0{slide + 1} / 0{YAYE_SLIDES.length}
+          </span>
+        </div>
+      </div>
+
+      {/* ── SCROLL INDICATOR ─────────────────────────────────── */}
+      <div style={{ position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)', zIndex: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, animation: 'floatY 3s ease-in-out infinite' }}>
+        <span style={{ fontFamily: 'var(--f-display)', fontSize: '.46rem', letterSpacing: '.24em', color: 'rgba(201,168,76,.4)', textTransform: 'uppercase' }}>
+          {tl('Défiler','Scroll','Deslizar','Scrollen','滑动')}
+        </span>
+        <div style={{ width: 20, height: 32, border: '1.5px solid rgba(201,168,76,.35)', borderRadius: 10, display: 'flex', justifyContent: 'center', paddingTop: 6 }}>
+          <div style={{ width: 3, height: 8, borderRadius: 2, background: 'var(--gold)', animation: 'scrollDot 1.8s ease-in-out infinite' }} />
+        </div>
+      </div>
+
+    </section>
+  );
+}
+
 export default function Home() {
   const { lang } = useLang();
   const w = useW();
@@ -159,95 +431,8 @@ export default function Home() {
   return (
     <main style={{ overflowX: 'hidden' }}>
 
-      {/* ══ SECTION 1 — HERO avec YAYE_SLIDES ══════════════════════ */}
-      <section style={{ position: 'relative', height: '100vh', minHeight: 600, overflow: 'hidden' }}>
-        {/* Slides */}
-        {YAYE_SLIDES.map((s, i) => (
-          <div key={i} style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: slideLoaded[i] ? `url(${slideLoaded[i]})` : undefined,
-            background: slideLoaded[i] ? undefined : 'linear-gradient(135deg,#050810,#0d1427)',
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            opacity: i === slide ? 1 : 0,
-            transform: i === slide ? 'scale(1.04)' : 'scale(1)',
-            transition: 'opacity 1.3s ease, transform 9s ease',
-          }} />
-        ))}
-        {/* Overlay gradient */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(5,8,16,.9) 0%, rgba(5,8,16,.55) 55%, rgba(5,8,16,.75) 100%), linear-gradient(to top, rgba(5,8,16,.7) 0%, transparent 50%)', zIndex: 1 }} />
-        {/* Gold particles */}
-        <GoldCanvas density={isMob ? 30 : 60} style={{ zIndex: 2 }} />
-
-        {/* Rotating rings accent */}
-        <div style={{ position: 'absolute', right: isMob ? '-5%' : '5%', top: '50%', transform: 'translateY(-50%)', width: isMob ? 200 : 340, height: isMob ? 200 : 340, zIndex: 2, pointerEvents: 'none' }}>
-          <div style={{ position: 'absolute', inset: 0, border: '1px solid rgba(201,168,76,.12)', borderRadius: '50%', animation: 'spinSlow 25s linear infinite' }} />
-          <div style={{ position: 'absolute', inset: 28, border: '1px solid rgba(201,168,76,.2)', borderRadius: '50%', animation: 'spinSlow 18s linear infinite reverse' }} />
-          <div style={{ position: 'absolute', inset: 56, border: '1px solid rgba(201,168,76,.32)', borderRadius: '50%', animation: 'spinSlow 12s linear infinite' }} />
-          <div style={{ position: 'absolute', top: '50%', left: -5, width: 10, height: 10, borderRadius: '50%', background: goldGrad, transform: 'translateY(-50%)', boxShadow: '0 0 18px rgba(201,168,76,.9)', animation: 'pulse 2s ease-in-out infinite' }} />
-        </div>
-
-        {/* Hero content */}
-        <div className="container" style={{ position: 'relative', zIndex: 3, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 clamp(16px,4vw,48px)' }}>
-          {/* Tag */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 14px', border: '1px solid rgba(201,168,76,.3)', background: 'rgba(201,168,76,.06)', backdropFilter: 'blur(8px)', marginBottom: 20, width: 'fit-content', animation: 'fadeInUp .6s ease both' }}>
-            <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399', animation: 'pulse 2s infinite' }} />
-            <span style={{ fontFamily: 'var(--f-display)', fontSize: '.55rem', letterSpacing: '.22em', color: 'var(--gold)', textTransform: 'uppercase' }}>
-              {YAYE_SLIDES[slide][lang]?.tag || YAYE_SLIDES[slide].fr.tag}
-            </span>
-          </div>
-
-          {/* Title from YAYE_SLIDES */}
-          <h1 key={slide} style={{ fontFamily: 'var(--f-elegant)', fontSize: 'clamp(2.2rem,5.5vw,4.8rem)', color: 'var(--cream)', lineHeight: 1.1, letterSpacing: '.02em', marginBottom: 14, maxWidth: 780, animation: 'fadeInUp .7s ease both' }}>
-            {YAYE_SLIDES[slide][lang]?.title || YAYE_SLIDES[slide].fr.title}
-          </h1>
-
-          {/* Sub */}
-          <p style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', fontSize: 'clamp(.88rem,1.6vw,1.15rem)', color: 'rgba(245,240,232,.55)', marginBottom: 12, animation: 'fadeInUp .8s ease both' }}>
-            {YAYE_SLIDES[slide][lang]?.sub || YAYE_SLIDES[slide].fr.sub}
-          </p>
-
-          {/* Global tagline */}
-          <p style={{ fontFamily: 'var(--f-display)', fontSize: '.7rem', letterSpacing: '.18em', textTransform: 'uppercase', marginBottom: 36, animation: 'fadeInUp .85s ease both' }}>
-            <span style={{ background: goldGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              {nl(TAGLINE)}
-            </span>
-          </p>
-
-          {/* CTAs */}
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', animation: 'fadeInUp .9s ease both' }}>
-            <Link to="/projets" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(12px,2vw,15px) clamp(22px,3vw,34px)', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.65rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', boxShadow: '0 8px 32px rgba(201,168,76,.45)', transition: 'all .3s' }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 44px rgba(201,168,76,.65)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(201,168,76,.45)'; }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-              {tl('Découvrir nos Projets', 'Discover our Projects', 'Ver nuestros Proyectos', 'Unsere Projekte', '探索我们的项目')}
-            </Link>
-            <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(12px,2vw,15px) clamp(22px,3vw,34px)', background: 'transparent', border: '1px solid rgba(201,168,76,.4)', color: 'var(--cream)', fontFamily: 'var(--f-display)', fontSize: '.65rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', backdropFilter: 'blur(6px)', transition: 'all .3s' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,.1)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.8)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(201,168,76,.4)'; }}>
-              {tl('Nous écrire', 'Message us', 'Escríbanos', 'Schreiben Sie uns', '发消息')}
-            </a>
-          </div>
-
-          {/* Slide dots */}
-          <div style={{ display: 'flex', gap: 8, marginTop: 44 }}>
-            {YAYE_SLIDES.map((_, i) => (
-              <button key={i} onClick={() => { setSlide(i); clearInterval(timerRef.current); timerRef.current = setInterval(() => setSlide(s => (s + 1) % YAYE_SLIDES.length), 5500); }}
-                style={{ width: i === slide ? 28 : 8, height: 8, borderRadius: 4, border: 'none', cursor: 'pointer', transition: 'all .4s', background: i === slide ? 'var(--gold)' : 'rgba(201,168,76,.28)', padding: 0, boxShadow: i === slide ? '0 0 12px rgba(201,168,76,.6)' : 'none' }} />
-            ))}
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, animation: 'floatY 3s ease-in-out infinite' }}>
-          <span style={{ fontFamily: 'var(--f-display)', fontSize: '.48rem', letterSpacing: '.22em', color: 'rgba(201,168,76,.45)', textTransform: 'uppercase' }}>
-            {tl('Défiler', 'Scroll', 'Deslizar', 'Scrollen', '滑动')}
-          </span>
-          <svg width="16" height="24" viewBox="0 0 16 24" fill="none" stroke="rgba(201,168,76,.5)" strokeWidth="1.5">
-            <rect x="1" y="1" width="14" height="22" rx="7"/>
-            <line x1="8" y1="6" x2="8" y2="12" strokeLinecap="round" style={{ animation: 'floatY 1.5s ease-in-out infinite' }}/>
-          </svg>
-        </div>
-      </section>
+      {/* ══ SECTION 1 — HERO 3D PREMIUM ═══════════════════════════════ */}
+      <HeroSection3D lang={lang} waUrl={waUrl} tl={tl} isMob={isMob} slide={slide} setSlide={setSlide} timerRef={timerRef} />
 
       {/* ══ SECTION 2 — STATS ANIMÉES (depuis STATS) ═══════════════ */}
       <section style={{ position: 'relative', background: 'var(--navy2)', padding: 'clamp(48px,6vw,72px) 0', overflow: 'hidden' }}>
