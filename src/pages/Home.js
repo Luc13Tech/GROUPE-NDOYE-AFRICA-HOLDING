@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
 import { SITE, STATS, SERVICES, PARTNERS_WORLD, COMPANIES, YAYE_SLIDES, VILLA_TYPES, TAGLINE, SUBTITLE } from '../data/siteData';
+
+// Import lazy du composant 3D
+const Villa3DViewer = lazy(() => import('../components/Villa3DViewer'));
 
 function useW() {
   const [w, sw] = useState(window.innerWidth);
@@ -492,7 +495,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ SECTION 4 — VILLAS ═══════════════════════════════════════ */}
+      {/* ══ SECTION 4 — VILLAS 3D ═══════════════════════════════════ */}
       <section style={{ padding: 'clamp(64px,8vw,100px) 0', background: 'var(--navy2)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(201,168,76,.05) 0%, transparent 55%), radial-gradient(circle at 80% 20%, rgba(201,168,76,.04) 0%, transparent 50%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -504,7 +507,7 @@ export default function Home() {
               <h2 style={{ fontFamily: 'var(--f-elegant)', fontSize: 'clamp(1.8rem,3.5vw,2.8rem)', color: 'var(--cream)', marginBottom: 10 }}>
                 {tl('300 Villas', '300 Villas', '300 Villas', '300 Villen', '300栋')}{' '}
                 <span style={{ background: goldGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                  {tl('Haut Standing', 'High-End', 'Alto Standing', 'Hochwertig', '高档别墅')}
+                  {tl('Haut Standing 3D', 'High-End 3D', 'Alto Standing 3D', 'Hochwertig 3D', '高档别墅3D')}
                 </span>
               </h2>
               <p style={{ fontFamily: 'var(--f-serif)', fontStyle: 'italic', color: 'rgba(200,195,186,.45)', fontSize: 'clamp(.84rem,1.2vw,.95rem)' }}>
@@ -515,30 +518,72 @@ export default function Home() {
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 36, flexWrap: 'wrap' }}>
             {VILLA_TYPES.map((v, i) => (
-              <button key={i} onClick={() => setActiveVilla(i)} style={{ padding: '8px 18px', border: `1px solid ${i === activeVilla ? v.color : 'rgba(201,168,76,.15)'}`, background: i === activeVilla ? `${v.color}18` : 'transparent', color: i === activeVilla ? v.color : 'rgba(200,195,186,.45)', fontFamily: 'var(--f-display)', fontSize: '.58rem', letterSpacing: '.1em', textTransform: 'uppercase', cursor: 'pointer', transition: 'all .3s' }}>
-                {v.id.toUpperCase()}
+              <button key={i} onClick={() => setActiveVilla(i)} style={{ 
+                padding: '8px 18px', 
+                border: `1px solid ${i === activeVilla ? v.color : 'rgba(201,168,76,.15)'}`, 
+                background: i === activeVilla ? `${v.color}18` : 'transparent', 
+                color: i === activeVilla ? v.color : 'rgba(200,195,186,.45)', 
+                fontFamily: 'var(--f-display)', 
+                fontSize: '.58rem', 
+                letterSpacing: '.1em', 
+                textTransform: 'uppercase', 
+                cursor: 'pointer', 
+                transition: 'all .3s',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+                onMouseEnter={e => {
+                  if (i !== activeVilla) {
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,.4)';
+                    e.currentTarget.style.background = 'rgba(201,168,76,.05)';
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (i !== activeVilla) {
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,.15)';
+                    e.currentTarget.style.background = 'transparent';
+                  }
+                }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ 
+                    display: 'inline-block', 
+                    width: 6, 
+                    height: 6, 
+                    borderRadius: '50%', 
+                    background: v.color,
+                    opacity: i === activeVilla ? 1 : 0.3
+                  }} />
+                  {v.id.toUpperCase()}
+                </span>
               </button>
             ))}
           </div>
 
           {VILLA_TYPES.map((v, i) => (
-            <div key={v.id} style={{ display: i === activeVilla ? 'grid' : 'none', gridTemplateColumns: isMob ? '1fr' : '1fr 1fr', gap: 'clamp(20px,4vw,52px)', alignItems: 'center', animation: 'fadeInUp .5s ease' }}>
-              <div style={{ position: 'relative', overflow: 'hidden' }}>
-                <img src={v.img} alt={(v[lang] || v.fr).name}
-                  style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block', transition: 'transform .7s ease' }}
-                  onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
-                  onMouseLeave={e => e.currentTarget.style.transform = ''}
-                  onError={e => { e.target.src = `https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80`; }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(5,8,16,.65) 0%, transparent 55%)' }} />
-                <div style={{ position: 'absolute', bottom: 16, left: 16, padding: '4px 12px', background: v.color, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.54rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
-                  {v.id.toUpperCase()} — {v.bati}
+            <div key={v.id} style={{ 
+              display: i === activeVilla ? 'grid' : 'none', 
+              gridTemplateColumns: isMob ? '1fr' : '1fr 1fr', 
+              gap: 'clamp(20px,4vw,52px)', 
+              alignItems: 'center',
+              animation: 'fadeIn3D .6s ease'
+            }}>
+              {/* Viewer 3D */}
+              <Suspense fallback={
+                <div className="villa-3d-loader">
+                  <div className="villa-3d-loader-spinner" />
+                  <div className="villa-3d-loader-text">Chargement 3D...</div>
                 </div>
-                {v.planImg && (
-                  <div style={{ position: 'absolute', bottom: 16, right: 16, width: 80, height: 64, overflow: 'hidden', border: '1px solid rgba(201,168,76,.4)', opacity: .85 }}>
-                    <img src={v.planImg} alt="plan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
-                  </div>
-                )}
-              </div>
+              }>
+                <Villa3DViewer 
+                  villa={v} 
+                  isMob={isMob} 
+                  waUrl={waUrl} 
+                  tl={tl} 
+                />
+              </Suspense>
+
+              {/* Informations */}
               <div>
                 <div style={{ color: v.color, fontFamily: 'var(--f-display)', fontSize: '.54rem', letterSpacing: '.18em', textTransform: 'uppercase', marginBottom: 10 }}>
                   {(v[lang] || v.fr).standing}
@@ -547,10 +592,10 @@ export default function Home() {
                   {(v[lang] || v.fr).name}
                 </h3>
                 <div style={{ display: 'flex', gap: 20, marginBottom: 18 }}>
-                  {[{ l: tl('Terrain', 'Plot', 'Terreno', 'Grundstück', '地块'), v: v.surface }, { l: tl('Bâti', 'Built', 'Construido', 'Gebaut', '建筑'), v: v.bati }].map((d, k) => (
+                  {[{ l: tl('Terrain', 'Plot', 'Terreno', 'Grundstück', '地块'), val: v.surface }, { l: tl('Bâti', 'Built', 'Construido', 'Gebaut', '建筑'), val: v.bati }].map((d, k) => (
                     <div key={k}>
                       <div style={{ fontFamily: 'var(--f-display)', fontSize: '.5rem', letterSpacing: '.14em', color: 'rgba(200,195,186,.4)', textTransform: 'uppercase', marginBottom: 2 }}>{d.l}</div>
-                      <div style={{ fontFamily: 'var(--f-elegant)', fontSize: '1.1rem', color: v.color }}>{d.v}</div>
+                      <div style={{ fontFamily: 'var(--f-elegant)', fontSize: '1.1rem', color: v.color }}>{d.val}</div>
                     </div>
                   ))}
                 </div>
@@ -570,13 +615,15 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <div style={{ display: 'flex', gap: 10 }}>
-                  <Link to="/projets" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 22px', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.6rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'opacity .3s' }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = '.85'}
-                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  <Link to="/projets" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 22px', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.6rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 25px rgba(201,168,76,.4)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}>
                     {tl('Voir le projet', 'View project', 'Ver proyecto', 'Projekt ansehen', '查看项目')}
                   </Link>
-                  <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 22px', border: `1px solid ${v.color}60`, color: v.color, fontFamily: 'var(--f-display)', fontSize: '.6rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}>
+                  <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '10px 22px', border: `1px solid ${v.color}60`, color: v.color, fontFamily: 'var(--f-display)', fontSize: '.6rem', letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', transition: 'all .3s' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = `${v.color}15`; e.currentTarget.style.borderColor = v.color; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.borderColor = `${v.color}60`; }}>
                     {tl('Réserver', 'Reserve', 'Reservar', 'Reservieren', '预订')}
                   </a>
                 </div>
@@ -788,4 +835,4 @@ export default function Home() {
 
     </main>
   );
-        }
+          }
