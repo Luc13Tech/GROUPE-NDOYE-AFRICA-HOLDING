@@ -7,230 +7,233 @@ export default function Villa3DViewer({ villa, isMob }) {
   const [startRot, setStartRot] = useState({ x: 0, y: 0 });
   const [autoRotate, setAutoRotate] = useState(true);
   const [currentFace, setCurrentFace] = useState(0);
-  const [viewMode, setViewMode] = useState('exterior'); // 'exterior' | 'interior'
+  const [viewMode, setViewMode] = useState('exterior');
   const containerRef = useRef(null);
   const color = villa.color || '#c9a84c';
 
-  // Pour chaque type de villa, on définit les 6 faces (extérieur) + intérieur
-  const villaData = {
+  // Structure des images par type de villa (chemins depuis /public)
+  const villaImages = {
     F4: {
-      name: 'Villa F4 Duplex',
       exterior: [
         { 
           label: 'Façade avant', 
-          url: '/public/Images/yaye-dia/villa-f4duplex.jpg',
-          desc: 'Entrée principale avec jardin'
+          url: '/Images/yaye-dia/villa-f4duplex.jpg',
+          desc: 'Villa F4 Duplex - Vue principale'
         },
         { 
-          label: 'Côté droit', 
-          url: '/public/Images/yaye-dia/villa-f4duplex-nuit.jpg',
-          desc: 'Vue latérale avec piscine'
+          label: 'Façade de nuit', 
+          url: '/Images/yaye-dia/villa-f4duplex-nuit.jpg',
+          desc: 'Villa F4 Duplex - Illumination nocturne'
         },
         { 
-          label: 'Côté gauche', 
-          url: '/public/Images/yaye-dia/villa-f4duplex.jpg',
-          desc: 'Terrasse et jardin paysager'
+          label: 'Plein pied', 
+          url: '/Images/yaye-dia/villa-f4-plein-pied.jpg',
+          desc: 'Villa F4 - Vue plein pied'
         },
         { 
-          label: 'Façade arrière', 
-          url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
-          desc: 'Arrière-cour avec vue sur la nature'
+          label: 'Façade PP', 
+          url: '/Images/yaye-dia/villa-f4pp-facade.jpg',
+          desc: 'Villa F4 - Façade principale'
         },
         { 
-          label: 'Vue du dessus', 
-          url: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80',
-          desc: 'Vue aérienne de la propriété'
+          label: 'Vue générale', 
+          url: '/Images/yaye-dia/villa-f4pp.jpg',
+          desc: 'Villa F4 - Vue d\'ensemble'
         },
         { 
-          label: 'Vue de nuit', 
-          url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-          desc: 'Illumination nocturne'
+          label: 'Plan 3D', 
+          url: '/Images/yaye-dia/villa-f4pp-plan2.jpg',
+          desc: 'Villa F4 - Plan d\'architecture'
         }
       ],
       interior: [
         { 
           label: 'Salon', 
-          url: 'https://images.unsplash.com/photo-1616137466211-f939a420be84?w=800&q=80',
-          desc: 'Salon spacieux avec vue sur jardin'
+          url: '/Images/yaye-dia/salon-f4.jpg',
+          desc: 'Salon spacieux et lumineux'
+        },
+        { 
+          label: 'Salon intérieur', 
+          url: '/Images/yaye-dia/salon-f4-interieur.jpg',
+          desc: 'Intérieur salon de luxe'
+        },
+        { 
+          label: 'Plan F4', 
+          url: '/Images/yaye-dia/villa-f4pp-plan3.jpg',
+          desc: 'Plan d\'architecture détaillé'
         },
         { 
           label: 'Cuisine', 
-          url: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&q=80',
+          url: '/Images/yaye-dia/cuisine-luxe.jpg',
           desc: 'Cuisine moderne équipée'
         },
         { 
-          label: 'Chambre', 
-          url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
-          desc: 'Chambre principale avec suite'
+          label: 'Design intérieur', 
+          url: '/Images/yaye-dia/design.jpg',
+          desc: 'Design d\'intérieur contemporain'
         },
         { 
-          label: 'Salle de bain', 
-          url: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80',
-          desc: 'Salle de bain luxueuse'
-        },
-        { 
-          label: 'Terrasse', 
-          url: 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&q=80',
-          desc: 'Terrasse avec vue panoramique'
-        },
-        { 
-          label: 'Piscine', 
-          url: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80',
-          desc: 'Piscine à débordement'
+          label: 'Vision', 
+          url: '/Images/yaye-dia/vision.jpg',
+          desc: 'Vision architecturale'
         }
       ]
     },
     F5: {
-      name: 'Villa F5 Prestige',
       exterior: [
         { 
           label: 'Façade avant', 
-          url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-          desc: 'Entrée majestueuse'
+          url: '/Images/yaye-dia/villa-f5-facade3.jpg',
+          desc: 'Villa F5 - Façade principale'
         },
         { 
-          label: 'Côté droit', 
-          url: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80',
-          desc: 'Jardin et piscine'
+          label: 'Terrasse', 
+          url: '/Images/yaye-dia/villa-f5-terrasse.jpg',
+          desc: 'Terrasse panoramique'
         },
         { 
-          label: 'Côté gauche', 
-          url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
-          desc: 'Terrasse couverte'
+          label: 'Plan terrasse', 
+          url: '/Images/yaye-dia/villa-f5-terrasse-plan.jpg',
+          desc: 'Plan de la terrasse'
         },
         { 
-          label: 'Façade arrière', 
-          url: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
-          desc: 'Vue sur le parc'
+          label: 'Vue aérienne', 
+          url: '/Images/yaye-dia/villa-f5-plan-aerien.jpg',
+          desc: 'Vue aérienne de la villa'
         },
         { 
-          label: 'Vue du dessus', 
-          url: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80',
-          desc: 'Vue aérienne'
+          label: 'Architecture', 
+          url: '/Images/yaye-dia/architecture.jpg',
+          desc: 'Architecture moderne'
         },
         { 
-          label: 'Vue de nuit', 
-          url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
-          desc: 'Éclairage d\'ambiance'
+          label: 'Modèle 3D', 
+          url: '/Images/yaye-dia/architecture-model-villa.jpg',
+          desc: 'Modèle 3D de la villa'
         }
       ],
       interior: [
         { 
           label: 'Salon', 
-          url: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&q=80',
-          desc: 'Salon double hauteur'
+          url: '/Images/yaye-dia/design.jpg',
+          desc: 'Salon design'
         },
         { 
           label: 'Cuisine', 
-          url: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&q=80',
-          desc: 'Cuisine américaine'
-        },
-        { 
-          label: 'Chambre', 
-          url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
-          desc: 'Suite parentale'
+          url: '/Images/yaye-dia/cuisine-luxe.jpg',
+          desc: 'Cuisine haut de gamme'
         },
         { 
           label: 'Salle de bain', 
-          url: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80',
-          desc: 'Spa intégré'
+          url: '/Images/yaye-dia/cadre-vie.jpg',
+          desc: 'Salle de bain luxueuse'
         },
         { 
-          label: 'Terrasse', 
-          url: 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&q=80',
-          desc: 'Terrasse panoramique'
+          label: 'Intérieur', 
+          url: '/Images/yaye-dia/salon-f4-interieur.jpg',
+          desc: 'Intérieur contemporain'
         },
         { 
-          label: 'Piscine', 
-          url: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80',
-          desc: 'Piscine chauffée'
+          label: 'Vision', 
+          url: '/Images/yaye-dia/vision.jpg',
+          desc: 'Vision architecturale'
+        },
+        { 
+          label: 'Plan', 
+          url: '/Images/yaye-dia/villa-f5-terrasse-plan.jpg',
+          desc: 'Plan d\'architecture'
         }
       ]
     },
     F6: {
-      name: 'Villa F6 Luxe',
       exterior: [
         { 
-          label: 'Façade avant', 
-          url: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80',
-          desc: 'Entrée principale'
+          label: 'Vue aérienne', 
+          url: '/Images/yaye-dia/cite-vue-aerienne.jpg',
+          desc: 'Vue aérienne de la cité'
         },
         { 
-          label: 'Côté droit', 
-          url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-          desc: 'Jardin luxuriant'
+          label: 'Voirie', 
+          url: '/Images/yaye-dia/cite-voirie.jpg',
+          desc: 'Aménagement de la voirie'
         },
         { 
-          label: 'Côté gauche', 
-          url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
-          desc: 'Cour intérieure'
+          label: 'Commodités', 
+          url: '/Images/yaye-dia/cite-commodites-vue.jpg',
+          desc: 'Commodités à proximité'
         },
         { 
-          label: 'Façade arrière', 
-          url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
-          desc: 'Vue sur jardin'
+          label: 'Modèle 3D', 
+          url: '/Images/yaye-dia/cite-yaye-dia-3D.jpg',
+          desc: 'Modèle 3D de la cité'
         },
         { 
-          label: 'Vue du dessus', 
-          url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
-          desc: 'Vue satellite'
+          label: 'Architecture', 
+          url: '/Images/yaye-dia/architecture-model-villa.jpg',
+          desc: 'Architecture de la cité'
         },
         { 
-          label: 'Vue de nuit', 
-          url: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
-          desc: 'Illumination'
+          label: 'Immeuble jour', 
+          url: '/Images/yaye-dia/immeuble-jour.jpg',
+          desc: 'Immeuble en journée'
         }
       ],
       interior: [
         { 
-          label: 'Salon', 
-          url: 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&q=80',
-          desc: 'Salon contemporain'
+          label: 'Éclairage', 
+          url: '/Images/yaye-dia/eclairage.jpg',
+          desc: 'Éclairage d\'ambiance'
         },
         { 
-          label: 'Cuisine', 
-          url: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&q=80',
-          desc: 'Cuisine design'
+          label: 'Gestion déchet', 
+          url: '/Images/yaye-dia/gestion-dechet.jpg',
+          desc: 'Gestion des déchets'
         },
         { 
-          label: 'Chambre', 
-          url: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80',
-          desc: 'Chambre luxueuse'
+          label: 'Philosophie', 
+          url: '/Images/yaye-dia/philosophie.jpg',
+          desc: 'Philosophie architecturale'
         },
         { 
-          label: 'Salle de bain', 
-          url: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80',
-          desc: 'Salle de bain moderne'
+          label: 'Lotissement', 
+          url: '/Images/yaye-dia/lotissement.jpg',
+          desc: 'Plan de lotissement'
         },
         { 
-          label: 'Terrasse', 
-          url: 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&q=80',
-          desc: 'Terrasse lounge'
+          label: 'Plan 3D', 
+          url: '/Images/yaye-dia/plan-3D.jpg',
+          desc: 'Plan 3D de la cité'
         },
         { 
-          label: 'Piscine', 
-          url: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80',
-          desc: 'Piscine à débordement'
+          label: 'Vue de nuit', 
+          url: '/Images/yaye-dia/immeuble-nuit.jpg',
+          desc: 'Immeuble illuminé de nuit'
         }
       ]
     }
   };
 
-  // Données par défaut si le type n'existe pas
+  // Images par défaut si le type n'existe pas
   const defaultData = {
-    exterior: Array(6).fill(null).map((_, i) => ({
-      label: `Vue ${i + 1}`,
-      url: `https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80`,
-      desc: `Vue ${i + 1} de la villa`
-    })),
-    interior: Array(6).fill(null).map((_, i) => ({
-      label: `Intérieur ${i + 1}`,
-      url: `https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&q=80`,
-      desc: `Intérieur ${i + 1}`
-    }))
+    exterior: [
+      { label: 'Façade', url: '/Images/yaye-dia/villa-f4duplex.jpg', desc: 'Villa de luxe' },
+      { label: 'Architecture', url: '/Images/yaye-dia/architecture.jpg', desc: 'Architecture moderne' },
+      { label: 'Design', url: '/Images/yaye-dia/design.jpg', desc: 'Design contemporain' },
+      { label: 'Vision', url: '/Images/yaye-dia/vision.jpg', desc: 'Vision architecturale' },
+      { label: 'Plan 3D', url: '/Images/yaye-dia/plan-3D.jpg', desc: 'Plan 3D' },
+      { label: 'Modèle', url: '/Images/yaye-dia/architecture-model-villa.jpg', desc: 'Modèle 3D' }
+    ],
+    interior: [
+      { label: 'Salon', url: '/Images/yaye-dia/salon-f4.jpg', desc: 'Salon de luxe' },
+      { label: 'Cuisine', url: '/Images/yaye-dia/cuisine-luxe.jpg', desc: 'Cuisine équipée' },
+      { label: 'Intérieur', url: '/Images/yaye-dia/salon-f4-interieur.jpg', desc: 'Intérieur raffiné' },
+      { label: 'Design', url: '/Images/yaye-dia/design.jpg', desc: 'Design intérieur' },
+      { label: 'Vision', url: '/Images/yaye-dia/vision.jpg', desc: 'Vision d\'intérieur' },
+      { label: 'Plan', url: '/Images/yaye-dia/plan-3D.jpg', desc: 'Plan intérieur' }
+    ]
   };
 
-  const data = villaData[villa.id] || defaultData;
+  const data = villaImages[villa.id] || defaultData;
   const currentData = viewMode === 'exterior' ? data.exterior : data.interior;
   const totalFaces = currentData.length;
 
@@ -349,7 +352,7 @@ export default function Villa3DViewer({ villa, isMob }) {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Mode actuel */}
+      {/* Mode actuel - Extérieur/Intérieur */}
       <div style={{
         position: 'absolute',
         top: 16,
@@ -358,14 +361,19 @@ export default function Villa3DViewer({ villa, isMob }) {
         zIndex: 10,
         display: 'flex',
         gap: 8,
-        background: 'rgba(5,8,16,0.7)',
+        background: 'rgba(5,8,16,0.8)',
         padding: '4px',
         borderRadius: '8px',
         backdropFilter: 'blur(10px)',
         border: '1px solid rgba(201,168,76,0.15)'
       }}>
         <button
-          onClick={() => setViewMode('exterior')}
+          onClick={() => {
+            setViewMode('exterior');
+            setCurrentFace(0);
+            setRotation({ x: 0, y: 0 });
+            setAutoRotate(true);
+          }}
           style={{
             padding: '6px 14px',
             background: viewMode === 'exterior' ? 'rgba(201,168,76,0.25)' : 'transparent',
@@ -383,7 +391,12 @@ export default function Villa3DViewer({ villa, isMob }) {
           🏠 Extérieur
         </button>
         <button
-          onClick={() => setViewMode('interior')}
+          onClick={() => {
+            setViewMode('interior');
+            setCurrentFace(0);
+            setRotation({ x: 0, y: 0 });
+            setAutoRotate(true);
+          }}
           style={{
             padding: '6px 14px',
             background: viewMode === 'interior' ? 'rgba(201,168,76,0.25)' : 'transparent',
@@ -425,12 +438,12 @@ export default function Villa3DViewer({ villa, isMob }) {
           {/* 6 faces du cube */}
           {currentData.map((face, index) => {
             const rotations = [
-              [0, 0, 150], // avant
-              [0, 90, 150], // droite
-              [0, -90, 150], // gauche
-              [0, 180, 150], // arrière
-              [90, 0, 150], // dessus
-              [-90, 0, 150] // dessous
+              [0, 0, 150],
+              [0, 90, 150],
+              [0, -90, 150],
+              [0, 180, 150],
+              [90, 0, 150],
+              [-90, 0, 150]
             ];
             const [rx, ry, tz] = rotations[index] || [0, 0, 150];
             
@@ -446,7 +459,7 @@ export default function Villa3DViewer({ villa, isMob }) {
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   borderRadius: '8px',
-                  boxShadow: 'inset 0 0 50px rgba(0,0,0,0.3), 0 0 30px rgba(201,168,76,0.05)',
+                  boxShadow: 'inset 0 0 50px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,76,0.05)',
                   transform: `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(${tz}px)`,
                   border: currentFace === index ? '2px solid var(--gold)' : '2px solid rgba(201,168,76,0.1)',
                   transition: 'border 0.4s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
@@ -461,7 +474,7 @@ export default function Villa3DViewer({ villa, isMob }) {
                   left: 0,
                   right: 0,
                   padding: '10px 14px',
-                  background: 'linear-gradient(to top, rgba(5,8,16,0.85), transparent)',
+                  background: 'linear-gradient(to top, rgba(5,8,16,0.9), transparent)',
                   color: 'var(--cream)',
                   fontFamily: 'var(--f-display)',
                   fontSize: '.6rem',
@@ -506,7 +519,7 @@ export default function Villa3DViewer({ villa, isMob }) {
         justifyContent: 'center',
         maxWidth: '90%'
       }}>
-        {currentData.map((face, i) => (
+        {currentData.map((_, i) => (
           <button
             key={i}
             onClick={() => goToFace(i)}
@@ -625,4 +638,4 @@ export default function Villa3DViewer({ villa, isMob }) {
       }} />
     </div>
   );
-            }
+          }
