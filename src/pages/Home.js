@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
 import { SITE, STATS, SERVICES, PARTNERS_WORLD, COMPANIES, YAYE_SLIDES, VILLA_TYPES, TAGLINE, SUBTITLE } from '../data/siteData';
 
-function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
+function useW() {
+  const [w, sw] = useState(window.innerWidth);
+  useEffect(() => {
+    const h = () => sw(window.innerWidth);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
+  return w;
+}
 
 /* ── Gold Particle Canvas ─────────────────────────────────────── */
 function GoldCanvas({ density = 55, style = {} }) {
@@ -102,8 +110,6 @@ const SVC_ICONS = {
 /* ══════════════════════════════════════════════════════════════
    HOME PAGE
 ══════════════════════════════════════════════════════════════ */
-/* ── Hero 3D Premium ─────────────────────────────────────────── */
-/* Premium Unsplash images - shown while local images load */
 const HERO_UNSPLASH = [
   'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=90',
   'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=90',
@@ -116,27 +122,21 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
   const canvasRef = useRef(null);
-  const rafRef = useRef(null);
 
   const nl = obj => obj[lang] || obj.fr;
 
-  /* Load Unsplash immediately, upgrade to local GNAH image if available */
   useEffect(() => {
-    // Set Unsplash immediately so slides show right away
     const initial = {};
     HERO_UNSPLASH.forEach((url, i) => { initial[i] = url; });
     setLoaded(initial);
 
-    // Then try to upgrade to local GNAH images
     YAYE_SLIDES.forEach((s, i) => {
       const img = new Image();
       img.onload = () => setLoaded(p => ({ ...p, [i]: s.img }));
-      // If local fails, keep Unsplash (already set)
       img.src = s.img;
     });
   }, []);
 
-  /* 3D Canvas — premium gold particles with depth */
   useEffect(() => {
     const cv = canvasRef.current; if (!cv) return;
     const ctx = cv.getContext('2d');
@@ -172,7 +172,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
           ctx.beginPath(); ctx.arc(px, py, p.r * 0.6, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255,240,180,${alpha * 1.5})`; ctx.fill();
         });
-        /* Connection lines for nearest layer */
         if (li === 1) {
           layer.forEach((p, pi) => {
             const px = (p.x * cv.width) + Math.sin(time * p.speed + p.x * 6) * 25 * p.depth + (mx - 0.5) * 40 * p.depth;
@@ -202,7 +201,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); window.removeEventListener('mousemove', onMove); };
   }, []);
 
-  /* Mouse parallax on hero container */
   const handleMouseMove = e => {
     if (!heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
@@ -218,7 +216,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
     <section ref={heroRef} onMouseMove={handleMouseMove}
       style={{ position: 'relative', height: '100vh', minHeight: 640, overflow: 'hidden', cursor: 'default' }}>
 
-      {/* ── BG SLIDES with parallax ─────────────────────────── */}
       {YAYE_SLIDES.map((s, i) => (
         <div key={i} style={{
           position: 'absolute', inset: '-3%',
@@ -234,23 +231,18 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
         }} />
       ))}
 
-      {/* ── CINEMATIC OVERLAY ──────────────────────────────── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 1,
         background: 'linear-gradient(105deg, rgba(5,8,16,.92) 0%, rgba(5,8,16,.65) 45%, rgba(5,8,16,.82) 100%)',
       }} />
-      {/* Bottom fade */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', zIndex: 1,
         background: 'linear-gradient(to top, rgba(5,8,16,.9) 0%, transparent 100%)',
       }} />
-      {/* Top fade */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '20%', zIndex: 1,
         background: 'linear-gradient(to bottom, rgba(5,8,16,.5) 0%, transparent 100%)',
       }} />
 
-      {/* ── 3D GOLD CANVAS ──────────────────────────────────── */}
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 2, pointerEvents: 'none' }} />
 
-      {/* ── 3D GEOMETRIC ACCENT ─────────────────────────────── */}
       <div style={{
         position: 'absolute', zIndex: 2, pointerEvents: 'none',
         right: isMob ? '-8%' : '4%', top: '50%',
@@ -259,24 +251,18 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
         transition: 'transform 0.15s ease',
         transformStyle: 'preserve-3d',
       }}>
-        {/* Outer ring */}
         <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '1px solid rgba(201,168,76,.12)', animation: 'spinSlow 30s linear infinite' }}>
-          {/* Orbit dot top */}
           <div style={{ position: 'absolute', top: -5, left: '50%', transform: 'translateX(-50%)', width: 10, height: 10, borderRadius: '50%', background: goldGrad, boxShadow: '0 0 20px rgba(201,168,76,.9), 0 0 40px rgba(201,168,76,.4)' }} />
         </div>
-        {/* Mid ring */}
         <div style={{ position: 'absolute', inset: 38, borderRadius: '50%', border: '1px solid rgba(201,168,76,.22)', animation: 'spinSlow 20s linear infinite reverse' }}>
           <div style={{ position: 'absolute', bottom: -5, left: '50%', transform: 'translateX(-50%)', width: 7, height: 7, borderRadius: '50%', background: 'rgba(201,168,76,.8)', boxShadow: '0 0 12px rgba(201,168,76,.8)' }} />
         </div>
-        {/* Inner ring */}
         <div style={{ position: 'absolute', inset: 76, borderRadius: '50%', border: '1px solid rgba(201,168,76,.38)', animation: 'spinSlow 14s linear infinite' }} />
-        {/* Core */}
         <div style={{ position: 'absolute', inset: 114, borderRadius: '50%', background: 'rgba(201,168,76,.04)', border: '1px solid rgba(201,168,76,.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ fontFamily: 'var(--f-display)', fontSize: isMob ? '.38rem' : '.5rem', letterSpacing: '.22em', color: 'rgba(201,168,76,.7)', textTransform: 'uppercase', textAlign: 'center' }}>GNAH</div>
         </div>
       </div>
 
-      {/* ── SLIDE NUMBER INDICATOR ───────────────────────────── */}
       <div style={{ position: 'absolute', right: isMob ? 16 : 32, top: '50%', transform: 'translateY(-50%)', zIndex: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
         {YAYE_SLIDES.map((_, i) => (
           <button key={i} onClick={() => { setSlide(i); clearInterval(timerRef.current); timerRef.current = setInterval(() => setSlide(s => (s + 1) % YAYE_SLIDES.length), 5500); }}
@@ -284,7 +270,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
         ))}
       </div>
 
-      {/* ── MAIN CONTENT ─────────────────────────────────────── */}
       <div className="container" style={{
         position: 'absolute', inset: 0, zIndex: 3,
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
@@ -293,7 +278,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
         transition: 'transform 0.2s ease',
       }}>
 
-        {/* Live badge */}
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', border: '1px solid rgba(201,168,76,.28)', background: 'rgba(201,168,76,.06)', backdropFilter: 'blur(12px)', marginBottom: 22, width: 'fit-content', animation: 'fadeInUp .5s ease both' }}>
           <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#34d399', boxShadow: '0 0 10px #34d399', animation: 'pulse 2s infinite' }} />
           <span style={{ fontFamily: 'var(--f-display)', fontSize: '.52rem', letterSpacing: '.26em', color: 'rgba(201,168,76,.85)', textTransform: 'uppercase' }}>
@@ -301,7 +285,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
           </span>
         </div>
 
-        {/* Main title */}
         <h1 key={`title-${slide}`} style={{
           fontFamily: 'var(--f-elegant)',
           fontSize: 'clamp(2.4rem,5.5vw,5.2rem)',
@@ -316,7 +299,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
           {YAYE_SLIDES[slide][lang]?.title || YAYE_SLIDES[slide].fr.title}
         </h1>
 
-        {/* Sub */}
         <p key={`sub-${slide}`} style={{
           fontFamily: 'var(--f-serif)', fontStyle: 'italic',
           fontSize: 'clamp(.9rem,1.6vw,1.18rem)',
@@ -327,14 +309,12 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
           {YAYE_SLIDES[slide][lang]?.sub || YAYE_SLIDES[slide].fr.sub}
         </p>
 
-        {/* Tagline */}
         <div style={{ marginBottom: 38, animation: 'heroSlideIn .85s cubic-bezier(.22,1,.36,1) .14s both' }}>
           <span style={{ fontFamily: 'var(--f-display)', fontSize: '.68rem', letterSpacing: '.22em', textTransform: 'uppercase', background: goldGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             {nl(TAGLINE)}
           </span>
         </div>
 
-        {/* CTAs */}
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', animation: 'heroSlideIn .9s cubic-bezier(.22,1,.36,1) .2s both' }}>
           <Link to="/projets" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: 'clamp(13px,2vw,16px) clamp(24px,3vw,36px)', background: goldGrad, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.66rem', letterSpacing: '.14em', textTransform: 'uppercase', textDecoration: 'none', boxShadow: '0 8px 36px rgba(201,168,76,.5)', transition: 'all .3s', backdropFilter: 'blur(4px)' }}
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(201,168,76,.7)'; }}
@@ -349,7 +329,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
           </a>
         </div>
 
-        {/* Progress bar dots */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 48, animation: 'fadeInUp 1s ease .3s both' }}>
           {YAYE_SLIDES.map((_, i) => (
             <button key={i} onClick={() => { setSlide(i); clearInterval(timerRef.current); timerRef.current = setInterval(() => setSlide(s => (s + 1) % YAYE_SLIDES.length), 5500); }}
@@ -361,7 +340,6 @@ function HeroSection3D({ lang, waUrl, tl, isMob, slide, setSlide, timerRef }) {
         </div>
       </div>
 
-      {/* ── SCROLL INDICATOR ─────────────────────────────────── */}
       <div style={{ position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)', zIndex: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, animation: 'floatY 3s ease-in-out infinite' }}>
         <span style={{ fontFamily: 'var(--f-display)', fontSize: '.46rem', letterSpacing: '.24em', color: 'rgba(201,168,76,.4)', textTransform: 'uppercase' }}>
           {tl('Défiler','Scroll','Deslizar','Scrollen','滑动')}
@@ -380,7 +358,7 @@ export default function Home() {
   const w = useW();
   const isMob = w < 768;
   const [slide, setSlide] = useState(0);
-  const [slideLoaded, setSlideLoaded] = useState({}); // stores {index: resolvedURL}
+  const [slideLoaded, setSlideLoaded] = useState({});
   const [activePart, setActivePart] = useState(0);
   const [activeVilla, setActiveVilla] = useState(0);
   const timerRef = useRef(null);
@@ -395,21 +373,18 @@ export default function Home() {
   const waUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}`;
   const goldGrad = 'linear-gradient(135deg,#c9a84c,#e8c96a,#8b6914)';
 
-  /* Hero auto-advance */
   useEffect(() => {
     timerRef.current = setInterval(() => setSlide(s => (s + 1) % YAYE_SLIDES.length), 5500);
     return () => clearInterval(timerRef.current);
   }, []);
 
-  /* Fallback Unsplash URLs for each YAYE_SLIDE image */
   const SLIDE_FALLBACKS = [
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=85', // villa-f5 → luxury villa
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85', // villa-f4duplex-nuit → villa at night
-    'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=85', // cite-vue-aerienne → aerial view
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1800&q=85',    // salon-f4-interieur → luxury interior
+    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=85',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85',
+    'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=85',
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1800&q=85',
   ];
 
-  /* Preload hero images — try local first, fallback to Unsplash */
   useEffect(() => {
     YAYE_SLIDES.forEach((s, i) => {
       const tryLoad = (src, onFail) => {
@@ -418,11 +393,8 @@ export default function Home() {
         img.onerror = onFail;
         img.src = src;
       };
-      // Try local /Images/ first
       tryLoad(s.img, () => {
-        // Fallback to Unsplash
         tryLoad(SLIDE_FALLBACKS[i], () => {
-          // Last resort: use Unsplash anyway
           setSlideLoaded(p => ({ ...p, [i]: SLIDE_FALLBACKS[i] }));
         });
       });
@@ -435,7 +407,7 @@ export default function Home() {
       {/* ══ SECTION 1 — HERO 3D PREMIUM ═══════════════════════════════ */}
       <HeroSection3D lang={lang} waUrl={waUrl} tl={tl} isMob={isMob} slide={slide} setSlide={setSlide} timerRef={timerRef} />
 
-      {/* ══ SECTION 2 — STATS ANIMÉES (depuis STATS) ═══════════════ */}
+      {/* ══ SECTION 2 — STATS ANIMÉES ═════════════════════════════════ */}
       <section style={{ position: 'relative', background: 'var(--navy2)', padding: 'clamp(48px,6vw,72px) 0', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,.07) 0%, transparent 70%)' }} />
         <GoldCanvas density={20} style={{ opacity: .5 }} />
@@ -491,7 +463,6 @@ export default function Home() {
           </FadeIn>
           <FadeIn dir="right">
             <div style={{ position: 'relative' }}>
-              {/* Main image - first YAYE_SLIDE */}
               <div style={{ position: 'relative', overflow: 'hidden' }}>
                 <img 
                   src={slideLoaded[0] || YAYE_SLIDES[0].img}
@@ -506,7 +477,6 @@ export default function Home() {
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(5,8,16,.5) 0%, transparent 50%)' }} />
               </div>
-              {/* Floating badge */}
               <div style={{ position: 'absolute', bottom: -24, left: isMob ? 12 : -24, padding: '14px 20px', background: 'var(--navy2)', border: '1px solid rgba(201,168,76,.3)', boxShadow: '0 16px 48px rgba(0,0,0,.5)', animation: 'floatY 4s ease-in-out infinite' }}>
                 <div style={{ fontFamily: 'var(--f-display)', fontSize: '.48rem', letterSpacing: '.18em', color: 'var(--gold)', textTransform: 'uppercase', marginBottom: 3 }}>
                   {tl('Depuis', 'Since', 'Desde', 'Seit', '自')} 2015
@@ -515,7 +485,6 @@ export default function Home() {
                   {tl("10 ans d'excellence", '10 years', '10 años', '10 Jahre', '10年卓越')}
                 </div>
               </div>
-              {/* Corner accents */}
               <div style={{ position: 'absolute', top: -8, right: -8, width: 36, height: 36, border: '2px solid var(--gold)', borderLeft: 'none', borderBottom: 'none' }} />
               <div style={{ position: 'absolute', bottom: -8, right: -8, width: 36, height: 36, border: '2px solid var(--gold)', borderTop: 'none', borderLeft: 'none' }} />
             </div>
@@ -523,7 +492,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ SECTION 4 — VILLAS (depuis VILLA_TYPES) ════════════════ */}
+      {/* ══ SECTION 4 — VILLAS ═══════════════════════════════════════ */}
       <section style={{ padding: 'clamp(64px,8vw,100px) 0', background: 'var(--navy2)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(201,168,76,.05) 0%, transparent 55%), radial-gradient(circle at 80% 20%, rgba(201,168,76,.04) 0%, transparent 50%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -544,7 +513,6 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          {/* Villa type tabs */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 36, flexWrap: 'wrap' }}>
             {VILLA_TYPES.map((v, i) => (
               <button key={i} onClick={() => setActiveVilla(i)} style={{ padding: '8px 18px', border: `1px solid ${i === activeVilla ? v.color : 'rgba(201,168,76,.15)'}`, background: i === activeVilla ? `${v.color}18` : 'transparent', color: i === activeVilla ? v.color : 'rgba(200,195,186,.45)', fontFamily: 'var(--f-display)', fontSize: '.58rem', letterSpacing: '.1em', textTransform: 'uppercase', cursor: 'pointer', transition: 'all .3s' }}>
@@ -553,7 +521,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Active villa display */}
           {VILLA_TYPES.map((v, i) => (
             <div key={v.id} style={{ display: i === activeVilla ? 'grid' : 'none', gridTemplateColumns: isMob ? '1fr' : '1fr 1fr', gap: 'clamp(20px,4vw,52px)', alignItems: 'center', animation: 'fadeInUp .5s ease' }}>
               <div style={{ position: 'relative', overflow: 'hidden' }}>
@@ -566,7 +533,6 @@ export default function Home() {
                 <div style={{ position: 'absolute', bottom: 16, left: 16, padding: '4px 12px', background: v.color, color: '#050810', fontFamily: 'var(--f-display)', fontSize: '.54rem', letterSpacing: '.1em', textTransform: 'uppercase' }}>
                   {v.id.toUpperCase()} — {v.bati}
                 </div>
-                {/* Plan image overlay */}
                 {v.planImg && (
                   <div style={{ position: 'absolute', bottom: 16, right: 16, width: 80, height: 64, overflow: 'hidden', border: '1px solid rgba(201,168,76,.4)', opacity: .85 }}>
                     <img src={v.planImg} alt="plan" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => e.target.style.display = 'none'} />
@@ -588,7 +554,6 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                {/* Rooms from VILLA_TYPES */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 20 }}>
                   {v.rooms.map((r, ri) => (
                     <div key={ri} style={{ padding: '8px 12px', border: '1px solid rgba(201,168,76,.1)', background: 'rgba(201,168,76,.03)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -597,7 +562,6 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                {/* Features */}
                 <div style={{ marginBottom: 24 }}>
                   {(v.features[lang] || v.features.fr).map((f, fi) => (
                     <div key={fi} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
@@ -622,7 +586,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ SECTION 5 — SERVICES (depuis SERVICES) ══════════════════ */}
+      {/* ══ SECTION 5 — SERVICES ═════════════════════════════════════ */}
       <section style={{ padding: 'clamp(64px,8vw,100px) 0', background: 'var(--navy)', position: 'relative', overflow: 'hidden' }}>
         <div className="container">
           <FadeIn dir="up">
@@ -669,7 +633,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ SECTION 6 — PARTENAIRES (depuis PARTNERS_WORLD) ════════ */}
+      {/* ══ SECTION 6 — PARTENAIRES ════════════════════════════════ */}
       <section style={{ padding: 'clamp(64px,8vw,100px) 0', background: 'var(--navy2)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 100%, rgba(201,168,76,.05) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -702,7 +666,6 @@ export default function Home() {
               );
             })}
           </div>
-          {/* Active partner detail */}
           <FadeIn dir="up">
             <div key={activePart} style={{ padding: 'clamp(18px,3vw,28px)', border: '1px solid rgba(201,168,76,.18)', background: 'var(--navy)', borderLeft: '3px solid var(--gold)', animation: 'fadeInUp .4s ease' }}>
               <div style={{ fontFamily: 'var(--f-display)', fontSize: '.54rem', letterSpacing: '.16em', color: 'var(--gold)', textTransform: 'uppercase', marginBottom: 8 }}>
@@ -724,7 +687,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ SECTION 7 — ENTREPRISES (depuis COMPANIES) ══════════════ */}
+      {/* ══ SECTION 7 — ENTREPRISES ══════════════════════════════════ */}
       <section style={{ padding: 'clamp(64px,8vw,100px) 0', background: 'var(--navy)', position: 'relative', overflow: 'hidden' }}>
         <div className="container">
           <FadeIn dir="up">
@@ -793,7 +756,6 @@ export default function Home() {
         <GoldCanvas density={isMob ? 28 : 52} />
         <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <FadeIn dir="up">
-            {/* Spinning badge */}
             <div style={{ display: 'inline-block', padding: 2, background: goldGrad, marginBottom: 32, animation: 'spinSlow 10s linear infinite' }}>
               <div style={{ background: 'var(--navy2)', padding: '10px 18px', fontFamily: 'var(--f-display)', fontSize: '.48rem', letterSpacing: '.3em', color: 'var(--gold)', textTransform: 'uppercase' }}>G.N.A.H</div>
             </div>
@@ -826,4 +788,4 @@ export default function Home() {
 
     </main>
   );
-}
+        }
