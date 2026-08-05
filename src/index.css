@@ -700,3 +700,277 @@ h1,h2,h3,h4,h5 { font-family: var(--f-display); letter-spacing:.04em; line-heigh
   0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,.9), 0 0 40px rgba(201,168,76,.4); }
   50%       { box-shadow: 0 0 30px rgba(201,168,76,1), 0 0 60px rgba(201,168,76,.6); }
 }
+
+
+/* ═══ COMPLÉMENTS POUR LE VIEWER 3D ════════════════════════════ */
+
+/* Conteneur du viewer 3D */
+.villa-3d-container {
+  width: 100%;
+  height: 550px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy);
+  border: 1px solid rgba(201,168,76,0.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  transition: all 0.4s ease;
+}
+
+.villa-3d-container:hover {
+  border-color: rgba(201,168,76,0.4);
+  box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 30px rgba(201,168,76,0.05);
+}
+
+@media (max-width: 768px) {
+  .villa-3d-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .villa-3d-container {
+    height: 350px;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .villa-3d-container {
+    height: 450px;
+  }
+}
+
+/* Boutons de contrôle 3D */
+.villa-3d-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.villa-3d-btn {
+  padding: 8px 16px;
+  background: rgba(5,8,16,0.7);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--cream);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--f-display);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.villa-3d-btn:hover {
+  background: rgba(201,168,76,0.2);
+  border-color: rgba(201,168,76,0.6);
+  transform: translateY(-2px);
+}
+
+.villa-3d-btn.active {
+  background: rgba(201,168,76,0.25);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(201,168,76,0.15);
+}
+
+@media (max-width: 640px) {
+  .villa-3d-btn {
+    padding: 6px 12px;
+    font-size: 0.45rem;
+  }
+}
+
+/* Info-bulle 3D */
+.villa-3d-tooltip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background: rgba(5,8,16,0.85);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  color: var(--cream);
+  font-size: 0.7rem;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;
+}
+
+.villa-3d-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .villa-3d-tooltip {
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 0.6rem;
+  }
+}
+
+/* Loader 3D */
+.villa-3d-loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--navy);
+  border-radius: 12px;
+  border: 1px solid rgba(201,168,76,0.1);
+}
+
+.villa-3d-loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(201,168,76,0.1);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin3d 0.8s linear infinite;
+}
+
+@keyframes spin3d {
+  to { transform: rotate(360deg); }
+}
+
+.villa-3d-loader-text {
+  font-family: var(--f-display);
+  color: rgba(201,168,76,0.5);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: pulseText 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Badges des types de villa */
+.villa-tab {
+  padding: 8px 18px;
+  border: 1px solid rgba(201,168,76,0.15);
+  background: transparent;
+  color: rgba(200,195,186,0.45);
+  font-family: var(--f-display);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.villa-tab:hover {
+  border-color: rgba(201,168,76,0.4);
+  background: rgba(201,168,76,0.05);
+}
+
+.villa-tab.active {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+}
+
+.villa-tab-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Animations pour la section 3D */
+@keyframes fadeIn3D {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.villa-3d-enter {
+  animation: fadeIn3D 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Amélioration du contraste pour les informations de la villa */
+.villa-info-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  .villa-info-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.villa-info-item {
+  padding: 8px 12px;
+  border: 1px solid rgba(201,168,76,0.1);
+  background: rgba(201,168,76,0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.villa-info-label {
+  font-family: var(--f-display);
+  font-size: 0.56rem;
+  color: rgba(200,195,186,0.6);
+  letter-spacing: 0.04em;
+}
+
+.villa-info-value {
+  font-family: var(--f-display);
+  font-size: 0.56rem;
+  color: var(--gold);
+}
+
+/* Transition douce pour le changement de villa */
+.villa-transition {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.villa-transition-exit {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.villa-transition-enter {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Effet de brillance sur le viewer 3D */
+.villa-3d-glare {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+        }
