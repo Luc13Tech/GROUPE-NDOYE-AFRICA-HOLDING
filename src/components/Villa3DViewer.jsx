@@ -18,12 +18,12 @@ export default function Villa3DViewer({ villa, isMob }) {
       exterior: [
         { 
           label: 'Façade avant', 
-          url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+          url: /public/Images/yaye-dia/villa-f4duplex.jpg ,
           desc: 'Entrée principale avec jardin'
         },
         { 
           label: 'Côté droit', 
-          url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+          url: /public/Images/yaye-dia/villa-f4duplex-nuit.jpg ,
           desc: 'Vue latérale avec piscine'
         },
         { 
