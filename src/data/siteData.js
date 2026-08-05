@@ -191,7 +191,7 @@ export const YAYE_SLIDES = [
     es:{tag:'El Arte de Vivir Moderno',title:'Villa F5 — Premium',sub:'340 m² construidos'},
     de:{tag:'Die Kunst des modernen Lebens',title:'F5 Villa — Premium',sub:'340 m² gebaut'},
     zh:{tag:'现代生活艺术',title:'F5豪华别墅',sub:'340平方米建筑 — Yaye Dia城'},
-  },i
+  },
   { img:'/Images/yaye-dia/villa-f4duplex-nuit.jpg',
     fr:{tag:'Nuit Étoilée',title:'Villas F4 Duplex illuminées',sub:'Haut Standing — sous les étoiles'},
     en:{tag:'Starry Night',title:'Illuminated F4 Duplex Villas',sub:'High-End — under the stars'},
