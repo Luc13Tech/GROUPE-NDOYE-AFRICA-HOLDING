@@ -69,7 +69,7 @@ export default function Villa3DViewer({ villa, isMob }) {
         },
         { 
           label: 'Design intérieur', 
-          url: '/Images/yaye-dia/commodites.jpg',
+          url: '/Images/yaye-dia/villa-f3-plan2.jpg',
           desc: 'Design d\'intérieur contemporain'
         },
         { 
@@ -218,7 +218,7 @@ export default function Villa3DViewer({ villa, isMob }) {
     exterior: [
       { label: 'Façade', url: '/Images/yaye-dia/villa-f4duplex.jpg', desc: 'Villa de luxe' },
       { label: 'Architecture', url: '/Images/yaye-dia/architecture.jpg', desc: 'Architecture moderne' },
-      { label: 'Design', url: '/Images/yaye-dia/commodites.jpg', desc: 'Design contemporain' },
+      { label: 'Design', url: '/Images/yaye-dia/immeuble-jour.jpg', desc: 'Design contemporain' },
       { label: 'Vision', url: '/Images/yaye-dia/commodites.jpg', desc: 'Vision architecturale' },
       { label: 'Plan 3D', url: '/Images/yaye-dia/plan-3D.jpg', desc: 'Plan 3D' },
       { label: 'Modèle', url: '/Images/yaye-dia/architecture-model-villa.jpg', desc: 'Modèle 3D' }
