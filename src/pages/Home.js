@@ -100,249 +100,6 @@ function FadeIn({ children, delay = 0, dir = 'up', style = {} }) {
   );
 }
 
-/* ── Animated Image With Parallax & Cinematic Effects ────────── */
-function CinematicImage({ src, alt, isMob }) {
-  const containerRef = useRef(null);
-  const imgRef = useRef(null);
-  const overlayRef = useRef(null);
-  const particlesRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-  const [isHover, setIsHover] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Détection de visibilité pour déclencher l'animation
-  useEffect(() => {
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-      }
-    }, { threshold: 0.2 });
-    if (containerRef.current) obs.observe(containerRef.current);
-    return () => obs.disconnect();
-  }, []);
-
-  // Effet de parallaxe au scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const winHeight = window.innerHeight;
-      const progress = 1 - (rect.top + rect.height / 2) / winHeight;
-      setScrollProgress(Math.max(0, Math.min(1, progress)));
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({
-      x: (e.clientX - rect.left) / rect.width,
-      y: (e.clientY - rect.top) / rect.height,
-    });
-  };
-
-  const goldGrad = 'linear-gradient(135deg,#c9a84c,#e8c96a,#8b6914)';
-
-  return (
-    <div
-      ref={containerRef}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      onMouseMove={handleMouseMove}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: '12px',
-        aspectRatio: '4/3',
-        background: 'var(--navy2)',
-        boxShadow: isHover 
-          ? '0 30px 80px rgba(0,0,0,0.7), 0 0 60px rgba(201,168,76,0.08)' 
-          : '0 20px 60px rgba(0,0,0,0.4)',
-        transition: 'box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
-        transform: `scale(${isVisible ? 1 : 0.96})`,
-        opacity: isVisible ? 1 : 0,
-        transition: 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
-        willChange: 'transform, opacity',
-      }}
-    >
-      {/* Overlay de particules dorées flottantes */}
-      <canvas
-        ref={particlesRef}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 3,
-          pointerEvents: 'none',
-          opacity: isVisible ? 0.8 : 0,
-          transition: 'opacity 1.5s ease 0.5s',
-        }}
-      />
-
-      {/* Conteneur d'image avec effet 3D */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: '-8%',
-          transform: `
-            scale(${1 + (0.06 - scrollProgress * 0.04)}) 
-            translate(
-              ${(mousePos.x - 0.5) * (isHover ? 20 : 8)}px, 
-              ${(mousePos.y - 0.5) * (isHover ? 12 : 5)}px
-            ) 
-            rotateX(${(mousePos.y - 0.5) * (isHover ? 6 : 2)}deg) 
-            rotateY(${(mousePos.x - 0.5) * (isHover ? 6 : 2)}deg)
-          `,
-          transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
-          willChange: 'transform',
-        }}
-      >
-        <img
-          ref={imgRef}
-          src={src}
-          alt={alt}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            display: 'block',
-            filter: `brightness(${0.7 + scrollProgress * 0.2}) contrast(${1.05 + scrollProgress * 0.1})`,
-            transition: 'filter 0.6s ease',
-          }}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85';
-          }}
-        />
-      </div>
-
-      {/* Calque de dégradé dynamique */}
-      <div
-        ref={overlayRef}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 2,
-          background: `
-            radial-gradient(
-              ellipse at ${mousePos.x * 100}% ${mousePos.y * 100}%, 
-              rgba(201,168,76,${0.08 + scrollProgress * 0.06}) 0%, 
-              transparent 60%
-            ),
-            linear-gradient(
-              ${135 + scrollProgress * 20}deg,
-              rgba(5,8,16,0.25) 0%,
-              transparent 40%,
-              rgba(201,168,76,0.05) 100%
-            )
-          `,
-          transition: 'background 0.4s ease',
-        }}
-      />
-
-      {/* Bordure dorée animée */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 2,
-          pointerEvents: 'none',
-          border: `2px solid rgba(201,168,76,${0.1 + scrollProgress * 0.15})`,
-          borderRadius: '12px',
-          transition: 'border-color 0.6s ease',
-        }}
-      />
-
-      {/* Coins dorés */}
-      {[0, 1, 2, 3].map((i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            width: isMob ? 16 : 24,
-            height: isMob ? 16 : 24,
-            zIndex: 4,
-            pointerEvents: 'none',
-            top: i < 2 ? 12 : 'auto',
-            bottom: i >= 2 ? 12 : 'auto',
-            left: i % 2 === 0 ? 12 : 'auto',
-            right: i % 2 === 1 ? 12 : 'auto',
-            border: `1.5px solid rgba(201,168,76,${0.2 + scrollProgress * 0.2})`,
-            borderTop: i < 2 ? 'none' : '1.5px solid rgba(201,168,76,0.3)',
-            borderBottom: i >= 2 ? 'none' : '1.5px solid rgba(201,168,76,0.3)',
-            borderLeft: i % 2 === 0 ? 'none' : '1.5px solid rgba(201,168,76,0.3)',
-            borderRight: i % 2 === 1 ? 'none' : '1.5px solid rgba(201,168,76,0.3)',
-            width: isMob ? 20 : 30,
-            height: isMob ? 20 : 30,
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 1s ease 0.8s, border-color 0.6s ease',
-          }}
-        />
-      ))}
-
-      {/* Badge flottant "GNAH" */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 20,
-          right: 20,
-          zIndex: 4,
-          padding: '8px 16px',
-          background: 'rgba(5,8,16,0.7)',
-          border: '1px solid rgba(201,168,76,0.3)',
-          backdropFilter: 'blur(12px)',
-          borderRadius: '6px',
-          fontFamily: 'var(--f-display)',
-          fontSize: isMob ? '.5rem' : '.6rem',
-          letterSpacing: '.2em',
-          color: 'var(--gold)',
-          textTransform: 'uppercase',
-          transform: `translateY(${isVisible ? 0 : 20}px)`,
-          opacity: isVisible ? 1 : 0,
-          transition: 'all 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1s',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-        }}
-      >
-        ✦ GNAH
-      </div>
-
-      {/* Ligne dorée animée au survol */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          zIndex: 4,
-          background: `linear-gradient(90deg, transparent, ${isHover ? 'rgba(201,168,76,0.6)' : 'transparent'}, transparent)`,
-          transform: `scaleX(${isHover ? 1 : 0})`,
-          transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background 0.6s ease',
-          transformOrigin: 'center',
-        }}
-      />
-
-      {/* Effet de révélation au chargement */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 5,
-          pointerEvents: 'none',
-          background: isVisible ? 'transparent' : 'var(--gold)',
-          clipPath: isVisible 
-            ? 'inset(0 0 0 0)' 
-            : 'inset(0 100% 0 0)',
-          transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, background 0.3s ease',
-        }}
-      />
-    </div>
-  );
-}
 
 /* ── Animated Button Component ────────────────────────────────── */
 function AnimBtn({ to, href, children, variant = 'gold', style = {}, onClick, target, rel }) {
@@ -432,6 +189,140 @@ function AnimBtn({ to, href, children, variant = 'gold', style = {}, onClick, ta
     <a href={href || '#'} target={target} rel={rel} style={s} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} onClick={handleClick}>
       {inner}
     </a>
+  );
+}
+
+/* ── LiveImage — Image vivante animée ────────────────────────── */
+function LiveImage({ src, fallback, alt }) {
+  const ref = useRef(null);
+  const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
+  const [scan, setScan] = React.useState(0);
+  const [imgSrc, setImgSrc] = React.useState(src);
+  const rafRef = useRef(null);
+
+  // Scan line animation
+  React.useEffect(() => {
+    let pos = -10;
+    const animate = () => {
+      pos += 0.25;
+      if (pos > 110) pos = -10;
+      setScan(pos);
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // Mouse tilt parallax
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top)  / rect.height - 0.5;
+    setTilt({ x: cy * 12, y: cx * -10 });
+  };
+  const handleMouseLeave = () => setTilt({ x: 0, y: 0 });
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        aspectRatio: '4/3',
+        perspective: '800px',
+        cursor: 'none',
+      }}
+    >
+      {/* ── IMAGE with Ken Burns + tilt ── */}
+      <div style={{
+        position: 'absolute', inset: '-6%',
+        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.12)`,
+        transition: 'transform .12s ease',
+        transformStyle: 'preserve-3d',
+        willChange: 'transform',
+      }}>
+        <img
+          src={imgSrc}
+          alt={alt}
+          onError={() => setImgSrc(fallback)}
+          style={{
+            width: '100%', height: '100%',
+            objectFit: 'cover', display: 'block',
+            animation: 'kenBurnsLive 14s ease-in-out infinite alternate',
+          }}
+        />
+      </div>
+
+      {/* ── CINEMATIC OVERLAY ── */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(135deg, rgba(5,8,16,.45) 0%, transparent 45%, rgba(5,8,16,.55) 100%)',
+        zIndex: 1,
+      }} />
+
+      {/* ── GOLD SCAN LINE ── */}
+      <div style={{
+        position: 'absolute', left: 0, right: 0,
+        top: `${scan}%`,
+        height: 1.5,
+        background: 'linear-gradient(to right, transparent 0%, rgba(201,168,76,.6) 30%, rgba(232,201,106,.9) 50%, rgba(201,168,76,.6) 70%, transparent 100%)',
+        zIndex: 2,
+        filter: 'blur(0.5px)',
+        boxShadow: '0 0 8px rgba(201,168,76,.4)',
+      }} />
+
+      {/* ── CORNER SCAN DOTS ── */}
+      {[[0,0],[0,'auto'],[,'auto',0],['auto','auto']].map((_, i) => (
+        <div key={i} style={{
+          position: 'absolute',
+          top:    i < 2 ? 12 : 'auto',
+          bottom: i >= 2 ? 12 : 'auto',
+          left:   i % 2 === 0 ? 12 : 'auto',
+          right:  i % 2 !== 0 ? 12 : 'auto',
+          width: 6, height: 6, borderRadius: '50%',
+          background: 'var(--gold)',
+          boxShadow: '0 0 10px rgba(201,168,76,.8)',
+          zIndex: 3,
+          animation: `pulse ${1.5 + i * 0.3}s ease-in-out infinite`,
+        }} />
+      ))}
+
+      {/* ── TOP FRAME LINES ── */}
+      <div style={{ position: 'absolute', top: 12, left: 12, width: 28, height: 28, borderTop: '1.5px solid rgba(201,168,76,.8)', borderLeft: '1.5px solid rgba(201,168,76,.8)', zIndex: 3 }} />
+      <div style={{ position: 'absolute', top: 12, right: 12, width: 28, height: 28, borderTop: '1.5px solid rgba(201,168,76,.8)', borderRight: '1.5px solid rgba(201,168,76,.8)', zIndex: 3 }} />
+      <div style={{ position: 'absolute', bottom: 12, left: 12, width: 28, height: 28, borderBottom: '1.5px solid rgba(201,168,76,.8)', borderLeft: '1.5px solid rgba(201,168,76,.8)', zIndex: 3 }} />
+      <div style={{ position: 'absolute', bottom: 12, right: 12, width: 28, height: 28, borderBottom: '1.5px solid rgba(201,168,76,.8)', borderRight: '1.5px solid rgba(201,168,76,.8)', zIndex: 3 }} />
+
+      {/* ── PULSING GOLD VIGNETTE ── */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(5,8,16,.5) 100%)',
+        zIndex: 2,
+        animation: 'vignettePulse 4s ease-in-out infinite',
+      }} />
+
+      {/* ── BOTTOM GRADIENT ── */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
+        background: 'linear-gradient(to top, rgba(5,8,16,.7) 0%, transparent 100%)',
+        zIndex: 2,
+      }} />
+
+      {/* ── LIVE BADGE ── */}
+      <div style={{
+        position: 'absolute', top: 16, left: 16, zIndex: 4,
+        display: 'inline-flex', alignItems: 'center', gap: 6,
+        padding: '5px 10px',
+        background: 'rgba(5,8,16,.7)',
+        border: '1px solid rgba(201,168,76,.35)',
+        backdropFilter: 'blur(8px)',
+      }}>
+        <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#34d399', boxShadow: '0 0 8px #34d399', animation: 'pulse 2s infinite' }} />
+        <span style={{ fontFamily: 'var(--f-display)', fontSize: '.44rem', letterSpacing: '.18em', color: 'rgba(201,168,76,.85)', textTransform: 'uppercase' }}>Live</span>
+      </div>
+    </div>
   );
 }
 
@@ -798,11 +689,23 @@ export default function Home() {
             </AnimBtn>
           </FadeIn>
           <FadeIn dir="right">
-            <CinematicImage 
-              src={slideLoaded[0] || YAYE_SLIDES[0].img}
-              alt="GNAH - African Development Company"
-              isMob={isMob}
-            />
+            <div style={{ position: 'relative' }}>
+              <LiveImage
+                src={slideLoaded[0] || YAYE_SLIDES[0].img}
+                fallback="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85"
+                alt="GNAH"
+              />
+              <div style={{ position: 'absolute', bottom: -24, left: isMob ? 12 : -24, padding: '14px 20px', background: 'var(--navy2)', border: '1px solid rgba(201,168,76,.3)', boxShadow: '0 16px 48px rgba(0,0,0,.5)', animation: 'floatY 4s ease-in-out infinite' }}>
+                <div style={{ fontFamily: 'var(--f-display)', fontSize: '.48rem', letterSpacing: '.18em', color: 'var(--gold)', textTransform: 'uppercase', marginBottom: 3 }}>
+                  {tl('Depuis', 'Since', 'Desde', 'Seit', '自')} 2015
+                </div>
+                <div style={{ fontFamily: 'var(--f-elegant)', fontSize: '1.3rem', color: 'var(--cream)', lineHeight: 1 }}>
+                  {tl("10 ans d'excellence", '10 years', '10 años', '10 Jahre', '10年卓越')}
+                </div>
+              </div>
+              <div style={{ position: 'absolute', top: -8, right: -8, width: 36, height: 36, border: '2px solid var(--gold)', borderLeft: 'none', borderBottom: 'none' }} />
+              <div style={{ position: 'absolute', bottom: -8, right: -8, width: 36, height: 36, border: '2px solid var(--gold)', borderTop: 'none', borderLeft: 'none' }} />
+            </div>
           </FadeIn>
         </div>
       </section>
@@ -1162,4 +1065,4 @@ export default function Home() {
 
     </main>
   );
-}
+          }
