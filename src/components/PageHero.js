@@ -1,145 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
+import { makeTl } from '../utils/i18n';
 
+/** Bandeau d'ouverture des pages intérieures. L'image locale est tentée d'abord, puis l'image de secours. */
 export default function PageHero({ bgImg, fallbackImg, label, title, sub, breadcrumbs = [] }) {
   const { lang } = useLang();
-  const [activeSrc, setActiveSrc] = useState(null);
-  const [useGradient, setUseGradient] = useState(false);
-
-  const tl = (fr, en, es, de, zh = '') => {
-    const val = { fr, en, es, de, zh }[lang];
-    return (val !== undefined && val !== '') ? val : fr;
-  };
-
-  const defaultGradient = 'linear-gradient(135deg,#050810 0%,#0d1427 100%)';
+  const tl = makeTl(lang);
+  const [src, setSrc] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
-    setActiveSrc(null);
-    setUseGradient(false);
-
-    if (!bgImg && !fallbackImg) { setUseGradient(true); return; }
-
-    const tryLoad = (src, onFail) => {
+    setSrc(null);
+    const load = (url, onFail) => {
+      if (!url) {
+        onFail();
+        return;
+      }
       const img = new window.Image();
-      img.onload = () => { if (!cancelled) setActiveSrc(src); };
-      img.onerror = () => { if (!cancelled) onFail(); };
-      img.src = src;
+      img.onload = () => !cancelled && setSrc(url);
+      img.onerror = () => !cancelled && onFail();
+      img.src = url;
     };
-
-    if (bgImg) {
-      tryLoad(bgImg, () => {
-        if (fallbackImg) {
-          tryLoad(fallbackImg, () => {
-            if (!cancelled) setUseGradient(true);
-          });
-        } else if (!cancelled) {
-          setUseGradient(true);
-        }
-      });
-    } else if (fallbackImg) {
-      tryLoad(fallbackImg, () => { if (!cancelled) setUseGradient(true); });
-    }
-
-    return () => { cancelled = true; };
+    load(bgImg, () => load(fallbackImg, () => {}));
+    return () => {
+      cancelled = true;
+    };
   }, [bgImg, fallbackImg]);
 
-  const bgStyle = useGradient
-    ? { background: defaultGradient }
-    : activeSrc
-      ? {
-          backgroundImage: `url(${activeSrc})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-        }
-      : { background: defaultGradient };
-
-  const homeLabel = tl('Accueil', 'Home', 'Inicio', 'Startseite', '首页');
+  const rise = (delay) => ({ animation: `fadeUp 1s var(--ease) ${delay}s both` });
 
   return (
-    <section style={{ paddingTop: 72, position: 'relative' }}>
-      {/* Background */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        ...bgStyle,
-        zIndex: 0,
-        transition: 'background-image 0.6s ease, background 0.6s ease',
-      }}/>
-
-      {/* Dark overlay */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(135deg,rgba(5,8,16,.78) 0%,rgba(5,8,16,.88) 100%)',
-        zIndex: 1,
-      }}/>
-
-      {/* Content */}
-      <div className="container page-hero-content" style={{
-        position: 'relative', zIndex: 2,
-        padding: 'clamp(48px,8vw,96px) clamp(16px,4vw,32px) clamp(40px,6vw,72px)',
-        textAlign: 'center',
-        minHeight: 'clamp(240px,35vh,380px)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-      }}>
-        {/* Breadcrumb */}
-        <nav className="breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: 16 }}>
-          <Link to="/" className="bc-link"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-            {homeLabel}
-          </Link>
-          {breadcrumbs.map((b, i) => (
+    <header className="phero on-dark">
+      {src && <div className="phero__bg is-on" style={{ backgroundImage: `url(${src})` }} aria-hidden="true" />}
+      <div className="container">
+        <nav className="phero__crumbs" aria-label={tl("Fil d’Ariane", 'Breadcrumb', 'Ruta de navegación', 'Brotkrumennavigation', '面包屑导航')} style={rise(0)}>
+          <Link to="/">{tl('Accueil', 'Home', 'Inicio', 'Startseite', '首页')}</Link>
+          {breadcrumbs.map((crumb, i) => (
             <React.Fragment key={i}>
-              <span className="bc-sep">/</span>
-              {b.path
-                ? <Link to={b.path} className="bc-link"
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-                    {b.label}
-                  </Link>
-                : <span className="bc-cur">{b.label}</span>
-              }
+              <span aria-hidden="true">/</span>
+              {crumb.path ? <Link to={crumb.path}>{crumb.label}</Link> : <span aria-current="page">{crumb.label}</span>}
             </React.Fragment>
           ))}
         </nav>
-
         {label && (
-          <div className="sec-label" style={{ paddingLeft: 0, marginBottom: 8 }}>
-            <span style={{
-              fontFamily: 'var(--f-display)', fontSize: '.6rem',
-              letterSpacing: '.28em', textTransform: 'uppercase', color: 'var(--gold)',
-            }}>
-              {label}
-            </span>
+          <div className="eyebrow" style={{ marginBottom: 18, ...rise(0.08) }}>
+            {label}
           </div>
         )}
-
-        {title && (
-          <h1 style={{
-            fontFamily: 'var(--f-elegant)',
-            fontSize: 'clamp(1.8rem,4vw,3.4rem)',
-            color: 'var(--cream)',
-            letterSpacing: '.04em',
-            marginBottom: 10,
-            lineHeight: 1.15,
-          }}>
-            {title}
-          </h1>
-        )}
-
+        <h1 className="h1 phero__title" style={rise(0.16)}>
+          {title}
+        </h1>
         {sub && (
-          <p style={{
-            fontFamily: 'var(--f-serif)', fontStyle: 'italic',
-            fontSize: 'clamp(.88rem,1.5vw,1.1rem)',
-            color: 'rgba(245,240,232,.55)',
-            maxWidth: 600, margin: '0 auto',
-          }}>
+          <p className="lead phero__sub" style={rise(0.26)}>
             {sub}
           </p>
         )}
       </div>
-    </section>
+    </header>
   );
-  }
+}
