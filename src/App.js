@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { LangProvider } from './hooks/useLang';
+import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
+import { LangProvider, useLang } from './hooks/useLang';
+import { ContentProvider, useContent } from './services/ContentProvider';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingButtons from './components/FloatingButtons';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
-import { Analytics } from '@vercel/analytics/react';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
@@ -18,71 +19,89 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Videos from './pages/Videos';
 import Entreprises from './pages/Entreprises';
-import AdminLogin from './pages/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard';
 
-function ScrollToTop() {
+const ORIGIN = 'https://groupendoyeafrica.com';
+
+function setTag(selector, create, attrs) {
+  let el = document.head.querySelector(selector);
+  if (!el) {
+    el = create();
+    document.head.appendChild(el);
+  }
+  Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+}
+
+/** Titre, description, langue du document, robots et URL canonique de chaque page. */
+function PageMeta() {
   const { pathname } = useLocation();
+  const { lang } = useLang();
+  const { NAV, SITE, TAGLINE, COMPANY_INTRO } = useContent();
+
+  useEffect(() => {
+    const item = NAV.find((n) => n.path === pathname);
+    const name = SITE.name;
+    document.title =
+      pathname === '/'
+        ? `${name} — ${TAGLINE[lang] || TAGLINE.fr}`
+        : `${item ? item[lang] || item.fr : name} — ${name}`;
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
+
+    const intro = (COMPANY_INTRO && (COMPANY_INTRO[lang] || COMPANY_INTRO.fr)) || '';
+    const description = intro.length > 158 ? `${intro.slice(0, 155).trimEnd()}…` : intro;
+    setTag('meta[name="description"]', () => Object.assign(document.createElement('meta'), { name: 'description' }), { content: description });
+    setTag('meta[name="robots"]', () => Object.assign(document.createElement('meta'), { name: 'robots' }), { content: 'index, follow' });
+    setTag('link[rel="canonical"]', () => Object.assign(document.createElement('link'), { rel: 'canonical' }), { href: `${ORIGIN}${pathname}` });
+  }, [pathname, lang, NAV, SITE, TAGLINE, COMPANY_INTRO]);
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    // Update document title for SEO per page
-    const titles = {
-      '/': 'Groupe Ndoye Africa Holding — Bâtir l\'Afrique de demain',
-      '/services': 'Services — Groupe Ndoye Africa Holding',
-      '/projets': 'Projets — Résidence Yaye Dia & Infrastructures',
-      '/engagements': 'Engagements — Groupe Ndoye Africa Holding',
-      '/partenaires': 'Partenaires Mondiaux — Groupe Ndoye Africa Holding',
-      '/entreprises': 'Entreprises Partenaires — Groupe Ndoye Africa Holding',
-      '/investisseurs': 'Investisseurs — Opportunités en Afrique',
-      '/collaboration': 'Collaboration — Groupe Ndoye Africa Holding',
-      '/a-propos': 'À Propos — Groupe Ndoye Africa Holding',
-      '/contact': 'Contact — Groupe Ndoye Africa Holding',
-      '/galerie': 'Galerie — Résidence Yaye Dia',
-      '/videos': 'Vidéos — Groupe Ndoye Africa Holding',
-    };
-    const title = titles[pathname] || 'Groupe Ndoye Africa Holding';
-    document.title = title;
   }, [pathname]);
+
   return null;
 }
 
-function Layout({ children }) {
+/** Structure commune des pages publiques : la navigation et le pied de page restent en place. */
+function Layout() {
   const { pathname } = useLocation();
   return (
-    <div key={pathname}>
+    <>
       <Navbar />
-      {children}
+      <div id="contenu" key={pathname}>
+        <Outlet />
+      </div>
       <Footer />
       <FloatingButtons />
       <PWAInstallPrompt />
-    </div>
+    </>
   );
 }
 
 export default function App() {
   return (
     <LangProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/"                element={<Layout><Home /></Layout>} />
-          <Route path="/services"        element={<Layout><Services /></Layout>} />
-          <Route path="/projets"         element={<Layout><Projects /></Layout>} />
-          <Route path="/engagements"     element={<Layout><Commitments /></Layout>} />
-          <Route path="/partenaires"     element={<Layout><Partners /></Layout>} />
-          <Route path="/entreprises"     element={<Layout><Entreprises /></Layout>} />
-          <Route path="/investisseurs"   element={<Layout><Investors /></Layout>} />
-          <Route path="/collaboration"   element={<Layout><Collaboration /></Layout>} />
-          <Route path="/a-propos"        element={<Layout><About /></Layout>} />
-          <Route path="/contact"         element={<Layout><Contact /></Layout>} />
-          <Route path="/galerie"         element={<Layout><Gallery /></Layout>} />
-          <Route path="/videos"          element={<Layout><Videos /></Layout>} />
-          <Route path="/admin"           element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="*"                element={<Navigate to="/" replace />} />
-        </Routes>
-        <Analytics />
-      </BrowserRouter>
+      <ContentProvider>
+        <BrowserRouter>
+          <PageMeta />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/projets" element={<Projects />} />
+              <Route path="/engagements" element={<Commitments />} />
+              <Route path="/partenaires" element={<Partners />} />
+              <Route path="/entreprises" element={<Entreprises />} />
+              <Route path="/investisseurs" element={<Investors />} />
+              <Route path="/collaboration" element={<Collaboration />} />
+              <Route path="/a-propos" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/galerie" element={<Gallery />} />
+              <Route path="/videos" element={<Videos />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Analytics />
+        </BrowserRouter>
+      </ContentProvider>
     </LangProvider>
   );
 }
