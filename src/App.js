@@ -19,6 +19,8 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Videos from './pages/Videos';
 import Entreprises from './pages/Entreprises';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
 const ORIGIN = 'https://groupendoyeafrica.com';
 
@@ -31,18 +33,17 @@ function setTag(selector, create, attrs) {
   Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
 }
 
-/** Titre, description, langue du document, robots et URL canonique de chaque page. */
 function PageMeta() {
   const { pathname } = useLocation();
   const { lang } = useLang();
-  const { NAV, SITE, TAGLINE, COMPANY_INTRO } = useContent();
+  const { NAV = [], SITE = {}, TAGLINE = {}, COMPANY_INTRO = {} } = useContent();
 
   useEffect(() => {
-    const item = NAV.find((n) => n.path === pathname);
-    const name = SITE.name;
+    const item = (NAV || []).find((n) => n.path === pathname);
+    const name = SITE.name || 'Groupe Ndoye Africa Holding';
     document.title =
       pathname === '/'
-        ? `${name} — ${TAGLINE[lang] || TAGLINE.fr}`
+        ? `${name} — ${TAGLINE[lang] || TAGLINE.fr || ''}`
         : `${item ? item[lang] || item.fr : name} — ${name}`;
     document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
 
@@ -60,7 +61,6 @@ function PageMeta() {
   return null;
 }
 
-/** Structure commune des pages publiques : la navigation et le pied de page restent en place. */
 function Layout() {
   const { pathname } = useLocation();
   return (
@@ -74,6 +74,11 @@ function Layout() {
       <PWAInstallPrompt />
     </>
   );
+}
+
+function ProtectedAdminRoute() {
+  const isLogged = sessionStorage.getItem('gnah_admin') === '1';
+  return isLogged ? <Outlet /> : <Navigate to="/admin" replace />;
 }
 
 export default function App() {
@@ -97,6 +102,12 @@ export default function App() {
               <Route path="/galerie" element={<Gallery />} />
               <Route path="/videos" element={<Videos />} />
             </Route>
+
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route element={<ProtectedAdminRoute />}>
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            </Route>
+
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Analytics />
