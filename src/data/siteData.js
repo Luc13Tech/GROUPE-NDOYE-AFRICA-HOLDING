@@ -185,7 +185,7 @@ export const VILLA_TYPES = [
 ];
 
 export const YAYE_SLIDES = [
-  { img:'/Images/yaye-dia/villa-f5-facade3.jpg',
+  { img:'/Images/yaye-dia/Image-villa.jpg',
     fr:{tag:"L'Art de vivre Moderne",title:'Villa F5 — Très Haut Standing',sub:'340 m² bâtis — Mercedes G-Wagon'},
     en:{tag:'The Art of Modern Living',title:'F5 Villa — Premium',sub:'340 m² built — Yaye Dia City'},
     es:{tag:'El Arte de Vivir Moderno',title:'Villa F5 — Premium',sub:'340 m² construidos'},
