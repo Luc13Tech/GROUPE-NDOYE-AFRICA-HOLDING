@@ -19,31 +19,32 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Videos from './pages/Videos';
 import Entreprises from './pages/Entreprises';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import { trackEvent } from './services/api';
 
 const ORIGIN = 'https://groupendoyeafrica.com';
 
 function setTag(selector, create, attrs) {
-  let el = document.head.querySelector(selector);
-  if (!el) {
-    el = create();
-    document.head.appendChild(el);
+  let element = document.head.querySelector(selector);
+  if (!element) {
+    element = create();
+    document.head.appendChild(element);
   }
-  Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+  Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
 }
 
-/** Titre, description, langue du document, robots et URL canonique de chaque page. */
 function PageMeta() {
   const { pathname } = useLocation();
   const { lang } = useLang();
   const { NAV, SITE, TAGLINE, COMPANY_INTRO } = useContent();
 
   useEffect(() => {
-    const item = NAV.find((n) => n.path === pathname);
+    const item = NAV.find((navItem) => navItem.path === pathname);
     const name = SITE.name;
-    document.title =
-      pathname === '/'
-        ? `${name} — ${TAGLINE[lang] || TAGLINE.fr}`
-        : `${item ? item[lang] || item.fr : name} — ${name}`;
+    document.title = pathname === '/'
+      ? `${name} — ${TAGLINE[lang] || TAGLINE.fr}`
+      : `${item ? item[lang] || item.fr : name} — ${name}`;
     document.documentElement.lang = lang === 'zh' ? 'zh-Hans' : lang;
 
     const intro = (COMPANY_INTRO && (COMPANY_INTRO[lang] || COMPANY_INTRO.fr)) || '';
@@ -55,20 +56,18 @@ function PageMeta() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (!pathname.startsWith('/admin')) trackEvent('page_view', { page: pathname });
   }, [pathname]);
 
   return null;
 }
 
-/** Structure commune des pages publiques : la navigation et le pied de page restent en place. */
 function Layout() {
   const { pathname } = useLocation();
   return (
     <>
       <Navbar />
-      <div id="contenu" key={pathname}>
-        <Outlet />
-      </div>
+      <div id="contenu" key={pathname}><Outlet /></div>
       <Footer />
       <FloatingButtons />
       <PWAInstallPrompt />
@@ -97,6 +96,8 @@ export default function App() {
               <Route path="/galerie" element={<Gallery />} />
               <Route path="/videos" element={<Videos />} />
             </Route>
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Analytics />
