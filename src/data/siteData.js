@@ -399,3 +399,4 @@ export const DEFAULT_ADMIN_CONTENT = {
     {id:3,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=85',title:{fr:'Autoroute Abuja-Lagos',en:'Abuja-Lagos Highway',zh:'阿布贾-拉各斯高速公路'},desc:{fr:"Autoroute au Nigeria — $5,7 milliards — BOT — 467 km.",en:"Highway in Nigeria — $5.7 billion — BOT — 467 km.",zh:"尼日利亚高速公路 — 57亿美元 — BOT合同 — 467公里。"},waMsg:{fr:"Bonjour, je m'intéresse à l'autoroute Abuja-Lagos.",en:"Hello, I am interested in the Abuja-Lagos highway."}},
   ],
 };
+export default DEFAULT_ADMIN_CONTENT;
