@@ -6,7 +6,7 @@ import { useContent } from '../../services/ContentProvider';
 import { makeTl, pick } from '../../utils/i18n';
 
 // Images principales de l'accueil : fichiers déposés dans public/Images/accueil/ (aucune image de substitution).
-export const HERO_IMAGES = ['/Images/accueil/hero-1.jpg', '/Images/accueil/hero-2.jpg'];
+export const HERO_IMAGES = ['public/Images/accueil/hero-1.jpg', 'public/Images/accueil/hero-2.jpg'];
 const SLIDE_MS = 7000;
 
 const prefersReducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
