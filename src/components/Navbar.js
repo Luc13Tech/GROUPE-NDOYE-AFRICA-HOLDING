@@ -69,8 +69,8 @@ export default function Navbar() {
               {logoOk && <img src="/Images/logo/gnah-logo.png" alt="" onError={() => setLogoOk(false)} />}
             </span>
             <span className="nav__word">
-              Groupe Ndoye
-              <small>Africa Holding</small>
+              GROUPE NDOYE 
+              <small>AFRICA HOLDING</small>
             </span>
           </Link>
 
