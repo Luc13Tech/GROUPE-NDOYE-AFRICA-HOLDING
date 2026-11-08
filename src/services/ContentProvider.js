@@ -12,7 +12,7 @@ const EMPTY_CONTENT = {
 };
 
 function getLocalContent() {
-  const source = localData.default || localData.content || localData;
+  const source = localData;
   return { ...EMPTY_CONTENT, ...source };
 }
 
