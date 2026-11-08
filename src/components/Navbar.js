@@ -66,7 +66,7 @@ export default function Navbar() {
         <div className="container nav__bar">
           <Link to="/" className="nav__brand" onClick={onBrandClick} aria-label={`${SITE.name} — ${tl('accueil', 'home', 'inicio', 'Startseite', '首页')}`}>
             <span className="nav__mark" aria-hidden="true">
-              {logoOk && <img src="/Images/logo/gnah-logo.png" alt="" onError={() => setLogoOk(false)} />}
+              {logoOk && <img src="public/Images/logo/gnah-logo.png" alt="" onError={() => setLogoOk(false)} />}
             </span>
             <span className="nav__word">
               Groupe Ndoye
