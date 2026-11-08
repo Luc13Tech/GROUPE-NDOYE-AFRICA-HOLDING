@@ -401,3 +401,5 @@ export const DEFAULT_ADMIN_CONTENT = {
 };
 export default DEFAULT_ADMIN_CONTENT;
 export const content = DEFAULT_ADMIN_CONTENT;
+export const VILLAS = VILLA_TYPES;
+export const PROJECTS = DEFAULT_ADMIN_CONTENT.projects;
