@@ -1740,3 +1740,13 @@ h1, h2, h3, h4, p {
     transform: none;
   }
 }
+/* Sécurité : si le JS ne s'exécute pas, on force l'affichage */
+@media (max-width: 1024px) {
+  [data-reveal],
+  [data-reveal="left"],
+  [data-reveal="right"],
+  [data-reveal="zoom"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
