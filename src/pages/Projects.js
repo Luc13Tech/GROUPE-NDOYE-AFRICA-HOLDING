@@ -33,19 +33,46 @@ function Carousel() {
     return () => { window.removeEventListener('storage', h); clearInterval(iv); };
   }, []);
   const [idx, setIdx] = useState(0);
+
+  // ✅ CORRECTION : Gestion de la pause après interaction
+  const [isPaused, setIsPaused] = useState(false);
+  const autoPlayRef = useRef(null);
+
   const prev = useCallback(()=>setIdx(i=>(i-1+YAYE_SLIDES.length)%YAYE_SLIDES.length),[]);
   const next = useCallback(()=>setIdx(i=>(i+1)%YAYE_SLIDES.length),[]);
-  useEffect(()=>{const t=setInterval(next,3500);return()=>clearInterval(t);},[next]);
+
+  // ✅ CORRECTION : L'intervalle respecte la pause
+  useEffect(()=>{
+    if (isPaused) return;
+    const t = setInterval(next, 5000); // Passé à 5s pour plus de confort
+    autoPlayRef.current = t;
+    return () => clearInterval(t);
+  }, [next, isPaused]);
+
+  // ✅ CORRECTION : Fonctions de clic avec pause temporaire
+  const handlePrev = () => {
+    setIsPaused(true);
+    prev();
+    setTimeout(() => setIsPaused(false), 10000); // Pause 10s après clic
+  };
+  const handleNext = () => {
+    setIsPaused(true);
+    next();
+    setTimeout(() => setIsPaused(false), 10000); // Pause 10s après clic
+  };
+
   const s = YAYE_SLIDES[idx];
   const td = (obj) => obj[lang]||obj.fr;
+
   return (
-    <div className="hcar">
-      <div className="hcar-track" style={{transform:`translateX(-${idx*100}%)`}}>
+    // ✅ CORRECTION : Ajout de styles inline de sécurité pour garantir le centrage et éviter le débordement
+    <div className="hcar" style={{ position: 'relative', width: '100%', overflow: 'hidden', margin: '0 auto' }}>
+      <div className="hcar-track" style={{ display: 'flex', transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)', transform: `translateX(-${idx * 100}%)` }}>
         {YAYE_SLIDES.map((sl,i)=>(
-          <div key={i} className={`hcar-slide${i===idx?' active':''}`}>
-            <img src={sl.img} alt={td(sl).title} className="img-cover" loading="lazy"/>
-            <div className="hcar-overlay"/>
-            <div className="hcar-info">
+          <div key={i} className={`hcar-slide${i===idx?' active':''}`} style={{ flex: '0 0 100%', width: '100%', position: 'relative', minHeight: '400px', aspectRatio: '16/9' }}>
+            <img src={sl.img} alt={td(sl).title} className="img-cover" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
+            <div className="hcar-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(20,18,16,.85), rgba(20,18,16,.1) 55%)', zIndex: 1 }} />
+            <div className="hcar-info" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 'clamp(24px, 5vw, 48px)', zIndex: 2, color: 'var(--ivory)' }}>
               <div className="hcar-tag">{td(sl).tag}</div>
               <h3 className="hcar-title">{td(sl).title}</h3>
               <p className="hcar-sub">{td(sl).sub}</p>
@@ -53,9 +80,9 @@ function Carousel() {
           </div>
         ))}
       </div>
-      <button className="hcar-btn prev" onClick={prev}><ChevL/></button>
-      <button className="hcar-btn next" onClick={next}><ChevR/></button>
-      <div className="hcar-dots">{YAYE_SLIDES.map((_,i)=><button key={i} className={`hcar-dot${i===idx?' active':''}`} onClick={()=>setIdx(i)}/>)}</div>
+      <button className="hcar-btn prev" onClick={handlePrev} style={{ position: 'absolute', top: '50%', left: '16px', transform: 'translateY(-50%)', zIndex: 3, cursor: 'pointer' }}><ChevL/></button>
+      <button className="hcar-btn next" onClick={handleNext} style={{ position: 'absolute', top: '50%', right: '16px', transform: 'translateY(-50%)', zIndex: 3, cursor: 'pointer' }}><ChevR/></button>
+      <div className="hcar-dots" style={{ position: 'absolute', bottom: '18px', left: '50%', transform: 'translateX(-50%)', zIndex: 3, display: 'flex', gap: '8px' }}>{YAYE_SLIDES.map((_,i)=><button key={i} className={`hcar-dot${i===idx?' active':''}`} onClick={()=>{ setIsPaused(true); setIdx(i); setTimeout(()=>setIsPaused(false), 10000); }} style={{ cursor: 'pointer' }} />)}</div>
     </div>
   );
 }
