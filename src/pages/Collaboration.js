@@ -73,7 +73,7 @@ ${form.desc}`;
       {/* FORM */}
       <section style={{background:'var(--gray-50)',padding:'72px 0'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'start'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,300px),1fr))',gap:64,alignItems:'start'}}>
             <div>
               <div className="sec-label">{tl('Proposez', 'Propose', 'Proponga', 'Vorschlagen','提交建议')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Entrons en Contact', "Let's Connect", 'Entremos en Contacto', 'Lassen Sie uns in Kontakt treten','让我们取得联系')}</h2>
@@ -93,7 +93,7 @@ ${form.desc}`;
               </div>
             </div>
 
-            <div style={{background:'var(--white)',padding:40,border:'1px solid var(--gray-200)',boxShadow:'var(--shadow-md)'}}>
+            <div style={{background:'var(--white)',padding:'clamp(22px,5vw,40px)',border:'1px solid var(--gray-200)',boxShadow:'var(--shadow-md)'}}>
               <div style={{fontFamily:'var(--f-display)',fontSize:'.78rem',color:'var(--gold)',letterSpacing:'.16em',marginBottom:26,textTransform:'uppercase'}}>
                 {tl('FORMULAIRE DE COLLABORATION', 'COLLABORATION FORM', 'FORMULARIO DE COLABORACIÓN', 'KOOPERATIONSFORMULAR','合作申请表')}
               </div>

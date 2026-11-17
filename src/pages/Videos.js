@@ -55,7 +55,7 @@ export default function Videos() {
       {/* VIDEO GRID */}
       <section className="section" ref={gridRef}>
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(320px, 1fr))', gap:24 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(100%,320px), 1fr))', gap:24 }}>
             {VIDEOS.map((video, idx) => {
               const platform = PLATFORM_CONFIG[video.platform] || PLATFORM_CONFIG.youtube;
               const info = video[lang] || video.fr;

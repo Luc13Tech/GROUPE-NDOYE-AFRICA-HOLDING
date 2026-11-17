@@ -128,7 +128,7 @@ export default function Gallery() {
       {/* PHOTO GRID */}
       <section className="section" ref={gridRef}>
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:16 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(100%,280px), 1fr))', gap:16 }}>
             {filtered.map((item, idx) => (
               <div
                 key={item.id}

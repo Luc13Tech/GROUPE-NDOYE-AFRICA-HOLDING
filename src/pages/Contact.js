@@ -74,7 +74,7 @@ ${form.msg}`;
       {/* MAIN SECTION */}
       <section className="section" ref={gridRef}>
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:64, alignItems:'start' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,300px),1fr))', gap:64, alignItems:'start' }}>
 
             {/* LEFT — INFO + SOCIALS */}
             <div className={`slide-left${gridVis?' visible':''}`}>
@@ -135,7 +135,7 @@ ${form.msg}`;
             </div>
 
             {/* RIGHT — FORM */}
-            <div className={`slide-right${gridVis?' visible':''}`} style={{ background:'var(--navy2)', padding:40, border:'var(--border-gold)' }}>
+            <div className={`slide-right${gridVis?' visible':''}`} style={{ background:'var(--navy2)', padding:'clamp(22px,5vw,40px)', border:'var(--border-gold)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.78rem', color:'var(--gold)', letterSpacing:'.16em', marginBottom:26, textTransform:'uppercase' }}>
                 {tl('FORMULAIRE DE CONTACT', 'CONTACT FORM', 'FORMULARIO DE CONTACTO', 'KONTAKTFORMULAR','联系表格')}
               </div>

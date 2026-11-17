@@ -104,7 +104,7 @@ ${tl('Description', 'Description', 'Descripción', 'Beschreibung','描述')}: ${
       {/* FORM */}
       <section className="section">
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1.4fr',gap:72,alignItems:'start'}}>
+          <div className="split-form" style={{gap:72,alignItems:'start'}}>
             <div>
               <div className="sec-label">{tl('Travaillons ensemble', "Let's work together", 'Trabajemos juntos', 'Arbeiten wir zusammen','让我们一起合作')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{tl('Demande de Service', 'Service Request', 'Solicitud de Servicio', 'Serviceanfrage','服务申请')}</h2>
@@ -124,7 +124,7 @@ ${tl('Description', 'Description', 'Descripción', 'Beschreibung','描述')}: ${
                 </div>
               ))}
             </div>
-            <div style={{background:'var(--navy2)',padding:40,border:'var(--border-gold)'}}>
+            <div style={{background:'var(--navy2)',padding:'clamp(22px,5vw,40px)',border:'var(--border-gold)'}}>
               <div style={{fontFamily:'var(--f-display)',fontSize:'.78rem',color:'var(--gold)',letterSpacing:'.16em',marginBottom:26,textTransform:'uppercase'}}>
                 {tl('FORMULAIRE DE DEMANDE', 'SERVICE REQUEST FORM', 'FORMULARIO DE SOLICITUD', 'SERVICEANFRAGE','申请表')}
               </div>

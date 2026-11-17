@@ -23,50 +23,68 @@ const AMENITY_ICONS = {
 function Carousel() {
   const { YAYE_SLIDES } = useContent();
   const { lang } = useLang();
-  const _w = useW();
-  const isMob = _w < 768;
-  const isTab = _w < 1024;
   const [idx, setIdx] = useState(0);
 
   // ✅ CORRECTION : Gestion de la pause après interaction
   const [isPaused, setIsPaused] = useState(false);
   const autoPlayRef = useRef(null);
 
-  const prev = useCallback(()=>setIdx(i=>(i-1+YAYE_SLIDES.length)%YAYE_SLIDES.length),[]);
-  const next = useCallback(()=>setIdx(i=>(i+1)%YAYE_SLIDES.length),[]);
+  const count = YAYE_SLIDES.length;
+  const prev = useCallback(()=>setIdx(i=>(i-1+count)%count),[count]);
+  const next = useCallback(()=>setIdx(i=>(i+1)%count),[count]);
+  // Si le nombre de diapositives change (contenu de l'administration), l'index reste valide.
+  useEffect(()=>{ if (idx >= count) setIdx(0); },[idx, count]);
 
-  // ✅ CORRECTION : L'intervalle respecte la pause
+  // Défilement automatique toutes les 5 s, suspendu pendant une interaction et quand l'onglet est caché.
+  const [hidden, setHidden] = useState(() => typeof document !== 'undefined' && document.hidden);
   useEffect(()=>{
-    if (isPaused) return;
-    const t = setInterval(next, 5000); // Passé à 5s pour plus de confort
+    const onVis = () => setHidden(document.hidden);
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, []);
+  useEffect(()=>{
+    if (isPaused || hidden || count < 2) return undefined;
+    const t = setInterval(next, 5000);
     autoPlayRef.current = t;
     return () => clearInterval(t);
-  }, [next, isPaused]);
+  }, [next, isPaused, hidden, count]);
 
-  // ✅ CORRECTION : Fonctions de clic avec pause temporaire
-  const handlePrev = () => {
-    setIsPaused(true);
-    prev();
-    setTimeout(() => setIsPaused(false), 10000); // Pause 10s après clic
-  };
-  const handleNext = () => {
-    setIsPaused(true);
-    next();
-    setTimeout(() => setIsPaused(false), 10000); // Pause 10s après clic
-  };
+  // Le cadre ne doit jamais être décalé par le navigateur (focus, défilement) : seul le transform déplace les images.
+  const frameRef = useRef(null);
+  useEffect(()=>{ if (frameRef.current) frameRef.current.scrollLeft = 0; }, [idx]);
 
-  const s = YAYE_SLIDES[idx];
+  // Après une interaction, le défilement automatique reprend 10 s après la DERNIÈRE action.
+  const resumeRef = useRef(null);
+  const pause = () => {
+    setIsPaused(true);
+    clearTimeout(resumeRef.current);
+    resumeRef.current = setTimeout(() => setIsPaused(false), 10000);
+  };
+  useEffect(() => () => clearTimeout(resumeRef.current), []);
+  const handlePrev = () => { pause(); prev(); };
+  const handleNext = () => { pause(); next(); };
+  const goTo = (i) => { pause(); setIdx(i); };
+
   const td = (obj) => obj[lang]||obj.fr;
+  const tl = (fr,en,es,de,zh) => ({fr,en,es,de,zh}[lang]||fr);
+  const touch = useRef(null);
+  const onTouchStart = (e) => { touch.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touch.current === null) return;
+    const dx = e.changedTouches[0].clientX - touch.current;
+    touch.current = null;
+    if (Math.abs(dx) > 40) (dx < 0 ? handleNext : handlePrev)();
+  };
 
   return (
     // ✅ CORRECTION : Ajout de styles inline de sécurité pour garantir le centrage et éviter le débordement
-    <div className="hcar" style={{ position: 'relative', width: '100%', overflow: 'hidden', margin: '0 auto' }}>
-      <div className="hcar-track" style={{ display: 'flex', transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)', transform: `translateX(-${idx * 100}%)` }}>
+    <div className="hcar" ref={frameRef} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} onScroll={(e)=>{ e.currentTarget.scrollLeft = 0; }}>
+      <div className="hcar-track" style={{ transform: `translate3d(-${idx * 100}%,0,0)` }}>
         {YAYE_SLIDES.map((sl,i)=>(
-          <div key={i} className={`hcar-slide${i===idx?' active':''}`} style={{ flex: '0 0 100%', width: '100%', position: 'relative', minHeight: '400px', aspectRatio: '16/9' }}>
-            <img src={sl.img} alt={td(sl).title} className="img-cover" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
-            <div className="hcar-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(20,18,16,.85), rgba(20,18,16,.1) 55%)', zIndex: 1 }} />
-            <div className="hcar-info" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 'clamp(24px, 5vw, 48px)', zIndex: 2, color: 'var(--ivory)' }}>
+          <div key={i} className={`hcar-slide${i===idx?' active':''}`} aria-hidden={i!==idx}>
+            <img src={sl.img} alt={td(sl).title} className="hcar-img" loading={i===0?'eager':'lazy'} draggable="false" />
+            <div className="hcar-overlay" />
+            <div className="hcar-info">
               <div className="hcar-tag">{td(sl).tag}</div>
               <h3 className="hcar-title">{td(sl).title}</h3>
               <p className="hcar-sub">{td(sl).sub}</p>
@@ -74,9 +92,9 @@ function Carousel() {
           </div>
         ))}
       </div>
-      <button className="hcar-btn prev" onClick={handlePrev} style={{ position: 'absolute', top: '50%', left: '16px', transform: 'translateY(-50%)', zIndex: 3, cursor: 'pointer' }}><ChevL/></button>
-      <button className="hcar-btn next" onClick={handleNext} style={{ position: 'absolute', top: '50%', right: '16px', transform: 'translateY(-50%)', zIndex: 3, cursor: 'pointer' }}><ChevR/></button>
-      <div className="hcar-dots" style={{ position: 'absolute', bottom: '18px', left: '50%', transform: 'translateX(-50%)', zIndex: 3, display: 'flex', gap: '8px' }}>{YAYE_SLIDES.map((_,i)=><button key={i} className={`hcar-dot${i===idx?' active':''}`} onClick={()=>{ setIsPaused(true); setIdx(i); setTimeout(()=>setIsPaused(false), 10000); }} style={{ cursor: 'pointer' }} />)}</div>
+      <button type="button" className="hcar-btn prev" onClick={handlePrev} aria-label={tl('Précédent','Previous','Anterior','Zurück','上一张')}><ChevL/></button>
+      <button type="button" className="hcar-btn next" onClick={handleNext} aria-label={tl('Suivant','Next','Siguiente','Weiter','下一张')}><ChevR/></button>
+      <div className="hcar-dots">{YAYE_SLIDES.map((_,i)=><button type="button" key={i} aria-label={`${i+1} / ${count}`} className={`hcar-dot${i===idx?' active':''}`} onClick={()=>goTo(i)} />)}</div>
     </div>
   );
 }
@@ -127,7 +145,7 @@ ${form.msg}`;
       {/* INTRO */}
       <section className="section">
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64,alignItems:'center'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:64,alignItems:'center'}}>
             <div>
               <div className="sec-label">{tl('Bienvenue', 'Welcome', 'Bienvenido', 'Willkommen','欢迎')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{tl("L'Art de vivre Moderne", "The Art of Modern Living", "El Arte de Vivir Moderno", "Die Kunst des modernen Lebens","现代生活艺术")}</h2>
@@ -155,8 +173,8 @@ ${form.msg}`;
               </div>
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:16}}>
-              <img src="/Images/yaye-dia/vision.jpg" alt="Résidence Moderne" style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
+              <img src="/Images/yaye-dia/vision.jpg" alt={tl('Résidence Moderne', 'Modern Residence', 'Residencia Moderna', 'Moderne Residenz', '现代住宅')} style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:12}}>
                 <img src="/Images/yaye-dia/design.jpg" alt="Design" style={{width:'100%',height:130,objectFit:'cover'}}/>
                 <div style={{background:'var(--navy)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:16,textAlign:'center'}}>
                   <div style={{fontFamily:'var(--f-elegant)',fontSize:'2rem',color:'var(--gold)'}}>300</div>
@@ -208,7 +226,7 @@ ${form.msg}`;
           </div>
 
           {villa && (
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:28}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:28}}>
               {/* Images */}
               <div>
                 <div style={{position:'relative',overflow:'hidden',marginBottom:12}}>
@@ -218,7 +236,7 @@ ${form.msg}`;
                   <div style={{position:'absolute',bottom:0,left:0,right:0,background:'linear-gradient(transparent,rgba(5,8,16,.88))',padding:'20px 18px'}}>
                     <div style={{fontFamily:'var(--f-elegant)',fontSize:'1.1rem',color:'var(--cream)',marginBottom:2}}>{tv(villa).name}</div>
                     <div style={{fontFamily:'var(--f-serif)',fontStyle:'italic',color:'var(--gold)',fontSize:'.82rem'}}>
-                      {villa.surface} — {tv(villa).standing} — Résidence Moderne
+                      {villa.surface} — {tv(villa).standing} — {tl('Résidence Moderne', 'Modern Residence', 'Residencia Moderna', 'Moderne Residenz', '现代住宅')}
                     </div>
                   </div>
                 </div>
@@ -258,7 +276,7 @@ ${form.msg}`;
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.58rem',letterSpacing:'.14em',color:'var(--gold)',textTransform:'uppercase',marginBottom:10}}>
                       {tl('Composition', 'Layout', 'Composición', 'Raumaufteilung','布局')}
                     </div>
-                    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:6}}>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:6}}>
                       {villa.rooms.map((r,i)=>(
                         <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,168,76,.04)',borderLeft:'2px solid rgba(201,168,76,.2)',fontSize:'.75rem'}}>
                           <span style={{color:'rgba(200,195,186,.6)'}}>{r[lang]||r.fr}</span>
@@ -274,7 +292,7 @@ ${form.msg}`;
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.6rem',letterSpacing:'.12em',color:'var(--gold)',textTransform:'uppercase',padding:'6px 10px',background:'rgba(201,168,76,.08)',marginBottom:8}}>
                       {fl.level}
                     </div>
-                    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:5}}>
+                    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:5}}>
                       {fl.rooms.map((r,i)=>(
                         <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'7px 10px',background:'rgba(201,168,76,.04)',borderLeft:'2px solid rgba(201,168,76,.2)',fontSize:'.75rem'}}>
                           <span style={{color:'rgba(200,195,186,.6)'}}>{r[lang]||r.fr}</span>
@@ -319,7 +337,7 @@ ${form.msg}`;
       {/* ARCHITECTURE */}
       <section className="section" ref={lotRef}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:64}}>
             <div className={`slide-left${lotVis?' visible':''}`}>
               <div className="sec-label">{tl('Esthétique', 'Aesthetics', 'Estética', 'Ästhetik','美学')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{arch.title}</h2>
@@ -350,7 +368,7 @@ ${form.msg}`;
                 </div>
                 <p style={{fontSize:'.8rem',color:'var(--text-mid)'}}>{mat.color}</p>
               </div>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:10}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:10}}>
                 <img src="/Images/yaye-dia/cuisine.jpg" alt="Cuisine" style={{width:'100%',height:110,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=70';}}
                 />
@@ -366,13 +384,13 @@ ${form.msg}`;
       {/* LOTISSEMENT */}
       <section style={{background:'var(--gray-50)',padding:'72px 0'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:64,alignItems:'center'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:64,alignItems:'center'}}>
             <div>
               <div className="sec-label">{tl('Infrastructure', 'Infrastructure', 'Infraestructura', 'Infrastruktur','基础设施')}</div>
               <h2 className="sec-title-light" style={{marginTop:6}}>{lot.title}</h2>
               <div className="divider-gold"/>
               <p style={{fontSize:'.88rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:24}}>{lot.desc}</p>
-              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:12}}>
                 {lot.items.map((it,i)=>(
                   <div key={i} style={{padding:'14px 16px',background:'var(--white)',border:'1px solid var(--gray-200)',borderTop:'2px solid var(--gold)',borderRadius:'0 0 4px 4px'}}>
                     <div style={{fontFamily:'var(--f-display)',fontSize:'.68rem',color:'var(--text-dark)',letterSpacing:'.06em',marginBottom:5}}>{it.t}</div>
@@ -385,7 +403,7 @@ ${form.msg}`;
               <img src="/Images/yaye-dia/lotissement.jpg" alt="Lotissement" style={{width:'100%',height:200,objectFit:'cover'}}
                 onError={e=>{e.target.src='https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=70';}}
               />
-              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))',gap:12}}>
                 <img src="/Images/yaye-dia/eclairage.jpg" alt="Éclairage" style={{width:'100%',height:120,objectFit:'cover'}}
                   onError={e=>{e.target.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=70';}}
                 />
@@ -401,7 +419,7 @@ ${form.msg}`;
       {/* BOOKING FORM */}
       <section className="section" style={{background:'var(--navy2)'}}>
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:64,alignItems:'start'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,300px),1fr))',gap:64,alignItems:'start'}}>
             <div>
               <div className="sec-label" style={{color:'var(--gold)'}}>{tl('Réservez', 'Book now', 'Reserve', 'Buchen','立即预订')}</div>
               <h2 style={{fontFamily:'var(--f-elegant)',fontSize:'clamp(1.5rem,3vw,2.2rem)',color:'var(--cream)',marginTop:6,marginBottom:10}}>
@@ -424,7 +442,7 @@ ${form.msg}`;
               ))}
             </div>
 
-            <div style={{background:'rgba(5,8,16,.6)',padding:40,border:'var(--border-gold)'}}>
+            <div style={{background:'rgba(5,8,16,.6)',padding:'clamp(22px,5vw,40px)',border:'var(--border-gold)'}}>
               <div style={{fontFamily:'var(--f-display)',fontSize:'.78rem',color:'var(--gold)',letterSpacing:'.16em',marginBottom:26,textTransform:'uppercase'}}>
                 {tl('FORMULAIRE DE RÉSERVATION', 'BOOKING FORM', 'FORMULARIO DE RESERVA', 'BUCHUNGSFORMULAR','预订表格')}
               </div>

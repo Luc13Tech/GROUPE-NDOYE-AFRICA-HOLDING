@@ -99,7 +99,7 @@ ${form.desc}`;
       {/* INVESTMENT FORM */}
       <section className="section">
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1.4fr', gap:64, alignItems:'start' }}>
+          <div className="split-form" style={{ gap:64, alignItems:'start' }}>
             <div>
               <div className="sec-label">{tl('Investissez', 'Invest', 'Invierta', 'Investieren','投资')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>{tl('Devenez Investisseur GNAH', 'Become a GNAH Investor', 'Conviértase en Inversor GNAH', 'GNAH-Investor werden','成为GNAH投资者')}</h2>
@@ -119,7 +119,7 @@ ${form.desc}`;
                 </div>
               ))}
             </div>
-            <div style={{ background:'var(--navy2)', padding:40, border:'var(--border-gold)' }}>
+            <div style={{ background:'var(--navy2)', padding:'clamp(22px,5vw,40px)', border:'var(--border-gold)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.78rem', color:'var(--gold)', letterSpacing:'.16em', marginBottom:26, textTransform:'uppercase' }}>
                 {tl("FORMULAIRE D'INVESTISSEMENT", "INVESTMENT FORM", "FORMULARIO DE INVERSIÓN", "INVESTITIONSFORMULAR",'投资申请表')}
               </div>

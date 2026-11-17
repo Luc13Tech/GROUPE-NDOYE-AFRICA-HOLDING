@@ -56,7 +56,7 @@ export default function Entreprises(){
               </div>
             </div>
           ):(
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(300px,1fr))',gap:24}}>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(min(100%,300px),1fr))',gap:24}}>
               {active.map((company,idx)=>{
                 const desc=typeof company.desc==='object'?(company.desc[lang]||company.desc.fr):company.desc;
                 const sector=typeof company.sector==='object'?(company.sector[lang]||company.sector.fr):company.sector;

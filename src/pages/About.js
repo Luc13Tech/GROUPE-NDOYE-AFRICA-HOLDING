@@ -180,7 +180,7 @@ export default function About() {
       {/* ── PRESENTATION ── */}
       <section className="section" ref={heroRef}>
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:72, alignItems:'center' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:72, alignItems:'center' }}>
             <div className={`slide-left${heroVis?' visible':''}`}>
               <div className="sec-label">{tl('Présentation', 'Overview', 'Presentación', 'Überblick','介绍')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>
@@ -257,7 +257,7 @@ export default function About() {
             <div className="divider-gold-c"/>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:40 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:40 }}>
             {/* Circular gauges */}
             <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(201,168,76,.15)', padding:'36px 32px', backdropFilter:'blur(8px)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.7rem', color:'rgba(201,168,76,.6)', letterSpacing:'.2em', textTransform:'uppercase', marginBottom:28, textAlign:'center' }}>
@@ -326,7 +326,7 @@ export default function About() {
       {/* ── STRATEGY ── */}
       <section className="section">
         <div className="container">
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:64 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:64 }}>
             <div>
               <div className="sec-label">{tl('Méthodologie', 'Methodology', 'Metodología', 'Methodik','方法论')}</div>
               <h2 className="sec-title-light" style={{ marginTop:6 }}>
@@ -407,7 +407,7 @@ export default function About() {
         <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:'min(400px,80vw)', height:'min(400px,80vw)', borderRadius:'50%', background:'radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%)', pointerEvents:'none' }}/>
 
         <div className="container" style={{ position:'relative', zIndex:1 }}>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:48, alignItems:'center', maxWidth:900, margin:'0 auto' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap:48, alignItems:'center', maxWidth:900, margin:'0 auto' }}>
 
             {/* Left — Text */}
             <div>
