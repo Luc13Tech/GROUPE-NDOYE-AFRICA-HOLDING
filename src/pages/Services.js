@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLang } from '../hooks/useLang';
-import { SERVICES, SITE } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.15){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
@@ -17,43 +17,11 @@ const SVC_ICONS = {
   zap:<polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/>,
 };
 
-const PROCESS_STEPS = {
-  fr:[{n:'01',t:'Analyse',d:'Étude de faisabilité, évaluation des risques et opportunités de votre projet.'},
-      {n:'02',t:'Structuration',d:'Mise en place du montage financier et technique le plus adapté.'},
-      {n:'03',t:'Partenariat',d:'Connexion avec nos partenaires techniques et financiers mondiaux.'},
-      {n:'04',t:'Réalisation',d:'Suivi rigoureux et livraison dans les délais et standards définis.'}],
-  en:[{n:'01',t:'Analysis',d:'Feasibility study, risk assessment and opportunity evaluation of your project.'},
-      {n:'02',t:'Structuring',d:'Setting up the most appropriate financial and technical arrangement.'},
-      {n:'03',t:'Partnership',d:'Connection with our global technical and financial partners.'},
-      {n:'04',t:'Delivery',d:'Rigorous monitoring and delivery within defined deadlines and standards.'}],
-  es:[{n:'01',t:'Análisis',d:'Estudio de viabilidad, evaluación de riesgos y oportunidades de su proyecto.'},
-      {n:'02',t:'Estructuración',d:'Establecimiento del montaje financiero y técnico más adecuado.'},
-      {n:'03',t:'Asociación',d:'Conexión con nuestros socios técnicos y financieros mundiales.'},
-      {n:'04',t:'Realización',d:'Seguimiento riguroso y entrega en los plazos y estándares definidos.'}],
-  de:[{n:'01',t:'Analyse',d:'Machbarkeitsstudie, Risikobewertung und Chancenanalyse Ihres Projekts.'},
-      {n:'02',t:'Strukturierung',d:'Aufstellung der am besten geeigneten finanziellen und technischen Lösung.'},
-      {n:'03',t:'Partnerschaft',d:'Verbindung mit unseren weltweiten technischen und finanziellen Partnern.'},
-      {n:'04',t:'Umsetzung',d:'Strenge Überwachung und Lieferung innerhalb definierter Fristen und Standards.'}],
-};
 
-
-function getServicesRT() {
-  try {
-    const s = localStorage.getItem('gnah_services');
-    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p; }
-  } catch {}
-  return null;
-}
 
 export default function Services() {
+  const { SERVICES, SITE, PROCESS_STEPS } = useContent();
   const { lang } = useLang();
-  const [rtSvc, setRtSvc] = useState(getServicesRT);
-  useEffect(() => {
-    const h = () => setRtSvc(getServicesRT());
-    window.addEventListener('storage', h);
-    const iv = setInterval(h, 2000);
-    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
-  }, []);
   const [gridRef, gridVis] = useInView();
   const [procRef, procVis] = useInView();
   const [form, setForm] = useState({ nom:'', entreprise:'', email:'', tel:'', service:'', budget:'', desc:'' });
@@ -91,7 +59,7 @@ ${tl('Description', 'Description', 'Descripción', 'Beschreibung','描述')}: ${
       <section className="section" ref={gridRef}>
         <div className="container">
           <div className="grid-3">
-            {(rtSvc || SERVICES).map((s,i) => (
+            {SERVICES.map((s,i) => (
               <div key={i} className={`card-white fade-up${gridVis?' visible':''} delay-${i+1}`}>
                 <div style={{width:54,height:54,border:'1px solid rgba(201,168,76,.3)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--gold)',marginBottom:20}}>
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">{SVC_ICONS[s.icon]}</svg>
@@ -179,7 +147,7 @@ ${tl('Description', 'Description', 'Descripción', 'Beschreibung','描述')}: ${
                   <label className="form-label form-label-dark">{tl('Type de Service *', 'Service Type *', 'Tipo de Servicio *', 'Dienstart *','服务类型 *')}</label>
                   <select className="form-select form-select-dark" value={form.service} onChange={e=>setForm(p=>({...p,service:e.target.value}))}>
                     <option value="">{tl('Sélectionner...', 'Select...', 'Seleccionar...', 'Auswählen...','请选择...')}</option>
-                    {(rtSvc || SERVICES).map(s=><option key={s.icon} value={(s[lang]||s.fr).title}>{(s[lang]||s.fr).title}</option>)}
+                    {SERVICES.map(s=><option key={s.icon} value={(s[lang]||s.fr).title}>{(s[lang]||s.fr).title}</option>)}
                   </select>
                 </div>
                 <div className="form-group form-full">

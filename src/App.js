@@ -19,8 +19,7 @@ import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 import Videos from './pages/Videos';
 import Entreprises from './pages/Entreprises';
-import AdminLogin from './pages/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminMoved from './pages/AdminMoved';
 
 const ORIGIN = 'https://groupendoyeafrica.com';
 
@@ -76,11 +75,6 @@ function Layout() {
   );
 }
 
-function ProtectedAdminRoute() {
-  const isLogged = sessionStorage.getItem('gnah_admin') === '1';
-  return isLogged ? <Outlet /> : <Navigate to="/admin" replace />;
-}
-
 export default function App() {
   return (
     <LangProvider>
@@ -103,10 +97,8 @@ export default function App() {
               <Route path="/videos" element={<Videos />} />
             </Route>
 
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route element={<ProtectedAdminRoute />}>
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            </Route>
+            {/* L'administration est un espace séparé : https://api.groupendoyeafrica.com */}
+            <Route path="/admin/*" element={<AdminMoved />} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

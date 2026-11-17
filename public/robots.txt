@@ -2,9 +2,8 @@
 User-agent: *
 Allow: /
 
-# Disallow admin pages from indexing
+# L'administration est sur un espace séparé ; /admin ne fait que rediriger.
 Disallow: /admin
-Disallow: /admin/dashboard
 
 # Sitemap location
 Sitemap: https://groupendoyeafrica.com/sitemap.xml

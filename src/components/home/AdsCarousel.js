@@ -15,7 +15,7 @@ const reducedMotion = () => typeof window !== 'undefined' && window.matchMedia('
 export default function AdsCarousel() {
   const { lang } = useLang();
   const tl = makeTl(lang);
-  const { ads: remote } = useContent();
+  const { ADS: remote } = useContent();
   const [local, setLocal] = useState([]);
   const [pv, setPv] = useState(() => (window.innerWidth >= 900 ? 2 : 1));
   const [idx, setIdx] = useState(0);

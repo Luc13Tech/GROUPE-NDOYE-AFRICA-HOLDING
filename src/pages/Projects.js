@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useLang } from '../hooks/useLang';
 function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
-import { VILLA_TYPES, AMENITIES, LOTISSEMENT, ARCH_PHILOSOPHY, MATERIALS, YAYE_SLIDES, SITE } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.1){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
@@ -21,17 +21,11 @@ const AMENITY_ICONS = {
 };
 
 function Carousel() {
+  const { YAYE_SLIDES } = useContent();
   const { lang } = useLang();
   const _w = useW();
   const isMob = _w < 768;
   const isTab = _w < 1024;
-  const [rtProj, setRtProj] = useState(getProjectsRT);
-  useEffect(() => {
-    const h = () => setRtProj(getProjectsRT());
-    window.addEventListener('storage', h);
-    const iv = setInterval(h, 2000);
-    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
-  }, []);
   const [idx, setIdx] = useState(0);
 
   // ✅ CORRECTION : Gestion de la pause après interaction
@@ -88,33 +82,19 @@ function Carousel() {
 }
 
 
-function getProjectsRT() {
-  try {
-    const s = localStorage.getItem('gnah_projets');
-    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length > 0) return p; }
-  } catch {}
-  return null;
-}
-
 export default function Projects() {
+  const { VILLA_TYPES, AMENITIES, LOTISSEMENT, ARCH_PHILOSOPHY, MATERIALS, SITE } = useContent();
   const { lang } = useLang();
   const _w = useW();
   const isMob = _w < 768;
   const isTab = _w < 1024;
-  const [rtProj, setRtProj] = useState(getProjectsRT);
-  useEffect(() => {
-    const h = () => setRtProj(getProjectsRT());
-    window.addEventListener('storage', h);
-    const iv = setInterval(h, 2000);
-    return () => { window.removeEventListener('storage', h); clearInterval(iv); };
-  }, []);
   const [activeVilla, setActiveVilla] = useState('f3');
   const [amenRef, amenVis] = useInView();
   const [lotRef, lotVis]   = useInView();
   const [form, setForm] = useState({ nom:'', prenom:'', tel:'', email:'', villa:'f3', msg:'' });
   const [sent, setSent] = useState(false);
 
-  const villa = VILLA_TYPES.find(v => v.id === activeVilla);
+  const villa = VILLA_TYPES.find(v => v.id === activeVilla) || VILLA_TYPES[0];
   const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);
   const tv = (obj) => obj[lang]||obj.fr;
 

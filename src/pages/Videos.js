@@ -1,70 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useLang } from '../hooks/useLang';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.1){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
 
-// ══════════════════════════════════════════════════════════════
-//  VIDEOS — Ajoutez vos liens ici
-//  Pour chaque vidéo :
-//    url       → lien YouTube, TikTok, Facebook, etc.
-//    thumbnail → image de prévisualisation (locale ou Unsplash)
-//    platform  → 'youtube' | 'tiktok' | 'facebook' | 'instagram'
-// ══════════════════════════════════════════════════════════════
-const VIDEOS = [
-  {
-    id: 1,
-    platform: 'youtube',
-    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI',           // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/cite-vue-aerienne.jpg',
-    fallback: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',
-    duration: '2:45',
-    fr: { title:'Résidence Yaye Dia — Présentation Officielle',     desc:'Découvrez en vidéo notre programme immobilier d\'exception : 300 villas haut standing en Région de Thiès, Sénégal.' },
-    en: { title:'Yaye Dia Residence — Official Presentation',       desc:'Discover our exceptional real estate programme in video: 300 high-end villas in the Thiès Region, Senegal.' },
-    es: { title:'Residencia Yaye Dia — Presentación Oficial',       desc:'Descubra en video nuestro excepcional programa inmobiliario: 300 villas de alto standing en la Región de Thiès, Senegal.' },
-    de: { title:'Yaye Dia Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
-    zh: { title:'Yaye Dia住宅 — 官方介绍',      desc:'通过视频探索我们卓越的房地产项目：塞内加尔蒂耶斯地区的300栋高档别墅。' },
-  },
-  {
-    id: 2,
-    platform: 'tiktok',
-    url: 'https://www.tiktok.com/@assane.design.con',                // ← Remplacez par votre lien TikTok
-    thumbnail: '/Images/yaye-dia/villa-f4duplex-nuit.jpg',
-    fallback: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=85',
-    duration: '0:58',
-    fr: { title:'Cité Yaye Dia — Vue Nuit Spectaculaire',           desc:'La Cité Yaye Dia illuminée de nuit. Nos villas F4 Duplex dans toute leur splendeur sous un ciel étoilé.' },
-    en: { title:'Yaye Dia City — Spectacular Night View',           desc:'Yaye Dia City illuminated at night. Our F4 Duplex villas in all their splendour under a starry sky.' },
-    es: { title:'Ciudad Yaye Dia — Vista Nocturna Espectacular',    desc:'La Ciudad Yaye Dia iluminada de noche. Nuestras villas F4 Dúplex en todo su esplendor bajo un cielo estrellado.' },
-    de: { title:'Yaye Dia Stadt — Spektakuläre Nachtansicht',       desc:'Die Yaye Dia Stadt bei Nacht beleuchtet. Unsere F4 Duplex Villen in voller Pracht unter einem Sternenhimmel.' },
-    zh: { title:'Yaye Dia城 — 壮观夜景',       desc:'夜幕下灯火璧煌的Yaye Dia城。我们的F4复式别墅在星空下尽显华丽风采。' },
-  },
-  {
-    id: 3,
-    platform: 'facebook',
-    url: 'https://www.facebook.com/groupendoyeafricaholding',        // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/cite-plan-top.jpg',
-    fallback: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=85',
-    duration: '4:10',
-    fr: { title:'Plan Masse — 300 Villas Tracées',                  desc:'Vue aérienne du plan masse de la Cité Yaye Dia. 300 villas soigneusement tracées sur 225 m² chacune.' },
-    en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Yaye Dia City site plan. 300 carefully plotted villas on 225 m² each.' },
-    es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Ciudad Yaye Dia. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
-    de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Yaye Dia Stadt. 300 sorgfältig geplante Villen auf je 225 m².' },
-    zh: { title:'总平面图 — 300栋规划别墅',                   desc:'Yaye Dia城总平面图鸟瞰图。300栋精心规划的别墅，每栋占地225平方米。' },
-  },
-  {
-    id: 4,
-    platform: 'instagram',
-    url: 'https://www.instagram.com/assanedesignconception',         // ← Remplacez par votre lien
-    thumbnail: '/Images/yaye-dia/cite-commodites-vue.jpg',
-    fallback: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85',
-    duration: '1:30',
-    fr: { title:'Commodités — Une Cité Complète',                   desc:'Complexe sportif, terrain omnisports, mosquée, centre commercial, district sanitaire — tout ce dont vous avez besoin.' },
-    en: { title:'Amenities — A Complete City',                      desc:'Sports complex, multi-purpose field, mosque, shopping centre, health district — everything you need.' },
-    es: { title:'Comodidades — Una Ciudad Completa',                desc:'Complejo deportivo, campo polideportivo, mezquita, centro comercial, distrito sanitario: todo lo que necesita.' },
-    de: { title:'Annehmlichkeiten — Eine vollständige Stadt',       desc:'Sportkomplex, Mehrzweckspielfeld, Moschee, Einkaufszentrum, Gesundheitsbezirk — alles was Sie brauchen.' },
-    zh: { title:'配套设施 — 一座完整的城市',       desc:'体育中心、多功能运动场、清真寺、购物中心、医疗区 — 应有尽有。' },
-  },
-];
+// Les vidéos se gèrent dans l'administration (rubrique « Vidéos »).
+// Copie de secours intégrée au site : VIDEOS dans src/data/siteData.js.
 
 const PLATFORM_CONFIG = {
   youtube:   { label:'YouTube',   color:'#FF0000', icon:<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20.06 12 20.06 12 20.06s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg> },
@@ -80,6 +22,7 @@ const PlayIcon = () => (
 );
 
 export default function Videos() {
+  const { VIDEOS } = useContent();
   const { lang } = useLang();
   const [gridRef, gridVis] = useInView();
   const tl = (fr,en,es,de,zh='') => ({fr,en,es,de,zh}[lang]||fr);

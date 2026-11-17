@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../hooks/useLang';
 function useW(){const[w,sw]=React.useState(window.innerWidth);React.useEffect(()=>{const h=()=>sw(window.innerWidth);window.addEventListener('resize',h);return()=>window.removeEventListener('resize',h);},[]);return w;}
-import { SITE, COMPANY_INTRO, CONSORTIUM, STRATEGY, OBJECTIVES, OPERATIONS } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.1){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
@@ -117,6 +117,7 @@ function HBar({ label, percent, color, visible, delay=0 }) {
 const ArrowR = () => <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>;
 
 export default function About() {
+  const { SITE, COMPANY_INTRO, CONSORTIUM, STRATEGY, OBJECTIVES, OPERATIONS } = useContent();
   const { lang } = useLang();
   const _w = useW();
   const isMob = _w < 768;

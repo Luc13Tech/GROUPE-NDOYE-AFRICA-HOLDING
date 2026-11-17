@@ -3,112 +3,124 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
 import * as localData from '../data/siteData';
 import { getPublicContent } from './api';
 
+/**
+ * Contenu du site : celui publié depuis l'administration (API) quand il est disponible,
+ * sinon les données intégrées au site (src/data/siteData.js), qui restent la copie de secours.
+ * Les clés exposées portent les mêmes noms que dans siteData.js.
+ */
 const ContentContext = createContext(null);
 
-const EMPTY_CONTENT = {
-  SITE: {}, NAV: [], TAGLINE: {}, SUBTITLE: {}, STATS: [], SERVICES: [], PROJECTS: [],
-  VILLAS: [], PARTNERS_WORLD: [], AFRICA_PARTNERS: [], COMPANIES: [], GALLERY: [],
-  ADS: [], ads: [], VIDEOS: [], YAYE_SLIDES: [], COMPANY_INTRO: {},
+const CACHE_KEY = 'gnah_content_v1';
+
+// Clé du bloc dans l'API → nom de la donnée dans le site.
+const BLOCKS = {
+  tagline: 'TAGLINE',
+  subtitle: 'SUBTITLE',
+  stats: 'STATS',
+  operations: 'OPERATIONS',
+  investCapacity: 'INVEST_CAPACITY',
+  commitments: 'COMMITMENTS',
+  africaOpps: 'AFRICA_OPPS',
+  companyIntro: 'COMPANY_INTRO',
+  consortium: 'CONSORTIUM',
+  strategy: 'STRATEGY',
+  objectives: 'OBJECTIVES',
+  amenities: 'AMENITIES',
+  lotissement: 'LOTISSEMENT',
+  archPhilosophy: 'ARCH_PHILOSOPHY',
+  materials: 'MATERIALS',
+  yayeSlides: 'YAYE_SLIDES',
+  collabBenefits: 'COLLAB_BENEFITS',
+  collabTypes: 'COLLAB_TYPES',
+  expertiseList: 'EXPERTISE_LIST',
+  processSteps: 'PROCESS_STEPS',
+  contactSubjects: 'CONTACT_SUBJECTS',
 };
 
-function getLocalContent() {
-  const source = localData;
-  return { ...EMPTY_CONTENT, ...source };
+// Collection de l'API → nom de la donnée dans le site.
+const COLLECTIONS = {
+  services: 'SERVICES',
+  companies: 'COMPANIES',
+  projects: 'PROJECTS',
+  gallery: 'GALLERY_ITEMS',
+  videos: 'VIDEOS',
+  ads: 'ADS',
+};
+
+// Données sans lesquelles une section ne peut pas s'afficher : une liste vide garde la version intégrée.
+const NEVER_EMPTY = new Set(['YAYE_SLIDES', 'VILLA_TYPES']);
+
+const isObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+const sameShape = (remote, local) => (Array.isArray(local) ? Array.isArray(remote) : isObject(remote));
+
+/** Convertit la réponse de l'API au format des données du site. Ce qui manque reste local. */
+export function fromApi(payload) {
+  if (!isObject(payload) || !isObject(payload.blocks)) return {};
+  const out = {};
+  const { blocks } = payload;
+
+  if (isObject(blocks.site)) out.SITE = { ...localData.SITE, ...blocks.site };
+  for (const [key, name] of Object.entries(BLOCKS)) {
+    if (sameShape(blocks[key], localData[name])) out[name] = blocks[key];
+  }
+  for (const [key, name] of Object.entries(COLLECTIONS)) {
+    if (Array.isArray(payload[key])) out[name] = payload[key];
+  }
+  // Les villas sont identifiées dans le site par leur code (f3, f4, f4-duplex, f5).
+  if (Array.isArray(payload.villas)) out.VILLA_TYPES = payload.villas.map((v) => ({ ...v, id: v.code }));
+  for (const name of NEVER_EMPTY) if (Array.isArray(out[name]) && out[name].length === 0) delete out[name];
+  if (isObject(payload.partners)) {
+    if (Array.isArray(payload.partners.world)) out.PARTNERS_WORLD = payload.partners.world;
+    if (Array.isArray(payload.partners.africa)) out.AFRICA_PARTNERS = payload.partners.africa;
+  }
+  out.version = payload.version;
+  return out;
 }
 
-function normalizeApiContent(response, local) {
-  if (!response || typeof response !== 'object') return {};
-
-  const payload =
-    response.data && typeof response.data === 'object' && !Array.isArray(response.data)
-      ? response.data
-      : response.content && typeof response.content === 'object' && !Array.isArray(response.content)
-        ? response.content
-        : response;
-  const blocks = payload.blocks && typeof payload.blocks === 'object' ? payload.blocks : {};
-  const site = { ...(blocks.site || {}), ...(payload.SITE || {}), ...(payload.site || {}) };
-  const partners = payload.partners || {};
-
-  return {
-    SITE: Object.keys(site).length ? site : local.SITE,
-    NAV: local.NAV,
-    TAGLINE: blocks.tagline || payload.TAGLINE || local.TAGLINE,
-    SUBTITLE: blocks.subtitle || payload.SUBTITLE || local.SUBTITLE,
-    STATS: Array.isArray(blocks.stats) ? blocks.stats : local.STATS,
-    SERVICES: Array.isArray(payload.services) ? payload.services : local.SERVICES,
-    PROJECTS: Array.isArray(payload.projects) ? payload.projects : local.PROJECTS,
-    VILLAS: Array.isArray(payload.villas) ? payload.villas : local.VILLAS,
-    PARTNERS_WORLD: Array.isArray(partners.world) ? partners.world : local.PARTNERS_WORLD,
-    AFRICA_PARTNERS: Array.isArray(partners.africa) ? partners.africa : local.AFRICA_PARTNERS,
-    COMPANIES: Array.isArray(payload.companies) ? payload.companies : local.COMPANIES,
-    GALLERY: Array.isArray(payload.gallery) ? payload.gallery : local.GALLERY,
-    ADS: Array.isArray(payload.ads) ? payload.ads : local.ADS,
-    ads: Array.isArray(payload.ads) ? payload.ads : (local.ADS || []),
-    VIDEOS: Array.isArray(payload.videos) ? payload.videos : local.VIDEOS,
-    YAYE_SLIDES: Array.isArray(blocks.yayeSlides) ? blocks.yayeSlides : local.YAYE_SLIDES,
-    COMPANY_INTRO: blocks.companyIntro || local.COMPANY_INTRO,
-    CONSORTIUM: blocks.consortium || local.CONSORTIUM,
-    STRATEGY: blocks.strategy || local.STRATEGY,
-    OPERATIONS: Array.isArray(blocks.operations) ? blocks.operations : local.OPERATIONS,
-    INVEST_CAPACITY: Array.isArray(blocks.investCapacity) ? blocks.investCapacity : local.INVEST_CAPACITY,
-    COMMITMENTS: Array.isArray(blocks.commitments) ? blocks.commitments : local.COMMITMENTS,
-    AFRICA_OPPS: blocks.africaOpps || local.AFRICA_OPPS,
-    OBJECTIVES: Array.isArray(blocks.objectives) ? blocks.objectives : local.OBJECTIVES,
-    AMENITIES: Array.isArray(blocks.amenities) ? blocks.amenities : local.AMENITIES,
-    LOTISSEMENT: blocks.lotissement || local.LOTISSEMENT,
-    ARCH_PHILOSOPHY: blocks.archPhilosophy || local.ARCH_PHILOSOPHY,
-    MATERIALS: blocks.materials || local.MATERIALS,
-    version: payload.version,
-  };
+function readCache() {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 }
 
-function mergeContent(local, remote) {
-  const merged = { ...local, ...remote };
-  Object.keys(local).forEach((key) => {
-    const remoteValue = remote[key];
-    if (remoteValue === undefined || remoteValue === null || (Array.isArray(remoteValue) && remoteValue.length === 0)) {
-      merged[key] = local[key];
-    }
-  });
-  // Keep the established lowercase alias expected by the home ads carousel.
-  merged.ads = remote.ads?.length ? remote.ads : (local.ads || local.ADS || []);
-  return merged;
+function writeCache(payload) {
+  try {
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+  } catch {
+    /* stockage indisponible : sans conséquence */
+  }
 }
 
 export function ContentProvider({ children }) {
-  const [remoteContent, setRemoteContent] = useState({});
+  const [remote, setRemote] = useState(() => fromApi(readCache()));
   const [loading, setLoading] = useState(true);
-  const localContent = useMemo(getLocalContent, []);
-
-  const refreshContent = async () => {
-    try {
-      const response = await getPublicContent();
-      setRemoteContent(normalizeApiContent(response, localContent));
-      return true;
-    } catch (error) {
-      console.error('Impossible de rafraîchir les contenus :', error);
-      return false;
-    }
-  };
 
   useEffect(() => {
     let alive = true;
     getPublicContent()
-      .then((response) => {
-        if (alive) setRemoteContent(normalizeApiContent(response, localContent));
+      .then((payload) => {
+        if (!alive) return;
+        const next = fromApi(payload);
+        if (next.version) {
+          setRemote(next);
+          writeCache(payload);
+        }
       })
-      .catch((error) => {
-        console.warn('GNAH: utilisation des contenus locaux.', error?.message || error);
+      .catch(() => {
+        /* API injoignable : le site affiche ses données intégrées */
       })
       .finally(() => {
         if (alive) setLoading(false);
       });
-    return () => { alive = false; };
-  }, [localContent]);
+    return () => {
+      alive = false;
+    };
+  }, []);
 
-  const content = useMemo(() => mergeContent(localContent, remoteContent), [localContent, remoteContent]);
-  const value = useMemo(() => ({ ...content, loading, refreshContent }), [content, loading]);
-
+  const value = useMemo(() => ({ ...localData, ...remote, loading }), [remote, loading]);
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;
 }
 

@@ -10,7 +10,6 @@ export const SITE = {
   whatsapp:   '221779398484',
   email:      'Contact@groupendoyeafrica.com',
   address_fr: 'Cité Baobab, Sénégal',
-  adminPass:  'admin123',
   social: {
     facebook:  'https://www.facebook.com/groupendoyeafricaholding',
     instagram: 'https://www.instagram.com/assanedesignconception',
@@ -392,14 +391,198 @@ export const MATERIALS = {
   zh:{ title:'高贵耐久的材料', desc:"每栋别墅都采用高端材料建造：实木、天然石材，F5别墅还使用卡拉卡塔大理石。GNAH的质量不可妥协。", marble:"卡拉卡塔大理石全覆盖 — 金色纹脉，自然光泽。绝对奢华与尊贵的象征。", color:"客户在颜色选择上拥有完全自由。首选推荐：可调节的祖母绿。客户是王。" },
 };
 
-export const DEFAULT_ADMIN_CONTENT = {
-  projects: [
+export const PROJECTS = [
     {id:1,active:true,category:'Immobilier',img:'/Images/yaye-dia/cite-vue-aerienne.jpg',title:{fr:'Résidence Yaye Dia',en:'Yaye Dia Residence',zh:'Yaye Dia住宅'},desc:{fr:'300 villas haut standing en Région de Thiès, Sénégal.',en:'300 high-end villas in Thiès Region, Senegal.',zh:'塞内加尔蒂耶斯地区300栋高档别墅。'},waMsg:{fr:'Bonjour, je suis intéressé(e) par la Résidence Yaye Dia.',en:'Hello, I am interested in the Yaye Dia Residence.'}},
     {id:2,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&q=85',title:{fr:'Port Lagunaire de Dabou',en:'Dabou Lagoon Port',zh:'达布湖港'},desc:{fr:"Port lagunaire en Côte d'Ivoire — $1,7 milliard — BOT.",en:"Lagoon port in Ivory Coast — $1.7 billion — BOT.",zh:"科特迪瓦湖港 — 17亿美元 — BOT合同。"},waMsg:{fr:"Bonjour, je suis intéressé(e) par le Port de Dabou.",en:"Hello, I am interested in the Dabou Port."}},
     {id:3,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=85',title:{fr:'Autoroute Abuja-Lagos',en:'Abuja-Lagos Highway',zh:'阿布贾-拉各斯高速公路'},desc:{fr:"Autoroute au Nigeria — $5,7 milliards — BOT — 467 km.",en:"Highway in Nigeria — $5.7 billion — BOT — 467 km.",zh:"尼日利亚高速公路 — 57亿美元 — BOT合同 — 467公里。"},waMsg:{fr:"Bonjour, je m'intéresse à l'autoroute Abuja-Lagos.",en:"Hello, I am interested in the Abuja-Lagos highway."}},
-  ],
+  ];
+
+// Collaboration — avantages
+export const COLLAB_BENEFITS = [
+  {
+    fr:{t:'Réseau International',d:"Accédez à notre réseau dans 6 pays et 11 marchés africains. Des opportunités à forte valeur ajoutée sur tout le continent."},
+    en:{t:'International Network',d:'Access our network in 6 countries and 11 African markets. High value-added opportunities across the entire continent.'},
+    es:{t:'Red Internacional',d:'Acceda a nuestra red en 6 países y 11 mercados africanos. Oportunidades de alto valor añadido en todo el continente.'},
+    de:{t:'Internationales Netzwerk',d:'Zugang zu unserem Netzwerk in 6 Ländern und 11 afrikanischen Märkten. Hochwertige Möglichkeiten auf dem gesamten Kontinent.'},
+    zh:{t:'国际网络',d:'access我们在6个国家和11个非洲市场的网络。覆盖整个大陆的高价值机遇。'},
+  },
+  {
+    fr:{t:'Projets Structurés',d:"Bénéficiez de notre expertise en structuration de projets pour maximiser la faisabilité et minimiser les risques à chaque étape."},
+    en:{t:'Structured Projects',d:'Benefit from our project structuring expertise to maximise feasibility and minimise risks at every stage.'},
+    es:{t:'Proyectos Estructurados',d:'Benefíciese de nuestra experiencia en estructuración de proyectos para maximizar la viabilidad y minimizar los riesgos en cada etapa.'},
+    de:{t:'Strukturierte Projekte',d:'Profitieren Sie von unserer Projektstrukturierungsexpertise, um die Machbarkeit zu maximieren und Risiken in jeder Phase zu minimieren.'},
+    zh:{t:'结构化项目',d:'借助我们的项目结构化专业知识，在每个阶段最大化可行性并最小化风险。'},
+  },
+  {
+    fr:{t:'Financement Accessible',d:'Accédez à nos partenaires bancaires mondiaux pour le financement de vos projets privés ou publics en Afrique.'},
+    en:{t:'Accessible Financing',d:'Access our global banking partners for the financing of your private or public projects in Africa.'},
+    es:{t:'Financiación Accesible',d:'Acceda a nuestros socios bancarios mundiales para la financiación de sus proyectos privados o públicos en África.'},
+    de:{t:'Zugängliche Finanzierung',d:'Zugang zu unseren globalen Bankpartnern für die Finanzierung Ihrer privaten oder öffentlichen Projekte in Afrika.'},
+    zh:{t:'便捷融资',d:'通过我们的全球银行合作伙伴，为您在非洲的私人或公共项目提供融资支持。'},
+  },
+  {
+    fr:{t:'Impact Durable',d:'Participez à des projets qui transforment réellement les économies africaines tout en générant des rendements attractifs pour vos investissements.'},
+    en:{t:'Lasting Impact',d:'Participate in projects that genuinely transform African economies while generating attractive returns for your investments.'},
+    es:{t:'Impacto Duradero',d:'Participe en proyectos que realmente transforman las economías africanas generando retornos atractivos para sus inversiones.'},
+    de:{t:'Nachhaltige Wirkung',d:'Beteiligen Sie sich an Projekten, die afrikanische Volkswirtschaften wirklich transformieren und gleichzeitig attraktive Renditen für Ihre Investitionen erzielen.'},
+    zh:{t:'持久影响',d:'参与真正改变非洲经济的项目，同时为您的投资带来可观的回报。'},
+  },
+  {
+    fr:{t:"Équipe d'Experts",d:"Collaborez avec nos ingénieurs, architectes et spécialistes qui apportent leur expertise technique et leur connaissance du terrain africain."},
+    en:{t:'Expert Team',d:'Collaborate with our engineers, architects and specialists who bring technical expertise and knowledge of the African landscape.'},
+    es:{t:'Equipo de Expertos',d:'Colabore con nuestros ingenieros, arquitectos y especialistas que aportan experiencia técnica y conocimiento del terreno africano.'},
+    de:{t:'Expertenteam',d:'Arbeiten Sie mit unseren Ingenieuren, Architekten und Spezialisten zusammen, die technische Expertise und Kenntnisse des afrikanischen Geländes mitbringen.'},
+    zh:{t:'专家团队',d:'与我们的工程师、建筑师和专家合作，他们带来技术专长和对非洲地形的深入了解。'},
+  },
+  {
+    fr:{t:'Vision Long Terme',d:'GNAH pense à long terme. Nos collaborations sont construites sur la durée avec une vision claire du développement continental africain.'},
+    en:{t:'Long-Term Vision',d:'GNAH thinks long-term. Our collaborations are built to last with a clear vision of African continental development.'},
+    es:{t:'Visión a Largo Plazo',d:'GNAH piensa a largo plazo. Nuestras colaboraciones están construidas para durar con una visión clara del desarrollo continental africano.'},
+    de:{t:'Langfristige Vision',d:'GNAH denkt langfristig. Unsere Kooperationen sind auf Dauer ausgelegt mit einer klaren Vision der afrikanischen kontinentalen Entwicklung.'},
+    zh:{t:'长远愿景',d:'GNAH着眼长远。我们的合作建立在持久的基础上，对非洲大陆发展有着清晰的愿景。'},
+  },
+];
+
+// Collaboration — types de partenariat
+export const COLLAB_TYPES = {
+  fr:['Partenariat technique','Partenariat financier','Partenariat commercial','Consortium de projet','Fournisseur de matériaux','Consultant spécialisé','Autre'],
+  en:['Technical partnership','Financial partnership','Commercial partnership','Project consortium','Materials supplier','Specialised consultant','Other'],
+  es:['Asociación técnica','Asociación financiera','Asociación comercial','Consorcio de proyecto','Proveedor de materiales','Consultor especializado','Otro'],
+  de:['Technische Partnerschaft','Finanzielle Partnerschaft','Kommerzielle Partnerschaft','Projektkonsortium','Materiallieferant','Spezialisierter Berater','Sonstiges'],
 };
-export default DEFAULT_ADMIN_CONTENT;
-export const content = DEFAULT_ADMIN_CONTENT;
-export const VILLAS = VILLA_TYPES;
-export const PROJECTS = DEFAULT_ADMIN_CONTENT.projects;
+
+// Collaboration — domaines d'expertise
+export const EXPERTISE_LIST = {
+  fr:['Construction & BTP','Finance & Investissement','Agriculture & Technologie','Énergie Renouvelable','Infrastructure Publique','Mines & Ressources','Immobilier','Logistique & Transport'],
+  en:['Construction & Civil Engineering','Finance & Investment','Agriculture & Technology','Renewable Energy','Public Infrastructure','Mining & Resources','Real Estate','Logistics & Transport'],
+  es:['Construcción e Ingeniería Civil','Finanzas e Inversión','Agricultura y Tecnología','Energía Renovable','Infraestructura Pública','Minería y Recursos','Inmobiliaria','Logística y Transporte'],
+  de:['Bau & Tiefbau','Finanzen & Investitionen','Landwirtschaft & Technologie','Erneuerbare Energien','Öffentliche Infrastruktur','Bergbau & Ressourcen','Immobilien','Logistik & Transport'],
+};
+
+// Services — étapes de la méthode
+export const PROCESS_STEPS = {
+  fr:[{n:'01',t:'Analyse',d:'Étude de faisabilité, évaluation des risques et opportunités de votre projet.'},
+      {n:'02',t:'Structuration',d:'Mise en place du montage financier et technique le plus adapté.'},
+      {n:'03',t:'Partenariat',d:'Connexion avec nos partenaires techniques et financiers mondiaux.'},
+      {n:'04',t:'Réalisation',d:'Suivi rigoureux et livraison dans les délais et standards définis.'}],
+  en:[{n:'01',t:'Analysis',d:'Feasibility study, risk assessment and opportunity evaluation of your project.'},
+      {n:'02',t:'Structuring',d:'Setting up the most appropriate financial and technical arrangement.'},
+      {n:'03',t:'Partnership',d:'Connection with our global technical and financial partners.'},
+      {n:'04',t:'Delivery',d:'Rigorous monitoring and delivery within defined deadlines and standards.'}],
+  es:[{n:'01',t:'Análisis',d:'Estudio de viabilidad, evaluación de riesgos y oportunidades de su proyecto.'},
+      {n:'02',t:'Estructuración',d:'Establecimiento del montaje financiero y técnico más adecuado.'},
+      {n:'03',t:'Asociación',d:'Conexión con nuestros socios técnicos y financieros mundiales.'},
+      {n:'04',t:'Realización',d:'Seguimiento riguroso y entrega en los plazos y estándares definidos.'}],
+  de:[{n:'01',t:'Analyse',d:'Machbarkeitsstudie, Risikobewertung und Chancenanalyse Ihres Projekts.'},
+      {n:'02',t:'Strukturierung',d:'Aufstellung der am besten geeigneten finanziellen und technischen Lösung.'},
+      {n:'03',t:'Partnerschaft',d:'Verbindung mit unseren weltweiten technischen und finanziellen Partnern.'},
+      {n:'04',t:'Umsetzung',d:'Strenge Überwachung und Lieferung innerhalb definierter Fristen und Standards.'}],
+};
+
+// Contact — objets du message
+export const CONTACT_SUBJECTS = {
+  fr:['Demande d\'information','Réservation villa','Investissement','Partenariat','Collaboration','Autre'],
+  en:['Information request','Villa booking','Investment','Partnership','Collaboration','Other'],
+  es:['Solicitud de información','Reserva de villa','Inversión','Asociación','Colaboración','Otro'],
+  de:['Informationsanfrage','Villabuchung','Investition','Partnerschaft','Zusammenarbeit','Sonstiges'],
+};
+
+// Galerie photos
+export const GALLERY_ITEMS = [
+  // Category: Vue générale / Overview
+  { id:1,  cat:'overview', src:'/Images/yaye-dia/cite-vue-aerienne.jpg',   fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Vue aérienne — Cité Yaye Dia complète',      en:'Aerial view — Complete Yaye Dia City',        es:'Vista aérea — Ciudad Yaye Dia completa',      de:'Luftaufnahme — Vollständige Yaye Dia Stadt' },
+  { id:2,  cat:'overview', src:'/Images/yaye-dia/cite-plan-top.jpg',       fallback:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=85', fr:'Plan de masse — 300 villas tracées',          en:'Site plan — 300 plotted villas',              es:'Plan de masa — 300 villas trazadas',           de:'Lageplan — 300 geplante Villen' },
+  { id:3,  cat:'overview', src:'/Images/yaye-dia/cite-commodites-vue.jpg', fallback:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85', fr:'Vue générale — Commodités visibles',          en:'General view — Visible amenities',            es:'Vista general — Comodidades visibles',         de:'Gesamtansicht — Sichtbare Annehmlichkeiten' },
+  { id:4,  cat:'overview', src:'/Images/yaye-dia/cite-voirie.jpg',         fallback:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=85', fr:'Voirie résidentielle — Palmiers & verdure',   en:'Residential road — Palm trees & greenery',    es:'Vía residencial — Palmeras y vegetación',     de:'Wohnstraße — Palmen und Grünflächen' },
+  { id:5,  cat:'overview', src:'/Images/yaye-dia/commodites.jpg',          fallback:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85', fr:'Vue aérienne — Rond-point et palmiers',       en:'Aerial — Roundabout and palm trees',          es:'Aérea — Rotonda y palmeras',                  de:'Luftaufnahme — Kreisverkehr und Palmen' },
+
+  // Category: Villas extérieur / Exterior
+  { id:6,  cat:'exterior', src:'/Images/yaye-dia/villa-f3-facade.jpg',     fallback:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=85', fr:'Villa F3 — Façade avec jardin tropical',      en:'F3 Villa — Facade with tropical garden',      es:'Villa F3 — Fachada con jardín tropical',      de:'F3 Villa — Fassade mit tropischem Garten' },
+  { id:7,  cat:'exterior', src:'/Images/yaye-dia/villa-f4pp-facade.jpg',   fallback:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=85', fr:'Villa F4 Plein Pied — Façade moderne',        en:'F4 Single-Story — Modern facade',             es:'Villa F4 Planta Baja — Fachada moderna',      de:'F4 Einstöckig — Moderne Fassade' },
+  { id:8,  cat:'exterior', src:'/Images/yaye-dia/villa-f4duplex.jpg',      fallback:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=85', fr:'Villa F4 Duplex — Façade nuit illuminée',     en:'F4 Duplex — Illuminated night facade',        es:'Villa F4 Dúplex — Fachada nocturna iluminada',de:'F4 Duplex — Beleuchtete Nachtfassade' },
+  { id:9,  cat:'exterior', src:'/Images/yaye-dia/villa-f4duplex-nuit.jpg', fallback:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=85', fr:'Rangée Villas F4 Duplex — Nuit étoilée',     en:'F4 Duplex Row — Starry night',                es:'Fila Villas F4 Dúplex — Noche estrellada',    de:'F4 Duplex Reihe — Sternennacht' },
+  { id:10, cat:'exterior', src:'/Images/yaye-dia/villa-f5.jpg',            fallback:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85', fr:'Villa F5 — Façade haut standing nuit',        en:'F5 Villa — High-end night facade',            es:'Villa F5 — Fachada de alto standing noche',  de:'F5 Villa — Hochwertige Nachtfassade' },
+  { id:11, cat:'exterior', src:'/Images/yaye-dia/villa-f5-facade2.jpg',    fallback:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85', fr:'Villa F5 — Vue de face variante',             en:'F5 Villa — Front view variant',               es:'Villa F5 — Vista frontal variante',           de:'F5 Villa — Vorderansicht Variante' },
+  { id:12, cat:'exterior', src:'/Images/yaye-dia/villa-f5-facade3.jpg',    fallback:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85', fr:'Villa F5 — 3 niveaux + balcons vitrés',      en:'F5 Villa — 3 floors + glass balconies',       es:'Villa F5 — 3 plantas + balcones de vidrio',  de:'F5 Villa — 3 Etagen + Glasbalkone' },
+  { id:13, cat:'exterior', src:'/Images/yaye-dia/villa-piscine.jpg',       fallback:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',   fr:'Villa avec piscine — Terrasse panoramique',  en:'Villa with pool — Panoramic terrace',         es:'Villa con piscina — Terraza panorámica',     de:'Villa mit Pool — Panoramaterrasse' },
+  { id:14, cat:'exterior', src:'/Images/yaye-dia/villa-piscine2.jpg',      fallback:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',   fr:'Villa moderne — Piscine & transats luxueux', en:'Modern villa — Pool & luxury sun loungers',   es:'Villa moderna — Piscina y tumbonas de lujo',  de:'Moderne Villa — Pool & Luxus-Liegestühle' },
+
+  // Category: Plans 3D / Floor plans
+  { id:15, cat:'plans',    src:'/Images/yaye-dia/villa-f3-plan.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F3 — Vue aérienne parcelle',          en:'F3 3D Plan — Aerial plot view',               es:'Plan 3D F3 — Vista aérea parcela',            de:'F3 3D Plan — Luftaufnahme Grundstück' },
+  { id:16, cat:'plans',    src:'/Images/yaye-dia/villa-f3-plan2.jpg',      fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F3 — Intérieur détaillé',            en:'F3 3D Plan — Detailed interior',              es:'Plan 3D F3 — Interior detallado',            de:'F3 3D Plan — Detailliertes Innere' },
+  { id:17, cat:'plans',    src:'/Images/yaye-dia/villa-f4pp-plan2.jpg',     fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F4 Plein Pied — Composition',        en:'F4 Single-Story 3D Plan — Layout',            es:'Plan 3D F4 Planta Baja — Composición',        de:'F4 Einstöckig 3D Plan — Grundriss' },
+  { id:18, cat:'plans',    src:'/Images/yaye-dia/villa-f5-plan-aerien.jpg',fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan aérien F5 — Terrasse & espaces',        en:'F5 Aerial plan — Terrace & spaces',           es:'Plan aéreo F5 — Terraza y espacios',          de:'F5 Luftplan — Terrasse & Räume' },
+  { id:19, cat:'plans',    src:'/Images/yaye-dia/villa-f5-terrasse-plan.jpg',fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85',fr:'Plan 3D Terrasse F5 — Barbecue & détente',  en:'F5 3D Terrace Plan — BBQ & relaxation',       es:'Plan 3D Terraza F5 — Barbacoa y relax',      de:'F5 3D Terrassenplan — Grill & Entspannung' },
+  { id:20, cat:'plans',    src:'/Images/yaye-dia/villa-f4duplex.jpg', fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Plan 3D F4 Duplex — RDC + Étage',           en:'F4 Duplex 3D Plan — Ground + Upper floor',    es:'Plan 3D F4 Dúplex — PB + Planta alta',       de:'F4 Duplex 3D Plan — EG + OG' },
+
+  // Category: Intérieurs / Interiors
+  { id:21, cat:'interior', src:'/Images/yaye-dia/salon-f3.jpg',            fallback:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',   fr:'Salon F3 — Espace de vie ouvert & lumineux',  en:'F3 Living room — Open & bright living space', es:'Salón F3 — Espacio de vida abierto y luminoso',de:'F3 Wohnzimmer — Offener heller Wohnraum' },
+  { id:22, cat:'interior', src:'/Images/yaye-dia/salon-f4.jpg',            fallback:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=85', fr:'Salon F4 Duplex — Canapé & escalier',        en:'F4 Duplex Living room — Sofa & staircase',    es:'Salón F4 Dúplex — Sofá y escalera',          de:'F4 Duplex Wohnzimmer — Sofa & Treppe' },
+  { id:23, cat:'interior', src:'/Images/yaye-dia/salon-duplex.jpg',        fallback:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=85',   fr:'Salon de luxe — Marbre, bois & verdure',     en:'Luxury living room — Marble, wood & plants',  es:'Salón de lujo — Mármol, madera y plantas',   de:'Luxus-Wohnzimmer — Marmor, Holz & Pflanzen' },
+  { id:24, cat:'interior', src:'/Images/yaye-dia/villa-f5-terrasse.jpg',   fallback:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=85',   fr:'Terrasse F5 — Salon extérieur & barbecue',   en:'F5 Terrace — Outdoor lounge & barbecue',      es:'Terraza F5 — Sala exterior y barbacoa',      de:'F5 Terrasse — Außenwohnbereich & Grill' },
+  { id:25, cat:'interior', src:'/Images/yaye-dia/cuisine.jpg',             fallback:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=85',   fr:'Cuisine — Marbre Calacatta & finitions',     en:'Kitchen — Calacatta marble & finishes',       es:'Cocina — Mármol Calacatta y acabados',       de:'Küche — Calacatta-Marmor & Oberflächen' },
+  { id:26, cat:'interior', src:'/Images/yaye-dia/master.jpg',              fallback:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=85', fr:'Master Room — Dressing & salle de bain',     en:'Master Room — Dressing & bathroom',           es:'Master Room — Vestidor y baño',              de:'Master Room — Ankleidezimmer & Bad' },
+
+  // Category: Immeubles / Buildings
+  { id:27, cat:'buildings',src:'/Images/yaye-dia/immeuble-nuit.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble résidentiel — Cité Yaye Dia nuit',  en:'Residential building — Yaye Dia City night',  es:'Edificio residencial — Ciudad Yaye Dia noche',de:'Wohngebäude — Yaye Dia Stadt Nacht' },
+  { id:28, cat:'buildings',src:'/Images/yaye-dia/immeuble-jour.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble Yaye Dia — Façade moderne jour',    en:'Yaye Dia Building — Modern daytime facade',   es:'Edificio Yaye Dia — Fachada moderna día',    de:'Yaye Dia Gebäude — Moderne Tagesfassade' },
+];
+
+// Vidéos
+export const VIDEOS = [
+  {
+    id: 1,
+    platform: 'youtube',
+    url: 'https://www.youtube.com/watch?v=VOTRE_LIEN_ICI',           // ← Remplacez par votre lien
+    thumbnail: '/Images/yaye-dia/cite-vue-aerienne.jpg',
+    fallback: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',
+    duration: '2:45',
+    fr: { title:'Résidence Yaye Dia — Présentation Officielle',     desc:'Découvrez en vidéo notre programme immobilier d\'exception : 300 villas haut standing en Région de Thiès, Sénégal.' },
+    en: { title:'Yaye Dia Residence — Official Presentation',       desc:'Discover our exceptional real estate programme in video: 300 high-end villas in the Thiès Region, Senegal.' },
+    es: { title:'Residencia Yaye Dia — Presentación Oficial',       desc:'Descubra en video nuestro excepcional programa inmobiliario: 300 villas de alto standing en la Región de Thiès, Senegal.' },
+    de: { title:'Yaye Dia Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
+    zh: { title:'Yaye Dia住宅 — 官方介绍',      desc:'通过视频探索我们卓越的房地产项目：塞内加尔蒂耶斯地区的300栋高档别墅。' },
+  },
+  {
+    id: 2,
+    platform: 'tiktok',
+    url: 'https://www.tiktok.com/@assane.design.con',                // ← Remplacez par votre lien TikTok
+    thumbnail: '/Images/yaye-dia/villa-f4duplex-nuit.jpg',
+    fallback: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=85',
+    duration: '0:58',
+    fr: { title:'Cité Yaye Dia — Vue Nuit Spectaculaire',           desc:'La Cité Yaye Dia illuminée de nuit. Nos villas F4 Duplex dans toute leur splendeur sous un ciel étoilé.' },
+    en: { title:'Yaye Dia City — Spectacular Night View',           desc:'Yaye Dia City illuminated at night. Our F4 Duplex villas in all their splendour under a starry sky.' },
+    es: { title:'Ciudad Yaye Dia — Vista Nocturna Espectacular',    desc:'La Ciudad Yaye Dia iluminada de noche. Nuestras villas F4 Dúplex en todo su esplendor bajo un cielo estrellado.' },
+    de: { title:'Yaye Dia Stadt — Spektakuläre Nachtansicht',       desc:'Die Yaye Dia Stadt bei Nacht beleuchtet. Unsere F4 Duplex Villen in voller Pracht unter einem Sternenhimmel.' },
+    zh: { title:'Yaye Dia城 — 壮观夜景',       desc:'夜幕下灯火璧煌的Yaye Dia城。我们的F4复式别墅在星空下尽显华丽风采。' },
+  },
+  {
+    id: 3,
+    platform: 'facebook',
+    url: 'https://www.facebook.com/groupendoyeafricaholding',        // ← Remplacez par votre lien
+    thumbnail: '/Images/yaye-dia/cite-plan-top.jpg',
+    fallback: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=85',
+    duration: '4:10',
+    fr: { title:'Plan Masse — 300 Villas Tracées',                  desc:'Vue aérienne du plan masse de la Cité Yaye Dia. 300 villas soigneusement tracées sur 225 m² chacune.' },
+    en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Yaye Dia City site plan. 300 carefully plotted villas on 225 m² each.' },
+    es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Ciudad Yaye Dia. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
+    de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Yaye Dia Stadt. 300 sorgfältig geplante Villen auf je 225 m².' },
+    zh: { title:'总平面图 — 300栋规划别墅',                   desc:'Yaye Dia城总平面图鸟瞰图。300栋精心规划的别墅，每栋占地225平方米。' },
+  },
+  {
+    id: 4,
+    platform: 'instagram',
+    url: 'https://www.instagram.com/assanedesignconception',         // ← Remplacez par votre lien
+    thumbnail: '/Images/yaye-dia/cite-commodites-vue.jpg',
+    fallback: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85',
+    duration: '1:30',
+    fr: { title:'Commodités — Une Cité Complète',                   desc:'Complexe sportif, terrain omnisports, mosquée, centre commercial, district sanitaire — tout ce dont vous avez besoin.' },
+    en: { title:'Amenities — A Complete City',                      desc:'Sports complex, multi-purpose field, mosque, shopping centre, health district — everything you need.' },
+    es: { title:'Comodidades — Una Ciudad Completa',                desc:'Complejo deportivo, campo polideportivo, mezquita, centro comercial, distrito sanitario: todo lo que necesita.' },
+    de: { title:'Annehmlichkeiten — Eine vollständige Stadt',       desc:'Sportkomplex, Mehrzweckspielfeld, Moschee, Einkaufszentrum, Gesundheitsbezirk — alles was Sie brauchen.' },
+    zh: { title:'配套设施 — 一座完整的城市',       desc:'体育中心、多功能运动场、清真寺、购物中心、医疗区 — 应有尽有。' },
+  },
+];
+
+// Publicités du carrousel d'accueil (gérées depuis l'administration).
+export const ADS = [];

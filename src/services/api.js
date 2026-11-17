@@ -1,72 +1,22 @@
-const API_BASE_URL = (process.env.REACT_APP_API_URL || 'https://api.groupendoyeafrica.com').replace(/\/+$/, '');
+// Lecture du contenu public publié depuis l'administration (https://api.groupendoyeafrica.com).
+// Le site ne fait que LIRE : toute modification passe par l'espace d'administration.
+export const API_BASE_URL = (process.env.REACT_APP_API_URL || 'https://api.groupendoyeafrica.com').replace(/\/+$/, '');
 
-export function buildApiUrl(path = '/') {
-  if (!path) return API_BASE_URL;
-  if (/^https?:\/\//i.test(path)) return path;
-  return `${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
-}
+const TIMEOUT_MS = 8000;
 
-export async function apiRequest(path, options = {}) {
-  const {
-    method = 'GET',
-    body,
-    headers = {},
-    credentials = 'include',
-    parseJson = true,
-    ...rest
-  } = options;
-
-  const preparedHeaders = { ...headers };
-
-  if (body !== undefined && !(body instanceof FormData) && !preparedHeaders['Content-Type']) {
-    preparedHeaders['Content-Type'] = 'application/json';
+export async function getPublicContent() {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/content`, {
+      method: 'GET',
+      credentials: 'omit',
+      headers: { Accept: 'application/json' },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`API ${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
   }
-
-  const response = await fetch(buildApiUrl(path), {
-    method,
-    credentials,
-    headers: preparedHeaders,
-    body: body !== undefined && !(body instanceof FormData) ? JSON.stringify(body) : body,
-    ...rest,
-  });
-
-  const raw = await response.text();
-  const payload = raw ? JSON.parse(raw) : null;
-
-  if (!response.ok) {
-    const error = new Error(payload?.message || `Request failed (${response.status})`);
-    error.status = response.status;
-    error.data = payload;
-    throw error;
-  }
-
-  return parseJson ? payload : raw;
-}
-
-export function getPublicContent() {
-  return apiRequest('/api/content');
-}
-
-export function loginAdmin({ email, password }) {
-  return apiRequest('/api/auth/login', {
-    method: 'POST',
-    body: { email, password },
-  });
-}
-
-export function logoutAdmin() {
-  return apiRequest('/api/auth/logout', {
-    method: 'POST',
-  });
-}
-
-export function submitContact({ name, email, phone, subject, message }) {
-  return apiRequest('/api/contact', {
-    method: 'POST',
-    body: { name, email, phone, subject, message },
-  });
-}
-
-export function getAdminStats() {
-  return apiRequest('/api/admin/stats');
 }

@@ -1,32 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLang } from '../hooks/useLang';
-import { COMPANIES, SITE } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.1){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
 
-function getCompanies(){
-  try{
-    const s=localStorage.getItem('gnah_companies');
-    if(s){const p=JSON.parse(s);if(Array.isArray(p)&&p.length>0)return p;}
-  }catch{}
-  return COMPANIES;
-}
-
 export default function Entreprises(){
+  const { COMPANIES, SITE } = useContent();
   const{lang}=useLang();
   const[gridRef,gridVis]=useInView();
-  const[companies,setCompanies]=useState(getCompanies);
   const tl=(fr,en,es,de,zh)=>({fr,en,es,de,zh}[lang]||fr);
 
-  useEffect(()=>{
-    const h=()=>setCompanies(getCompanies());
-    window.addEventListener('storage',h);
-    const iv=setInterval(h,2000);
-    return()=>{window.removeEventListener('storage',h);clearInterval(iv);};
-  },[]);
 
-  const active=companies.filter(c=>c.active!==false);
+  const active=COMPANIES.filter(c=>c.active!==false);
 
   return(
     <main className="page-white">

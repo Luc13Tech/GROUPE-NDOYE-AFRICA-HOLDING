@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useLang } from '../hooks/useLang';
-import { COMMITMENTS, AFRICA_OPPS } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.15){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
@@ -13,6 +13,7 @@ const ICONS = {
 };
 
 export default function Commitments() {
+  const { COMMITMENTS, AFRICA_OPPS } = useContent();
   const { lang } = useLang();
   const [cardsRef, cardsVis] = useInView();
   const [statsRef, statsVis] = useInView();

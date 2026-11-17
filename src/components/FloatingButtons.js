@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLang } from '../hooks/useLang';
-import { SITE } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 
 // Knowledge base
 const KB = {
@@ -176,6 +176,7 @@ const WASvg = () => (
 );
 
 export default function FloatingButtons() {
+  const { SITE } = useContent();
   const { lang } = useLang();
   const [open, setOpen]   = useState(false);
   const [msgs, setMsgs]   = useState([]);

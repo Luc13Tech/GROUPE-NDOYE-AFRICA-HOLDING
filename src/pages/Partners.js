@@ -1,14 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useLang } from '../hooks/useLang';
-import { PARTNERS_WORLD, AFRICA_PARTNERS, OPERATIONS } from '../data/siteData';
+import { useContent } from '../services/ContentProvider';
 import PageHero from '../components/PageHero';
 
 function useInView(t=.12){const r=useRef(null);const[v,sv]=useState(false);useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){sv(true);o.disconnect();}},{threshold:t});if(r.current)o.observe(r.current);return()=>o.disconnect();},[t]);return[r,v];}
 
-function getCustomPartners(){
-  try{const s=localStorage.getItem('gnah_partners');if(s){const p=JSON.parse(s);if(Array.isArray(p)&&p.length>0)return p;}}catch{}
-  return null;
-}
 
 const FLAGS={TR:'🇹🇷',CN:'🇨🇳',RU:'🇷🇺',US:'🇺🇸',MY:'🇲🇾',GB:'🇬🇧',IN:'🇮🇳'};
 const AF_FLAGS={'Sénégal':'🇸🇳',"Côte d'Ivoire":'🇨🇮','Nigeria':'🇳🇬','Gabon':'🇬🇦','Ghana':'🇬🇭','Cameroun':'🇨🇲','Mali':'🇲🇱','Burkina Faso':'🇧🇫','Guinée':'🇬🇳','Togo':'🇹🇬','Bénin':'🇧🇯'};
@@ -36,21 +32,12 @@ function Ticker({items,speed=22}){
 }
 
 export default function Partners(){
+  const { PARTNERS_WORLD, AFRICA_PARTNERS, OPERATIONS } = useContent();
   const{lang}=useLang();
   const[wpRef,wpVis]=useInView();
   const[opRef,opVis]=useInView();
   const[afRef,afVis]=useInView();
-  const[custom,setCustom]=useState(getCustomPartners);
   const tl=(fr,en,es,de,zh)=>({fr,en,es,de,zh}[lang]||fr);
-
-  useEffect(()=>{
-    const h=()=>setCustom(getCustomPartners());
-    window.addEventListener('storage',h);
-    const iv=setInterval(h,2000);
-    return()=>{window.removeEventListener('storage',h);clearInterval(iv);};
-  },[]);
-
-  const displayPartners=custom||PARTNERS_WORLD;
 
   // World ticker
   const worldItems=PARTNERS_WORLD.map(p=>({
