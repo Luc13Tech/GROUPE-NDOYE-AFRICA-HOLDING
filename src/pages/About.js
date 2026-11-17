@@ -228,7 +228,7 @@ export default function About() {
               { val:'10', suf:'+', fr:"Ans d'expérience", en:'Years of experience', es:'Años de experiencia', de:'Jahre Erfahrung', color:'#c9a84c' },
               { val:'7', suf:'', fr:'Partenaires mondiaux', en:'Global partners', es:'Socios mundiales', de:'Weltweite Partner', color:'#6366f1' },
               { val:'11', suf:'', fr:'Pays africains partenaires', en:'African partner countries', es:'Países socios africanos', de:'Afrikanische Partnerländer', color:'#34d399' },
-              { val:'300', suf:'', fr:'Villas Résidence Yaye Dia', en:'Yaye Dia Villas', es:'Villas Yaye Dia', de:'Yaye Dia Villen', color:'#f472b6' },
+              { val:'300', suf:'', fr:'Villas de la Résidence Moderne', en:'Modern Residence Villas', es:'Villas de la Residencia Moderna', de:'Villen der Modernen Residenz', color:'#f472b6' },
             ].map((s,i)=>(
               <div key={i} className={`fade-up${statsVis?' visible':''} delay-${i+1}`}
                 style={{ textAlign:'center', padding:'36px 20px', border:`1px solid ${s.color}30`, background:`${s.color}08`, borderTop:`3px solid ${s.color}` }}>

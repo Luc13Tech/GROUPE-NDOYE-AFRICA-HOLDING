@@ -34,7 +34,7 @@ export default function Videos() {
         fallbackImg="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=85"
         label={tl('Nos Réalisations', 'Our Achievements', 'Nuestras Realizaciones', 'Unsere Realisierungen','我们的成就')}
         title={tl('Nos Vidéos', 'Our Videos', 'Nuestros Videos', 'Unsere Videos','我们的视频')}
-        sub={tl('Visitez la Cité Yaye Dia en vidéo', 'Visit Yaye Dia City in video', 'Visite la Ciudad Yaye Dia en video', 'Besuchen Sie die Yaye Dia Stadt im Video','通过视频参观Yaye Dia城')}
+        sub={tl('Visitez la Résidence Moderne en vidéo', 'Visit Modern Residence in video', 'Visite la Residencia Moderna en video', 'Besuchen Sie die Moderne Residenz im Video','通过视频参观现代住宅')}
         breadcrumbs={[{ label: tl('Vidéos', 'Videos', 'Videos', 'Videos','视频') }]}
       />
 
@@ -43,11 +43,11 @@ export default function Videos() {
         <div className="container" style={{ textAlign:'center' }}>
           <div className="sec-label" style={{ display:'inline-flex' }}>{tl('Contenu vidéo', 'Video content', 'Contenido en video', 'Videoinhalt','视频内容')}</div>
           <h2 className="sec-title-light" style={{ marginTop:6 }}>
-            {tl('Plongez dans la Cité Yaye Dia', 'Dive into Yaye Dia City', 'Sumérgete en la Ciudad Yaye Dia', 'Tauchen Sie ein in die Yaye Dia Stadt','沉浸式体验Yaye Dia城')}
+            {tl('Plongez dans la Résidence Moderne', 'Dive into Modern Residence', 'Sumérgete en la Residencia Moderna', 'Tauchen Sie ein in die Moderne Residenz','沉浸式体验现代住宅')}
           </h2>
           <div className="divider-gold-c"/>
           <p style={{ color:'var(--text-mid)', maxWidth:600, margin:'0 auto', fontSize:'.88rem', lineHeight:1.8 }}>
-            {tl("Nos vidéos vous permettent de visiter virtuellement la Résidence Yaye Dia, de découvrir chaque villa, les commodités et l'environnement exceptionnel de la cité.", "Our videos allow you to virtually visit Yaye Dia Residence, discover each villa, the amenities and the exceptional environment of the city.", "Nuestros videos le permiten visitar virtualmente la Residencia Yaye Dia, descubrir cada villa, las comodidades y el entorno excepcional de la ciudad.", "Unsere Videos ermöglichen es Ihnen, die Yaye Dia Residenz virtuell zu besuchen, jede Villa, die Annehmlichkeiten und das außergewöhnliche Stadtumfeld zu entdecken.",'我们的视频让您虚拟参观Yaye Dia住宅，探索每栋别墅并跟踪施工进展。')}
+            {tl("Nos vidéos vous permettent de visiter virtuellement la Résidence Moderne, de découvrir chaque villa, les commodités et l'environnement exceptionnel de la cité.", "Our videos allow you to virtually visit Modern Residence, discover each villa, the amenities and the exceptional environment of the city.", "Nuestros videos le permiten visitar virtualmente la Residencia Moderna, descubrir cada villa, las comodidades y el entorno excepcional de la ciudad.", "Unsere Videos ermöglichen es Ihnen, die Moderne Residenz virtuell zu besuchen, jede Villa, die Annehmlichkeiten und das außergewöhnliche Stadtumfeld zu entdecken.",'我们的视频让您虚拟参观现代住宅，探索每栋别墅并跟踪施工进展。')}
           </p>
         </div>
       </section>
@@ -166,7 +166,7 @@ export default function Videos() {
           </h2>
           <div className="divider-gold-c"/>
           <p style={{ color:'rgba(200,195,186,.55)', maxWidth:500, margin:'0 auto 32px', fontSize:'.88rem', lineHeight:1.8 }}>
-            {tl("Suivez nos pages pour ne manquer aucune actualité, vidéo exclusive et mise à jour de la Résidence Yaye Dia.", "Follow our pages to never miss any news, exclusive video or update from Yaye Dia Residence.", "Siga nuestras páginas para no perderse ninguna noticia, video exclusivo o actualización de la Residencia Yaye Dia.", "Folgen Sie unseren Seiten, um keine Neuigkeiten, exklusiven Videos oder Updates der Yaye Dia Residenz zu verpassen.",'关注我们的页面，不错过任何Yaye Dia住宅的新闻、独家视频和更新。')}
+            {tl("Suivez nos pages pour ne manquer aucune actualité, vidéo exclusive et mise à jour de la Résidence Moderne.", "Follow our pages to never miss any news, exclusive video or update from Modern Residence.", "Siga nuestras páginas para no perderse ninguna noticia, video exclusivo o actualización de la Residencia Moderna.", "Folgen Sie unseren Seiten, um keine Neuigkeiten, exklusiven Videos oder Updates der Modernen Residenz zu verpassen.",'关注我们的页面，不错过任何现代住宅的新闻、独家视频和更新。')}
           </p>
           <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap' }}>
             {[

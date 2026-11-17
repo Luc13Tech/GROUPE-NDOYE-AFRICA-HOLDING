@@ -101,7 +101,7 @@ export default function Projects() {
   const submit = () => {
     const vName = tv(villa).name;
     const msg = `${tl('Bonjour', 'Hello', 'Hola', 'Hallo','您好')}, ${tl('je m\'appelle', 'my name is', 'me llamo', 'mein Name ist','我的名字是')} ${form.nom} ${form.prenom}.
-${tl('Je suis intéressé(e) par la','I am interested in the','Estoy interesado/a en la','Ich interessiere mich für die','我对以下感兴趣：')} ${vName} ${tl('de la Résidence Yaye Dia', 'at Yaye Dia Residence', 'de la Residencia Yaye Dia', 'der Yaye Dia Residenz','于Yaye Dia住宅')}.
+${tl('Je suis intéressé(e) par la','I am interested in the','Estoy interesado/a en la','Ich interessiere mich für die','我对以下感兴趣：')} ${vName} ${tl('de la Résidence Moderne', 'at Modern Residence', 'de la Residencia Moderna', 'der Modernen Residenz','于现代住宅')}.
 ${tl('Téléphone', 'Phone', 'Teléfono', 'Telefon','电话')}: ${form.tel}.
 Email: ${form.email}.
 ${form.msg}`;
@@ -119,7 +119,7 @@ ${form.msg}`;
         bgImg="/Images/yaye-dia/cover.jpg"
         fallbackImg="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=85"
         label={tl('Projet Phare', 'Flagship Project', 'Proyecto Insignia', 'Vorzeigeprojekt','旗舰项目')}
-        title={tl('Résidence Yaye Dia', 'Yaye Dia Residence', 'Residencia Yaye Dia', 'Yaye Dia Residenz','Yaye Dia住宅')}
+        title={tl('Résidence Moderne', 'Modern Residence', 'Residencia Moderna', 'Moderne Residenz','现代住宅')}
         sub={tl('300 villas Haut Standing — Région de Thiès, Sénégal', '300 High-End Villas — Thiès Region, Senegal', '300 Villas de Alto Standing — Región de Thiès, Senegal', '300 Hochwertige Villen — Thiès Region, Senegal','300栋高档别墅 — 塞内加尔蒂耶斯地区')}
         breadcrumbs={[{ label: tl('Projets', 'Projects', 'Proyectos', 'Projekte','项目') }]}
       />
@@ -136,10 +136,10 @@ ${form.msg}`;
                 {tl("L'immobilier au vrai sens du mot", "Real estate in the truest sense", "Bienes raíces en el verdadero sentido", "Immobilien im wahrsten Sinne","真正意义上的房地产")}
               </p>
               <p style={{fontSize:'.9rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:16}}>
-                {tl("Bienvenue à la Cité YAYE DIA, un programme immobilier d'exception composé de 300 villas modernes, conçu pour redéfinir les standards du cadre de vie résidentiel.", "Welcome to YAYE DIA City, an exceptional real estate programme of 300 modern villas, designed to redefine residential living standards.", "Bienvenido a la Ciudad YAYE DIA, un programa inmobiliario excepcional de 300 villas modernas, diseñado para redefinir los estándares de vida residencial.", "Willkommen in der YAYE DIA Stadt, einem außergewöhnlichen Immobilienprogramm mit 300 modernen Villen, das darauf ausgelegt ist, die Wohnstandards neu zu definieren.",'欢迎来到YAYE DIA城，一个由300栋现代优雅别墅组成的卓越房地产项目。')}
+                {tl("Bienvenue à la Résidence Moderne, un programme immobilier d'exception composé de 300 villas modernes, conçu pour redéfinir les standards du cadre de vie résidentiel.", "Welcome to Modern Residence, an exceptional real estate programme of 300 modern villas, designed to redefine residential living standards.", "Bienvenido a la Residencia Moderna, un programa inmobiliario excepcional de 300 villas modernas, diseñado para redefinir los estándares de vida residencial.", "Willkommen in der Modernen Residenz, einem außergewöhnlichen Immobilienprogramm mit 300 modernen Villen, das darauf ausgelegt ist, die Wohnstandards neu zu definieren.",'欢迎来到现代住宅，一个由300栋现代优雅别墅组成的卓越房地产项目。')}
               </p>
               <p style={{fontSize:'.9rem',color:'var(--text-mid)',lineHeight:1.9,marginBottom:28}}>
-                {tl("Choisir la Cité YAYE DIA, c'est investir dans un cadre de vie moderne et structuré, une communauté dynamique et une valorisation immobilière durable.", "Choosing YAYE DIA City means investing in a modern structured living environment, a dynamic community and sustainable real estate appreciation.", "Elegir la Ciudad YAYE DIA significa invertir en un entorno de vida moderno y estructurado, una comunidad dinámica y una valorización inmobiliaria sostenible.", "Die YAYE DIA Stadt zu wählen bedeutet, in ein modernes strukturiertes Wohnumfeld, eine dynamische Gemeinschaft und nachhaltige Immobilienwertsteigerung zu investieren.",'选择YAYE DIA城，就是投资于现代化、结构完善的生活环境，一个安全且配套齐全的社区。')}
+                {tl("Choisir la Résidence Moderne, c'est investir dans un cadre de vie moderne et structuré, une communauté dynamique et une valorisation immobilière durable.", "Choosing Modern Residence means investing in a modern structured living environment, a dynamic community and sustainable real estate appreciation.", "Elegir la Residencia Moderna significa invertir en un entorno de vida moderno y estructurado, una comunidad dinámica y una valorización inmobiliaria sostenible.", "Die Moderne Residenz zu wählen bedeutet, in ein modernes strukturiertes Wohnumfeld, eine dynamische Gemeinschaft und nachhaltige Immobilienwertsteigerung zu investieren.",'选择现代住宅，就是投资于现代化、结构完善的生活环境，一个安全且配套齐全的社区。')}
               </p>
               <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
                 {[
@@ -155,7 +155,7 @@ ${form.msg}`;
               </div>
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:16}}>
-              <img src="/Images/yaye-dia/vision.jpg" alt="Yaye Dia" style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
+              <img src="/Images/yaye-dia/vision.jpg" alt="Résidence Moderne" style={{width:'100%',height:240,objectFit:'cover',borderTop:'3px solid var(--gold)'}}/>
               <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12}}>
                 <img src="/Images/yaye-dia/design.jpg" alt="Design" style={{width:'100%',height:130,objectFit:'cover'}}/>
                 <div style={{background:'var(--navy)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:16,textAlign:'center'}}>
@@ -218,7 +218,7 @@ ${form.msg}`;
                   <div style={{position:'absolute',bottom:0,left:0,right:0,background:'linear-gradient(transparent,rgba(5,8,16,.88))',padding:'20px 18px'}}>
                     <div style={{fontFamily:'var(--f-elegant)',fontSize:'1.1rem',color:'var(--cream)',marginBottom:2}}>{tv(villa).name}</div>
                     <div style={{fontFamily:'var(--f-serif)',fontStyle:'italic',color:'var(--gold)',fontSize:'.82rem'}}>
-                      {villa.surface} — {tv(villa).standing} — Cité Yaye Dia
+                      {villa.surface} — {tv(villa).standing} — Résidence Moderne
                     </div>
                   </div>
                 </div>

@@ -159,7 +159,7 @@ export default function Home() {
       <section className="section section--sand">
         <div className="container">
           <SectionHead
-            eyebrow={`${tl('Résidence Yaye Dia', 'Yaye Dia Residence', 'Residencia Yaye Dia', 'Yaye Dia Residenz', 'Yaye Dia住宅区')} · ${tl('Région de Thiès, Sénégal', 'Thiès Region, Senegal', 'Región de Thiès, Senegal', 'Region Thiès, Senegal', '塞内加尔蒂耶斯地区')}`}
+            eyebrow={`${tl('Résidence Moderne', 'Modern Residence', 'Residencia Moderna', 'Moderne Residenz', '现代住宅区')} · ${tl('Région de Thiès, Sénégal', 'Thiès Region, Senegal', 'Región de Thiès, Senegal', 'Region Thiès, Senegal', '塞内加尔蒂耶斯地区')}`}
             title={tl('300 villas haut standing', '300 high-end villas', '300 villas de alto standing', '300 hochwertige Villen', '300栋高端别墅')}
             lead={tl('Sur des parcelles de 225 m², quatre modèles de villas composent une cité équipée : complexe sportif, aire de jeux, mosquée, centre commercial et district sanitaire.', 'On 225 m² plots, four villa models form a fully equipped city: sports complex, playground, mosque, shopping centre and health district.', 'Sobre parcelas de 225 m², cuatro modelos de villas componen una ciudad equipada: complejo deportivo, zona de juegos, mezquita, centro comercial y distrito sanitario.', 'Auf Grundstücken von 225 m² bilden vier Villenmodelle eine voll ausgestattete Stadt: Sportkomplex, Spielbereich, Moschee, Einkaufszentrum und Gesundheitsbezirk.', '四种别墅户型坐落于225平方米的地块上，共同构成配套完善的城区：体育中心、游乐区、清真寺、购物中心和医疗区。')}
           />

@@ -55,7 +55,7 @@ export const SUBTITLE = {
 export const STATS = [
   { val:'10+', fr:"Années d'expérience",        en:'Years of experience',       es:'Años de experiencia',         de:'Jahre Erfahrung',                zh:'年经验' },
   { val:'7',   fr:'Partenaires mondiaux',       en:'Global partners',           es:'Socios mundiales',            de:'Weltweite Partner',             zh:'全球合作伙伴' },
-  { val:'300', fr:'Villas Yaye Dia',            en:'Yaye Dia Villas',           es:'Villas Yaye Dia',             de:'Yaye Dia Villen',               zh:'Yaye Dia别墅' },
+  { val:'300', fr:'Villas de la Résidence Moderne',            en:'Modern Residence Villas',           es:'Villas de la Residencia Moderna',             de:'Villen der Modernen Residenz',               zh:'现代住宅别墅' },
   { val:'11',  fr:'Pays africains partenaires', en:'African partner countries', es:'Países socios africanos',     de:'Afrikanische Partnerländer',    zh:'非洲合作国家' },
 ];
 
@@ -186,10 +186,10 @@ export const VILLA_TYPES = [
 export const YAYE_SLIDES = [
   { img:'/Images/yaye-dia/Image-villa.jpg',
     fr:{tag:"L'Art de vivre Moderne",title:'Villa F5 — Très Haut Standing',sub:'340 m² bâtis — Mercedes G-Wagon'},
-    en:{tag:'The Art of Modern Living',title:'F5 Villa — Premium',sub:'340 m² built — Yaye Dia City'},
+    en:{tag:'The Art of Modern Living',title:'F5 Villa — Premium',sub:'340 m² built — Modern Residence'},
     es:{tag:'El Arte de Vivir Moderno',title:'Villa F5 — Premium',sub:'340 m² construidos'},
     de:{tag:'Die Kunst des modernen Lebens',title:'F5 Villa — Premium',sub:'340 m² gebaut'},
-    zh:{tag:'现代生活艺术',title:'F5豪华别墅',sub:'340平方米建筑 — Yaye Dia城'},
+    zh:{tag:'现代生活艺术',title:'F5豪华别墅',sub:'340平方米建筑 — 现代住宅'},
   },
   { img:'/Images/yaye-dia/villa-f4duplex-nuit.jpg',
     fr:{tag:'Nuit Étoilée',title:'Villas F4 Duplex illuminées',sub:'Haut Standing — sous les étoiles'},
@@ -279,7 +279,7 @@ export const STRATEGY = {
 
 export const OBJECTIVES = [
   {img:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=85',fr:{title:'Infrastructure Routière',desc:"Autoroute Abuja-Lagos 467km ($5,7 Mrd)"},en:{title:'Road Infrastructure',desc:"Abuja-Lagos 467km highway ($5.7B)"},es:{title:'Infraestructura Vial',desc:"Autopista Abuja-Lagos 467km"},de:{title:'Straßeninfrastruktur',desc:"Abuja-Lagos 467km Autobahn"},zh:{title:'公路基础设施',desc:"阿布贾-拉各斯467公里高速公路 (57亿美元)"}},
-  {img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=85',fr:{title:'Développement Immobilier',desc:"300+ villas Yaye Dia, Programme Eden ($700M)"},en:{title:'Real Estate Development',desc:"300+ Yaye Dia villas, Eden Programme ($700M)"},es:{title:'Desarrollo Inmobiliario',desc:"300+ villas Yaye Dia, Programa Eden ($700M)"},de:{title:'Immobilienentwicklung',desc:"300+ Yaye Dia Villen, Eden-Programm ($700M)"},zh:{title:'房地产开发',desc:"300多栋Yaye Dia别墅，伊甸园计划 (7亿美元)"}},
+  {img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=85',fr:{title:'Développement Immobilier',desc:"300+ villas de la Résidence Moderne, Programme Eden ($700M)"},en:{title:'Real Estate Development',desc:"300+ Modern Residence villas, Eden Programme ($700M)"},es:{title:'Desarrollo Inmobiliario',desc:"300+ villas de la Residencia Moderna, Programa Eden ($700M)"},de:{title:'Immobilienentwicklung',desc:"300+ Villen der Modernen Residenz, Eden-Programm ($700M)"},zh:{title:'房地产开发',desc:"300多栋现代住宅别墅，伊甸园计划 (7亿美元)"}},
   {img:'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=85',fr:{title:'Agriculture Technologique',desc:"Systèmes agricoles automatisés pour l'Afrique"},en:{title:'Technological Agriculture',desc:"Automated agricultural systems for Africa"},es:{title:'Agricultura Tecnológica',desc:"Sistemas agrícolas automatizados para África"},de:{title:'Technologische Landwirtschaft',desc:"Automatisierte Agrarsysteme für Afrika"},zh:{title:'技术农业',desc:"非洲自动化农业系统"}},
   {img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&q=85',fr:{title:'Ports & Transport Maritime',desc:"Port lagunaire Dabou ($1,7 Mrd BOT)"},en:{title:'Ports & Maritime Transport',desc:"Dabou lagoon port ($1.7B BOT)"},es:{title:'Puertos y Transporte Marítimo',desc:"Puerto lagunar Dabou ($1,7 Mrd BOT)"},de:{title:'Häfen & Seetransport',desc:"Lagunenhafen Dabou ($1,7 Mrd BOT)"},zh:{title:'港口与海上运输',desc:"达布湖港 (17亿美元 BOT)"}},
   {img:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=85',fr:{title:'Énergie Renouvelable',desc:"30% des ressources solaires mondiales en Afrique"},en:{title:'Renewable Energy',desc:"30% of global solar resources in Africa"},es:{title:'Energía Renovable',desc:"30% de los recursos solares mundiales en África"},de:{title:'Erneuerbare Energien',desc:"30% der weltweiten Solarressourcen in Afrika"},zh:{title:'可再生能源',desc:"非洲拥有全球30%的太阳能资源"}},
@@ -343,31 +343,31 @@ export const COMPANIES = [
 ];
 
 export const LOTISSEMENT = {
-  fr:{ title:'Lotissement Sur Mesure', desc:"La Cité Yaye Dia est conçue selon les standards modernes d'urbanisme. Chaque élément est pensé pour offrir confort, sécurité et durabilité aux 300 familles.", items:[
+  fr:{ title:'Lotissement Sur Mesure', desc:"La Résidence Moderne est conçue selon les standards modernes d'urbanisme. Chaque élément est pensé pour offrir confort, sécurité et durabilité aux 300 familles.", items:[
     { t:'Éclairage Solaire', d:'Lampadaires solaires performants pour la sécurité 24h/24 et la durabilité environnementale.' },
     { t:'Réseau Assainissement', d:"Réseau complet tout-à-l'égout conforme aux normes internationales d'hygiène." },
     { t:'Gestion des Déchets', d:'Station de recyclage dédiée et collecte organisée pour une cité propre.' },
     { t:'Voirie Intelligente', d:'Routes larges et parfaitement tracées facilitant la circulation et le développement.' },
   ]},
-  en:{ title:'Tailored Development', desc:"Yaye Dia City is designed to modern urban planning standards. Every element is designed for comfort, safety and durability for 300 families.", items:[
+  en:{ title:'Tailored Development', desc:"Modern Residence is designed to modern urban planning standards. Every element is designed for comfort, safety and durability for 300 families.", items:[
     { t:'Solar Lighting', d:'High-performance solar street lights for 24/7 security and environmental sustainability.' },
     { t:'Sewerage Network', d:'Complete sewerage network compliant with international hygiene standards.' },
     { t:'Waste Management', d:'Dedicated recycling station and organised collection for a clean city.' },
     { t:'Smart Roads', d:'Wide and perfectly laid roads facilitating circulation and development.' },
   ]},
-  es:{ title:'Urbanización a Medida', desc:"La Ciudad Yaye Dia está diseñada según los estándares modernos de planificación urbana.", items:[
+  es:{ title:'Urbanización a Medida', desc:"La Residencia Moderna está diseñada según los estándares modernos de planificación urbana.", items:[
     { t:'Alumbrado Solar', d:'Farolas solares de alto rendimiento para seguridad 24/7.' },
     { t:'Red de Saneamiento', d:'Red completa de alcantarillado conforme a normas internacionales.' },
     { t:'Gestión de Residuos', d:'Estación de reciclaje dedicada y recogida organizada.' },
     { t:'Vías Inteligentes', d:'Calles amplias y perfectamente trazadas.' },
   ]},
-  de:{ title:'Maßgeschneiderte Erschließung', desc:"Die Yaye Dia Stadt ist nach modernen Stadtplanungsstandards gestaltet.", items:[
+  de:{ title:'Maßgeschneiderte Erschließung', desc:"Die Moderne Residenz ist nach modernen Stadtplanungsstandards gestaltet.", items:[
     { t:'Solarbeleuchtung', d:'Solarstraßenlaternen für 24/7-Sicherheit.' },
     { t:'Kanalnetz', d:'Vollständiges Abwassernetz gemäß internationalen Hygienestandards.' },
     { t:'Abfallwirtschaft', d:'Dedizierte Recyclingstation und organisierte Sammlung.' },
     { t:'Intelligente Straßen', d:'Breite und perfekt angelegte Straßen.' },
   ]},
-  zh:{ title:'定制化开发', desc:"Yaye Dia城按照现代城市规划标准设计，为300个家庭提供舒适、安全和耐久的居住环境。", items:[
+  zh:{ title:'定制化开发', desc:"现代住宅按照现代城市规划标准设计，为300个家庭提供舒适、安全和耐久的居住环境。", items:[
     { t:'太阳能照明', d:'高性能太阳能路灯，提供24/7安全保障和环境可持续性。' },
     { t:'排污网络', d:'符合国际卫生标准的完整排污网络。' },
     { t:'废物管理', d:'专用回收站和有组织的垃圾收集，保持城市整洁。' },
@@ -392,7 +392,7 @@ export const MATERIALS = {
 };
 
 export const PROJECTS = [
-    {id:1,active:true,category:'Immobilier',img:'/Images/yaye-dia/cite-vue-aerienne.jpg',title:{fr:'Résidence Yaye Dia',en:'Yaye Dia Residence',zh:'Yaye Dia住宅'},desc:{fr:'300 villas haut standing en Région de Thiès, Sénégal.',en:'300 high-end villas in Thiès Region, Senegal.',zh:'塞内加尔蒂耶斯地区300栋高档别墅。'},waMsg:{fr:'Bonjour, je suis intéressé(e) par la Résidence Yaye Dia.',en:'Hello, I am interested in the Yaye Dia Residence.'}},
+    {id:1,active:true,category:'Immobilier',img:'/Images/yaye-dia/cite-vue-aerienne.jpg',title:{fr:'Résidence Moderne',en:'Modern Residence',zh:'现代住宅'},desc:{fr:'300 villas haut standing en Région de Thiès, Sénégal.',en:'300 high-end villas in Thiès Region, Senegal.',zh:'塞内加尔蒂耶斯地区300栋高档别墅。'},waMsg:{fr:'Bonjour, je suis intéressé(e) par la Résidence Moderne.',en:'Hello, I am interested in the Modern Residence.'}},
     {id:2,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600&q=85',title:{fr:'Port Lagunaire de Dabou',en:'Dabou Lagoon Port',zh:'达布湖港'},desc:{fr:"Port lagunaire en Côte d'Ivoire — $1,7 milliard — BOT.",en:"Lagoon port in Ivory Coast — $1.7 billion — BOT.",zh:"科特迪瓦湖港 — 17亿美元 — BOT合同。"},waMsg:{fr:"Bonjour, je suis intéressé(e) par le Port de Dabou.",en:"Hello, I am interested in the Dabou Port."}},
     {id:3,active:true,category:'Infrastructure',img:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&q=85',title:{fr:'Autoroute Abuja-Lagos',en:'Abuja-Lagos Highway',zh:'阿布贾-拉各斯高速公路'},desc:{fr:"Autoroute au Nigeria — $5,7 milliards — BOT — 467 km.",en:"Highway in Nigeria — $5.7 billion — BOT — 467 km.",zh:"尼日利亚高速公路 — 57亿美元 — BOT合同 — 467公里。"},waMsg:{fr:"Bonjour, je m'intéresse à l'autoroute Abuja-Lagos.",en:"Hello, I am interested in the Abuja-Lagos highway."}},
   ];
@@ -490,7 +490,7 @@ export const CONTACT_SUBJECTS = {
 // Galerie photos
 export const GALLERY_ITEMS = [
   // Category: Vue générale / Overview
-  { id:1,  cat:'overview', src:'/Images/yaye-dia/cite-vue-aerienne.jpg',   fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Vue aérienne — Cité Yaye Dia complète',      en:'Aerial view — Complete Yaye Dia City',        es:'Vista aérea — Ciudad Yaye Dia completa',      de:'Luftaufnahme — Vollständige Yaye Dia Stadt' },
+  { id:1,  cat:'overview', src:'/Images/yaye-dia/cite-vue-aerienne.jpg',   fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Vue aérienne — Résidence Moderne complète',      en:'Aerial view — Complete Modern Residence',        es:'Vista aérea — Residencia Moderna completa',      de:'Luftaufnahme — Vollständige Moderne Residenz' },
   { id:2,  cat:'overview', src:'/Images/yaye-dia/cite-plan-top.jpg',       fallback:'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=85', fr:'Plan de masse — 300 villas tracées',          en:'Site plan — 300 plotted villas',              es:'Plan de masa — 300 villas trazadas',           de:'Lageplan — 300 geplante Villen' },
   { id:3,  cat:'overview', src:'/Images/yaye-dia/cite-commodites-vue.jpg', fallback:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85', fr:'Vue générale — Commodités visibles',          en:'General view — Visible amenities',            es:'Vista general — Comodidades visibles',         de:'Gesamtansicht — Sichtbare Annehmlichkeiten' },
   { id:4,  cat:'overview', src:'/Images/yaye-dia/cite-voirie.jpg',         fallback:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=85', fr:'Voirie résidentielle — Palmiers & verdure',   en:'Residential road — Palm trees & greenery',    es:'Vía residencial — Palmeras y vegetación',     de:'Wohnstraße — Palmen und Grünflächen' },
@@ -524,8 +524,8 @@ export const GALLERY_ITEMS = [
   { id:26, cat:'interior', src:'/Images/yaye-dia/master.jpg',              fallback:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=85', fr:'Master Room — Dressing & salle de bain',     en:'Master Room — Dressing & bathroom',           es:'Master Room — Vestidor y baño',              de:'Master Room — Ankleidezimmer & Bad' },
 
   // Category: Immeubles / Buildings
-  { id:27, cat:'buildings',src:'/Images/yaye-dia/immeuble-nuit.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble résidentiel — Cité Yaye Dia nuit',  en:'Residential building — Yaye Dia City night',  es:'Edificio residencial — Ciudad Yaye Dia noche',de:'Wohngebäude — Yaye Dia Stadt Nacht' },
-  { id:28, cat:'buildings',src:'/Images/yaye-dia/immeuble-jour.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble Yaye Dia — Façade moderne jour',    en:'Yaye Dia Building — Modern daytime facade',   es:'Edificio Yaye Dia — Fachada moderna día',    de:'Yaye Dia Gebäude — Moderne Tagesfassade' },
+  { id:27, cat:'buildings',src:'/Images/yaye-dia/immeuble-nuit.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble résidentiel — Résidence Moderne de nuit',  en:'Residential building — Modern Residence at night',  es:'Edificio residencial — Residencia Moderna de noche',de:'Wohngebäude — Moderne Residenz bei Nacht' },
+  { id:28, cat:'buildings',src:'/Images/yaye-dia/immeuble-jour.jpg',       fallback:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85', fr:'Immeuble de la Résidence Moderne — Façade moderne jour',    en:'Modern Residence Building — Modern daytime facade',   es:'Edificio de la Residencia Moderna — Fachada moderna día',    de:'Gebäude der Modernen Residenz — Moderne Tagesfassade' },
 ];
 
 // Vidéos
@@ -537,11 +537,11 @@ export const VIDEOS = [
     thumbnail: '/Images/yaye-dia/cite-vue-aerienne.jpg',
     fallback: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',
     duration: '2:45',
-    fr: { title:'Résidence Yaye Dia — Présentation Officielle',     desc:'Découvrez en vidéo notre programme immobilier d\'exception : 300 villas haut standing en Région de Thiès, Sénégal.' },
-    en: { title:'Yaye Dia Residence — Official Presentation',       desc:'Discover our exceptional real estate programme in video: 300 high-end villas in the Thiès Region, Senegal.' },
-    es: { title:'Residencia Yaye Dia — Presentación Oficial',       desc:'Descubra en video nuestro excepcional programa inmobiliario: 300 villas de alto standing en la Región de Thiès, Senegal.' },
-    de: { title:'Yaye Dia Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
-    zh: { title:'Yaye Dia住宅 — 官方介绍',      desc:'通过视频探索我们卓越的房地产项目：塞内加尔蒂耶斯地区的300栋高档别墅。' },
+    fr: { title:'Résidence Moderne — Présentation Officielle',     desc:'Découvrez en vidéo notre programme immobilier d\'exception : 300 villas haut standing en Région de Thiès, Sénégal.' },
+    en: { title:'Modern Residence — Official Presentation',       desc:'Discover our exceptional real estate programme in video: 300 high-end villas in the Thiès Region, Senegal.' },
+    es: { title:'Residencia Moderna — Presentación Oficial',       desc:'Descubra en video nuestro excepcional programa inmobiliario: 300 villas de alto standing en la Región de Thiès, Senegal.' },
+    de: { title:'Moderne Residenz — Offizielle Präsentation',      desc:'Entdecken Sie unser außergewöhnliches Immobilienprogramm im Video: 300 hochwertige Villen in der Thiès-Region, Senegal.' },
+    zh: { title:'现代住宅 — 官方介绍',      desc:'通过视频探索我们卓越的房地产项目：塞内加尔蒂耶斯地区的300栋高档别墅。' },
   },
   {
     id: 2,
@@ -550,11 +550,11 @@ export const VIDEOS = [
     thumbnail: '/Images/yaye-dia/villa-f4duplex-nuit.jpg',
     fallback: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=85',
     duration: '0:58',
-    fr: { title:'Cité Yaye Dia — Vue Nuit Spectaculaire',           desc:'La Cité Yaye Dia illuminée de nuit. Nos villas F4 Duplex dans toute leur splendeur sous un ciel étoilé.' },
-    en: { title:'Yaye Dia City — Spectacular Night View',           desc:'Yaye Dia City illuminated at night. Our F4 Duplex villas in all their splendour under a starry sky.' },
-    es: { title:'Ciudad Yaye Dia — Vista Nocturna Espectacular',    desc:'La Ciudad Yaye Dia iluminada de noche. Nuestras villas F4 Dúplex en todo su esplendor bajo un cielo estrellado.' },
-    de: { title:'Yaye Dia Stadt — Spektakuläre Nachtansicht',       desc:'Die Yaye Dia Stadt bei Nacht beleuchtet. Unsere F4 Duplex Villen in voller Pracht unter einem Sternenhimmel.' },
-    zh: { title:'Yaye Dia城 — 壮观夜景',       desc:'夜幕下灯火璧煌的Yaye Dia城。我们的F4复式别墅在星空下尽显华丽风采。' },
+    fr: { title:'Résidence Moderne — Vue Nuit Spectaculaire',           desc:'La Résidence Moderne illuminée de nuit. Nos villas F4 Duplex dans toute leur splendeur sous un ciel étoilé.' },
+    en: { title:'Modern Residence — Spectacular Night View',           desc:'Modern Residence illuminated at night. Our F4 Duplex villas in all their splendour under a starry sky.' },
+    es: { title:'Residencia Moderna — Vista Nocturna Espectacular',    desc:'La Residencia Moderna iluminada de noche. Nuestras villas F4 Dúplex en todo su esplendor bajo un cielo estrellado.' },
+    de: { title:'Moderne Residenz — Spektakuläre Nachtansicht',       desc:'Die Moderne Residenz bei Nacht beleuchtet. Unsere F4 Duplex Villen in voller Pracht unter einem Sternenhimmel.' },
+    zh: { title:'现代住宅 — 壮观夜景',       desc:'夜幕下灯火璧煌的现代住宅。我们的F4复式别墅在星空下尽显华丽风采。' },
   },
   {
     id: 3,
@@ -563,11 +563,11 @@ export const VIDEOS = [
     thumbnail: '/Images/yaye-dia/cite-plan-top.jpg',
     fallback: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=85',
     duration: '4:10',
-    fr: { title:'Plan Masse — 300 Villas Tracées',                  desc:'Vue aérienne du plan masse de la Cité Yaye Dia. 300 villas soigneusement tracées sur 225 m² chacune.' },
-    en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Yaye Dia City site plan. 300 carefully plotted villas on 225 m² each.' },
-    es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Ciudad Yaye Dia. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
-    de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Yaye Dia Stadt. 300 sorgfältig geplante Villen auf je 225 m².' },
-    zh: { title:'总平面图 — 300栋规划别墅',                   desc:'Yaye Dia城总平面图鸟瞰图。300栋精心规划的别墅，每栋占地225平方米。' },
+    fr: { title:'Plan Masse — 300 Villas Tracées',                  desc:'Vue aérienne du plan masse de la Résidence Moderne. 300 villas soigneusement tracées sur 225 m² chacune.' },
+    en: { title:'Site Plan — 300 Plotted Villas',                   desc:'Aerial view of the Modern Residence site plan. 300 carefully plotted villas on 225 m² each.' },
+    es: { title:'Plan de Masa — 300 Villas Trazadas',               desc:'Vista aérea del plan de masa de la Residencia Moderna. 300 villas cuidadosamente trazadas en 225 m² cada una.' },
+    de: { title:'Lageplan — 300 Geplante Villen',                   desc:'Luftaufnahme des Lageplans der Modernen Residenz. 300 sorgfältig geplante Villen auf je 225 m².' },
+    zh: { title:'总平面图 — 300栋规划别墅',                   desc:'现代住宅总平面图鸟瞰图。300栋精心规划的别墅，每栋占地225平方米。' },
   },
   {
     id: 4,

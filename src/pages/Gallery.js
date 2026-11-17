@@ -56,7 +56,7 @@ function Lightbox({ item, items, onClose, onPrev, onNext, lang }) {
         <div style={{ textAlign:'center' }}>
           <div style={{ fontFamily:'var(--f-elegant)', fontSize:'1rem', color:'var(--cream)', marginBottom:4 }}>{label}</div>
           <div style={{ fontFamily:'var(--f-display)', fontSize:'.58rem', letterSpacing:'.14em', color:'rgba(201,168,76,.5)', textTransform:'uppercase' }}>
-            Groupe Ndoye Africa Holding — Résidence Yaye Dia
+            Groupe Ndoye Africa Holding — Résidence Moderne
           </div>
         </div>
       </div>
@@ -85,9 +85,9 @@ export default function Gallery() {
       <PageHero
         bgImg="/Images/yaye-dia/cite-vue-aerienne.jpg"
         fallbackImg="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&q=85"
-        label={tl('Résidence Yaye Dia', 'Yaye Dia Residence', 'Residencia Yaye Dia', 'Yaye Dia Residenz','Yaye Dia住宅')}
+        label={tl('Résidence Moderne', 'Modern Residence', 'Residencia Moderna', 'Moderne Residenz','现代住宅')}
         title={tl('Galerie de Photos', 'Photo Gallery', 'Galería de Fotos', 'Fotogalerie','图片库')}
-        sub={tl('Découvrez la Cité Yaye Dia en images', 'Discover Yaye Dia City in pictures', 'Descubra la Ciudad Yaye Dia en imágenes', 'Entdecken Sie die Yaye Dia Stadt in Bildern','通过图片探索Yaye Dia城')}
+        sub={tl('Découvrez la Résidence Moderne en images', 'Discover Modern Residence in pictures', 'Descubra la Residencia Moderna en imágenes', 'Entdecken Sie die Moderne Residenz in Bildern','通过图片探索现代住宅')}
         breadcrumbs={[{ label: tl('Galerie', 'Gallery', 'Galería', 'Galerie','图库') }]}
       />
 
