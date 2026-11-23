@@ -1,6 +1,6 @@
 // GNAH Service Worker — Network First Strategy
-const CACHE_NAME = 'gnah-v24';
-const STATIC_CACHE = 'gnah-static-v24';
+const CACHE_NAME = 'gnah-v25';
+const STATIC_CACHE = 'gnah-static-v25';
 
 const STATIC_ASSETS = [
   '/Images/logo/gnah-logo.png',

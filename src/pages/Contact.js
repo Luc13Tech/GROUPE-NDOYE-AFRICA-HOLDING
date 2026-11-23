@@ -49,10 +49,17 @@ ${form.msg}`;
     setTimeout(() => { setSent(false); setForm({ nom:'', email:'', tel:'', pays:'', objet:'', msg:'' }); }, 4000);
   };
 
+  // Carte centrée sur le bureau (coordonnées gérées dans l'administration, sinon celles du site).
+  const hasGeo = Number.isFinite(SITE.lat) && Number.isFinite(SITE.lng);
+  const mapsLink = SITE.mapsUrl || (hasGeo ? `https://www.google.com/maps/search/?api=1&query=${SITE.lat},${SITE.lng}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address_fr)}`);
+  const mapSrc = hasGeo
+    ? `https://www.openstreetmap.org/export/embed.html?bbox=${[SITE.lng - 0.012, SITE.lat - 0.008, SITE.lng + 0.012, SITE.lat + 0.008].map((n) => n.toFixed(6)).join(',')}&layer=mapnik&marker=${SITE.lat},${SITE.lng}`
+    : null;
+
   const CONTACT_INFO = [
     { icon:<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>,
       label:tl('Adresse', 'Address', 'Dirección', 'Adresse','地址'),
-      val: SITE.address_fr },
+      val: SITE.address_fr, href: mapsLink },
     { icon:<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 10.9a16 16 0 006.29 6.29l1.22-1.22a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0121.17 18z"/></svg>,
       label:'WhatsApp / Téléphone',
       val: SITE.phone, href:`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(wm)}` },
@@ -199,17 +206,23 @@ ${form.msg}`;
             <div className="divider-gold-c"/>
           </div>
           <div style={{ border:'3px solid var(--gold)', overflow:'hidden', height:360, position:'relative' }}>
-            <iframe
-              title="GNAH Location"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-16.8,14.5,-16.4,14.8&layer=mapnik&marker=14.693425,-17.447938"
+            {mapSrc && <iframe
+              title={tl('Localisation du bureau GNAH', 'GNAH office location', 'Ubicación de la oficina GNAH', 'Standort des GNAH-Büros', 'GNAH办公室位置')}
+              src={mapSrc}
               style={{ width:'100%', height:'100%', border:0 }}
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
-            />
+            />}
             <div style={{ position:'absolute', top:12, left:12, background:'rgba(5,8,16,.9)', backdropFilter:'blur(8px)', padding:'8px 14px', border:'1px solid rgba(201,168,76,.3)' }}>
               <div style={{ fontFamily:'var(--f-display)', fontSize:'.65rem', color:'var(--gold)', letterSpacing:'.12em', textTransform:'uppercase' }}>GNAH</div>
-              <div style={{ fontFamily:'var(--f-body)', fontSize:'.76rem', color:'rgba(200,195,186,.7)', marginTop:2 }}>Cité Baobab, Sénégal</div>
+              <div style={{ fontFamily:'var(--f-body)', fontSize:'.76rem', color:'rgba(200,195,186,.7)', marginTop:2 }}>{SITE.address_fr}</div>
             </div>
+          </div>
+          <div style={{ textAlign:'center', marginTop:22 }}>
+            <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="btn btn--dark">
+              {tl('Ouvrir dans Google Maps', 'Open in Google Maps', 'Abrir en Google Maps', 'In Google Maps öffnen', '在谷歌地图中打开')}
+            </a>
           </div>
         </div>
       </section>

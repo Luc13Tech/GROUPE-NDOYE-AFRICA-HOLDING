@@ -9,7 +9,11 @@ export const SITE = {
   phone:      '+221 77 939 84 84',
   whatsapp:   '221779398484',
   email:      'Contact@groupendoyeafrica.com',
-  address_fr: 'Cité Baobab, Sénégal',
+  address_fr: 'Almadies, Dakar, Sénégal',
+  // Bureau des Almadies : position sur la carte et lien Google Maps
+  lat:        14.7322779,
+  lng:        -17.5056343,
+  mapsUrl:    'https://maps.app.goo.gl/1WTmNK7RZsvA68HC7',
   social: {
     facebook:  'https://www.facebook.com/groupendoyeafricaholding',
     instagram: 'https://www.instagram.com/assanedesignconception',
