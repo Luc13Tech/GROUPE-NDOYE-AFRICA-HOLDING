@@ -136,7 +136,8 @@ export default function Footer() {
             <h2 className="foot__title">{tl('Contact', 'Contact', 'Contacto', 'Kontakt', '联系我们')}</h2>
             <ul>
               <li>{SITE.address_fr}</li>
-              <li><a href={`tel:${String(SITE.phone).replace(/[^+\d]/g, '')}`}>{SITE.phone}</a></li>
+              {SITE.phoneFixed && <li><a href={`tel:${String(SITE.phoneFixed).replace(/[^+\d]/g, '')}`}>{tl('Fixe', 'Landline', 'Fijo', 'Festnetz', '座机')} : {SITE.phoneFixed}</a></li>}
+              <li><a href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp : {SITE.phone}</a></li>
               <li><a href={`mailto:${SITE.email}`} style={{ wordBreak: 'break-all' }}>{SITE.email}</a></li>
             </ul>
             <a className="btn btn--sm" style={{ marginTop: 22, opacity: 1 }} href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener noreferrer">

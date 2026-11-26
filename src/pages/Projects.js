@@ -433,7 +433,8 @@ ${form.msg}`;
                 {fr:'Région de Thiès, Sénégal',en:'Thiès Region, Senegal',es:'Región de Thiès, Senegal',de:'Thiès Region, Senegal'},
                 {fr:'300 villas disponibles',en:'300 villas available',es:'300 villas disponibles',de:'300 Villen verfügbar'},
                 {fr:'225 m² par parcelle',en:'225 m² per plot',es:'225 m² por parcela',de:'225 m² pro Grundstück'},
-                {fr:SITE.phone,en:SITE.phone,es:SITE.phone,de:SITE.phone},
+                ...(SITE.phoneFixed ? [{fr:`Fixe : ${SITE.phoneFixed}`,en:`Landline: ${SITE.phoneFixed}`,es:`Fijo: ${SITE.phoneFixed}`,de:`Festnetz: ${SITE.phoneFixed}`,zh:`座机：${SITE.phoneFixed}`}] : []),
+                {fr:`WhatsApp : ${SITE.phone}`,en:`WhatsApp: ${SITE.phone}`,es:`WhatsApp: ${SITE.phone}`,de:`WhatsApp: ${SITE.phone}`,zh:`WhatsApp：${SITE.phone}`},
               ].map((it,i)=>(
                 <div key={i} style={{display:'flex',gap:12,alignItems:'center',marginBottom:12}}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="2.5"><polyline points="20,6 9,17 4,12"/></svg>
